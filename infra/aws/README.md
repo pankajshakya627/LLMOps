@@ -2,7 +2,8 @@
 
 This deployment is designed for **one or two hours**, followed by deletion, with a
 **$3–$8 planning allowance per session**. It deploys the actual application and its
-supporting containers. It has not yet been launched in an AWS account.
+supporting containers. The first successful live deployment completed on
+31 October 2026; see [verification evidence](VALIDATION.md) for its checks and limits.
 
 Use a dedicated AWS sandbox account. The selected Region is **Mumbai
 (`ap-south-1`)**. The default model provider is **OpenAI** for chat, judging and
@@ -276,8 +277,10 @@ Find the host ID in CloudFormation stack outputs, or run:
 
 ```bash
 aws cloudformation describe-stacks --stack-name nexa-lab-training \
+  --profile nexa-lab --region ap-south-1 \
   --query "Stacks[0].Outputs[?OutputKey=='InstanceId'].OutputValue" --output text
 aws ssm start-session --target i-your-instance-id \
+  --profile nexa-lab --region ap-south-1 \
   --document-name AWS-StartPortForwardingSession \
   --parameters '{"portNumber":["8501"],"localPortNumber":["18501"]}'
 ```
@@ -289,6 +292,13 @@ remote `6006`, local `16006`. Your human AWS identity needs permission to start,
 resume and terminate sessions against this host and use the forwarding document.
 The CI role intentionally has no interactive session access.
 [SSM forwarding requirements](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html).
+
+If `TargetNotConnected` appears, check that the target is the current session's
+instance and is both EC2 `running` and SSM `Online`. A failed start automatically
+deletes its host; an old terminated instance ID cannot be reused. Fix the startup
+error and create a new session, then copy its new `InstanceId`. Also install the
+local Session Manager plugin before opening a tunnel; AWS CLI login alone does
+not install that plugin.
 
 Use only synthetic material. Phoenix and the API have no public listener, and
 SSM access is an administrative boundary. All containers share one EC2 IAM role;

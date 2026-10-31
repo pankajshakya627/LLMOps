@@ -1,5 +1,35 @@
 # AWS lab verification — 31 October 2026
 
+## Successful live application deployment
+
+[Run 41204777838](https://github.com/pankajshakya627/LLMOps/actions/runs/41204777838)
+completed successfully on 31 October 2026, using OpenAI and the Free-plan
+`m7i-flex.large` host in Mumbai. The account plan was not upgraded.
+
+The prior SSM error was retrieved using the user's newly configured local AWS
+profile: the OpenAI credential secret contained a JSON wrapper. Its single key
+was normalized to plaintext in a new secret version, retaining the same key and
+ARN. No key was printed; the private temporary request file was deleted. This
+format correction did not rotate the OpenAI key. A read-only OpenAI model-list
+request authenticated successfully and confirmed the configured chat model.
+
+Live verification passed: GitHub CI, OIDC authentication, stack creation, all
+three image builds/pushes, secret loading, corpus ingestion, container health,
+API readiness and the cited-answer smoke. SSM reported the new host `Online`.
+The Streamlit health endpoint responded successfully; all six containers were
+running with zero restarts and no OOM-killed flags. A post-start sample recorded
+1,878,663,168 bytes used and 5,867,839,488 bytes available out of 8,157,741,056
+bytes usable RAM (about 1.8 GiB used and 5.5 GiB available).
+
+This verifies a small synthetic session, not peak concurrency or load capacity.
+No separate Ragas evaluation was requested. Interactive browser tunneling still
+requires the local Session Manager plugin. Earlier failed-session cleanup
+succeeded, but timed expiry of this successful session remains unverified.
+Its scheduled expiry is 31 October 2026 at 19:48 IST; deletion can take longer.
+
+The historical attempts and offline snapshots below describe their state at
+the time, before this successful deployment.
+
 ## First live attempt and Free-plan correction
 
 [Run 41200237918](https://github.com/pankajshakya627/LLMOps/actions/runs/41200237918)
