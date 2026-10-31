@@ -234,7 +234,7 @@ If a run fails, open its failed step and inspect the error. Common boundaries:
 | Failed step | Check |
 | --- | --- |
 | Configure AWS credentials | Actual role ARN, exact OIDC subject and environment/branch restriction |
-| Create infrastructure | CloudFormation Events and the first resource failure reason |
+| Create infrastructure | CloudFormation Events and the first resource failure reason; a Free Tier eligibility error requires an account-eligible instance, not broader IAM permissions |
 | Build/push images | Docker build log and ECR permissions |
 | Deploy/ingest/smoke | SSM Run Command, host startup logs, secret format/access and OpenAI model availability |
 | Destroy | CloudFormation Events and remaining resources; retry after correcting the reported issue |

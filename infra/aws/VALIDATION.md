@@ -1,5 +1,25 @@
 # AWS lab verification — 31 October 2026
 
+## First live attempt and Free-plan correction
+
+[Run 41200237918](https://github.com/pankajshakya627/LLMOps/actions/runs/41200237918)
+passed offline checks and authenticated to AWS through GitHub OIDC. CloudFormation
+failed at `Host`: EC2 rejected `t3.xlarge` as not Free Tier eligible. The user
+provided the resource-level error from stack events. Workflow cleanup reported
+successful deletion of the session stack. Images, ingestion and model calls were
+not reached; this was not a successful application deployment.
+
+The user chose to keep the Free account plan. The corrected template defaults
+to the AWS-listed eligible `m7i-flex.large` x86 instance and removes T3-specific
+CPU-credit configuration. The host records memory snapshots and container
+memory usage for capacity review. Failed starts now print failed resource reasons
+before deleting the owned stack. Live capacity and corrected deployment remain
+unverified until a new run succeeds; no account-plan upgrade was performed.
+The AWS UI also uses the existing local Streamlit health probe, rather than
+inheriting the shared image's FastAPI probe on port 8000.
+Offline correction checks passed: 402 tests, the 18 affected AWS cases after
+the UI-probe change, Ruff, scoped Mypy, cfn-lint, actionlint and Bash syntax.
+
 ## OpenAI default update
 
 The active AWS profile now defaults to OpenAI chat/judging and

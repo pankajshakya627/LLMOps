@@ -13,7 +13,7 @@ including Bedrock Guardrails. Bedrock is an explicit alternative described below
 
 | Application responsibility | Placement |
 | --- | --- |
-| FastAPI, Streamlit, LiteLLM, Guardrails AI | One `t3.xlarge` EC2 host, existing Docker images |
+| FastAPI, Streamlit, LiteLLM, Guardrails AI | One `m7i-flex.large` EC2 host (8 GiB), existing Docker images |
 | Chat and independent judge alias | OpenAI through LiteLLM; existing project default `gpt-6-luna` |
 | Embeddings | OpenAI `text-embedding-3-small`, 1536 dimensions |
 | Input/output content policy | Existing redaction, Guardrails AI, schema and citation validation |
@@ -68,9 +68,9 @@ embeddings and any explicitly requested Ragas evaluation. OpenAI usage is billed
 by OpenAI separately from AWS; include both in the $3–$8 allowance. This
 is an estimate for a small synthetic exercise, not an AWS quote or a guarantee.
 Region, model, request counts, first-pull traffic, taxes and GitHub Actions usage
-can change it. AWS currently lists a T3 xlarge reference rate of about $0.167/hour
-and public IPv4 at $0.005/hour; verify the selected Region before launch.
-[T3 pricing](https://aws.amazon.com/ec2/instance-types/t3/),
+can change it. Verify Mumbai instance pricing, account credits and IPv4 charges
+before launch. Free Tier eligibility does not mean unlimited free usage.
+[EC2 pricing](https://aws.amazon.com/ec2/pricing/on-demand/),
 [IPv4 pricing](https://aws.amazon.com/vpc/pricing/),
 [OpenAI prices](https://openai.com/api/pricing/).
 
@@ -79,8 +79,7 @@ Cost controls implemented here:
 - Session lifetime is 60 or 120 minutes, measured from infrastructure creation;
   builds and deployment consume part of that time. Redeploy does not extend it.
 - Independent OS shutdown terminates the instance if scheduled cleanup fails.
-- T3 CPU credits use **standard** mode to avoid surplus-credit charges. Pulling
-  and starting many containers can still be slow when credits are exhausted.
+- The host uses an x86 `m7i-flex.large`; no T3 CPU-credit configuration is applied.
 - Output is bounded to 2,000 tokens, retries are bounded, and the API allows three
   answer requests per client address per minute. The UI shares its backend
   address, so this limit is shared by UI users.
@@ -99,6 +98,21 @@ as an additional signal, but this deployment does not create one.
 [AWS Budgets update frequency](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html).
 
 ## One-time AWS and GitHub setup
+
+Check your account plan before starting. The first live attempt failed because
+the former `t3.xlarge` host was rejected as not Free Tier eligible. The default
+is now `m7i-flex.large`, which AWS lists as eligible for accounts created on or
+after 15 July 2025 and offers in Mumbai. Account restrictions, quotas, available
+capacity and AMI eligibility still need live verification. Keep the Free account
+plan; no plan upgrade is requested by this deployment.
+[EC2 Free Tier eligibility](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-free-tier-usage.html),
+[Regional instance families](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-regions.html).
+
+The 8 GiB host has less memory than the previous 16 GiB default. Deployment checks
+container health, ingests the corpus and tests one cited answer. It saves memory
+snapshots before ingestion and after the smoke, plus per-container memory usage,
+in the session's S3 report prefix. These measurements do not establish peak-load
+capacity. Do not substitute a micro instance for the full stack without testing.
 
 1. Install AWS CLI v2 and the Session Manager plugin on the trainer's laptop.
    For the IAM admin user, use the browser login below; Identity Center users can

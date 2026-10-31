@@ -35,6 +35,16 @@ def template(path: str) -> dict[str, Any]:
     return yaml.load(Path(path).read_text(), Loader=Loader)
 
 
+def test_host_uses_free_tier_eligible_x86_instance_without_t3_credit_options() -> None:
+    config = template("infra/aws/session.yaml")
+    assert config["Parameters"]["InstanceType"]["Default"] == "m7i-flex.large"
+    assert config["Parameters"]["InstanceType"]["AllowedValues"] == ["m7i-flex.large"]
+    assert config["Parameters"]["Ami"]["Default"].endswith("-x86_64")
+    host = config["Resources"]["Host"]["Properties"]
+    assert "CreditSpecification" not in host
+    assert host["InstanceType"] == {"Ref": "InstanceType"}
+
+
 @pytest.mark.parametrize("provider", ["openai", "bedrock"])
 def test_release_contains_only_synthetic_corpus_and_digest_manifest(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, provider: str
@@ -175,7 +185,7 @@ def test_session_has_no_inbound_ports_and_no_retained_paid_resources() -> None:
     resources = template("infra/aws/session.yaml")["Resources"]
     assert not resources["SecurityGroup"]["Properties"].get("SecurityGroupIngress")
     assert resources["Host"]["Properties"]["InstanceInitiatedShutdownBehavior"] == "terminate"
-    assert resources["Host"]["Properties"]["CreditSpecification"]["CPUCredits"] == "standard"
+    assert "CreditSpecification" not in resources["Host"]["Properties"]
     assert all(resource.get("DeletionPolicy") != "Retain" for resource in resources.values())
     for resource in resources.values():
         if resource["Type"] == "AWS::ECR::Repository":
@@ -283,6 +293,8 @@ def test_default_runtime_uses_openai_without_constructing_a_bedrock_client(
     from app.security import bedrock
 
     compose = yaml.safe_load(Path("app/compose.aws.yaml").read_text())
+    ui_check = compose["services"]["ui"]["healthcheck"]["test"]
+    assert "http://127.0.0.1:8501/_stcore/health" in ui_check[-1]
     gateway = compose["services"]["gateway"]
     assert "/opt/gateway/litellm_openai.yaml" in gateway["command"]
     env = compose["services"]["api"]["environment"]

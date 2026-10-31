@@ -155,5 +155,11 @@ jobs:
         if: failure() && inputs.operation == 'start' && steps.create.outcome != 'skipped'
         run: |
           if [ -f session-created.json ]; then
+            stack_id="$(uv run --no-sync python -c 'import json; print(json.load(open("session-created.json"))["stack_id"])')"
+            if ! aws cloudformation describe-stack-events --stack-name "$stack_id" \
+              --query "StackEvents[?ResourceStatus=='CREATE_FAILED'].[LogicalResourceId,ResourceStatusReason]" \
+              --output table; then
+              echo '::warning::Could not retrieve resource failure reasons; inspect CloudFormation Events.'
+            fi
             uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" destroy --receipt session-created.json
           fi

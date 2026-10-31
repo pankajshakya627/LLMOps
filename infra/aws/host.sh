@@ -60,6 +60,7 @@ PY
   }
   trap rollback ERR
   docker compose up -d --wait --wait-timeout 300 postgres phoenix gateway guardrails
+  free -b > reports/memory-before-ingestion.txt
   docker compose run --rm --no-deps api python -m app.database.postgres init
   docker compose run --rm --no-deps api \
     python -m app.services.ingestion /data/document_register.json
@@ -75,6 +76,8 @@ r = json.loads(Path('reports/answer.json').read_text())
 assert r['status'] == 'answered' and r['citations'], 'Live structured answer/citation smoke failed'
 assert json.loads(Path('reports/ready.json').read_text())['status'] == 'ready'
 PY
+  free -b > reports/host-memory.txt
+  docker stats --no-stream --format '{{json .}}' > reports/container-stats.jsonl
   ln -sfn "$PWD" /opt/nexaassist/current
   trap - ERR
 else

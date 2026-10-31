@@ -6,8 +6,8 @@ Parameters:
     Default: /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64
   InstanceType:
     Type: String
-    Default: t3.xlarge
-    AllowedValues: [t3.large, t3.xlarge]
+    Default: m7i-flex.large
+    AllowedValues: [m7i-flex.large]
   SessionMinutes:
     Type: Number
     Default: 120
@@ -245,7 +245,6 @@ Resources:
       SecurityGroupIds: [!Ref SecurityGroup]
       InstanceInitiatedShutdownBehavior: terminate
       MetadataOptions: {HttpTokens: required, HttpPutResponseHopLimit: 2}
-      CreditSpecification: {CPUCredits: standard}
       BlockDeviceMappings:
         - DeviceName: /dev/xvda
           Ebs: {VolumeSize: 40, VolumeType: gp3, Encrypted: true, DeleteOnTermination: true}
