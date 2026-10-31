@@ -9,6 +9,9 @@ the deployment includes scheduled teardown. The AWS profile uses **OpenAI for
 chat, evaluation and embeddings** by default, with no Bedrock calls or resources.
 Bedrock is available only through the [explicit opt-in instructions](infra/aws/README.md#optional-bedrock-mode--disabled-by-default).
 
+For an explanation of the workflows, AWS roles, secret storage and local
+start/stop commands, read the [AWS CI/CD guide](infra/aws/CI_CD_GUIDE.md).
+
 The application uses **LiteLLM** for chat routing/fallback, load balancing and
 optional exact response caching; **Guardrails AI** plus application checks for
 output validation; **Phoenix/OpenInference** for observability; and **Ragas** for

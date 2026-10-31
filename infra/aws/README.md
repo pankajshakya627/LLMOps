@@ -57,6 +57,9 @@ remains a separate option for a persistent application; it is not this lab's
 implementation. No production availability, separate container identities or
 tenant isolation is claimed by this single-host deployment.
 
+Read the [CI/CD explanation and local terminal guide](CI_CD_GUIDE.md) for how
+GitHub connects to AWS, what each role does and where credentials belong.
+
 ## Cost envelope and limits
 
 Plan roughly **$0.40–$1 for the host, disk, public IPv4, logs and small artifact
