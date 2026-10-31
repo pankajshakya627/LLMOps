@@ -1,0 +1,29 @@
+{
+  "page": "slide_16.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_16.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Session 1 / architecture exit gate",
+    "render_delivers": true,
+    "note": "Inspected rendered PNG and source: three readable assessment actions, intact footer, no overlap or missing element."
+  }
+}

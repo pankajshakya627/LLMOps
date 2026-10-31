@@ -1,0 +1,353 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "NexaAssist | current local architecture",
+    "locale": "en",
+    "output": ".archify/architecture-nexaassist-full-20261028-062755/nexaassist-current.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "answer",
+        "label": "Answer request",
+        "focus": [
+          "staff",
+          "ui",
+          "api",
+          "input",
+          "rag",
+          "postgres",
+          "gateway",
+          "ollama",
+          "validator"
+        ],
+        "note": "Ask, sanitize, retrieve, generate, validate and cite."
+      },
+      {
+        "id": "evaluation",
+        "label": "Evaluation and traces",
+        "focus": [
+          "api",
+          "ragas",
+          "gateway",
+          "phoenix"
+        ],
+        "note": "The evaluated endpoint scores with Ragas and publishes Phoenix annotations."
+      },
+      {
+        "id": "ingestion",
+        "label": "Corpus ingestion",
+        "focus": [
+          "ingest",
+          "gateway",
+          "postgres"
+        ],
+        "note": "Hash-checked policy files become embeddings, chunks and parent sections."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "staff",
+      "type": "external",
+      "label": "Staff browser",
+      "sublabel": "Policy question",
+      "pos": [
+        40,
+        45
+      ],
+      "size": [
+        125,
+        64
+      ]
+    },
+    {
+      "id": "ui",
+      "type": "frontend",
+      "label": "Streamlit UI",
+      "sublabel": "question, citations, feedback",
+      "pos": [
+        240,
+        45
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "FastAPI",
+      "sublabel": "answer, eval, feedback",
+      "pos": [
+        470,
+        45
+      ],
+      "size": [
+        175,
+        68
+      ]
+    },
+    {
+      "id": "phoenix",
+      "type": "cloud",
+      "label": "Arize Phoenix",
+      "sublabel": "traces + Ragas annotations",
+      "pos": [
+        735,
+        45
+      ],
+      "size": [
+        160,
+        68
+      ]
+    },
+    {
+      "id": "ollama",
+      "type": "external",
+      "label": "Ollama host",
+      "sublabel": "Qwen chat + embeddings",
+      "pos": [
+        1000,
+        45
+      ],
+      "size": [
+        170,
+        68
+      ]
+    },
+    {
+      "id": "input",
+      "type": "security",
+      "label": "Input policy",
+      "sublabel": "injection block + PII mask",
+      "pos": [
+        470,
+        230
+      ],
+      "size": [
+        175,
+        72
+      ]
+    },
+    {
+      "id": "rag",
+      "type": "backend",
+      "label": "RAG answer chain",
+      "sublabel": "scope, retrieve, cite, abstain",
+      "pos": [
+        735,
+        230
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "gateway",
+      "type": "backend",
+      "label": "LiteLLM gateway",
+      "sublabel": "route, retry, fallback",
+      "pos": [
+        1000,
+        230
+      ],
+      "size": [
+        170,
+        72
+      ]
+    },
+    {
+      "id": "ragas",
+      "type": "backend",
+      "label": "Ragas evaluation",
+      "sublabel": "inside FastAPI process",
+      "pos": [
+        240,
+        430
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "validator",
+      "type": "security",
+      "label": "Guardrails AI",
+      "sublabel": "schema validation sidecar",
+      "pos": [
+        470,
+        430
+      ],
+      "size": [
+        175,
+        72
+      ]
+    },
+    {
+      "id": "postgres",
+      "type": "database",
+      "label": "PostgreSQL + pgvector",
+      "sublabel": "chunks, sections, feedback",
+      "pos": [
+        735,
+        430
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "openai",
+      "type": "external",
+      "label": "OpenAI",
+      "sublabel": "optional chat fallback",
+      "pos": [
+        1000,
+        430
+      ],
+      "size": [
+        170,
+        72
+      ]
+    },
+    {
+      "id": "ingest",
+      "type": "backend",
+      "label": "Ingestion job",
+      "sublabel": "signed register \u2192 policy index",
+      "pos": [
+        735,
+        625
+      ],
+      "size": [
+        160,
+        72
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from": "staff",
+      "to": "ui",
+      "label": "ask policy"
+    },
+    {
+      "from": "ui",
+      "to": "api",
+      "label": "HTTP /answer",
+      "variant": "emphasis"
+    },
+    {
+      "from": "api",
+      "to": "input",
+      "label": "scrub query",
+      "variant": "security"
+    },
+    {
+      "from": "input",
+      "to": "rag",
+      "label": "safe query",
+      "variant": "emphasis"
+    },
+    {
+      "from": "rag",
+      "to": "postgres",
+      "label": "retrieve evidence"
+    },
+    {
+      "from": "rag",
+      "to": "gateway",
+      "label": "chat + embed"
+    },
+    {
+      "from": "gateway",
+      "to": "ollama",
+      "label": "primary route"
+    },
+    {
+      "from": "gateway",
+      "to": "openai",
+      "label": "chat fallback",
+      "variant": "dashed"
+    },
+    {
+      "from": "rag",
+      "to": "validator",
+      "label": "validate draft",
+      "variant": "security"
+    },
+    {
+      "from": "api",
+      "to": "phoenix",
+      "label": "OTLP + eval",
+      "variant": "dashed"
+    },
+    {
+      "from": "gateway",
+      "to": "phoenix",
+      "label": "provider traces",
+      "variant": "dashed"
+    },
+    {
+      "from": "api",
+      "to": "ragas",
+      "label": "/answer/evaluated"
+    },
+    {
+      "from": "ingest",
+      "to": "postgres",
+      "label": "upsert corpus"
+    },
+    {
+      "from": "ingest",
+      "to": "gateway",
+      "label": "embed policy"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "What runs now",
+      "items": [
+        "Compose starts UI, FastAPI, LiteLLM, Guardrails AI, PostgreSQL/pgvector and Phoenix.",
+        "Ollama runs on the host; OpenAI is the configured chat fallback.",
+        "Phoenix uses its local data volume; the app corpus and feedback use pgvector."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Safety and evidence",
+      "items": [
+        "The API blocks explicit prompt overrides and masks supported PII before embedding or generation.",
+        "Output passes structured schema, Guardrails AI, PII and exact citation checks; weak evidence yields abstention.",
+        "Feedback review and golden-case export use the same API and PostgreSQL storage."
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Evaluation path",
+      "items": [
+        "/answer/evaluated runs Ragas scores using a configured judge and embeddings.",
+        "The API publishes scored or unavailable metric annotations to the answer span in Phoenix.",
+        "MongoDB remains a code-supported alternative; this Compose deployment selects pgvector."
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Code map",
+      "items": [
+        "UI \u2192 API: app/ui/app.py:190; app/api/answer.py:27",
+        "Input and RAG: app/services/retrieval.py:23; app/chains/answer.py:97",
+        "Routing and stores: app/gateway/litellm.yaml:3; app/database/mongo.py:69",
+        "Safety: app/security/input_policy.py:26; app/chains/guardrails.py:9",
+        "Traces and eval: app/phoenix_main.py:29; app/evaluation/live.py:18",
+        "Ingestion and feedback: app/services/ingestion.py:71; app/api/feedback.py:20"
+      ]
+    }
+  ]
+}

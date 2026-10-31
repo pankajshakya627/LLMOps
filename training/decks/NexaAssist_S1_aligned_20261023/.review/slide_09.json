@@ -1,0 +1,29 @@
+{
+  "page": "slide_09.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_09.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Request and failure flow: validate, retrieve scoped evidence, pack the prompt, generate, validate output, then return an answer or abstention.",
+    "render_delivers": true,
+    "note": "The six numbered steps and directed snake path are clear; repair and abstention conditions are visible and explicitly delegated to notes. No collision or overflow observed."
+  }
+}

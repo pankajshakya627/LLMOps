@@ -1,0 +1,1 @@
+Keep case set, retrieval configuration and judge aligned. Save the baseline before writing the next report. Inspect per-metric deltas and newly failing cases. The comparison helper does not enforce dataset identity. The operator must verify comparability before interpreting a delta as a regression. The implementation or concept reference is app/evaluation/compare.py.

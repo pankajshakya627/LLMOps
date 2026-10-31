@@ -1,0 +1,18 @@
+{
+  "main_pytest": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 98,
+    "seconds": 9.21
+  },
+  "mock_api_pytest": {
+    "passed": 22,
+    "seconds": 0.31,
+    "dependency_note": "openapi_spec_validator supplied by existing temporary validation environment, not app dev dependencies"
+  },
+  "ruff_lint": "passed: app tests",
+  "ruff_format": "passed: 68 files",
+  "mypy": "passed: 55 app source files",
+  "api_validation_cases": 12,
+  "answer_journeys": 19,
+  "scope": "Bounded synthetic journeys, not human recruitment or a load certification"
+}

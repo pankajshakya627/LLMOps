@@ -1,0 +1,1 @@
+Current answers are buffered and validated as a whole. Total generation time does not measure TTFT or TPS. Streaming requires deciding when validated content may leave. TTFT means time to first token; TPS means tokens per second. They are discussed as future metrics rather than inferred from the current generation_ms field.

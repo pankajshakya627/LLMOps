@@ -1,0 +1,3 @@
+Open FastAPI at http://127.0.0.1:8001/docs, Phoenix at http://127.0.0.1:6006, Guardrails at http://127.0.0.1:8101/docs and Streamlit at http://127.0.0.1:8501. The host gateway port is 4001 when following .env.example; Compose alone defaults it to 4000. Inside the network the API always uses http://gateway:4000/v1, http://postgres:5432 and http://guardrails:8101. Changing API_PORT or GATEWAY_PORT changes host publishing only. Check docker compose ps if this private deployment uses other port values. LiteLLM UI Logs has no retained response history in this stack because no spend-log DATABASE_URL is configured; Phoenix owns our observability evidence.
+
+Host ports below follow the repository .env.example.

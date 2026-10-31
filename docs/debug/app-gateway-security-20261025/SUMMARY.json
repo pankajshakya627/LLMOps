@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-25",
+  "automated": {
+    "tests": 372,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "seconds": 22.906,
+  "lint": "passed: app tests training",
+  "mypy": "passed: 102 files",
+  "lockfile": "unchanged; uv lock --check --offline passed",
+  "constraints": "unchanged",
+  "service_sdk_checks": {
+    "litellm_router_fallback_cache_and_auth_error_handler": "passed with offline fixtures",
+    "guardrails_ai_schema_selfcheck": "passed: five synthetic cases"
+  },
+  "compose_configurations": [
+    "standard",
+    "cache",
+    "balanced",
+    "openai_embeddings"
+  ],
+  "phoenix_image": "arizephoenix/phoenix:20.26.0 manifest verified for amd64 and arm64",
+  "docker_build": "not run; daemon unavailable",
+  "live_provider_or_atlas_calls": false,
+  "gateway_native_smoke": "service-smoke.json",
+  "temporary_gateway": "stopped; no unrelated services stopped",
+  "limits": [
+    "Explicit English instruction-override detection is incomplete",
+    "Cache is exact, process-local, single-worker and opt-in",
+    "Gateway admin endpoints bypass application rails",
+    "Existing live semantic quality targets have not been re-certified"
+  ],
+  "final_profile_document_checks": {
+    "passed": 18,
+    "seconds": 0.09
+  },
+  "example_payloads_validated": 10,
+  "changed_python_formatting": "passed: 40 files"
+}

@@ -1,0 +1,1 @@
+Run tests/test_slo.py and tests/test_telemetry.py. Map a request through FastAPI and workflow spans. Explain why transport-only API tests omit lifespan. The standalone serving lab does not execute startup. Separate tests cover telemetry initialization, and a live Datadog demo remains optional.

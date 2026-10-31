@@ -1,0 +1,10 @@
+{
+  "reviewer": "fresh-context evidence reviewer",
+  "result": "No material contradictions or unsupported claims found in the bounded review.",
+  "confirmed_limits": [
+    "Accepted browser review; rejected selection unverified",
+    "Wider fee retrieval abstained",
+    "Datadog cloud receipt unverified"
+  ],
+  "scope": "Saved evidence and report; no external-service reruns"
+}

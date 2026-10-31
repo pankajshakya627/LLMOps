@@ -1,0 +1,28 @@
+from __future__ import annotations
+import asyncio,json,time
+from datetime import datetime,UTC
+from pathlib import Path
+import httpx
+from app.models.answer import AnswerResponse
+from app.models.evaluation import EvaluatedAnswerResponse
+OUT=Path('app/evaluation/results/system_uat_20261021')
+CASES=[('U16','home_ltv','/answer',{'query':'What loan to value ratio applies to a NexaHome Loan of ₹80 lakh?','as_of':'2026-10-01','product_id':'NEXA-HL','top_k':5}),('U17','home_age','/answer',{'query':'What are the age limits for a NexaHome Loan today?','as_of':'2026-10-01','product_id':'NEXA-HL','top_k':5}),('U18','fee_wider_retrieval_evaluated','/answer/evaluated',{'query':'What is the current processing fee for a NexaHome Loan?','as_of':'2026-10-01','product_id':'NEXA-HL','top_k':20})]
+async def main():
+ rows=[]
+ async with httpx.AsyncClient(base_url='http://127.0.0.1:8000',timeout=300) as client:
+  for identifier,name,endpoint,payload in CASES:
+   row={'id':identifier,'scenario':name,'endpoint':endpoint,'request':payload,'started_at':datetime.now(UTC).isoformat()}
+   start=time.perf_counter()
+   try:
+    r=await client.post(endpoint,json=payload);row.update(http_status=r.status_code,response=r.json())
+    r.raise_for_status()
+    schema=EvaluatedAnswerResponse if endpoint.endswith('evaluated') else AnswerResponse
+    valid=schema.model_validate(r.json());answer=valid.answer if isinstance(valid,EvaluatedAnswerResponse) else valid
+    assert str(answer.as_of)==payload['as_of']
+    row['contract']='pass'
+    print(identifier,answer.answer,flush=True)
+    if isinstance(valid,EvaluatedAnswerResponse):print('RAGAS',valid.quality.model_dump(mode='json'),flush=True)
+   except Exception as exc:row.update(error_type=type(exc).__name__)
+   row['wall_ms']=round((time.perf_counter()-start)*1000,2);rows.append(row)
+   (OUT/'api_extended.json').write_text(json.dumps(rows,indent=2,ensure_ascii=False))
+asyncio.run(main())

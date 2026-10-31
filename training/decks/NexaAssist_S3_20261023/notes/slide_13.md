@@ -1,0 +1,1 @@
+Context precision: relevance of retrieved material. Context recall: coverage of reference information. Faithfulness and answer relevance: grounding and fit. Judge scores are estimates influenced by context and rubric. We use the local evaluation implementation and human review rather than treating exact word overlap as truth.

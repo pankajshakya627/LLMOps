@@ -1,0 +1,10 @@
+{
+  "deleted_count": 3,
+  "feedback_ids": [
+    "828db764-0f1e-5cdc-b0f4-5e7af7fa8932",
+    "18b91a7a-479c-5a28-a1d5-279237c49bd5",
+    "56cb121f-0344-5bc5-9cb1-84c01cc010db"
+  ],
+  "scope": "Exact IDs, institution, synthetic correction text, rejected status and synthetic reviewer",
+  "remaining_test_ids": 0
+}

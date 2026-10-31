@@ -1,0 +1,483 @@
+[
+  {
+    "case": 1,
+    "input": {
+      "query": "What is the maximum loan amount for a NexaHome Loan?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 20
+    },
+    "expected_status": "answered",
+    "reference": "The maximum NexaHome Loan amount is ₹7,50,00,000 (₹7.5 crore). The minimum is ₹5,00,000. This is the limit under POL-HL-V3, clause 4.1.",
+    "http_status": 200,
+    "elapsed_seconds": 37.13,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "insufficient_evidence",
+      "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 1187.12,
+        "parent_ms": 127.38,
+        "total_ms": 1314.94
+      },
+      "generation_ms": 35462.15,
+      "datadog_span_id": null,
+      "provenance": {
+        "prompt_id": "nexaassist-policy-answer",
+        "prompt_version": "1.1.0",
+        "prompt_sha": "dca0041f402b",
+        "chat_model": "qwen3.5:9b-mlx",
+        "observed_chat_model": "qwen3.5:9b-mlx",
+        "gateway_cache_hit": null,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "retrieval_mode": "dense",
+        "rerank_enabled": false,
+        "evidence_refs": [
+          "CIR-2026-07:1.0:full",
+          "POL-HL-V3:3.0:7.2",
+          "POL-HL-V3:3.0:full",
+          "POL-HL-V3:3.0:3.2",
+          "POL-HL-V3:3.0:8.3",
+          "POL-HL-V3:3.0:5.1",
+          "POL-HL-V3:3.0:10.2",
+          "POL-HL-V3:3.0:6.5",
+          "POL-HL-V3:3.0:1.1",
+          "POL-HL-V3:3.0:4.1"
+        ]
+      }
+    }
+  },
+  {
+    "case": 2,
+    "input": {
+      "query": "What is the current processing fee for a NexaHome Loan?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 20
+    },
+    "expected_status": "answered",
+    "reference": "For loans sanctioned on or after 1 July 2026 the processing fee is 0.30% of the sanctioned amount, minimum ₹5,000 and maximum ₹10,000, plus 18% GST. This comes from circular CIR-2026-07, which replaced clause 6.2 of POL-HL-V3. Loans sanctioned earlier keep the fee that applied at their sanction.",
+    "http_status": 200,
+    "elapsed_seconds": 17.12,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "insufficient_evidence",
+      "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 104.71,
+        "parent_ms": 124.46,
+        "total_ms": 229.44
+      },
+      "generation_ms": 16778.81,
+      "datadog_span_id": null,
+      "provenance": {
+        "prompt_id": "nexaassist-policy-answer",
+        "prompt_version": "1.1.0",
+        "prompt_sha": "dca0041f402b",
+        "chat_model": "qwen3.5:9b-mlx",
+        "observed_chat_model": "qwen3.5:9b-mlx",
+        "gateway_cache_hit": null,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "retrieval_mode": "dense",
+        "rerank_enabled": false,
+        "evidence_refs": [
+          "CIR-2026-07:1.0:full",
+          "POL-HL-V3:3.0:1.1",
+          "POL-HL-V3:3.0:full",
+          "POL-HL-V3:3.0:7.2",
+          "POL-HL-V3:3.0:3.2",
+          "POL-HL-V3:3.0:2.1",
+          "POL-HL-V3:3.0:10.2",
+          "POL-HL-V3:3.0:8.1",
+          "POL-HL-V3:3.0:5.1",
+          "POL-HL-V3:3.0:4.1",
+          "POL-HL-V3:3.0:6.2"
+        ]
+      }
+    }
+  },
+  {
+    "case": 3,
+    "input": {
+      "query": "What loan to value ratio applies to a NexaHome Loan of ₹80 lakh?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 20
+    },
+    "expected_status": "answered",
+    "reference": "For a loan above ₹75 lakh the maximum LTV is 75%. The LTV is applied to the lower of the agreement value and NexaBank's technical valuation. The tiers are 90% up to ₹30 lakh, 80% above ₹30 lakh up to ₹75 lakh, and 75% above ₹75 lakh.",
+    "http_status": 200,
+    "elapsed_seconds": 32.43,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "insufficient_evidence",
+      "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 107.38,
+        "parent_ms": 602.86,
+        "total_ms": 710.4
+      },
+      "generation_ms": 31613.24,
+      "datadog_span_id": null,
+      "provenance": {
+        "prompt_id": "nexaassist-policy-answer",
+        "prompt_version": "1.1.0",
+        "prompt_sha": "dca0041f402b",
+        "chat_model": "qwen3.5:9b-mlx",
+        "observed_chat_model": "qwen3.5:9b-mlx",
+        "gateway_cache_hit": null,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "retrieval_mode": "dense",
+        "rerank_enabled": false,
+        "evidence_refs": [
+          "CIR-2026-07:1.0:full",
+          "POL-HL-V3:3.0:4.1",
+          "POL-HL-V3:3.0:full",
+          "POL-HL-V3:3.0:6.5",
+          "POL-HL-V3:3.0:2.1",
+          "POL-HL-V3:3.0:8.3",
+          "POL-HL-V3:3.0:10.2",
+          "POL-HL-V3:3.0:5.1",
+          "POL-HL-V3:3.0:3.2",
+          "POL-HL-V3:3.0:1.1",
+          "POL-HL-V3:3.0:7.2"
+        ]
+      }
+    }
+  },
+  {
+    "case": 4,
+    "input": {
+      "query": "Is there a foreclosure charge on a NexaFlex personal loan?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-PL",
+      "top_k": 20
+    },
+    "expected_status": "answered",
+    "reference": "Yes. Foreclosure is not allowed before 6 EMIs have been paid. After that, foreclosure attracts 4.00% of the outstanding principal plus GST. The foreclosure clause does not specify a GST percentage.",
+    "http_status": 200,
+    "elapsed_seconds": 21.53,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "insufficient_evidence",
+      "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 172.06,
+        "parent_ms": 81.52,
+        "total_ms": 253.75
+      },
+      "generation_ms": 21164.83,
+      "datadog_span_id": null,
+      "provenance": {
+        "prompt_id": "nexaassist-policy-answer",
+        "prompt_version": "1.1.0",
+        "prompt_sha": "dca0041f402b",
+        "chat_model": "qwen3.5:9b-mlx",
+        "observed_chat_model": "qwen3.5:9b-mlx",
+        "gateway_cache_hit": null,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "retrieval_mode": "dense",
+        "rerank_enabled": false,
+        "evidence_refs": [
+          "POL-PL-V1:1.0:7.2",
+          "POL-PL-V1:1.0:6.1",
+          "POL-PL-V1:1.0:full",
+          "POL-PL-V1:1.0:5.1",
+          "POL-PL-V1:1.0:2.4",
+          "POL-PL-V1:1.0:8.1",
+          "POL-PL-V1:1.0:4.1",
+          "POL-PL-V1:1.0:9.1",
+          "POL-PL-V1:1.0:3.2",
+          "POL-PL-V1:1.0:1.1"
+        ]
+      }
+    }
+  },
+  {
+    "case": 5,
+    "input": {
+      "query": "What LTV does NexaDrive allow for a new car and for a used car?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-AL",
+      "top_k": 20
+    },
+    "expected_status": "answered",
+    "reference": "A new car can be financed up to 90% of the on-road price. A used car can be financed up to 70% of the valuation by a NexaBank empanelled valuer.",
+    "http_status": 200,
+    "elapsed_seconds": 20.95,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "insufficient_evidence",
+      "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 103.31,
+        "parent_ms": 77.31,
+        "total_ms": 180.72
+      },
+      "generation_ms": 20663.78,
+      "datadog_span_id": null,
+      "provenance": {
+        "prompt_id": "nexaassist-policy-answer",
+        "prompt_version": "1.1.0",
+        "prompt_sha": "dca0041f402b",
+        "chat_model": "qwen3.5:9b-mlx",
+        "observed_chat_model": "qwen3.5:9b-mlx",
+        "gateway_cache_hit": null,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "retrieval_mode": "dense",
+        "rerank_enabled": false,
+        "evidence_refs": [
+          "POL-AL-V1:1.0:1.1",
+          "POL-AL-V1:1.0:6.2",
+          "POL-AL-V1:1.0:full",
+          "POL-AL-V1:1.0:2.1",
+          "POL-AL-V1:1.0:8.1",
+          "POL-AL-V1:1.0:7.1",
+          "POL-AL-V1:1.0:5.1",
+          "POL-AL-V1:1.0:4.1",
+          "POL-AL-V1:1.0:9.1",
+          "POL-AL-V1:1.0:3.2"
+        ]
+      }
+    }
+  },
+  {
+    "case": 6,
+    "input": {
+      "query": "What are the age limits for a NexaHome Loan today?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 20
+    },
+    "expected_status": "answered",
+    "reference": "Minimum age at application is 21. Maximum age at application is 62 for salaried and 65 for self-employed applicants. Age at maturity must not exceed 70 (salaried) or 75 (self-employed).",
+    "http_status": 200,
+    "elapsed_seconds": 31.25,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "insufficient_evidence",
+      "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 100.86,
+        "parent_ms": 119.76,
+        "total_ms": 220.87
+      },
+      "generation_ms": 30929.93,
+      "datadog_span_id": null,
+      "provenance": {
+        "prompt_id": "nexaassist-policy-answer",
+        "prompt_version": "1.1.0",
+        "prompt_sha": "dca0041f402b",
+        "chat_model": "qwen3.5:9b-mlx",
+        "observed_chat_model": "qwen3.5:9b-mlx",
+        "gateway_cache_hit": null,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "retrieval_mode": "dense",
+        "rerank_enabled": false,
+        "evidence_refs": [
+          "CIR-2026-07:1.0:full",
+          "POL-HL-V3:3.0:4.1",
+          "POL-HL-V3:3.0:1.1",
+          "POL-HL-V3:3.0:6.5",
+          "POL-HL-V3:3.0:9.2",
+          "POL-HL-V3:3.0:5.1",
+          "POL-HL-V3:3.0:10.2",
+          "POL-HL-V3:3.0:7.2",
+          "POL-HL-V3:3.0:full",
+          "POL-HL-V3:3.0:3.1"
+        ]
+      }
+    }
+  },
+  {
+    "case": 7,
+    "input": {
+      "query": "What was the minimum part prepayment on a NexaHome Loan on 31 March 2024?",
+      "as_of": "2024-03-31",
+      "product_id": "NEXA-HL",
+      "top_k": 20
+    },
+    "expected_status": "answered",
+    "reference": "₹50,000. POL-HL-V1 was still in force on 31 March 2024, the last day of v1.",
+    "http_status": 200,
+    "elapsed_seconds": 24.4,
+    "response": {
+      "as_of": "2024-03-31",
+      "status": "insufficient_evidence",
+      "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 107.07,
+        "parent_ms": 90.47,
+        "total_ms": 197.65
+      },
+      "generation_ms": 24094.97,
+      "datadog_span_id": null,
+      "provenance": {
+        "prompt_id": "nexaassist-policy-answer",
+        "prompt_version": "1.1.0",
+        "prompt_sha": "dca0041f402b",
+        "chat_model": "qwen3.5:9b-mlx",
+        "observed_chat_model": "qwen3.5:9b-mlx",
+        "gateway_cache_hit": null,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "retrieval_mode": "dense",
+        "rerank_enabled": false,
+        "evidence_refs": [
+          "POL-HL-V1:1.0:8.3",
+          "POL-HL-V1:1.0:4.1",
+          "POL-HL-V1:1.0:10.2",
+          "POL-HL-V1:1.0:3.2",
+          "POL-HL-V1:1.0:5.4",
+          "POL-HL-V1:1.0:2.1",
+          "POL-HL-V1:1.0:7.2",
+          "POL-HL-V1:1.0:6.5",
+          "POL-HL-V1:1.0:1.1",
+          "POL-HL-V1:1.0:full"
+        ]
+      }
+    }
+  },
+  {
+    "case": 8,
+    "input": {
+      "query": "What was the minimum part prepayment on a NexaHome Loan on 1 April 2024?",
+      "as_of": "2024-04-01",
+      "product_id": "NEXA-HL",
+      "top_k": 20
+    },
+    "expected_status": "answered",
+    "reference": "₹25,000. POL-HL-V2 took effect on 1 April 2024 and replaced the v1 minimum.",
+    "http_status": 200,
+    "elapsed_seconds": 26.14,
+    "response": {
+      "as_of": "2024-04-01",
+      "status": "insufficient_evidence",
+      "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 109.31,
+        "parent_ms": 79.66,
+        "total_ms": 189.24
+      },
+      "generation_ms": 25848.7,
+      "datadog_span_id": null,
+      "provenance": {
+        "prompt_id": "nexaassist-policy-answer",
+        "prompt_version": "1.1.0",
+        "prompt_sha": "dca0041f402b",
+        "chat_model": "qwen3.5:9b-mlx",
+        "observed_chat_model": "qwen3.5:9b-mlx",
+        "gateway_cache_hit": null,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "retrieval_mode": "dense",
+        "rerank_enabled": false,
+        "evidence_refs": [
+          "POL-HL-V2:2.0:8.3",
+          "POL-HL-V2:2.0:4.1",
+          "POL-HL-V2:2.0:6.5",
+          "POL-HL-V2:2.0:10.2",
+          "POL-HL-V2:2.0:5.4",
+          "POL-HL-V2:2.0:2.1",
+          "POL-HL-V2:2.0:7.2",
+          "POL-HL-V2:2.0:3.2",
+          "POL-HL-V2:2.0:1.1",
+          "POL-HL-V2:2.0:full"
+        ]
+      }
+    }
+  },
+  {
+    "case": 9,
+    "input": {
+      "query": "What is the current NRLR?",
+      "as_of": "2026-10-01",
+      "top_k": 5
+    },
+    "expected_status": "insufficient_evidence",
+    "reference": "I cannot answer this question reliably from the retrieved policy evidence.",
+    "http_status": 200,
+    "elapsed_seconds": 10.29,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "needs_clarification",
+      "answer": "Which product and policy date should I use, and what specific rate or policy term do you want to check?",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 61.9,
+        "parent_ms": 697.17,
+        "total_ms": 759.36
+      },
+      "generation_ms": 9426.54,
+      "datadog_span_id": null,
+      "provenance": {
+        "prompt_id": "nexaassist-policy-answer",
+        "prompt_version": "1.1.0",
+        "prompt_sha": "dca0041f402b",
+        "chat_model": "qwen3.5:9b-mlx",
+        "observed_chat_model": "qwen3.5:9b-mlx",
+        "gateway_cache_hit": null,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "retrieval_mode": "dense",
+        "rerank_enabled": false,
+        "evidence_refs": [
+          "CIR-2026-07:1.0:full",
+          "POL-LAP-V1:1.0:4.1",
+          "POL-PL-V1:1.0:4.1",
+          "POL-HL-V3:3.0:2.1",
+          "POL-HL-V3:3.0:5.1"
+        ]
+      }
+    }
+  },
+  {
+    "case": 10,
+    "input": {
+      "query": "What is the NexaBank cryptocurrency custody policy?",
+      "as_of": "2026-10-01",
+      "top_k": 5
+    },
+    "expected_status": "insufficient_evidence",
+    "reference": "I cannot answer this question reliably from the retrieved policy evidence.",
+    "http_status": 200,
+    "elapsed_seconds": 10.6,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "needs_clarification",
+      "answer": "Which product and policy date should I use, and what specific rate or policy term do you want to check?",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 62.56,
+        "parent_ms": 159.96,
+        "total_ms": 222.81
+      },
+      "generation_ms": 10274.38,
+      "datadog_span_id": null,
+      "provenance": {
+        "prompt_id": "nexaassist-policy-answer",
+        "prompt_version": "1.1.0",
+        "prompt_sha": "dca0041f402b",
+        "chat_model": "qwen3.5:9b-mlx",
+        "observed_chat_model": "qwen3.5:9b-mlx",
+        "gateway_cache_hit": null,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "retrieval_mode": "dense",
+        "rerank_enabled": false,
+        "evidence_refs": [
+          "CIR-2026-07:1.0:full",
+          "POL-AL-V1:1.0:6.1",
+          "POL-OPS-001:1.0:2.1",
+          "POL-HL-V3:3.0:full",
+          "POL-PL-V1:1.0:6.1",
+          "POL-OPS-001:1.0:full"
+        ]
+      }
+    }
+  }
+]

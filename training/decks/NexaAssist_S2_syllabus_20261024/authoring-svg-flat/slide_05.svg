@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="&quot;Courier New&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 343.86 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 343.86 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 407.22 31 L 407.22 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST  /  SESSION 02  /  DISTILL I</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 83 871.529 64" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 83 871.529 64" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 83 L 933.929 83 L 933.929 147 L 62.4 147 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Practical / compare chunking candidates</text>
+</g>
+</g>
+<g id="shape-18" data-pptx-object="group" data-pptx-frame="64 205 1152 335" data-pptx-source-ref="slide:18">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 205 1152 335" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 205 L 1216 205 L 1216 540 L 64 540 Z" fill="#132C42" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<text x="88" y="255" font-family="Courier New, monospace" font-size="25" fill="#FFFFFF" xml:space="preserve">uv run --no-sync python -m training.session2.chunks</text><text x="88" y="309" font-family="Courier New, monospace" font-size="25" fill="#FFFFFF" xml:space="preserve">max_characters       chunks       tables preserved</text><text x="88" y="363" font-family="Courier New, monospace" font-size="25" fill="#FFFFFF" xml:space="preserve">300                  40           yes</text><text x="88" y="417" font-family="Courier New, monospace" font-size="25" fill="#FFFFFF" xml:space="preserve">1200                 32           yes</text><text x="88" y="471" font-family="Courier New, monospace" font-size="25" fill="#FFFFFF" xml:space="preserve">5000                 32           yes</text></g>
+<g id="shape-20" data-pptx-object="group" data-pptx-frame="62.96 566 972.735 41.6" data-pptx-source-ref="slide:20">
+<g id="shape-19" data-pptx-object="shape" data-pptx-frame="62.96 566 972.735 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:19" data-pptx-semantic-object="shape">
+<path d="M 62.96 566 L 1035.69 566 L 1035.69 607.6 L 62.96 607.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="592" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Submit: chunk counts, preserved table and a justified candidate setting.</text>
+</g>
+</g>
+<g id="shape-23" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:23">
+<g id="shape-21" data-pptx-object="shape" data-pptx-frame="63.36 665 622.18 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:21" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 685.54 665 L 685.54 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 03, 12 / Offline exercise; observed fixture results</text>
+</g>
+<g id="shape-22" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:22" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">05/16</text>
+</g>
+</g></svg>

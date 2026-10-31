@@ -1,0 +1,63 @@
+{
+  "answer": {
+    "as_of": "2026-10-01",
+    "status": "insufficient_evidence",
+    "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+    "citations": [],
+    "retrieval_timings": {
+      "search_ms": 1404.38,
+      "parent_ms": 21.21,
+      "total_ms": 1425.7
+    },
+    "generation_ms": 15025.07,
+    "phoenix_trace_id": "51758907bb6e7718ded0f2782216d29f",
+    "phoenix_span_id": "a649d98c799c0a52",
+    "provenance": {
+      "prompt_id": "nexaassist-policy-answer",
+      "prompt_version": "1.2.0",
+      "prompt_sha": "f29e38485765",
+      "chat_model": "nexa-chat",
+      "observed_chat_model": "nexa-chat",
+      "gateway_cache_hit": null,
+      "fallback_from_model": null,
+      "fallback_reason": null,
+      "embedding_model": "nexa-embed-local",
+      "retrieval_mode": "dense",
+      "rerank_enabled": false,
+      "evidence_refs": [
+        "CIR-2026-07:1.0:full",
+        "POL-HL-V3:3.0:7.2",
+        "POL-HL-V3:3.0:full",
+        "POL-HL-V3:3.0:1.1",
+        "POL-HL-V3:3.0:4.1"
+      ]
+    }
+  },
+  "quality": {
+    "metrics": {
+      "faithfulness": {
+        "status": "unavailable",
+        "value": null,
+        "reason": "The answer abstained; this metric is not applicable."
+      },
+      "answer_relevancy": {
+        "status": "unavailable",
+        "value": null,
+        "reason": "The answer abstained; this metric is not applicable."
+      },
+      "context_precision": {
+        "status": "scored",
+        "value": 0.19999999998,
+        "reason": null
+      },
+      "context_recall": {
+        "status": "scored",
+        "value": 1.0,
+        "reason": null
+      }
+    },
+    "reference_source": "golden_dataset",
+    "reference_answer": "The maximum NexaHome Loan amount is ₹7,50,00,000 (₹7.5 crore). The minimum is ₹5,00,000. This is the limit under POL-HL-V3, clause 4.1.",
+    "evaluated_at": "2026-10-25T14:54:45.797687Z"
+  }
+}

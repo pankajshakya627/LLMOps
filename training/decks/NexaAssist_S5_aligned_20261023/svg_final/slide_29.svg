@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text font-size="16" fill="#526375" xml:space="preserve" x="64" y="47">NEXAASSIST  /  SESSION 05  /  DELIVER</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text font-size="40" fill="#132C42" font-family="Trebuchet MS" xml:space="preserve" x="64" y="123">Practical 3 / rehearse rollback</text></g>
+<g id="stage-1" data-pptx-bounds="64 242 1152 100"><rect x="64" y="242" width="46" height="46" fill="#AF476A" /><text font-size="26" fill="#FFFFFF" xml:space="preserve" x="77" y="274">1</text><text font-size="26" fill="#132C42" xml:space="preserve" x="142" y="273">Hold candidate → preserve evidence → restore known-good set</text></g>
+<g id="stage-2" data-pptx-bounds="64 374 1152 100"><rect x="64" y="374" width="46" height="46" fill="#AF476A" /><text font-size="26" fill="#FFFFFF" xml:space="preserve" x="77" y="406">2</text><text font-size="26" fill="#132C42" xml:space="preserve" x="142" y="405">Replay failing and golden cases → measure representative traffic</text></g>
+<g id="stage-3" data-pptx-bounds="64 506 1152 100"><rect x="64" y="506" width="46" height="46" fill="#AF476A" /><text font-size="26" fill="#FFFFFF" xml:space="preserve" x="77" y="538">3</text><text font-size="26" fill="#132C42" xml:space="preserve" x="142" y="537">Document owner decision and follow-up regression case</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" fill="#526375" font-size="16"><text xml:space="preserve" x="64" y="681">Educative L15 / Course concept + NexaAssist adaptation; URL in notes</text><text xml:space="preserve" x="1150" y="681">29/40</text></g>
+</svg>

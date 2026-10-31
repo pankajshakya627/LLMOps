@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-25",
+  "repository_history": "unavailable: no .git",
+  "test_runs": {
+    "offline_application_and_mock_api": {
+      "tests": 328,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 35.848
+    },
+    "phoenix_actual_sdk": {
+      "tests": 4,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 2.61
+    }
+  },
+  "live_candidates": {
+    "openai": {
+      "requests": 10,
+      "http_200": 10,
+      "expected_status_matches": 10,
+      "status_counts": {
+        "answered": 8,
+        "insufficient_evidence": 2,
+        "needs_clarification": 0
+      }
+    },
+    "ollama": {
+      "requests": 10,
+      "http_200": 10,
+      "expected_status_matches": 0,
+      "status_counts": {
+        "answered": 0,
+        "insufficient_evidence": 8,
+        "needs_clarification": 2
+      }
+    }
+  },
+  "browser": {
+    "status": "blocked",
+    "pages_tested": 0,
+    "reasons": [
+      "No Chrome DevTools or qualifying integrated browser available",
+      "agent-browser CLI not installed",
+      "Docker daemon unavailable for Phoenix"
+    ]
+  },
+  "remaining_risks": [
+    "Ollama does not satisfy the golden functional cases",
+    "max_clients does not hard-cap active limiter identities",
+    "Context precision 0.10 for the live maximum-loan evaluation",
+    "Browser rendering and fresh collector export not validated"
+  ],
+  "coverage": {
+    "covered_lines": 2892,
+    "num_statements": 3384,
+    "percent_covered": 83.73523622047244,
+    "percent_covered_display": "83.7",
+    "missing_lines": 492,
+    "excluded_lines": 3,
+    "percent_statements_covered": 85.46099290780141,
+    "percent_statements_covered_display": "85.5",
+    "num_branches": 680,
+    "num_partial_branches": 59,
+    "covered_branches": 511,
+    "missing_branches": 169,
+    "percent_branches_covered": 75.1470588235294,
+    "percent_branches_covered_display": "75.1"
+  },
+  "additional_checks": {
+    "ruff": "pass",
+    "mypy": "pass: 141 files",
+    "changed_test_formatting": "pass",
+    "hostile_environment": "40 passed",
+    "guardrails_real_engine_self_check": "pass: five schema decisions",
+    "litellm_real_router_cache_self_check": "pass: offline fixtures",
+    "temporary_services": "stopped after validation"
+  }
+}

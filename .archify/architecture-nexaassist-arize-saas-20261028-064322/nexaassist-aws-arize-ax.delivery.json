@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "756a8fa1-9f14-4415-82ee-30ef48559be3",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-arize-saas-20261028-064322/candidate.json",
+  "output": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-arize-saas-20261028-064322/nexaassist-aws-arize-ax.html",
+  "specification": {
+    "sha256": "ffd53714aadc6d3066608666ed4cf557be18238471e23a9defd054ebe80d686a",
+    "bytes": 8349
+  },
+  "artifact": {
+    "sha256": "839bcd9b1bd16bf6751c55bad64b2cfddac7f7215004bd631e2816bf0e989434",
+    "bytes": 840281
+  }
+}

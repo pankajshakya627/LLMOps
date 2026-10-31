@@ -1,0 +1,3 @@
+Explain retry as another attempt and fallback as another model group. The YAML caps the router retry setting at one and fallback depth at one. Its 30-second timeout is not an end-to-end SLA: retrieval, client retries, fallback and citation repair contribute additional time. The gateway profile clears OPENAI_FALLBACK_MODEL so the optional direct application fallback does not stack another cloud route. This gateway does not switch based on a low Ragas score or a safe abstention. Both primary and backup can fail.
+
+Source locations for this page are app/gateway/litellm.yaml:23; app/chains/llm.py:14. Open the Markdown guide app/operations/GATEWAYS_AND_GUARDRAILS_GUIDE.md for the complete walkthrough. Source lines describe the 25 October 2026 snapshot.

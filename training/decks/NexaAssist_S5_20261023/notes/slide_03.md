@@ -1,0 +1,1 @@
+25 min operating loop + 20 min trace walkthrough 90 min labs, including a 10 min break 25 min incident review + 20 min final debrief The practicals cover incident metrics, reviewed feedback and a rollback tabletop. Keep time for each pair to defend its release hold or approval recommendation.

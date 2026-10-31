@@ -1,0 +1,1 @@
+Carry the quality and operational evidence forward. Bring one regression and one misleading feedback item. Session 5 rehearses the operating loop. The operating loop connects traces, reviewed feedback, golden cases and reversible configuration. It begins after deployment rather than ending there.

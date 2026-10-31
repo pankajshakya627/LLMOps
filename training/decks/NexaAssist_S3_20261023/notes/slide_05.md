@@ -1,0 +1,1 @@
+Prompt ID, version and fingerprint travel with the answer provenance. Open app/chains/prompts/answer.py and locate ANSWER_PROMPT_ID. Read the displayed excerpt in context; it is taken directly from the application. Prompt ID, version and fingerprint travel with the answer provenance. The implementation or concept reference is app/chains/prompts/answer.py.

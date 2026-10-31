@@ -1,0 +1,1 @@
+A grounded answer replay and a failure diagnosis. Three proposed golden cases with a review memo. A documented quality gate decision. Carry retrieval evidence from Session 2. An answer-quality result needs the question, expected behavior, evidence references and actual response.

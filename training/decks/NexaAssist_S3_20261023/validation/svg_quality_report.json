@@ -1,0 +1,1517 @@
+{
+  "schema": "ppt-master.svg-quality-report.v1",
+  "stage": "final",
+  "target": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S3_20261023",
+  "source_fingerprint": {
+    "algorithm": "sha256",
+    "digest": "ee01870a13eb2ec5a689bb025eb443861ff4565f3843644abe086e9d7d1098f0",
+    "file_count": 22,
+    "files": [
+      {
+        "file": "slide_01.svg",
+        "sha256": "67d03bc1c0a6ad774516c843092b2895f549b38653556530dd07c4a733e42adc"
+      },
+      {
+        "file": "slide_02.svg",
+        "sha256": "a46d1531b9a6b6c761fa1c0bd1847d1b0df2016f05217fd50a4ad10e78d602aa"
+      },
+      {
+        "file": "slide_03.svg",
+        "sha256": "da06ae84048ec9408590a962fa00a4f6e9e2e3e55ff32d5e174b4db72adfbf20"
+      },
+      {
+        "file": "slide_04.svg",
+        "sha256": "3929f4e31c1a925697f331afb4c45e0abd2712241306d689880972e77df4223f"
+      },
+      {
+        "file": "slide_05.svg",
+        "sha256": "f30cc7477d679a7f724da42acde9fdc5e3ca7aa600d3b05c22e153de2f92d167"
+      },
+      {
+        "file": "slide_06.svg",
+        "sha256": "70f32b867d5444193e5bc624b1811e40a7a1288fd246187e4e0f926fff4d5cca"
+      },
+      {
+        "file": "slide_07.svg",
+        "sha256": "de0e3c0549526ec6060a57dcf73ab2757b235beb4742ec9dfb44cafa69251927"
+      },
+      {
+        "file": "slide_08.svg",
+        "sha256": "e65d7471b318855ae8f7010745046686e2fd4dbba63b618a4406f2717470796f"
+      },
+      {
+        "file": "slide_09.svg",
+        "sha256": "db25abe59b46d5c07a634aceb1984232dbd693840bfafaa922a0c5620a985612"
+      },
+      {
+        "file": "slide_10.svg",
+        "sha256": "a81e3da7c0347e8ea53d74ce84f64429f06deb000a58b765501db30f6be70837"
+      },
+      {
+        "file": "slide_11.svg",
+        "sha256": "9332117095373d068eeea1d26f93b5338ab604bac88abc590ffdf5e9695c360b"
+      },
+      {
+        "file": "slide_12.svg",
+        "sha256": "86bf321f35ea78724b8383f7e769a6e62ab3d0fb56971e59e62eb6f1e358b012"
+      },
+      {
+        "file": "slide_13.svg",
+        "sha256": "374d7cbf73c974ba35896bdd7c6632babb2876fcc9960ca78f2552688ee7f35c"
+      },
+      {
+        "file": "slide_14.svg",
+        "sha256": "0e3538b5097e202ad0193f9fe5c906f192924960ecbf696757a7cef891421e98"
+      },
+      {
+        "file": "slide_15.svg",
+        "sha256": "0219cf9a93c5230aa35c179ca4310c6be118860433b0f61de4c167c5ccbd75cf"
+      },
+      {
+        "file": "slide_16.svg",
+        "sha256": "0b0f4d28fe5921cf4e89e8a57ab10beadc0f2f68ed53faba85b60aaee151286f"
+      },
+      {
+        "file": "slide_17.svg",
+        "sha256": "fa218584c83929c9eb65f77d1730e0e01ecd8b417f718f969d2a5411d4341452"
+      },
+      {
+        "file": "slide_18.svg",
+        "sha256": "09b0073b1513b1071ed2cf4e9d8dc356da7cc39f85c71351341802d1cb1bf831"
+      },
+      {
+        "file": "slide_19.svg",
+        "sha256": "008bd73b8b33973a156e42b8bc151d1f9c9d5ea7bb40de5a396289dc3328b85d"
+      },
+      {
+        "file": "slide_20.svg",
+        "sha256": "b12de3abab10384697d7acc8054b52907f35c3ea2a456d3ac0eb7d82a52f24e0"
+      },
+      {
+        "file": "slide_21.svg",
+        "sha256": "8cf78a9357df8f7c8bbeb6ff0574aa7a21d182b5323e07d7773066de8920ecfa"
+      },
+      {
+        "file": "slide_22.svg",
+        "sha256": "bcc5f910f5b92f80748089ae81288b66923c8e2f41066e09cba2e2750d42131c"
+      }
+    ]
+  },
+  "summary": {
+    "total": 22,
+    "passed": 22,
+    "warnings": 0,
+    "errors": 0
+  },
+  "issue_types": {},
+  "categories": {
+    "blocking": {
+      "count": 0,
+      "issues": []
+    },
+    "introduced": {
+      "count": 0,
+      "issues": []
+    },
+    "inherited": {
+      "count": 0,
+      "issues": []
+    },
+    "source-import": {
+      "count": 0,
+      "summary": {
+        "warning_count": 0,
+        "by_code": {}
+      }
+    }
+  },
+  "drift": {
+    "colors": {
+      "#BBCBD7": [
+        "slide_01.svg",
+        "slide_21.svg",
+        "slide_22.svg"
+      ]
+    },
+    "fonts": {},
+    "sizes": {}
+  },
+  "carrier_receipt": {
+    "scope": "informational-not-a-quota",
+    "pages": 22,
+    "totals": {
+      "text_elements": 186,
+      "image_placements": 0,
+      "icons": 0,
+      "svg_geometry_elements": 70,
+      "preset_shapes": 0,
+      "page_frame_elements": 23,
+      "marker_uses": 0,
+      "inline_emphasis_runs": 0,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "pages_with": {
+      "images": 0,
+      "icons": 0,
+      "presets": 0,
+      "charts": 0,
+      "tables": 0,
+      "formulas": 0,
+      "inline_emphasis_runs": 0,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "relationship_pages": 1,
+    "geometry_elements": {
+      "circle": 0,
+      "ellipse": 0,
+      "line": 0,
+      "path": 0,
+      "polygon": 0,
+      "polyline": 0,
+      "rect": 70
+    },
+    "preset_names": {},
+    "native_objects": {
+      "chart": 0,
+      "formula_block": 0,
+      "formula_inline": 0,
+      "other": 0,
+      "table": 0
+    },
+    "image_page_max_frame_share_range": []
+  },
+  "project_issues": {
+    "template": [],
+    "animation": [],
+    "illustration": [],
+    "communication_trace": [],
+    "pptx_structure": []
+  },
+  "files": [
+    {
+      "file": "slide_01.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_01.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 6,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 2,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 6,
+        "tspan_elements": 7,
+        "contextual_values": {
+          "colors": [
+            "#BBCBD7"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "67d03bc1c0a6ad774516c843092b2895f549b38653556530dd07c4a733e42adc"
+    },
+    {
+      "file": "slide_02.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_02.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 7,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 7,
+        "tspan_elements": 7
+      },
+      "passed": true,
+      "source_sha256": "a46d1531b9a6b6c761fa1c0bd1847d1b0df2016f05217fd50a4ad10e78d602aa"
+    },
+    {
+      "file": "slide_03.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_03.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 7,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 7,
+        "tspan_elements": 7
+      },
+      "passed": true,
+      "source_sha256": "da06ae84048ec9408590a962fa00a4f6e9e2e3e55ff32d5e174b4db72adfbf20"
+    },
+    {
+      "file": "slide_04.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_04.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 7,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 7,
+        "tspan_elements": 7
+      },
+      "passed": true,
+      "source_sha256": "3929f4e31c1a925697f331afb4c45e0abd2712241306d689880972e77df4223f"
+    },
+    {
+      "file": "slide_05.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_05.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 16,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Consolas",
+          "Trebuchet MS"
+        ],
+        "text_elements": 16,
+        "tspan_elements": 16
+      },
+      "passed": true,
+      "source_sha256": "f30cc7477d679a7f724da42acde9fdc5e3ca7aa600d3b05c22e153de2f92d167"
+    },
+    {
+      "file": "slide_06.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_06.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 7,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 7,
+        "tspan_elements": 7
+      },
+      "passed": true,
+      "source_sha256": "70f32b867d5444193e5bc624b1811e40a7a1288fd246187e4e0f926fff4d5cca"
+    },
+    {
+      "file": "slide_07.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_07.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 8,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Consolas",
+          "Trebuchet MS"
+        ],
+        "text_elements": 8,
+        "tspan_elements": 8
+      },
+      "passed": true,
+      "source_sha256": "de0e3c0549526ec6060a57dcf73ab2757b235beb4742ec9dfb44cafa69251927"
+    },
+    {
+      "file": "slide_08.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_08.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 13,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Consolas",
+          "Trebuchet MS"
+        ],
+        "text_elements": 13,
+        "tspan_elements": 13
+      },
+      "passed": true,
+      "source_sha256": "e65d7471b318855ae8f7010745046686e2fd4dbba63b618a4406f2717470796f"
+    },
+    {
+      "file": "slide_09.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_09.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 10,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 10,
+        "tspan_elements": 10
+      },
+      "passed": true,
+      "source_sha256": "db25abe59b46d5c07a634aceb1984232dbd693840bfafaa922a0c5620a985612"
+    },
+    {
+      "file": "slide_10.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_10.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 7,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 7,
+        "tspan_elements": 7
+      },
+      "passed": true,
+      "source_sha256": "a81e3da7c0347e8ea53d74ce84f64429f06deb000a58b765501db30f6be70837"
+    },
+    {
+      "file": "slide_11.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_11.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 8,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Consolas",
+          "Trebuchet MS"
+        ],
+        "text_elements": 8,
+        "tspan_elements": 8
+      },
+      "passed": true,
+      "source_sha256": "9332117095373d068eeea1d26f93b5338ab604bac88abc590ffdf5e9695c360b"
+    },
+    {
+      "file": "slide_12.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_12.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 8,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Consolas",
+          "Trebuchet MS"
+        ],
+        "text_elements": 8,
+        "tspan_elements": 8
+      },
+      "passed": true,
+      "source_sha256": "86bf321f35ea78724b8383f7e769a6e62ab3d0fb56971e59e62eb6f1e358b012"
+    },
+    {
+      "file": "slide_13.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_13.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 7,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 7,
+        "tspan_elements": 7
+      },
+      "passed": true,
+      "source_sha256": "374d7cbf73c974ba35896bdd7c6632babb2876fcc9960ca78f2552688ee7f35c"
+    },
+    {
+      "file": "slide_14.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_14.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 7,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 7,
+        "tspan_elements": 7
+      },
+      "passed": true,
+      "source_sha256": "0e3538b5097e202ad0193f9fe5c906f192924960ecbf696757a7cef891421e98"
+    },
+    {
+      "file": "slide_15.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_15.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 8,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Consolas",
+          "Trebuchet MS"
+        ],
+        "text_elements": 8,
+        "tspan_elements": 8
+      },
+      "passed": true,
+      "source_sha256": "0219cf9a93c5230aa35c179ca4310c6be118860433b0f61de4c167c5ccbd75cf"
+    },
+    {
+      "file": "slide_16.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_16.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 17,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Consolas",
+          "Trebuchet MS"
+        ],
+        "text_elements": 17,
+        "tspan_elements": 17
+      },
+      "passed": true,
+      "source_sha256": "0b0f4d28fe5921cf4e89e8a57ab10beadc0f2f68ed53faba85b60aaee151286f"
+    },
+    {
+      "file": "slide_17.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_17.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 8,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Consolas",
+          "Trebuchet MS"
+        ],
+        "text_elements": 8,
+        "tspan_elements": 8
+      },
+      "passed": true,
+      "source_sha256": "fa218584c83929c9eb65f77d1730e0e01ecd8b417f718f969d2a5411d4341452"
+    },
+    {
+      "file": "slide_18.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_18.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 7,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 7,
+        "tspan_elements": 7
+      },
+      "passed": true,
+      "source_sha256": "09b0073b1513b1071ed2cf4e9d8dc356da7cc39f85c71351341802d1cb1bf831"
+    },
+    {
+      "file": "slide_19.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_19.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 7,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 7,
+        "tspan_elements": 7
+      },
+      "passed": true,
+      "source_sha256": "008bd73b8b33973a156e42b8bc151d1f9c9d5ea7bb40de5a396289dc3328b85d"
+    },
+    {
+      "file": "slide_20.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_20.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 7,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 7,
+        "tspan_elements": 7
+      },
+      "passed": true,
+      "source_sha256": "b12de3abab10384697d7acc8054b52907f35c3ea2a456d3ac0eb7d82a52f24e0"
+    },
+    {
+      "file": "slide_21.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_21.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 7,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 7,
+        "tspan_elements": 7,
+        "contextual_values": {
+          "colors": [
+            "#BBCBD7"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "8cf78a9357df8f7c8bbeb6ff0574aa7a21d182b5323e07d7773066de8920ecfa"
+    },
+    {
+      "file": "slide_22.svg",
+      "path": "training/decks/NexaAssist_S3_20261023/svg_output/slide_22.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 7,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Trebuchet MS"
+        ],
+        "text_elements": 7,
+        "tspan_elements": 7,
+        "contextual_values": {
+          "colors": [
+            "#BBCBD7"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "bcc5f910f5b92f80748089ae81288b66923c8e2f41066e09cba2e2750d42131c"
+    }
+  ]
+}

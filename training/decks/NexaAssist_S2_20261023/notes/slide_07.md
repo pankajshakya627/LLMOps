@@ -1,0 +1,1 @@
+Run: python -m training.session2.chunks Compare maximum sizes 300, 1200 and 5000. Expected counts: 40, 32 and 32; tables remain visible. The corpus is local. The size setting only splits oversized clauses, so 1200 and 5000 produce the same count here. Inspect an actual table chunk before choosing a size.

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/candidate-aws.json",
+    "sha256": "3cf47a7a230ce05fa07092d9b45d9e21b8cf27ce6beb1453eed10d883ef720da",
+    "bytes": 8671
+  },
+  "artifact": {
+    "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/nexaassist-aws-claude.html",
+    "sha256": "1b38b509727046908313a791868b7c5fa9aa464e7e125e90f56fe178edbea32f",
+    "bytes": 841836
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "fail"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/browser-check-runtime",
+      "severity": "error",
+      "message": "browser-check could not complete its Chrome inspection.",
+      "subject": {
+        "artifact": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/nexaassist-aws-claude.html"
+      },
+      "evidence": {
+        "reason": "Chrome DevTools read pipe failed: stream ended\nChrome process: still running.\nChrome transport: Node v26.12.1, libuv 1.53.0, darwin; pid=60754, exitCode=null, signalCode=null.\nChrome read pipe: readable=false, ended=true, destroyed=false, receivedBytes=0, messages=0, bufferedBytes=0.\nChrome write pipe: writable=true, ended=false, destroyed=false, completedWrites=1, writtenBytes=50, bufferedBytes=0."
+      },
+      "supportedFixes": [
+        "resolve the reported Chrome inspection error, then rerun browser-check"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/nexaassist-aws-claude.finalize.json",
+    "summaryReceipt": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/nexaassist-aws-claude.finalize-summary.json",
+    "browserCheckReceipt": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/nexaassist-aws-claude.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 759,
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  }
+}

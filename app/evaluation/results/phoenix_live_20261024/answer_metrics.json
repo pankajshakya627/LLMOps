@@ -1,0 +1,14 @@
+{
+  "sample_count": 1,
+  "p50_ms": 17631.97,
+  "p95_ms": 17631.97,
+  "p99_ms": 17631.97,
+  "answer_requests_total": 1,
+  "answer_errors_total": 0,
+  "answer_error_rate": 0.0,
+  "input_tokens_total": 10072,
+  "output_tokens_total": 118,
+  "cost_per_query_usd": null,
+  "sampled_count": 0,
+  "sampled_hallucination_rate": null
+}

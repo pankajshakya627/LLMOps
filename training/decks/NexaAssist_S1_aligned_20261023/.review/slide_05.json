@@ -1,0 +1,29 @@
+{
+  "page": "slide_05.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_05.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Show Discover, Distill, Deploy and Deliver as four linked phases and decisions.",
+    "render_delivers": true,
+    "note": "All four phases and their decisions are present. Labelled arrows visibly connect scope, quality and SLO transitions; text and connector placements have no collisions or clipping."
+  }
+}

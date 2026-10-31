@@ -1,0 +1,1 @@
+A staff member flags an unhelpful answer. A reviewer checks sources and accepts the signal. A separate curated answer becomes a golden case. Acceptance does not authenticate the client response or certify the correction. Export requires the same input, explicit expected status/output and source references for an answered target. Detected PII is blocked.

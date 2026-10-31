@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC"/>
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 05 / WORKING DEMONSTRATION</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42">Showcase / a complaint becomes a test</text></g>
+<g id="signal" data-pptx-bounds="64 210 1152 110"><rect x="64" y="215" width="5" height="80" fill="#AF476A"/><text x="92" y="239" font-size="20" fill="#AF476A">SIGNAL</text><text x="92" y="282" font-size="26" fill="#132C42">A staff member flags an unhelpful answer.</text></g>
+<g id="review" data-pptx-bounds="64 350 1152 110"><rect x="64" y="355" width="5" height="80" fill="#AF476A"/><text x="92" y="379" font-size="20" fill="#AF476A">HUMAN REVIEW</text><text x="92" y="422" font-size="26" fill="#132C42">A reviewer checks sources and accepts the signal.</text></g>
+<g id="curation" data-pptx-bounds="64 490 1152 110"><rect x="64" y="495" width="5" height="80" fill="#176849"/><text x="92" y="519" font-size="20" fill="#176849">REGRESSION ASSET</text><text x="92" y="562" font-size="26" fill="#132C42">A separate curated answer becomes a golden case.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Accepted feedback is a signal / policy meaning needs SME verification</text><text x="1150" y="681"><tspan>04/40</tspan></text></g>
+</svg>

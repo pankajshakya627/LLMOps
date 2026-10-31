@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 556.92 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 556.92 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 620.28 31 L 620.28 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 02 / OFFLINE POLICY DEMONSTRATION</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 84.33 820.4 61.6" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 84.33 820.4 61.6" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 84.33 L 882.8 84.33 L 882.8 145.93 L 62.4 145.93 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Practical / replay the July policy boundary</text>
+</g>
+</g>
+<g id="shape-8" data-pptx-object="group" data-pptx-frame="64 215 1152 105" data-pptx-source-ref="slide:8">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 215 1152 105" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 215 L 1216 215 L 1216 320 L 64 320 Z" fill="#132C42" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="87.2 256 800.88 32" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 87.2 256 L 888.08 256 L 888.08 288 L 87.2 288 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.2" y="276" text-anchor="start" xml:space="preserve" font-family="&quot;Courier New&quot;, sans-serif" font-size="20" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">uv run --no-sync python -m training.showcase --session 2</text>
+</g>
+</g>
+<g id="shape-11" data-pptx-object="group" data-pptx-frame="62.96 366.67 846.48 80.93" data-pptx-source-ref="slide:11">
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="62.96 366.67 691.28 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 62.96 366.67 L 754.24 366.67 L 754.24 406.71 L 62.96 406.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="392" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">June: 0.35% / POL-HL-V3; July: 0.30% / CIR-2026-07.</text>
+</g>
+<g id="shape-10" data-pptx-object="shape" data-pptx-frame="62.96 406 846.48 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:10" data-pptx-semantic-object="shape">
+<path d="M 62.96 406 L 909.44 406 L 909.44 447.6 L 62.96 447.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="432" text-anchor="start" xml:space="preserve" font-family="Arial, sans-serif" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Record lookup + sanction dates, product, status and citations.</text>
+</g>
+</g>
+<g id="shape-13" data-pptx-object="group" data-pptx-frame="62.96 506.67 617.22 40.04" data-pptx-source-ref="slide:13">
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="62.96 506.67 617.22 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 62.96 506.67 L 680.18 506.67 L 680.18 546.71 L 62.96 546.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="532" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Wrong product: insufficient_evidence; no citations.</text>
+</g>
+</g>
+<g id="shape-16" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:16">
+<g id="shape-14" data-pptx-object="shape" data-pptx-frame="63.36 665 683.74 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:14" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 747.1 665 L 747.1 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 03, 05, 09, 12 / Offline exercise; observed fixture results</text>
+</g>
+<g id="shape-15" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:15" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">14/16</text>
+</g>
+</g></svg>

@@ -1,0 +1,1 @@
+Run input_rail, output_cap and rate_limit tests. Run test_readiness_timeout.py and the answer replay. Explain both protected cases and known detector limits. Use the complete pytest command in the handout. Extend a copy of the rate-limit exercise to three allowed requests and a fourth blocked one. The implementation or concept reference is training/session4/handout.md.

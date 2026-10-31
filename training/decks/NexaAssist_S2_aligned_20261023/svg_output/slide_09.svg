@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#2463A6" /></marker></defs>
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 02 / RETRIEVAL ARCHITECTURE</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42">Retrieval / scope first, then expand evidence</text></g>
+<g id="diagram-root" data-pptx-bounds="64 205 1152 440" fill="#132C42">
+<g id="node-scope"><rect x="64" y="230" width="330" height="120" fill="#E8EDF0" /><text x="84" y="267" font-size="26">1 / Request + filters</text><text x="84" y="300" font-size="20">Scrub query; constrain corpus</text><text x="84" y="330" font-size="20">Dates, product, access scope</text></g>
+<g id="node-search"><rect x="475" y="230" width="330" height="120" fill="#E8EDF0" /><text x="495" y="267" font-size="26">2 / Candidate search</text><text x="495" y="300" font-size="20">Query embedding + Atlas</text><text x="495" y="330" font-size="20">Dense or configured hybrid</text></g>
+<g id="node-rank"><rect x="886" y="230" width="330" height="120" fill="#E8EDF0" /><text x="906" y="267" font-size="26">3 / Rank + top_k</text><text x="906" y="300" font-size="20">Reranker when enabled</text><text x="906" y="330" font-size="20">Keep the requested hit count</text></g>
+<g id="node-parents"><rect x="886" y="460" width="330" height="120" fill="#E8EDF0" /><text x="906" y="497" font-size="26">4 / Expand parents</text><text x="906" y="530" font-size="20">Validate matching scope</text><text x="906" y="560" font-size="20">Otherwise retain child text</text></g>
+<g id="node-amendments"><rect x="475" y="460" width="330" height="120" fill="#E8EDF0" /><text x="495" y="497" font-size="26">5 / Load amendments</text><text x="495" y="530" font-size="20">Scoped linked instruments</text><text x="495" y="560" font-size="20">Separate from top_k results</text></g>
+<g id="node-context"><rect x="64" y="460" width="330" height="120" /><text x="84" y="497" font-size="26" fill="#FFFFFF">6 / Pack context</text><text x="84" y="530" font-size="20" fill="#FFFFFF">Preserve complete evidence</text><text x="84" y="560" font-size="20" fill="#FFFFFF">Then hand off to generation</text></g>
+<g id="edge-1-2"><line x1="394" y1="290" x2="475" y2="290" stroke="#2463A6" stroke-width="2" marker-end="url(#arrow)" /><text x="408" y="272" font-size="20">search</text></g>
+<g id="edge-2-3"><line x1="805" y1="290" x2="886" y2="290" stroke="#2463A6" stroke-width="2" marker-end="url(#arrow)" /><text x="821" y="272" font-size="20">rank</text></g>
+<g id="edge-3-4"><line x1="1051" y1="350" x2="1051" y2="460" stroke="#2463A6" stroke-width="2" marker-end="url(#arrow)" /><text x="1067" y="410" font-size="20">expand</text></g>
+<g id="edge-4-5"><line x1="886" y1="520" x2="805" y2="520" stroke="#2463A6" stroke-width="2" marker-end="url(#arrow)" /><text x="815" y="445" font-size="20">link</text></g>
+<g id="edge-5-6"><line x1="475" y1="520" x2="394" y2="520" stroke="#2463A6" stroke-width="2" marker-end="url(#arrow)" /><text x="407" y="445" font-size="20">pack</text></g>
+<g id="diagram-legend"><text x="64" y="630" font-size="20" fill="#526375">Numbered path: baseline retrieval. Hybrid search and reranking are explicit configuration branches.</text></g>
+</g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Educative L08 / app/services/retrieval.py + app/chains/retrieval.py</text><text x="1150" y="681">09/16</text></g>
+</svg>

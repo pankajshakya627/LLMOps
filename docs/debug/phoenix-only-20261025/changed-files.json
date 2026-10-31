@@ -1,0 +1,282 @@
+[
+  {
+    "path": "requirements.txt",
+    "added": 5,
+    "removed": 3
+  },
+  {
+    "path": "uv.lock",
+    "added": 332,
+    "removed": 58
+  },
+  {
+    "path": "CAPABILITY_MAP.md",
+    "added": 7,
+    "removed": 8
+  },
+  {
+    "path": "pyproject.toml",
+    "added": 5,
+    "removed": 3
+  },
+  {
+    "path": "DATADOG_README.md",
+    "added": 0,
+    "removed": 96
+  },
+  {
+    "path": "CONSTRAINTS.md",
+    "added": 1,
+    "removed": 1
+  },
+  {
+    "path": "APP_COMPONENT_GUIDE.md",
+    "added": 84,
+    "removed": 962
+  },
+  {
+    "path": "README.md",
+    "added": 24,
+    "removed": 24
+  },
+  {
+    "path": ".env.example",
+    "added": 1,
+    "removed": 19
+  },
+  {
+    "path": "SPEC-model-access.md",
+    "added": 5,
+    "removed": 5
+  },
+  {
+    "path": "DEVELOPMENT_TOOLING_GUIDE.md",
+    "added": 37,
+    "removed": 295
+  },
+  {
+    "path": "app/phoenix_main.py",
+    "added": 1,
+    "removed": 3
+  },
+  {
+    "path": "app/compose.datadog.yaml",
+    "added": 0,
+    "removed": 24
+  },
+  {
+    "path": "app/main.py",
+    "added": 0,
+    "removed": 2
+  },
+  {
+    "path": "training/SHOWCASE_RUNBOOK.md",
+    "added": 2,
+    "removed": 2
+  },
+  {
+    "path": "training/IMPLEMENTATION_CHANGES.md",
+    "added": 1,
+    "removed": 1
+  },
+  {
+    "path": "tests/test_feedback.py",
+    "added": 38,
+    "removed": 30
+  },
+  {
+    "path": "tests/test_live_evaluation.py",
+    "added": 24,
+    "removed": 49
+  },
+  {
+    "path": "tests/test_ui.py",
+    "added": 4,
+    "removed": 7
+  },
+  {
+    "path": "tests/test_evaluation.py",
+    "added": 7,
+    "removed": 77
+  },
+  {
+    "path": "tests/test_feedback_export.py",
+    "added": 0,
+    "removed": 2
+  },
+  {
+    "path": "tests/test_answer.py",
+    "added": 8,
+    "removed": 8
+  },
+  {
+    "path": "tests/test_course_delivery.py",
+    "added": 1,
+    "removed": 1
+  },
+  {
+    "path": "tests/test_telemetry.py",
+    "added": 115,
+    "removed": 251
+  },
+  {
+    "path": "C4-Documentation/nexaassist-architecture.html",
+    "added": 3,
+    "removed": 3
+  },
+  {
+    "path": "C4-Documentation/architecture-explorer.md",
+    "added": 1,
+    "removed": 1
+  },
+  {
+    "path": "docs/architecture/c4-context.md",
+    "added": 4,
+    "removed": 4
+  },
+  {
+    "path": "docs/architecture/c4-containers.md",
+    "added": 2,
+    "removed": 2
+  },
+  {
+    "path": "tests/runtime/phoenix_profile_check.py",
+    "added": 14,
+    "removed": 17
+  },
+  {
+    "path": "training/session2/live_practicals.md",
+    "added": 16,
+    "removed": 21
+  },
+  {
+    "path": "training/session2/IMPLEMENTATION_VERIFICATION.md",
+    "added": 3,
+    "removed": 0
+  },
+  {
+    "path": "training/session2/phoenix.md",
+    "added": 20,
+    "removed": 19
+  },
+  {
+    "path": "training/session2/requirements-phoenix.txt",
+    "added": 1,
+    "removed": 1
+  },
+  {
+    "path": "training/session2/handout.md",
+    "added": 9,
+    "removed": 9
+  },
+  {
+    "path": "training/session2/instructor.md",
+    "added": 16,
+    "removed": 28
+  },
+  {
+    "path": "training/session2/PHOENIX_VERIFICATION.md",
+    "added": 3,
+    "removed": 0
+  },
+  {
+    "path": "training/session2/runtime.md",
+    "added": 8,
+    "removed": 9
+  },
+  {
+    "path": "training/session5/handout.md",
+    "added": 5,
+    "removed": 2
+  },
+  {
+    "path": "training/session5/feedback_loop.py",
+    "added": 1,
+    "removed": 6
+  },
+  {
+    "path": "training/decks/course_content.py",
+    "added": 5,
+    "removed": 3
+  },
+  {
+    "path": "training/decks/compact_content.py",
+    "added": 1,
+    "removed": 1
+  },
+  {
+    "path": "app/ui/app.py",
+    "added": 2,
+    "removed": 3
+  },
+  {
+    "path": "app/database/feedback.py",
+    "added": 16,
+    "removed": 5
+  },
+  {
+    "path": "app/core/logging.py",
+    "added": 4,
+    "removed": 1
+  },
+  {
+    "path": "app/core/config.py",
+    "added": 0,
+    "removed": 3
+  },
+  {
+    "path": "app/core/telemetry.py",
+    "added": 0,
+    "removed": 14
+  },
+  {
+    "path": "app/core/observability.py",
+    "added": 9,
+    "removed": 22
+  },
+  {
+    "path": "app/core/phoenix.py",
+    "added": 23,
+    "removed": 1
+  },
+  {
+    "path": "app/models/answer.py",
+    "added": 2,
+    "removed": 1
+  },
+  {
+    "path": "app/models/evaluation.py",
+    "added": 0,
+    "removed": 2
+  },
+  {
+    "path": "app/evaluation/run.py",
+    "added": 70,
+    "removed": 132
+  },
+  {
+    "path": "app/services/ingestion.py",
+    "added": 0,
+    "removed": 2
+  },
+  {
+    "path": "app/services/answer.py",
+    "added": 3,
+    "removed": 20
+  },
+  {
+    "path": "app/services/feedback.py",
+    "added": 0,
+    "removed": 22
+  },
+  {
+    "path": "app/services/evaluation.py",
+    "added": 27,
+    "removed": 104
+  },
+  {
+    "path": "tests/test_observability_contract.py",
+    "added": 32,
+    "removed": 0
+  }
+]

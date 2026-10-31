@@ -1,0 +1,1 @@
+Keep generation behind the service layer. Bring one invalid input and one dependency outage. Session 4 will measure the API failure contract. The next class wraps the already-working intelligence in deterministic request validation, quotas, readiness checks and measurable operational constraints.

@@ -1,0 +1,1 @@
+Educative lesson 02 Concept → worked example → NexaAssist application This section follows the lesson How We Reached LLMOps. Teach the concept first, then distinguish the existing NexaAssist implementation from proposed extensions. The slides paraphrase the source rather than reproduce its text. Source lesson: https://www.educative.io/courses/llmops/how-we-reached-llmops.

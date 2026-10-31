@@ -1,0 +1,1 @@
+Read app/chains/prompts/answer.py. Bring one unsupported question and one scope ambiguity. Keep the same retrieval cases for Session 3. The next session adds structured generation, deterministic citation checks and semantic evaluation while preserving this evidence contract.

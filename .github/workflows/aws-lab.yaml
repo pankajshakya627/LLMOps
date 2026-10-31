@@ -1,0 +1,136 @@
+name: Disposable AWS lab
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        type: choice
+        options: [start, deploy, evaluate, destroy]
+        default: start
+        description: Start creates a NEW session. Deploy replaces images in an existing session. Destroy deletes all session data.
+      session:
+        type: string
+        default: nexa-lab-training
+        description: Session stack name (nexa-lab- prefix, lowercase; never reuse a live name with start)
+      minutes:
+        type: choice
+        options: ['60', '120']
+        default: '120'
+        description: Maximum session lifetime; deploy does not extend it
+      budget:
+        type: choice
+        options: ['3', '4', '5', '6', '7', '8']
+        default: '5'
+        description: USD planning allowance, recorded as a tag; NOT a billing hard cap
+permissions:
+  contents: read
+concurrency:
+  group: aws-lab-${{ inputs.session }}
+  cancel-in-progress: false
+jobs:
+  checks:
+    if: inputs.operation == 'start' || inputs.operation == 'deploy'
+    uses: ./.github/workflows/ci.yaml
+  session:
+    needs: checks
+    if: always() && (needs.checks.result == 'success' || needs.checks.result == 'skipped')
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    environment: aws-lab
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION || 'ap-south-1' }}
+      AWS_DEFAULT_REGION: ${{ vars.AWS_REGION || 'ap-south-1' }}
+      LAB_STACK: ${{ inputs.session }}
+      LAB_OPERATION: ${{ inputs.operation }}
+      LAB_MINUTES: ${{ inputs.minutes }}
+      LAB_BUDGET: ${{ inputs.budget }}
+      CF_ROLE: ${{ vars.AWS_CLOUDFORMATION_ROLE_ARN }}
+      BOUNDARY: ${{ vars.AWS_SESSION_BOUNDARY_ARN }}
+      MODELS: ${{ vars.BEDROCK_MODEL_ARNS }}
+      CHAT_ROUTE: ${{ vars.BEDROCK_CHAT_ROUTE }}
+      JUDGE_ROUTE: ${{ vars.BEDROCK_JUDGE_ROUTE }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Require the default branch and configured AWS settings
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          test "$GITHUB_REF_NAME" = "$DEFAULT_BRANCH"
+          test -n "$AWS_REGION"
+          if [ "$LAB_OPERATION" = start ]; then
+            test -n "$CF_ROLE"
+            test -n "$BOUNDARY"
+            test -n "$MODELS"
+          fi
+          if [ "$LAB_OPERATION" = start ] || [ "$LAB_OPERATION" = deploy ]; then
+            test -n "$CHAT_ROUTE"
+            test -n "$JUDGE_ROUTE"
+          fi
+          [[ "$LAB_STACK" =~ ^nexa-lab-[a-z0-9-]{1,25}$ ]]
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
+        with:
+          version: '0.13.5'
+      - uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708 # v5
+        with:
+          role-to-assume: ${{ vars.AWS_GITHUB_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'ap-south-1' }}
+          role-session-name: nexa-lab-${{ github.run_id }}
+      - run: uv sync --locked --extra aws
+      - name: Create bounded-lifetime infrastructure
+        if: inputs.operation == 'start'
+        id: create
+        run: |
+          uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" create \
+            --minutes "$LAB_MINUTES" --budget "$LAB_BUDGET" \
+            --cloudformation-role-arn "$CF_ROLE" --boundary-arn "$BOUNDARY" \
+            --model-resources "$MODELS"
+      - name: Read session outputs
+        if: inputs.operation == 'start' || inputs.operation == 'deploy'
+        run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" status > session-outputs.json
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+        if: inputs.operation == 'start' || inputs.operation == 'deploy'
+      - name: Build three images and resolve immutable digests
+        if: inputs.operation == 'start' || inputs.operation == 'deploy'
+        run: |
+          registry="$(jq -r '.AppRepository | split("/")[0]' session-outputs.json)"
+          aws ecr get-login-password | docker login --username AWS --password-stdin "$registry"
+          tag="$GITHUB_SHA-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          for component in app gateway guardrails; do
+            case "$component" in
+              app) field=AppRepository; dockerfile=app/Dockerfile ;;
+              gateway) field=GatewayRepository; dockerfile=app/gateway/Dockerfile ;;
+              guardrails) field=GuardrailsRepository; dockerfile=app/security/Dockerfile ;;
+            esac
+            repo="$(jq -r --arg field "$field" '.[$field]' session-outputs.json)"
+            docker buildx build --platform linux/amd64 --push --provenance=false \
+              --file "$dockerfile" --tag "$repo:$tag" \
+              --metadata-file "$RUNNER_TEMP/$component-build.json" .
+            digest="$(jq -r '.["containerimage.digest"]' "$RUNNER_TEMP/$component-build.json")"
+            echo "$component=$repo@$digest" >> "$RUNNER_TEMP/image-refs"
+          done
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          refs = dict(line.split('=', 1) for line in Path(os.environ['RUNNER_TEMP'], 'image-refs').read_text().splitlines())
+          Path('images.json').write_text(json.dumps({'APP_IMAGE': refs['app'], 'GATEWAY_IMAGE': refs['gateway'], 'GUARDRAILS_IMAGE': refs['guardrails']}))
+          PY
+      - name: Deploy, ingest synthetic corpus, and smoke test
+        if: inputs.operation == 'start' || inputs.operation == 'deploy'
+        run: |
+          uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" deploy \
+            --images images.json --release-id "$GITHUB_SHA-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" \
+            --chat-route "$CHAT_ROUTE" --judge-route "$JUDGE_ROUTE"
+      - name: Run one explicitly requested paid evaluation
+        if: inputs.operation == 'evaluate'
+        run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" evaluate
+      - name: Destroy session and verify deletion
+        if: inputs.operation == 'destroy'
+        run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" destroy
+      - name: Clean up a failed NEW session
+        if: failure() && inputs.operation == 'start' && steps.create.outcome != 'skipped'
+        run: |
+          if [ -f session-created.json ]; then
+            uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" destroy --receipt session-created.json
+          fi

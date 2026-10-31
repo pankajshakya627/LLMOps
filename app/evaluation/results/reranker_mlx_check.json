@@ -1,0 +1,50 @@
+{
+  "captured_at": "2026-10-18T11:20:21.352544+00:00",
+  "model": "nexaassist-reranker:0.6b-mlx",
+  "endpoint": "http://127.0.0.1:11434",
+  "api": "ollama",
+  "status": "failed",
+  "input_kind": "fixed fictional passages; no Atlas or OpenAI cloud calls",
+  "error_type": "ValueError",
+  "reason": "Reranker endpoint must return finite yes AND no token logprobs",
+  "model_details": {
+    "parent_model": "",
+    "format": "safetensors",
+    "family": "qwen3",
+    "families": null,
+    "parameter_size": "595.78M",
+    "quantization_level": "bfloat16",
+    "runner": "mlx"
+  },
+  "larger_logprob_request": {
+    "http_status": 400,
+    "response": {
+      "error": "top_logprobs must be between 0 and 20"
+    }
+  },
+  "observations": [
+    {
+      "passage": "A car loan requires a vehicle invoice.",
+      "response": "No",
+      "exact_scoring_logprobs": {
+        "no": -4.263304233551025
+      },
+      "returned_alternative_count": 20
+    },
+    {
+      "passage": "A home loan processing fee is 0.35 percent of the amount.",
+      "response": "yes",
+      "exact_scoring_logprobs": {
+        "yes": -0.1525852531194687,
+        "no": -7.965085029602051
+      },
+      "returned_alternative_count": 20
+    }
+  ],
+  "observed_at": "2026-10-18T11:25:10.195939+00:00",
+  "source": {
+    "model": "Qwen/Qwen3-Reranker-0.6B",
+    "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+    "weights_sha256_verified": true
+  }
+}

@@ -1,0 +1,1 @@
+The two-second driver deadline applies to readiness, not ordinary retrieval. Open app/database/mongo.py and locate def ping_database. Read the displayed excerpt in context; it is taken directly from the application. The two-second driver deadline applies to readiness, not ordinary retrieval. The implementation or concept reference is app/database/mongo.py.

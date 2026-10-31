@@ -1,0 +1,1 @@
+Staff need the approved policy explanation. A file changes while its register hash stays fixed. The ingestion boundary must reject that file. Open the synthetic register. Ask learners to predict whether a plausible PDF remains authoritative when its bytes change. Inspect source verification before discussing models.

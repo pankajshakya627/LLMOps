@@ -1,0 +1,1 @@
+Distinguish answered, insufficient_evidence and needs_clarification. Open app/models/answer.py and locate class AnswerDraft. Read the displayed excerpt in context; it is taken directly from the application. Distinguish answered, insufficient_evidence and needs_clarification. The implementation or concept reference is app/models/answer.py.

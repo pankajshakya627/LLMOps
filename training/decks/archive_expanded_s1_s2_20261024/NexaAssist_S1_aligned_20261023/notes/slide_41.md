@@ -1,0 +1,1 @@
+Hand in the manifest and data-access decision. Name source owner, restrictions and must-abstain cases. Keep unresolved approvals visible in the release file. Pass the class exercise when the scope and unresolved decisions are explicit. A production data-governance gate remains blocked until the real owners approve.

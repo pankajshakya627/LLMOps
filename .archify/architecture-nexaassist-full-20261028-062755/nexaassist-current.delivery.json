@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "132b5914-3b9c-472b-8082-d1cc922c8b9b",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/candidate-current.json",
+  "output": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/nexaassist-current.html",
+  "specification": {
+    "sha256": "c634fd4bd40958bf87ba2c452761d8468ca06903156f76aa05a0d3881ceb01f8",
+    "bytes": 7473
+  },
+  "artifact": {
+    "sha256": "81fdefe65e5b213c1977091a13ac0d3557703d740c959a501974392011c61f6a",
+    "bytes": 836328
+  }
+}

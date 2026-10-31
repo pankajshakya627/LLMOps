@@ -1,0 +1,29 @@
+{
+  "page": "slide_05.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_05.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Show the clause-aware splitter excerpt and direct attention to oversized section handling.",
+    "render_delivers": true,
+    "note": "The full specified source excerpt and interpretation are present. Code remains legible within its field, line spacing is clear, and title, code, interpretation and footer do not collide."
+  }
+}

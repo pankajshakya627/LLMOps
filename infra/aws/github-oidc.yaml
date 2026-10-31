@@ -1,0 +1,165 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: One-time, zero-running-cost GitHub OIDC bootstrap for disposable nexa-lab-* stacks. Use a dedicated sandbox account.
+Parameters:
+  GitHubSubject:
+    Type: String
+    Description: Exact OIDC sub for your repository and protected aws-lab environment. Include immutable IDs if enabled by GitHub.
+    AllowedPattern: 'repo:.+:environment:aws-lab'
+  ExistingOidcProviderArn:
+    Type: String
+    Default: ''
+    Description: Supply the account's existing token.actions.githubusercontent.com provider ARN, or leave empty to create it.
+Conditions:
+  CreateProvider: !Equals [!Ref ExistingOidcProviderArn, '']
+Resources:
+  Provider:
+    Type: AWS::IAM::OIDCProvider
+    Condition: CreateProvider
+    Properties:
+      Url: https://token.actions.githubusercontent.com
+      ClientIdList: [sts.amazonaws.com]
+  SessionBoundary:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: Upper bound on roles that the session stack may create
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action: [ssm:UpdateInstanceInformation, ssmmessages:CreateControlChannel, ssmmessages:CreateDataChannel, ssmmessages:OpenControlChannel, ssmmessages:OpenDataChannel, ec2messages:AcknowledgeMessage, ec2messages:DeleteMessage, ec2messages:FailMessage, ec2messages:GetEndpoint, ec2messages:GetMessages, ec2messages:SendReply, ecr:GetAuthorizationToken, ec2:DescribeInstances]
+            Resource: '*'
+          - Effect: Allow
+            Action: [ecr:BatchCheckLayerAvailability, ecr:GetDownloadUrlForLayer, ecr:BatchGetImage]
+            Resource: !Sub 'arn:${AWS::Partition}:ecr:${AWS::Region}:${AWS::AccountId}:repository/nexa-lab-*'
+          - Effect: Allow
+            Action: [s3:GetObject, s3:PutObject, s3:ListBucket, s3:ListBucketVersions, s3:DeleteObject, s3:DeleteObjectVersion, s3:ListBucketMultipartUploads, s3:AbortMultipartUpload]
+            Resource: [!Sub 'arn:${AWS::Partition}:s3:::nexa-lab-*', !Sub 'arn:${AWS::Partition}:s3:::nexa-lab-*/*']
+          - Effect: Allow
+            Action: secretsmanager:GetSecretValue
+            Resource: !Sub 'arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:nexa-lab-*'
+          - Effect: Allow
+            Action: [bedrock:InvokeModel, bedrock:InvokeModelWithResponseStream]
+            Resource: !Sub 'arn:${AWS::Partition}:bedrock:*:*:*'
+          - Effect: Allow
+            Action: bedrock:ApplyGuardrail
+            Resource: !Sub 'arn:${AWS::Partition}:bedrock:${AWS::Region}:${AWS::AccountId}:guardrail/*'
+          - Effect: Allow
+            Action: [logs:CreateLogStream, logs:PutLogEvents]
+            Resource: [!Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/nexaassist/nexa-lab-*:*', !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/nexa-lab-*:*']
+          - Effect: Allow
+            Action: cloudformation:DeleteStack
+            Resource: !Sub 'arn:${AWS::Partition}:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/nexa-lab-*/*'
+          - Effect: Allow
+            Action: lambda:InvokeFunction
+            Resource: !Sub 'arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:nexa-lab-*-cleanup'
+          - Effect: Allow
+            Action: ec2:TerminateInstances
+            Resource: !Sub 'arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/*'
+            Condition: {StringLike: {'ec2:ResourceTag/Session': 'nexa-lab-*'}}
+  CloudFormationRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: {Service: cloudformation.amazonaws.com}
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: disposable-infrastructure
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              # Network creation APIs have incomplete resource-level scoping; isolate this lab account.
+              - Effect: Allow
+                Action: [ec2:Describe*, ec2:RunInstances, ec2:TerminateInstances, ec2:CreateVpc, ec2:DeleteVpc, ec2:ModifyVpcAttribute, ec2:CreateSubnet, ec2:DeleteSubnet, ec2:ModifySubnetAttribute, ec2:CreateInternetGateway, ec2:DeleteInternetGateway, ec2:AttachInternetGateway, ec2:DetachInternetGateway, ec2:CreateRouteTable, ec2:DeleteRouteTable, ec2:AssociateRouteTable, ec2:DisassociateRouteTable, ec2:CreateRoute, ec2:DeleteRoute, ec2:CreateSecurityGroup, ec2:DeleteSecurityGroup, ec2:AuthorizeSecurityGroupEgress, ec2:RevokeSecurityGroupEgress, ec2:CreateTags, ec2:DeleteTags, ec2:ModifyInstanceAttribute]
+                Resource: '*'
+              - Effect: Allow
+                Action: [ssm:GetParameters, ssm:GetParameter]
+                Resource: !Sub 'arn:${AWS::Partition}:ssm:${AWS::Region}::parameter/aws/service/ami-amazon-linux-latest/*'
+              - Effect: Allow
+                Action: iam:CreateRole
+                Resource: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:role/nexa-lab-*'
+                Condition: {StringEquals: {'iam:PermissionsBoundary': !Ref SessionBoundary}}
+              - Effect: Allow
+                Action: [iam:GetRole, iam:DeleteRole, iam:PutRolePolicy, iam:GetRolePolicy, iam:DeleteRolePolicy, iam:TagRole, iam:UntagRole, iam:ListRolePolicies, iam:ListAttachedRolePolicies, iam:PassRole]
+                Resource: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:role/nexa-lab-*'
+              - Effect: Allow
+                Action: [iam:CreateInstanceProfile, iam:GetInstanceProfile, iam:DeleteInstanceProfile, iam:AddRoleToInstanceProfile, iam:RemoveRoleFromInstanceProfile, iam:TagInstanceProfile, iam:UntagInstanceProfile]
+                Resource: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:instance-profile/nexa-lab-*'
+              - Effect: Allow
+                Action: [s3:CreateBucket, s3:DeleteBucket, s3:GetBucket*, s3:PutBucket*, s3:DeleteBucketPolicy, s3:GetEncryptionConfiguration, s3:PutEncryptionConfiguration, s3:GetLifecycleConfiguration, s3:PutLifecycleConfiguration, s3:GetBucketPublicAccessBlock, s3:PutBucketPublicAccessBlock]
+                Resource: !Sub 'arn:${AWS::Partition}:s3:::nexa-lab-*'
+              - Effect: Allow
+                Action: [ecr:CreateRepository, ecr:DeleteRepository, ecr:DescribeRepositories, ecr:TagResource, ecr:UntagResource, ecr:ListTagsForResource, ecr:PutImageScanningConfiguration, ecr:PutImageTagMutability, ecr:ListImages, ecr:BatchDeleteImage]
+                Resource: !Sub 'arn:${AWS::Partition}:ecr:${AWS::Region}:${AWS::AccountId}:repository/nexa-lab-*'
+              - Effect: Allow
+                Action: [secretsmanager:CreateSecret, secretsmanager:DeleteSecret, secretsmanager:DescribeSecret, secretsmanager:TagResource, secretsmanager:UntagResource, secretsmanager:GetResourcePolicy]
+                Resource: !Sub 'arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:nexa-lab-*'
+              - Effect: Allow
+                Action: secretsmanager:GetRandomPassword
+                Resource: '*'
+              - Effect: Allow
+                Action: [bedrock:CreateGuardrail, bedrock:GetGuardrail, bedrock:CreateGuardrailVersion, bedrock:DeleteGuardrail, bedrock:ListTagsForResource, bedrock:TagResource, bedrock:UntagResource]
+                Resource: '*'
+              - Effect: Allow
+                Action: [logs:CreateLogGroup, logs:DeleteLogGroup, logs:PutRetentionPolicy, logs:DeleteRetentionPolicy, logs:TagResource, logs:UntagResource, logs:ListTagsForResource]
+                Resource: [!Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/nexaassist/nexa-lab-*', !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/nexa-lab-*', !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/nexaassist/nexa-lab-*:*', !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/nexa-lab-*:*']
+              - Effect: Allow
+                Action: logs:DescribeLogGroups
+                Resource: '*'
+              - Effect: Allow
+                Action: [lambda:CreateFunction, lambda:GetFunction, lambda:GetFunctionConfiguration, lambda:DeleteFunction, lambda:ListTags, lambda:TagResource, lambda:UntagResource]
+                Resource: !Sub 'arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:nexa-lab-*-cleanup'
+              - Effect: Allow
+                Action: [scheduler:CreateSchedule, scheduler:GetSchedule, scheduler:DeleteSchedule, scheduler:TagResource, scheduler:UntagResource, scheduler:ListTagsForResource]
+                Resource: !Sub 'arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule/default/nexa-lab-*-expiry'
+  GitHubRole:
+    Type: AWS::IAM::Role
+    Properties:
+      MaxSessionDuration: 3600
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: {Federated: !If [CreateProvider, !Ref Provider, !Ref ExistingOidcProviderArn]}
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                'token.actions.githubusercontent.com:aud': sts.amazonaws.com
+                'token.actions.githubusercontent.com:sub': !Ref GitHubSubject
+      Policies:
+        - PolicyName: lab-pipeline
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: [cloudformation:CreateStack, cloudformation:DeleteStack, cloudformation:DescribeStacks, cloudformation:DescribeStackEvents, cloudformation:DescribeStackResources, cloudformation:GetTemplate]
+                Resource: !Sub 'arn:${AWS::Partition}:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/nexa-lab-*/*'
+              - Effect: Allow
+                Action: iam:PassRole
+                Resource: !GetAtt CloudFormationRole.Arn
+                Condition: {StringEquals: {'iam:PassedToService': cloudformation.amazonaws.com}}
+              - Effect: Allow
+                Action: [ecr:GetAuthorizationToken, ssm:GetCommandInvocation, ssm:DescribeInstanceInformation, ssm:CancelCommand]
+                Resource: '*'
+              - Effect: Allow
+                Action: [ecr:BatchCheckLayerAvailability, ecr:InitiateLayerUpload, ecr:UploadLayerPart, ecr:CompleteLayerUpload, ecr:PutImage, ecr:DescribeImages, ecr:BatchGetImage, ecr:GetDownloadUrlForLayer]
+                Resource: !Sub 'arn:${AWS::Partition}:ecr:${AWS::Region}:${AWS::AccountId}:repository/nexa-lab-*'
+              - Effect: Allow
+                Action: [s3:PutObject, s3:GetObject]
+                Resource: !Sub 'arn:${AWS::Partition}:s3:::nexa-lab-*/*'
+              - Effect: Allow
+                Action: ssm:SendCommand
+                Resource: !Sub 'arn:${AWS::Partition}:ssm:${AWS::Region}::document/AWS-RunShellScript'
+              - Effect: Allow
+                Action: ssm:SendCommand
+                Resource: !Sub 'arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/*'
+                Condition: {StringLike: {'ssm:resourceTag/Session': 'nexa-lab-*'}}
+              - Effect: Allow
+                Action: lambda:InvokeFunction
+                Resource: !Sub 'arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:nexa-lab-*-cleanup'
+Outputs:
+  GitHubRoleArn: {Value: !GetAtt GitHubRole.Arn}
+  CloudFormationRoleArn: {Value: !GetAtt CloudFormationRole.Arn}
+  BoundaryArn: {Value: !Ref SessionBoundary}

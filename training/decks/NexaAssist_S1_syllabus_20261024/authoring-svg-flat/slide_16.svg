@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#132C42" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 341.86 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 341.86 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 405.22 31 L 405.22 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-size="16" fill="#BBCBD7" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 01 / EXIT GATE</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 83 821.685 64" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 83 821.685 64" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 83 L 884.085 83 L 884.085 147 L 62.4 147 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Session 1 / release-readiness exit gate</text>
+</g>
+</g>
+<g id="shape-8" data-pptx-object="group" data-pptx-frame="64 215 869.13 64" data-pptx-source-ref="slide:8">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 215 5 64" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 215 L 69 215 L 69 279 L 64 279 Z" fill="#087E8B" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="90.96 221 842.17 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 90.96 221 L 933.13 221 L 933.13 262.6 L 90.96 262.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="90.96" y="247" text-anchor="start" xml:space="preserve" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Hand in: inventory, baseline cases and two failure transcripts.</text>
+</g>
+</g>
+<g id="shape-11" data-pptx-object="group" data-pptx-frame="64 355 852.894 64" data-pptx-source-ref="slide:11">
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="64 355 5 64" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 64 355 L 69 355 L 69 419 L 64 419 Z" fill="#087E8B" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-10" data-pptx-object="shape" data-pptx-frame="90.96 361 825.934 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:10" data-pptx-semantic-object="shape">
+<path d="M 90.96 361 L 916.894 361 L 916.894 402.6 L 90.96 402.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="90.96" y="387" text-anchor="start" xml:space="preserve" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Defend: owner, evidence, HOLD or promote, rollback target.</text>
+</g>
+</g>
+<g id="shape-14" data-pptx-object="group" data-pptx-frame="64 495 861.185 64" data-pptx-source-ref="slide:14">
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="64 495 5 64" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 64 495 L 69 495 L 69 559 L 64 559 Z" fill="#087E8B" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-13" data-pptx-object="shape" data-pptx-frame="90.96 501 834.225 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:13" data-pptx-semantic-object="shape">
+<path d="M 90.96 501 L 925.185 501 L 925.185 542.6 L 90.96 542.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="90.96" y="527" text-anchor="start" xml:space="preserve" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Pass the exercise; keep unmeasured production gates open.</text>
+</g>
+</g>
+<g id="shape-17" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:17">
+<g id="shape-15" data-pptx-object="shape" data-pptx-frame="63.36 665 792.022 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:15" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 855.382 665 L 855.382 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#BBCBD7" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 01, 03, 10, 11, 14 / Learning gate; production evidence remains open</text>
+</g>
+<g id="shape-16" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:16" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#BBCBD7" data-pptx-text-baseline="metrics-v1">16/16</text>
+</g>
+</g></svg>

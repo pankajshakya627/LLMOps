@@ -1,0 +1,24 @@
+{
+  "read_on": "2026-10-23",
+  "method": "signed-in Safari; seven-second page wait",
+  "visits": [
+    {
+      "url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management",
+      "elapsed_seconds": 7.33,
+      "characters": 13688,
+      "read_status": "full lesson read"
+    },
+    {
+      "url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback",
+      "elapsed_seconds": 7.29,
+      "characters": 14293,
+      "read_status": "full lesson read"
+    },
+    {
+      "url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems",
+      "elapsed_seconds": 7.31,
+      "characters": 10969,
+      "read_status": "full lesson read"
+    }
+  ]
+}

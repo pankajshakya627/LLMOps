@@ -1,0 +1,1 @@
+System health: latency, failures, tokens and priced cost. Answer quality: grounding, relevance and correct scope. A healthy system can still produce a harmful answer. APM spans diagnose infrastructure; semantic evaluation and human review diagnose meaning. Neither substitutes for the other.

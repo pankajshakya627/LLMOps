@@ -1,0 +1,1 @@
+An attacker supplies closing tags and instructions. A generated draft cites an invented quote. A candidate has a lower faithfulness score. Distinguish escaped syntax, citation validation and semantic evaluation. A delimiter test does not prove injection resistance; valid quotes do not establish every claim.

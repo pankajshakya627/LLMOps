@@ -1,0 +1,23 @@
+from __future__ import annotations
+import asyncio,json,time
+from datetime import datetime,UTC
+from pathlib import Path
+from uuid import uuid4
+import httpx
+from app.models.answer import AnswerResponse
+OUT=Path('app/evaluation/results/devtools_validation_20261021')
+BASE={'query':'What is the maximum loan amount for a NexaHome Loan?','as_of':'2026-10-01','product_id':'NEXA-HL','top_k':5}
+CASES=[('empty_question','POST','/answer',{**BASE,'query':' '},422),('missing_date','POST','/answer',{'query':'loan'},422),('invalid_date','POST','/answer',{**BASE,'as_of':'yesterday'},422),('too_many_sources','POST','/retrieve',{**BASE,'top_k':21},422),('zero_sources','POST','/retrieve',{**BASE,'top_k':0},422),('oversized_question','POST','/answer',{**BASE,'query':'x'*2001},422),('empty_product','POST','/retrieve',{**BASE,'product_id':''},422),('extra_scope','POST','/answer',{**BASE,'institution':'OtherBank'},422),('empty_reference','POST','/answer/evaluated',{**BASE,'reference_answer':''},422),('feedback_missing_fields','POST','/feedback',{},422),('invalid_feedback_uuid','POST','/feedback/not-a-uuid/review',{'status':'rejected','reviewer':'UAT','review_note':'Synthetic validation only'},422),('empty_reviewer','POST',f'/feedback/{uuid4()}/review',{'status':'rejected','reviewer':' ','review_note':'Synthetic validation only'},422),('unknown_feedback','POST',f'/feedback/{uuid4()}/review',{'status':'rejected','reviewer':'UAT','review_note':'Synthetic validation only'},409),('feedback_limit_upper','GET','/feedback?limit=101',None,422),('feedback_limit_lower','GET','/feedback?limit=0',None,422),('unknown_route','GET','/no-such-route',None,404),('wrong_method','GET','/answer',None,405)]
+async def main():
+ async with httpx.AsyncClient(base_url='http://127.0.0.1:8000',timeout=120) as client:
+  results=[]
+  for name,method,url,payload,expected in CASES:
+   response=await client.request(method,url,json=payload)
+   results.append({'name':name,'method':method,'path':url,'http_status':response.status_code,'expected':expected,'pass':response.status_code==expected})
+  (OUT/'api_boundaries.json').write_text(json.dumps(results,indent=2));assert all(r['pass'] for r in results)
+  spec=(await client.get('/openapi.json')).json();ops=[{'method':method.upper(),'path':path} for path,methods in spec['paths'].items() for method in methods if method in {'get','post','put','patch','delete'}]
+  (OUT/'api_operations.json').write_text(json.dumps(ops,indent=2));print('API boundary checks:',len(results),'passed; documented operations:',len(ops),flush=True)
+  payload={**BASE,'query':'What is the current processing fee for a NexaHome Loan?'};start=time.perf_counter();r=await client.post('/answer',json=payload)
+  row={'started_at':datetime.now(UTC).isoformat(),'request':payload,'http_status':r.status_code,'wall_ms':round((time.perf_counter()-start)*1000,2),'response':r.json()};r.raise_for_status();valid=AnswerResponse.model_validate(r.json());assert str(valid.as_of)==payload['as_of']
+  (OUT/'fee_retest.json').write_text(json.dumps(row,indent=2,ensure_ascii=False));print('Fee retest:',valid.status,valid.answer,flush=True)
+asyncio.run(main())

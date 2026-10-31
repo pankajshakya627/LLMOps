@@ -1,0 +1,67 @@
+{
+  "answer": {
+    "as_of": "2026-10-01",
+    "status": "insufficient_evidence",
+    "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+    "citations": [],
+    "retrieval_timings": {
+      "search_ms": 135.37,
+      "parent_ms": 127.24,
+      "total_ms": 262.67
+    },
+    "generation_ms": 5999.78,
+    "datadog_span_id": null,
+    "provenance": {
+      "prompt_id": "nexaassist-policy-answer",
+      "prompt_version": "1.1.0",
+      "prompt_sha": "dca0041f402b",
+      "chat_model": "qwen3.5:9b-mlx",
+      "observed_chat_model": "qwen3.5:9b-mlx",
+      "gateway_cache_hit": null,
+      "embedding_model": "qwen3-embedding:0.6b",
+      "retrieval_mode": "dense",
+      "rerank_enabled": false,
+      "evidence_refs": [
+        "CIR-2026-07:1.0:full",
+        "POL-HL-V3:3.0:7.2",
+        "POL-HL-V3:3.0:full",
+        "POL-HL-V3:3.0:3.2",
+        "POL-HL-V3:3.0:8.3",
+        "POL-HL-V3:3.0:5.1",
+        "POL-HL-V3:3.0:10.2",
+        "POL-HL-V3:3.0:6.5",
+        "POL-HL-V3:3.0:1.1",
+        "POL-HL-V3:3.0:4.1"
+      ]
+    }
+  },
+  "quality": {
+    "metrics": {
+      "faithfulness": {
+        "status": "unavailable",
+        "value": null,
+        "reason": "The answer abstained; this metric is not applicable."
+      },
+      "answer_relevancy": {
+        "status": "unavailable",
+        "value": null,
+        "reason": "The answer abstained; this metric is not applicable."
+      },
+      "context_precision": {
+        "status": "scored",
+        "value": 0.09999999999,
+        "reason": null
+      },
+      "context_recall": {
+        "status": "scored",
+        "value": 1.0,
+        "reason": null
+      }
+    },
+    "reference_source": "provided",
+    "reference_answer": "The maximum NexaHome Loan amount is 7.5 crore under POL-HL-V3, clause 4.1.",
+    "evaluated_at": "2026-10-24T12:21:02.470725Z",
+    "datadog_status": "disabled",
+    "datadog_url": null
+  }
+}

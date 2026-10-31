@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="cover" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#132C42" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text xml:space="preserve" x="64" y="47" font-size="16" fill="#BBCBD7"><tspan x="64" y="47">NEXAASSIST  /  SESSION 02  /  DISTILL I</tspan></text></g>
+<g id="cover-title" data-pptx-bounds="64 150 1000 125"><text xml:space="preserve" x="64" y="230" font-family="Trebuchet MS" font-size="76" fill="#FFFFFF"><tspan x="64" y="230">Distill I</tspan></text></g>
+<g id="cover-subtitle" data-pptx-bounds="64 295 1000 100"><text xml:space="preserve" x="64" y="330" font-size="30" fill="#FFFFFF"><tspan x="64" y="330">Build and measure the evidence path</tspan></text></g>
+<g id="cover-description" data-pptx-bounds="64 475 1050 95"><text xml:space="preserve" x="64" y="510" font-size="26" fill="#FFFFFF"><tspan x="64" y="510">Data foundations, embeddings and retrieval Session 2 of 5 · 3 hours ·</tspan><tspan x="64" y="548">hands-on NexaAssist</tspan></text></g>
+<rect id="accent-bar" data-pptx-role="decoration" x="64" y="402" width="160" height="6" fill="#2463A6" />
+<g id="footer" data-pptx-bounds="64 655 1152 50" fill="#BBCBD7" font-size="16"><text xml:space="preserve" x="64" y="681"><tspan x="64" y="681">Original workshop adaptation · Educative LLMOps + local NexaAssist code</tspan></text><text xml:space="preserve" x="1150" y="681"><tspan x="1150" y="681">01/22</tspan></text></g>
+</svg>

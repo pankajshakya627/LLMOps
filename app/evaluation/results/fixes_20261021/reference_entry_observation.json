@@ -1,0 +1,13 @@
+{
+  "source": "Observed FastAPI structured answer_quality_completed event",
+  "timestamp": "2026-10-21T09:46:14.649330Z",
+  "span_id": "4572598630148393293",
+  "reference_source": "provided",
+  "metric_statuses": {
+    "faithfulness": "scored",
+    "answer_relevancy": "scored",
+    "context_precision": "scored",
+    "context_recall": "scored"
+  },
+  "datadog_status": "queued"
+}

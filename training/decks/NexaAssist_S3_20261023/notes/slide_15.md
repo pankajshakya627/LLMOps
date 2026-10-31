@@ -1,0 +1,1 @@
+Run: python -m training.session3.gates Missing required context → retrieval_error. Complete context, unsupported response → generation_error. The scores are synthetic and deliberately chosen to trigger the production gate. Do not label the output a measured Ragas benchmark.

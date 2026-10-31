@@ -1,0 +1,108 @@
+{
+  "checked_at": "2026-10-21T14:25:02.864046+00:00",
+  "request": {
+    "query": "What is the maximum loan amount for a NexaHome Loan?",
+    "as_of": "2026-10-01",
+    "product_id": "NEXA-HL",
+    "top_k": 20
+  },
+  "http_status": 200,
+  "duration_seconds": 6.4,
+  "trace_id": "14417201337028729959",
+  "client_span_id": "3459823731556351492",
+  "ui_propagated_application": "nexaassist-ui",
+  "response": {
+    "as_of": "2026-10-01",
+    "status": "answered",
+    "answer": "The maximum NexaHome Loan amount is \u20b97,50,00,000 (\u20b97.5 crore) [2].",
+    "citations": [
+      {
+        "evidence_id": 2,
+        "quote": "Maximum loan amount is \u20b97,50,00,000.",
+        "matched_child": {
+          "doc_id": "POL-HL-V3",
+          "title": "NexaHome Loan Policy",
+          "policy_version": "3.0",
+          "clause": "4.1",
+          "effective_date": "2025-10-01"
+        }
+      }
+    ],
+    "retrieval_timings": {
+      "search_ms": 1403.14,
+      "parent_ms": 112.82,
+      "total_ms": 1516.26
+    },
+    "generation_ms": 4677.07,
+    "datadog_span_id": "13258989794602002539"
+  },
+  "apm_url": "https://app.datadoghq.com/apm/trace/14417201337028729959?timeHint=1792592696465&env=dev&graphType=flamegraph",
+  "llm_url": "https://app.datadoghq.com/llm/traces?query=%40span_id%3A13258989794602002539&start=1792592636465&end=1792592882864&paused=true",
+  "agent_snapshot": {
+    "checked_at": "2026-10-21T14:26:08.248651+00:00",
+    "receiver": [
+      {
+        "service": "pymongo",
+        "traces_received": 18,
+        "spans_received": 18,
+        "payload_refused": 0,
+        "spans_dropped": 0
+      },
+      {
+        "service": "nexaassist-api",
+        "traces_received": 1,
+        "spans_received": 26,
+        "payload_refused": 0,
+        "spans_dropped": 0
+      },
+      {
+        "service": "nexaassist-ui",
+        "traces_received": 1,
+        "spans_received": 2,
+        "payload_refused": 0,
+        "spans_dropped": 0
+      }
+    ],
+    "trace_writer": {
+      "Bytes": 2728,
+      "BytesUncompressed": 5832,
+      "Errors": 0,
+      "Events": 0,
+      "Payloads": 3,
+      "Retries": 0,
+      "SingleMaxSize": 0,
+      "Spans": 6,
+      "Traces": 6
+    },
+    "forwarder_key_valid": true,
+    "logs_collection_running": false
+  },
+  "cloud_visibility": "Not checked in an authenticated browser",
+  "correlated_api_logs": [
+    {
+      "input_tokens": 3581,
+      "output_tokens": 129,
+      "total_tokens": 3710,
+      "event": "model_token_usage",
+      "dd.trace_id": "14417201337028729959",
+      "dd.span_id": "3904097264998810250",
+      "dd.service": "nexaassist-api",
+      "timestamp": "2026-10-21T14:25:02.860659Z"
+    },
+    {
+      "status": "answered",
+      "generation_ms": 4677.07,
+      "event": "answer_completed",
+      "dd.trace_id": "14417201337028729959",
+      "dd.span_id": "6309592717578134374",
+      "dd.service": "nexaassist-api",
+      "timestamp": "2026-10-21T14:25:02.862728Z"
+    }
+  ],
+  "verification": {
+    "pytest": "125 passed",
+    "ruff": "passed",
+    "mypy_changed_files": "passed",
+    "sdk_regression": "Both API workflow identities and distributed APM continuity verified with real ddtrace SDK; providers mocked"
+  }
+}

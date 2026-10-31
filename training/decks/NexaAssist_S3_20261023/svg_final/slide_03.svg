@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text font-size="16" fill="#526375" xml:space="preserve" x="64" y="47">NEXAASSIST  /  SESSION 03  /  DISTILL II</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text font-family="Trebuchet MS" font-size="40" fill="#132C42" xml:space="preserve" x="64" y="123">The three-hour plan</text></g>
+<g id="point-1" data-pptx-bounds="64 207 1152 105"><rect x="64" y="213" width="5" height="42" fill="#7954A3" /><text font-size="26" fill="#132C42" xml:space="preserve" x="92" y="235">25 min prompts/evaluation + 20 min code walkthrough</text></g>
+<g id="point-2" data-pptx-bounds="64 327 1152 105"><rect x="64" y="333" width="5" height="42" fill="#7954A3" /><text font-size="26" fill="#132C42" xml:space="preserve" x="92" y="355">90 min pair labs, including a 10 min break</text></g>
+<g id="point-3" data-pptx-bounds="64 447 1152 105"><rect x="64" y="453" width="5" height="42" fill="#7954A3" /><text font-size="26" fill="#132C42" xml:space="preserve" x="92" y="475">25 min gate decisions + 20 min review</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" fill="#526375" font-size="16"><text xml:space="preserve" x="64" y="681">Original workshop adaptation · Educative LLMOps + local NexaAssist code</text><text xml:space="preserve" x="1150" y="681">03/22</text></g>
+</svg>

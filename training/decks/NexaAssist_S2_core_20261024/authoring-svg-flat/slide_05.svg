@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="&quot;Courier New&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 343.86 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 343.86 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 407.22 31 L 407.22 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST  /  SESSION 02  /  DISTILL I</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 83 871.53 64" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 83 871.53 64" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 83 L 933.93 83 L 933.93 147 L 62.4 147 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Practical / compare chunking candidates</text>
+</g>
+</g>
+<g id="shape-18" data-pptx-object="group" data-pptx-frame="64 205 1152 335" data-pptx-source-ref="slide:18">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 205 1152 335" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 205 L 1216 205 L 1216 540 L 64 540 Z" fill="#132C42" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="87 231 815.06 38.6" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 87 231 L 902.06 231 L 902.06 269.6 L 87 269.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87" y="255" text-anchor="start" xml:space="preserve" font-size="25.07" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">uv run --no-sync python -m training.session2.chunks</text>
+</g>
+<g id="shape-10" data-pptx-object="shape" data-pptx-frame="87 285 799.12 38.6" data-pptx-prst="rect" data-pptx-source-ref="slide:10" data-pptx-semantic-object="shape">
+<path d="M 87 285 L 886.12 285 L 886.12 323.6 L 87 323.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87" y="309" text-anchor="start" xml:space="preserve" font-size="25.07" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">max_characters       chunks       tables preserved</text>
+</g>
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="87 339 591.87 38.6" data-pptx-prst="rect" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 87 339 L 678.87 339 L 678.87 377.6 L 87 377.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87" y="363" text-anchor="start" xml:space="preserve" font-size="25.07" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">300                  40           yes</text>
+</g>
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="87 393 591.87 38.6" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 87 393 L 678.87 393 L 678.87 431.6 L 87 431.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87" y="417" text-anchor="start" xml:space="preserve" font-size="25.07" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">1200                 32           yes</text>
+</g>
+<g id="shape-13" data-pptx-object="shape" data-pptx-frame="87 447 591.87 38.6" data-pptx-prst="rect" data-pptx-source-ref="slide:13" data-pptx-semantic-object="shape">
+<path d="M 87 447 L 678.87 447 L 678.87 485.6 L 87 485.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87" y="471" text-anchor="start" xml:space="preserve" font-size="25.07" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">5000                 32           yes</text>
+</g>
+</g>
+<g id="shape-20" data-pptx-object="group" data-pptx-frame="62.96 566 972.74 41.6" data-pptx-source-ref="slide:20">
+<g id="shape-19" data-pptx-object="shape" data-pptx-frame="62.96 566 972.74 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:19" data-pptx-semantic-object="shape">
+<path d="M 62.96 566 L 1035.7 566 L 1035.7 607.6 L 62.96 607.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="592" text-anchor="start" xml:space="preserve" font-family="Arial, sans-serif" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Submit: chunk counts, preserved table and a justified candidate setting.</text>
+</g>
+</g>
+<g id="shape-23" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:23">
+<g id="shape-21" data-pptx-object="shape" data-pptx-frame="63.36 665 622.18 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:21" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 685.54 665 L 685.54 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 03, 12 / Offline exercise; observed fixture results</text>
+</g>
+<g id="shape-22" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:22" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">05/16</text>
+</g>
+</g></svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC"/>
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 01 / RELEASE EVIDENCE</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42">The release file is more than application code</text></g>
+<g id="identity" data-pptx-bounds="64 210 1152 105"><rect x="64" y="215" width="5" height="64" fill="#087E8B"/><text x="92" y="247" font-size="26" fill="#132C42">Record prompt, model, corpus and embedding identities.</text></g>
+<g id="measurements" data-pptx-bounds="64 350 1152 105"><rect x="64" y="355" width="5" height="64" fill="#087E8B"/><text x="92" y="387" font-size="26" fill="#132C42">Attach golden results and measured operating evidence.</text></g>
+<g id="pending" data-pptx-bounds="64 490 1152 105"><rect x="64" y="495" width="5" height="64" fill="#98521A"/><text x="92" y="527" font-size="26" fill="#132C42">Keep placeholder targets and missing approvals visible.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Educative L06 / evaluation/gates.json is placeholder data, not an approved production SLO</text><text x="1150" y="681">15/16</text></g>
+</svg>

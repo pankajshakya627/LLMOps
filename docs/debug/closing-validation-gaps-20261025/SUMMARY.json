@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-25",
+  "tests": {
+    "application_and_mock_api": {
+      "tests": 355,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 36.428
+    },
+    "optional_phoenix_and_ragas": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.558
+    }
+  },
+  "lint": "passed",
+  "types": "passed: 143 files",
+  "coverage": {
+    "covered_lines": 3003,
+    "num_statements": 3427,
+    "percent_covered": 85.97427808784276,
+    "percent_covered_display": "86.0",
+    "missing_lines": 424,
+    "excluded_lines": 3,
+    "percent_statements_covered": 87.62766267872775,
+    "percent_statements_covered_display": "87.6",
+    "num_branches": 694,
+    "num_partial_branches": 60,
+    "covered_branches": 540,
+    "missing_branches": 154,
+    "percent_branches_covered": 77.80979827089337,
+    "percent_branches_covered_display": "77.8"
+  },
+  "live": {
+    "expected_status_matches": 10,
+    "cases": 10,
+    "cloud_fallbacks": 5
+  },
+  "browser": {
+    "driver": "agent-browser 0.39.2; isolated headless Chrome",
+    "passed_flows": [
+      "Swagger answer",
+      "Streamlit evaluated chat and quote",
+      "Streamlit feedback submission, accepted review and golden export (mongomock feedback storage)",
+      "Phoenix project trace table",
+      "Phoenix source prompt version",
+      "Phoenix evaluated trace with all four annotations expanded",
+      "Guardrails invalid-output rejection",
+      "Architecture explorer step navigation"
+    ]
+  },
+  "residuals": [
+    "Pure-local prompt candidate met 4/10 expected statuses; final 10/10 includes cloud fallback",
+    "The live evaluation has relevancy ~0.673 and context precision ~0.10; unchanged placeholder quality targets not met",
+    "No full semantic release, load or penetration test"
+  ],
+  "temporary_services": "Temporary API, UI, validator and collector stopped; browser closed; no signal sent to separate Ollama Desktop runtime",
+  "total_automated_tests": 363,
+  "configuration_validation": {
+    "results": 3,
+    "amendments": 1,
+    "maximum_amount_evidence_present": true,
+    "embedding_model": "qwen3-embedding:0.6b",
+    "embedding_dimensions": 1024
+  }
+}

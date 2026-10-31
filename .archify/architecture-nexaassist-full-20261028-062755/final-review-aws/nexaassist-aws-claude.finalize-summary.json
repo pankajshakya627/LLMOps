@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/candidate-aws.json",
+    "sha256": "3cf47a7a230ce05fa07092d9b45d9e21b8cf27ce6beb1453eed10d883ef720da",
+    "bytes": 8671
+  },
+  "artifact": {
+    "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/nexaassist-aws-claude.html",
+    "sha256": "1b38b509727046908313a791868b7c5fa9aa464e7e125e90f56fe178edbea32f",
+    "bytes": 841836
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/final-review-aws/nexaassist-aws-claude.finalize.json",
+    "summaryReceipt": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/final-review-aws/nexaassist-aws-claude.finalize-summary.json",
+    "browserCheckReceipt": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-full-20261028-062755/final-review-aws/nexaassist-aws-claude.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-28T01:05:21.022Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2078,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  },
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "routesOverSuggestedBends": 4
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [],
+      "detours": [
+        {
+          "relationship": {
+            "from": "ui",
+            "to": "api",
+            "label": "private HTTP",
+            "collectionIndex": 2,
+            "artifactIndex": 3
+          },
+          "bends": 3,
+          "stretch": 1.321
+        },
+        {
+          "relationship": {
+            "from": "rag",
+            "to": "gateway",
+            "label": "chat + embed",
+            "collectionIndex": 6,
+            "artifactIndex": 7
+          },
+          "bends": 3,
+          "stretch": 1.327
+        },
+        {
+          "relationship": {
+            "from": "api",
+            "to": "ragas",
+            "label": "score answer",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "bends": 3,
+          "stretch": 1
+        },
+        {
+          "relationship": {
+            "from": "s3",
+            "to": "ingest",
+            "label": "stage corpus",
+            "collectionIndex": 13,
+            "artifactIndex": 14
+          },
+          "bends": 3,
+          "stretch": 1.338
+        }
+      ],
+      "truncated": false
+    },
+    "hints": [
+      "ui → api needs 3 bends: move node ui or api so they share a row or column with matching centers, or sit diagonally with a clear corner.",
+      "rag → gateway needs 3 bends: move node rag or gateway so they share a row or column with matching centers, or sit diagonally with a clear corner.",
+      "api → ragas needs 3 bends: move node api or ragas so they share a row or column with matching centers, or sit diagonally with a clear corner.",
+      "s3 → ingest needs 3 bends: move node s3 or ingest so they share a row or column with matching centers, or sit diagonally with a clear corner."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}

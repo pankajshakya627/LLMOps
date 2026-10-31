@@ -1,0 +1,1 @@
+Submit manifest, retrieval experiment and golden review. Attach quality/SLO reports and an incident write-up. State release, hold or unmeasured with supporting evidence. A successful class demonstrates engineering judgment and reproducible exercises. It does not certify a real production environment that has not been tested.

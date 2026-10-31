@@ -1,0 +1,3 @@
+Introduce the workshop as a code-grounded enterprise policy assistant, using fictional NexaBank policies and synthetic data. The two topics are gateways/routing and security/guardrails. Phoenix and existing Ragas measurements support the demonstrations; they are not separate syllabus sections. The deck describes the 25 October 2026 repository snapshot. LiteLLM and Guardrails AI are integrated; Portkey and NeMo are alternatives only. A model tag does not itself establish the hardware backend.
+
+Source locations for this page are app/gateway/litellm.yaml:2; app/security/guardrails_service.py:20. Open the Markdown guide app/operations/GATEWAYS_AND_GUARDRAILS_GUIDE.md for the complete walkthrough. Source lines describe the 25 October 2026 snapshot.

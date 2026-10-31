@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-page-role="ending" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#122C45" />
+<g id="page-title" data-pptx-bounds="64 25 1152 113" font-weight="bold" text-anchor="start"><text x="64" y="49" font-size="16" fill="#6BE3D3">21 / APPLY THE DECISION</text><text x="64" y="113" font-size="42" fill="#FFFFFF">Choose the control; show the evidence</text></g>
+<text id="deck-footer" data-pptx-role="footer" x="64" y="709" font-size="16" fill="#6BE3D3">NEXAASSIST  /  SYNTHETIC POLICY REFERENCE  /  25 OCT 2026</text>
+<text id="page-number" data-pptx-role="page-number" x="1216" y="709" text-anchor="end" font-size="16" fill="#6BE3D3">22 / 22</text>
+<g id="decision-0" data-pptx-bounds="64 172 556 108" font-size="24" text-anchor="start"><text x="64" y="203" fill="#FFFFFF" font-weight="bold">Unavailable provider?</text><text x="64" y="249" fill="#6BE3D3">Retry / fallback</text></g>
+<g id="decision-1" data-pptx-bounds="660 172 556 108" font-size="24" text-anchor="start"><text x="660" y="203" fill="#FFFFFF" font-weight="bold">More concurrent work?</text><text x="660" y="249" fill="#6BE3D3">Independent capacity</text></g>
+<g id="decision-2" data-pptx-bounds="64 297 556 108" font-size="24" text-anchor="start"><text x="64" y="328" fill="#FFFFFF" font-weight="bold">Same scoped generation?</text><text x="64" y="374" fill="#6BE3D3">Exact cache</text></g>
+<g id="decision-3" data-pptx-bounds="660 297 556 108" font-size="24" text-anchor="start"><text x="660" y="328" fill="#FFFFFF" font-weight="bold">Personal identifiers?</text><text x="660" y="374" fill="#6BE3D3">Redact supported PII</text></g>
+<g id="decision-4" data-pptx-bounds="64 422 556 108" font-size="24" text-anchor="start"><text x="64" y="453" fill="#FFFFFF" font-weight="bold">Override or invalid draft?</text><text x="64" y="499" fill="#6BE3D3">Reject / validate</text></g>
+<g id="decision-5" data-pptx-bounds="660 422 556 108" font-size="24" text-anchor="start"><text x="660" y="453" fill="#FFFFFF" font-weight="bold">Unsupported claims?</text><text x="660" y="499" fill="#6BE3D3">Inspect sources and quality</text></g>
+<g id="takeaway" data-pptx-bounds="64 574 1152 66"><line x1="64" y1="575" x2="1216" y2="575" stroke="#6BE3D3" stroke-width="2" /><text x="64" y="608" font-size="24" fill="#6BE3D3" text-anchor="start" font-weight="bold">Route for reliability. Validate for policy boundaries. Measure both.</text></g>
+<g id="source-caption" data-pptx-bounds="64 650 1152 43"><text x="64" y="674" font-size="16" fill="#6BE3D3" text-anchor="start">app/gateway/litellm.yaml:23  •  app/gateway/litellm_cache.yaml:31  •  more in notes</text></g>
+</svg>

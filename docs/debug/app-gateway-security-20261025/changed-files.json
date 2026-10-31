@@ -1,0 +1,257 @@
+[
+  {
+    "path": "README.md",
+    "added": 260,
+    "removed": 270
+  },
+  {
+    "path": ".env.example",
+    "added": 14,
+    "removed": 0
+  },
+  {
+    "path": "app/main.py",
+    "added": 10,
+    "removed": 1
+  },
+  {
+    "path": "tests/test_ui.py",
+    "added": 14,
+    "removed": 0
+  },
+  {
+    "path": "tests/test_ollama_thinking.py",
+    "added": 1,
+    "removed": 1
+  },
+  {
+    "path": "tests/test_gateway_config.py",
+    "added": 4,
+    "removed": 4
+  },
+  {
+    "path": "tests/test_guardrails_sidecar.py",
+    "added": 3,
+    "removed": 1
+  },
+  {
+    "path": "tests/test_provider_profiles.py",
+    "added": 47,
+    "removed": 1
+  },
+  {
+    "path": "training/session2/TRAINER_SCRIPT.md",
+    "added": 1,
+    "removed": 1
+  },
+  {
+    "path": "training/session2/live_practicals.md",
+    "added": 2,
+    "removed": 2
+  },
+  {
+    "path": "training/session2/guardrails_service.py",
+    "added": 3,
+    "removed": 56
+  },
+  {
+    "path": "training/session2/requirements-guardrails.txt",
+    "added": 0,
+    "removed": 5
+  },
+  {
+    "path": "training/session2/ollama.env.example",
+    "added": 0,
+    "removed": 17
+  },
+  {
+    "path": "training/session2/phoenix.md",
+    "added": 4,
+    "removed": 4
+  },
+  {
+    "path": "training/session2/litellm_balanced.yaml",
+    "added": 0,
+    "removed": 32
+  },
+  {
+    "path": "training/session2/litellm.yaml",
+    "added": 0,
+    "removed": 35
+  },
+  {
+    "path": "training/session2/gateway_selfcheck.py",
+    "added": 0,
+    "removed": 61
+  },
+  {
+    "path": "training/session2/handout.md",
+    "added": 9,
+    "removed": 9
+  },
+  {
+    "path": "training/session2/requirements-gateway.txt",
+    "added": 0,
+    "removed": 2
+  },
+  {
+    "path": "training/session2/openai-fallback.env.example",
+    "added": 0,
+    "removed": 13
+  },
+  {
+    "path": "training/session2/instructor.md",
+    "added": 11,
+    "removed": 11
+  },
+  {
+    "path": "training/session2/gateway.env.example",
+    "added": 0,
+    "removed": 7
+  },
+  {
+    "path": "training/session2/runtime.md",
+    "added": 11,
+    "removed": 11
+  },
+  {
+    "path": "training/session2/litellm_cache.yaml",
+    "added": 0,
+    "removed": 27
+  },
+  {
+    "path": "app/ui/app.py",
+    "added": 2,
+    "removed": 0
+  },
+  {
+    "path": "app/database/indexes.md",
+    "added": 18,
+    "removed": 1
+  },
+  {
+    "path": "app/core/config.py",
+    "added": 5,
+    "removed": 1
+  },
+  {
+    "path": "app/api/retrieval.py",
+    "added": 3,
+    "removed": 0
+  },
+  {
+    "path": "app/services/retrieval.py",
+    "added": 3,
+    "removed": 1
+  },
+  {
+    "path": "app/compose.yaml",
+    "added": 94,
+    "removed": 0
+  },
+  {
+    "path": "app/security/requirements.txt",
+    "added": 5,
+    "removed": 0
+  },
+  {
+    "path": "app/security/guardrails_service.py",
+    "added": 66,
+    "removed": 0
+  },
+  {
+    "path": "app/security/__init__.py",
+    "added": 0,
+    "removed": 0
+  },
+  {
+    "path": "app/security/input_policy.py",
+    "added": 32,
+    "removed": 0
+  },
+  {
+    "path": "app/security/README.md",
+    "added": 97,
+    "removed": 0
+  },
+  {
+    "path": "app/examples/security.http",
+    "added": 32,
+    "removed": 0
+  },
+  {
+    "path": "app/examples/gateway.http",
+    "added": 43,
+    "removed": 0
+  },
+  {
+    "path": "app/gateway/selfcheck.py",
+    "added": 65,
+    "removed": 0
+  },
+  {
+    "path": "app/gateway/requirements.txt",
+    "added": 4,
+    "removed": 0
+  },
+  {
+    "path": "app/gateway/ollama.env.example",
+    "added": 18,
+    "removed": 0
+  },
+  {
+    "path": "app/gateway/litellm_balanced.yaml",
+    "added": 43,
+    "removed": 0
+  },
+  {
+    "path": "app/gateway/README.md",
+    "added": 145,
+    "removed": 0
+  },
+  {
+    "path": "app/gateway/litellm.yaml",
+    "added": 36,
+    "removed": 0
+  },
+  {
+    "path": "app/gateway/application.env.example",
+    "added": 17,
+    "removed": 0
+  },
+  {
+    "path": "app/gateway/openai-fallback.env.example",
+    "added": 14,
+    "removed": 0
+  },
+  {
+    "path": "app/gateway/gateway.env.example",
+    "added": 8,
+    "removed": 0
+  },
+  {
+    "path": "app/gateway/service.env.example",
+    "added": 4,
+    "removed": 0
+  },
+  {
+    "path": "app/gateway/litellm_cache.yaml",
+    "added": 40,
+    "removed": 0
+  },
+  {
+    "path": "app/gateway/openai-embeddings.env.example",
+    "added": 14,
+    "removed": 0
+  },
+  {
+    "path": "tests/test_prompt_injection.py",
+    "added": 60,
+    "removed": 0
+  },
+  {
+    "path": "tests/test_app_services.py",
+    "added": 39,
+    "removed": 0
+  }
+]

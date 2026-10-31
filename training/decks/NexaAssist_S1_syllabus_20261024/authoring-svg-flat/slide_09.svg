@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><defs><marker id="marrow1" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="2.5" markerHeight="2.5" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 10 5 L 0 10 z" fill="#087E8B" /></marker></defs><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 391.63 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 391.63 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 454.99 31 L 454.99 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 01 / REQUEST FLOW</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 84.33 732.44 61.6" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 84.33 732.44 61.6" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 84.33 L 794.84 84.33 L 794.84 145.93 L 62.4 145.93 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">One answer / request and failure flow</text>
+</g>
+</g>
+<g id="shape-47" data-pptx-object="group" data-pptx-frame="63.2 230 1151.8 405.8" data-pptx-source-ref="slide:47">
+<g id="shape-9" data-pptx-object="group" data-pptx-frame="64 230 300 110" data-pptx-source-ref="slide:9">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 230 300 110" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 230 L 364 230 L 364 340 L 64 340 Z" fill="#E8EDF0" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="82.96 243.67 241.4 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 82.96 243.67 L 324.36 243.67 L 324.36 283.71 L 82.96 283.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="82.96" y="269" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">1 / Validate + quota</text>
+</g>
+<g id="shape-8" data-pptx-object="shape" data-pptx-frame="83.2 287 181.47 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:8" data-pptx-semantic-object="shape">
+<path d="M 83.2 287 L 264.67 287 L 264.67 317.8 L 83.2 317.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="83.2" y="307" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">Thin FastAPI route</text>
+</g>
+</g>
+<g id="shape-13" data-pptx-object="group" data-pptx-frame="465 230 350 110" data-pptx-source-ref="slide:13">
+<g id="shape-10" data-pptx-object="shape" data-pptx-frame="465 230 350 110" data-pptx-prst="rect" data-pptx-source-ref="slide:10" data-pptx-semantic-object="shape">
+<path d="M 465 230 L 815 230 L 815 340 L 465 340 Z" fill="#E8EDF0" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="483.96 243.67 236.7 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 483.96 243.67 L 720.66 243.67 L 720.66 283.71 L 483.96 283.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="483.96" y="269" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">2 / Scrub + retrieve</text>
+</g>
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="484.2 287 279.26 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 484.2 287 L 763.46 287 L 763.46 317.8 L 484.2 317.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="484.2" y="307" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">Scope, parents, amendments</text>
+</g>
+</g>
+<g id="shape-17" data-pptx-object="group" data-pptx-frame="915 230 300 110" data-pptx-source-ref="slide:17">
+<g id="shape-14" data-pptx-object="shape" data-pptx-frame="915 230 300 110" data-pptx-prst="rect" data-pptx-source-ref="slide:14" data-pptx-semantic-object="shape">
+<path d="M 915 230 L 1215 230 L 1215 340 L 915 340 Z" fill="#E8EDF0" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-15" data-pptx-object="shape" data-pptx-frame="933.96 243.67 220.66 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:15" data-pptx-semantic-object="shape">
+<path d="M 933.96 243.67 L 1154.62 243.67 L 1154.62 283.71 L 933.96 283.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="933.96" y="269" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">3 / Pack evidence</text>
+</g>
+<g id="shape-16" data-pptx-object="shape" data-pptx-frame="934.2 287 279.98 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:16" data-pptx-semantic-object="shape">
+<path d="M 934.2 287 L 1214.18 287 L 1214.18 317.8 L 934.2 317.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="934.2" y="307" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">No complete evidence? Stop.</text>
+</g>
+</g>
+<g id="shape-21" data-pptx-object="group" data-pptx-frame="915 455 300 110" data-pptx-source-ref="slide:21">
+<g id="shape-18" data-pptx-object="shape" data-pptx-frame="915 455 300 110" data-pptx-prst="rect" data-pptx-source-ref="slide:18" data-pptx-semantic-object="shape">
+<path d="M 915 455 L 1215 455 L 1215 565 L 915 565 Z" fill="#E8EDF0" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-19" data-pptx-object="shape" data-pptx-frame="933.96 468.67 231.19 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:19" data-pptx-semantic-object="shape">
+<path d="M 933.96 468.67 L 1165.15 468.67 L 1165.15 508.71 L 933.96 508.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="933.96" y="494" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">4 / Structured draft</text>
+</g>
+<g id="shape-20" data-pptx-object="shape" data-pptx-frame="934.2 512 240.23 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:20" data-pptx-semantic-object="shape">
+<path d="M 934.2 512 L 1174.43 512 L 1174.43 542.8 L 934.2 542.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="934.2" y="532" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">Model call / strict schema</text>
+</g>
+</g>
+<g id="shape-25" data-pptx-object="group" data-pptx-frame="465 455 350 110" data-pptx-source-ref="slide:25">
+<g id="shape-22" data-pptx-object="shape" data-pptx-frame="465 455 350 110" data-pptx-prst="rect" data-pptx-source-ref="slide:22" data-pptx-semantic-object="shape">
+<path d="M 465 455 L 815 455 L 815 565 L 465 565 Z" fill="#E8EDF0" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-23" data-pptx-object="shape" data-pptx-frame="483.96 468.67 225.16 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:23" data-pptx-semantic-object="shape">
+<path d="M 483.96 468.67 L 709.12 468.67 L 709.12 508.71 L 483.96 508.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="483.96" y="494" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">5 / Validate output</text>
+</g>
+<g id="shape-24" data-pptx-object="shape" data-pptx-frame="484.2 512 231.62 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:24" data-pptx-semantic-object="shape">
+<path d="M 484.2 512 L 715.82 512 L 715.82 542.8 L 484.2 542.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="484.2" y="532" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">PII + IDs + exact quotes</text>
+</g>
+</g>
+<g id="shape-29" data-pptx-object="group" data-pptx-frame="64 455 300 110" data-pptx-source-ref="slide:29">
+<g id="shape-26" data-pptx-object="shape" data-pptx-frame="64 455 300 110" data-pptx-prst="rect" data-pptx-source-ref="slide:26" data-pptx-semantic-object="shape">
+<path d="M 64 455 L 364 455 L 364 565 L 64 565 Z" fill="#132C42" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-27" data-pptx-object="shape" data-pptx-frame="82.96 468.67 199.08 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:27" data-pptx-semantic-object="shape">
+<path d="M 82.96 468.67 L 282.04 468.67 L 282.04 508.71 L 82.96 508.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="82.96" y="494" text-anchor="start" xml:space="preserve" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">6 / Return result</text>
+</g>
+<g id="shape-28" data-pptx-object="shape" data-pptx-frame="83.2 512 239.04 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:28" data-pptx-semantic-object="shape">
+<path d="M 83.2 512 L 322.24 512 L 322.24 542.8 L 83.2 542.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="83.2" y="532" text-anchor="start" xml:space="preserve" font-size="20" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Answer, clarify or abstain</text>
+</g>
+</g>
+<g id="shape-32" data-pptx-object="group" data-pptx-frame="364 248 101 37" data-pptx-source-ref="slide:32">
+<g id="shape-30" data-pptx-object="shape" data-pptx-frame="364 285 101 0" data-pptx-prst="line" data-pptx-source-ref="slide:30" data-pptx-semantic-object="shape">
+<path d="M 364 285 L 465 285" fill="none" stroke-width="2" stroke="#087E8B" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-31" data-pptx-object="shape" data-pptx-frame="378.2 248 62.88 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:31" data-pptx-semantic-object="shape">
+<path d="M 378.2 248 L 441.08 248 L 441.08 278.8 L 378.2 278.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="378.2" y="268" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">invoke</text>
+</g>
+</g>
+<g id="shape-35" data-pptx-object="group" data-pptx-frame="815 248 100 37" data-pptx-source-ref="slide:35">
+<g id="shape-33" data-pptx-object="shape" data-pptx-frame="815 285 100 0" data-pptx-prst="line" data-pptx-source-ref="slide:33" data-pptx-semantic-object="shape">
+<path d="M 815 285 L 915 285" fill="none" stroke-width="2" stroke="#087E8B" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-34" data-pptx-object="shape" data-pptx-frame="829.2 248 62.88 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:34" data-pptx-semantic-object="shape">
+<path d="M 829.2 248 L 892.08 248 L 892.08 278.8 L 829.2 278.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="829.2" y="268" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">supply</text>
+</g>
+</g>
+<g id="shape-38" data-pptx-object="group" data-pptx-frame="1065 340 81.78 115" data-pptx-source-ref="slide:38">
+<g id="shape-36" data-pptx-object="shape" data-pptx-frame="1065 340 0 115" data-pptx-prst="line" data-pptx-source-ref="slide:36" data-pptx-semantic-object="shape">
+<path d="M 1065 340 L 1065 455" fill="none" stroke-width="2" stroke="#087E8B" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-37" data-pptx-object="shape" data-pptx-frame="1079.2 384 67.58 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:37" data-pptx-semantic-object="shape">
+<path d="M 1079.2 384 L 1146.78 384 L 1146.78 414.8 L 1079.2 414.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1079.2" y="404" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">prompt</text>
+</g>
+</g>
+<g id="shape-41" data-pptx-object="group" data-pptx-frame="815 470 100 40" data-pptx-source-ref="slide:41">
+<g id="shape-39" data-pptx-object="shape" data-pptx-frame="815 510 100 0" data-pptx-prst="line" transform="translate(865 510) scale(-1 1) translate(-865 -510)" data-pptx-source-ref="slide:39" data-pptx-semantic-object="shape">
+<path d="M 815 510 L 915 510" fill="none" stroke-width="2" stroke="#087E8B" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-40" data-pptx-object="shape" data-pptx-frame="829.2 470 56.98 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:40" data-pptx-semantic-object="shape">
+<path d="M 829.2 470 L 886.18 470 L 886.18 500.8 L 829.2 500.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="829.2" y="490" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">check</text>
+</g>
+</g>
+<g id="shape-44" data-pptx-object="group" data-pptx-frame="364 470 101 40" data-pptx-source-ref="slide:44">
+<g id="shape-42" data-pptx-object="shape" data-pptx-frame="364 510 101 0" data-pptx-prst="line" transform="translate(414.5 510) scale(-1 1) translate(-414.5 -510)" data-pptx-source-ref="slide:42" data-pptx-semantic-object="shape">
+<path d="M 364 510 L 465 510" fill="none" stroke-width="2" stroke="#087E8B" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-43" data-pptx-object="shape" data-pptx-frame="378.2 470 56.98 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:43" data-pptx-semantic-object="shape">
+<path d="M 378.2 470 L 435.18 470 L 435.18 500.8 L 378.2 500.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="378.2" y="490" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">return</text>
+</g>
+</g>
+<g id="shape-45" data-pptx-object="shape" data-pptx-frame="63.2 378 376.99 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:45" data-pptx-semantic-object="shape">
+<path d="M 63.2 378 L 440.19 378 L 440.19 408.8 L 63.2 408.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.2" y="398" text-anchor="start" xml:space="preserve" font-size="20" fill="#98521A" data-pptx-text-baseline="metrics-v1">Invalid citation: one repair, then abstain.</text>
+</g>
+<g id="shape-46" data-pptx-object="shape" data-pptx-frame="63.2 605 962.31 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:46" data-pptx-semantic-object="shape">
+<path d="M 63.2 605 L 1025.51 605 L 1025.51 635.8 L 63.2 635.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.2" y="625" text-anchor="start" xml:space="preserve" font-size="20" fill="#526375" data-pptx-text-baseline="metrics-v1">Numbered boxes show the main path. Early abstention and the bounded repair are explained in notes.</text>
+</g>
+</g>
+<g id="shape-50" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:50">
+<g id="shape-48" data-pptx-object="shape" data-pptx-frame="63.36 665 841.635 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:48" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 904.995 665 L 904.995 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 03, 04, 05, 09 / Concept + inspected local implementation; sources in notes</text>
+</g>
+<g id="shape-49" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:49" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">09/16</text>
+</g>
+</g></svg>

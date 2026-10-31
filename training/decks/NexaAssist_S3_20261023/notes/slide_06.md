@@ -1,0 +1,1 @@
+Run tests/test_prompts.py before changing wording. A wording change requires a version and pin update. Then replay cases; a new hash proves identity, not quality. The workshop does not alter the shared prompt. Delimiters and closing reminders remain a proposed future change that would need a version bump and live evaluation.

@@ -1,0 +1,187 @@
+[
+  {
+    "file": "tests/test_amendments.py",
+    "test_functions": 4,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_answer.py",
+    "test_functions": 13,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_api_pipeline.py",
+    "test_functions": 10,
+    "classification": "offline integration or CLI subprocess"
+  },
+  {
+    "file": "tests/test_architecture_document.py",
+    "test_functions": 1,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_compare.py",
+    "test_functions": 7,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_course_delivery.py",
+    "test_functions": 3,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_embedding_profiles.py",
+    "test_functions": 6,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_eval_profiles.py",
+    "test_functions": 3,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_evaluation.py",
+    "test_functions": 8,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_feedback.py",
+    "test_functions": 4,
+    "classification": "offline integration or CLI subprocess"
+  },
+  {
+    "file": "tests/test_feedback_export.py",
+    "test_functions": 1,
+    "classification": "offline integration or CLI subprocess"
+  },
+  {
+    "file": "tests/test_gates.py",
+    "test_functions": 3,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_gateway.py",
+    "test_functions": 4,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_gateway_config.py",
+    "test_functions": 3,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_guardrails_integration.py",
+    "test_functions": 2,
+    "classification": "offline integration or CLI subprocess"
+  },
+  {
+    "file": "tests/test_guardrails_sidecar.py",
+    "test_functions": 1,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_hybrid_rerank.py",
+    "test_functions": 8,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_ingestion.py",
+    "test_functions": 26,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_input_rail.py",
+    "test_functions": 6,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_live_evaluation.py",
+    "test_functions": 8,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_model_access.py",
+    "test_functions": 6,
+    "classification": "offline integration or CLI subprocess"
+  },
+  {
+    "file": "tests/test_ollama_thinking.py",
+    "test_functions": 4,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_output_cap.py",
+    "test_functions": 2,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_phoenix.py",
+    "test_functions": 11,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_prompts.py",
+    "test_functions": 2,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_provider_profiles.py",
+    "test_functions": 2,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_rag_failure_modes.py",
+    "test_functions": 3,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_rate_limit.py",
+    "test_functions": 6,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_readiness_timeout.py",
+    "test_functions": 1,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_redaction.py",
+    "test_functions": 4,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_retrieval.py",
+    "test_functions": 6,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_retrieval_eval.py",
+    "test_functions": 3,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_sampling.py",
+    "test_functions": 3,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_slo.py",
+    "test_functions": 6,
+    "classification": "unit/contract"
+  },
+  {
+    "file": "tests/test_telemetry.py",
+    "test_functions": 4,
+    "classification": "offline integration or CLI subprocess"
+  },
+  {
+    "file": "tests/test_training_labs.py",
+    "test_functions": 10,
+    "classification": "offline integration or CLI subprocess"
+  },
+  {
+    "file": "tests/test_ui.py",
+    "test_functions": 9,
+    "classification": "offline integration or CLI subprocess"
+  }
+]

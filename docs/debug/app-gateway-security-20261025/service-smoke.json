@@ -1,0 +1,14 @@
+{
+  "mode": "local_service_synthetic_credentials_no_model_calls",
+  "health_status": 200,
+  "missing_key_status": 401,
+  "invalid_key_status": 400,
+  "valid_key_status": 200,
+  "routes": [
+    "nexa-chat",
+    "nexa-chat-openai",
+    "nexa-embed-local",
+    "nexa-embed-openai"
+  ],
+  "authentication_error_dependency": "prisma==0.15.0"
+}

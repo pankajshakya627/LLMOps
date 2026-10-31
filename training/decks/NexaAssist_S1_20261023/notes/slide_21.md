@@ -1,0 +1,1 @@
+Does a SHA-256 match prove that a policy is correct? Can a healthy API answer from the wrong clause? Which artifacts must be restored together? Answers: a hash proves correspondence to the registered bytes, not correctness; yes, liveness does not judge meaning; restore compatible code, prompts, models, knowledge stores and configuration.

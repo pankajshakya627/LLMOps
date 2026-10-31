@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#2463A6" /></marker></defs>
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 02 / KNOWLEDGE STORAGE</text></g>
+<g id="page-title" fill="#132C42" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40">Storage / search children, read parent sections</text></g>
+<g id="diagram-root" data-pptx-bounds="64 205 1152 440" fill="#132C42">
+<g id="child-store"><rect x="64" y="230" width="440" height="325" fill="#E8EDF0" /><text x="88" y="268" font-size="26">Embedded child chunks</text></g>
+<g id="child-fee"><rect x="88" y="290" width="392" height="100" fill="#FFFFFF" /><text x="108" y="326" font-size="26">6.2 / Processing fee</text><text x="108" y="361" font-size="20">POL-HL-V3_6.2_c01</text></g>
+<g id="child-general"><rect x="88" y="420" width="392" height="100" fill="#FFFFFF" /><text x="108" y="456" font-size="26">6.1 / General fee terms</text><text x="108" y="491" font-size="20">Neighboring conditions</text></g>
+<g id="parent-section"><rect x="760" y="285" width="456" height="240" /><text x="784" y="326" font-size="26" fill="#FFFFFF">Whole fee section</text><text x="784" y="370" font-size="20" fill="#FFFFFF">Key: parent_id</text><text x="784" y="408" font-size="20" fill="#FFFFFF">Includes 6.1, 6.2 and other fee clauses</text><text x="784" y="454" font-size="20" fill="#FFFFFF">Plain text store / not embedded</text></g>
+<g id="edge-fee-parent"><line x1="480" y1="340" x2="760" y2="340" stroke="#2463A6" stroke-width="2" marker-end="url(#arrow)" /><text x="540" y="320" font-size="20">parent_id lookup</text></g>
+<g id="edge-general-parent"><line x1="480" y1="470" x2="760" y2="470" stroke="#2463A6" stroke-width="2" marker-end="url(#arrow)" /><text x="540" y="504" font-size="20">same parent link</text></g>
+<g id="diagram-legend" font-size="20"><text x="64" y="603">Search the child; expand a scope-compatible parent. Missing or mismatched parent → child fallback.</text><text x="64" y="633" fill="#526375">The matched child does not own every claim in the parent. Keep citation identity precise.</text></g>
+</g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Educative L07 / app/chains/ingestion.py + app/chains/retrieval.py</text><text x="1150" y="681">04/16</text></g>
+</svg>

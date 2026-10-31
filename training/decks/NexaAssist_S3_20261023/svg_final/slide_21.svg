@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#132C42" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text font-size="16" fill="#BBCBD7" xml:space="preserve" x="64" y="47">NEXAASSIST  /  SESSION 03  /  DISTILL II</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text font-family="Trebuchet MS" font-size="40" fill="#FFFFFF" xml:space="preserve" x="64" y="123">Exit gate / quality with an explanation</text></g>
+<g id="point-1" data-pptx-bounds="64 207 1152 105"><rect x="64" y="213" width="5" height="42" fill="#7954A3" /><text font-size="26" fill="#FFFFFF" xml:space="preserve" x="92" y="235">Three valid cases and human review memo.</text></g>
+<g id="point-2" data-pptx-bounds="64 327 1152 105"><rect x="64" y="333" width="5" height="42" fill="#7954A3" /><text font-size="26" fill="#FFFFFF" xml:space="preserve" x="92" y="355">A named failure type for every failing example.</text></g>
+<g id="point-3" data-pptx-bounds="64 447 1152 105"><rect x="64" y="453" width="5" height="42" fill="#7954A3" /><text font-size="26" fill="#FFFFFF" xml:space="preserve" x="92" y="475">Thresholds met or a documented release hold.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" fill="#BBCBD7" font-size="16"><text xml:space="preserve" x="64" y="681">Original workshop adaptation · Educative LLMOps + local NexaAssist code</text><text xml:space="preserve" x="1150" y="681">21/22</text></g>
+</svg>

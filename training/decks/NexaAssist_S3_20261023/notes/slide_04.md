@@ -1,0 +1,1 @@
+Role: what the assistant is authorized to do. Evidence boundary: which supplied text supports claims. Output contract: schema, status and citations. Prompts guide model behavior but cannot enforce every safety property. The application validates output and evidence after generation. The implementation or concept reference is app/chains/prompts/answer.py.

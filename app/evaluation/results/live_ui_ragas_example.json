@@ -1,0 +1,70 @@
+{
+  "captured_at": "2026-10-20T07:55:53.034809+00:00",
+  "scope": "One real Streamlit-to-FastAPI RAGAS evaluation; no mocked providers",
+  "turn": {
+    "id": "c714f5c6738b4b3b9beb4146a8c1183a",
+    "mode": "Answer",
+    "request": {
+      "query": "What is the maximum loan amount for a NexaHome Loan?",
+      "as_of": "2026-10-01",
+      "top_k": 5,
+      "product_id": "NEXA-HL",
+      "jurisdiction": null
+    },
+    "evaluate_quality": true,
+    "reference_answer": null,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "The maximum NexaHome Loan amount is ₹7,50,00,000 (₹7.5 crore) [1].",
+      "citations": [
+        {
+          "evidence_id": 1,
+          "quote": "Maximum loan amount is ₹7,50,00,000.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "4.1",
+            "effective_date": "2025-10-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 1278.05,
+        "parent_ms": 43.63,
+        "total_ms": 1322.24
+      },
+      "generation_ms": 4266.7
+    },
+    "quality": {
+      "metrics": {
+        "faithfulness": {
+          "status": "scored",
+          "value": 1.0,
+          "reason": null
+        },
+        "answer_relevancy": {
+          "status": "scored",
+          "value": 0.9583873236833522,
+          "reason": null
+        },
+        "context_precision": {
+          "status": "scored",
+          "value": 0.9999999999,
+          "reason": null
+        },
+        "context_recall": {
+          "status": "scored",
+          "value": 1.0,
+          "reason": null
+        }
+      },
+      "reference_source": "golden_dataset",
+      "reference_answer": "The maximum NexaHome Loan amount is ₹7,50,00,000 (₹7.5 crore). The minimum is ₹5,00,000. This is the limit under POL-HL-V3, clause 4.1.",
+      "evaluated_at": "2026-10-20T07:55:53.018442Z",
+      "datadog_status": "queued",
+      "datadog_url": "https://app.datadoghq.com/llm/traces?query=service%3Anexaassist-api+%40name%3Apolicy_answer_live_evaluation&start=1792482870808&end=1792483013018&paused=true"
+    }
+  }
+}

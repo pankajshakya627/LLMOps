@@ -1,0 +1,42 @@
+{
+  "reference_sha256": "13504f6c221a42c1726460a9e865e563355539ff97d702d6c9b2267b4b261d76",
+  "output": "training/decks/system_design/Model_Access_Design.docx",
+  "changed_package_parts": [
+    "word/footer1.xml",
+    "word/footnotes.xml",
+    "word/document.xml",
+    "word/_rels/document.xml.rels",
+    "word/media/image1.png"
+  ],
+  "styles_numbering_fonts_headers_preserved": true,
+  "page_setup_tables_paragraph_properties_preserved": true,
+  "retained_reference_unchanged": true,
+  "unfilled_template_slots": 0,
+  "table_count": 9,
+  "application_implementation": "not started",
+  "render_review": {
+    "status": "reviewed",
+    "pdf_page_count": 7,
+    "all_pages_reviewed_in_contact_sheet": true,
+    "detail_pages_reviewed": [
+      2,
+      3
+    ],
+    "contact_sheet": "training/decks/system_design/model_access_design_contact_sheet.png",
+    "blocking_render_issues": []
+  },
+  "schema_validation": {
+    "status": "not_run",
+    "reason": "Bundled validator requires defusedxml, absent in available interpreters; no dependency installed."
+  },
+  "checks": [
+    "OOXML parts parse successfully",
+    "Reference file SHA-256 unchanged",
+    "Only content, footer, footnote, diagram and contract link changed",
+    "Styles, numbering, fonts, headers, section and table properties unchanged",
+    "All nine tables retained; no template placeholders remain",
+    "LibreOffice PDF export succeeded"
+  ],
+  "application_tests": "not run: documentation-only specification phase",
+  "live_checks": "not run"
+}

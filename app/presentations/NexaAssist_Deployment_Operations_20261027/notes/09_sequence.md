@@ -1,0 +1,3 @@
+Start with GET http://127.0.0.1:8001/health and /ready. The /ready implementation only pings the selected database: it does not verify model health, a nonempty index or semantic quality. Next send the maximum-loan request from slide 11 to /retrieve and inspect results, parent_text, citations and timings. Finally call /answer to exercise chat generation and output validation. An HTTP 200 response can contain answered, needs_clarification or insufficient_evidence. Evaluate the business status, not just HTTP. Direct gateway requests demonstrate routing but bypass the application's input, scope and citation checks. The sidecar /health checks its process; POST /validate checks the actual output schema.
+
+Advance from process health to an actual policy answer.

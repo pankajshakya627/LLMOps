@@ -1,0 +1,507 @@
+[
+  {
+    "name": "earlier_sanction",
+    "request": {
+      "query": "My NexaHome loan was sanctioned on 30 June 2026. What processing fee applies to that sanction?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 5
+    },
+    "http_status": 200,
+    "wall_ms": 5794.69,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "For a loan sanctioned on 30 June 2026, the processing fee is 0.35% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹15,000, plus GST at 18%.[1][2]",
+      "citations": [
+        {
+          "evidence_id": 1,
+          "quote": "Loans sanctioned before that date keep the processing fee that applied at sanction, and no refund or adjustment is made.",
+          "matched_child": {
+            "doc_id": "CIR-2026-07",
+            "title": "Circular CIR-2026-07",
+            "policy_version": "1.0",
+            "clause": null,
+            "effective_date": "2026-07-01"
+          }
+        },
+        {
+          "evidence_id": 2,
+          "quote": "6.1 General. All fees are exclusive of GST at 18%, which is charged additionally.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "6.2",
+            "effective_date": "2025-10-01"
+          }
+        },
+        {
+          "evidence_id": 2,
+          "quote": "6.2 Processing fee. Processing fee is 0.35% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹15,000, plus GST.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "6.2",
+            "effective_date": "2025-10-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 1878.23,
+        "parent_ms": 126.01,
+        "total_ms": 2004.3
+      },
+      "generation_ms": 3585.5,
+      "datadog_span_id": "14974439079792756203"
+    }
+  },
+  {
+    "name": "current_fee",
+    "request": {
+      "query": "What is the current processing fee for a NexaHome Loan?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 5
+    },
+    "http_status": 200,
+    "wall_ms": 7560.75,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "For loans sanctioned on or after 2026-07-01, the processing fee is 0.30% of the sanctioned amount, with a minimum of ₹5,000 and maximum of ₹10,000, plus GST [1]. GST is 18% [2]. Loans sanctioned before 2026-07-01 keep the fee that applied at sanction; under POL-HL-V3, that fee was 0.35%, with a minimum of ₹5,000 and maximum of ₹15,000, plus GST [1][2].",
+      "citations": [
+        {
+          "evidence_id": 1,
+          "quote": "3.1 Revised clause 6.2. Processing fee is 0.30% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹10,000, plus GST. The earlier terms were 0.35%, minimum ₹5,000 and maximum ₹15,000.",
+          "matched_child": {
+            "doc_id": "CIR-2026-07",
+            "title": "Circular CIR-2026-07",
+            "policy_version": "1.0",
+            "clause": null,
+            "effective_date": "2026-07-01"
+          }
+        },
+        {
+          "evidence_id": 1,
+          "quote": "5.1 Loans covered. The revised processing fee applies only to loans sanctioned on or after 2026-07-01. Loans sanctioned before that date keep the processing fee that applied at sanction, and no refund or adjustment is made.",
+          "matched_child": {
+            "doc_id": "CIR-2026-07",
+            "title": "Circular CIR-2026-07",
+            "policy_version": "1.0",
+            "clause": null,
+            "effective_date": "2026-07-01"
+          }
+        },
+        {
+          "evidence_id": 2,
+          "quote": "6.1 General. All fees are exclusive of GST at 18%, which is charged additionally.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "6.2",
+            "effective_date": "2025-10-01"
+          }
+        },
+        {
+          "evidence_id": 2,
+          "quote": "6.2 Processing fee. Processing fee is 0.35% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹15,000, plus GST.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "6.2",
+            "effective_date": "2025-10-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 1444.79,
+        "parent_ms": 181.36,
+        "total_ms": 1626.82
+      },
+      "generation_ms": 5728.53,
+      "datadog_span_id": "15172152205976298912"
+    }
+  },
+  {
+    "name": "cutoff_sanction",
+    "request": {
+      "query": "My NexaHome loan was sanctioned on 1 July 2026. What processing fee applies?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 5
+    },
+    "http_status": 200,
+    "wall_ms": 4122.2,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "Because your loan was sanctioned on 1 July 2026, the revised processing fee applies: 0.30% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹10,000, plus 18% GST [1][2].",
+      "citations": [
+        {
+          "evidence_id": 1,
+          "quote": "Processing fee is 0.30% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹10,000, plus GST.",
+          "matched_child": {
+            "doc_id": "CIR-2026-07",
+            "title": "Circular CIR-2026-07",
+            "policy_version": "1.0",
+            "clause": null,
+            "effective_date": "2026-07-01"
+          }
+        },
+        {
+          "evidence_id": 1,
+          "quote": "The revised processing fee applies only to loans sanctioned on or after 2026-07-01.",
+          "matched_child": {
+            "doc_id": "CIR-2026-07",
+            "title": "Circular CIR-2026-07",
+            "policy_version": "1.0",
+            "clause": null,
+            "effective_date": "2026-07-01"
+          }
+        },
+        {
+          "evidence_id": 2,
+          "quote": "All fees are exclusive of GST at 18%, which is charged additionally.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "6.2",
+            "effective_date": "2025-10-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 484.91,
+        "parent_ms": 132.48,
+        "total_ms": 617.66
+      },
+      "generation_ms": 3494.47,
+      "datadog_span_id": "5189376298758900448"
+    }
+  },
+  {
+    "name": "product_conflict",
+    "request": {
+      "query": "What is the maximum NexaHome loan amount?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-AL",
+      "top_k": 5
+    },
+    "http_status": 200,
+    "wall_ms": 2813.58,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "needs_clarification",
+      "answer": "Which product and policy date should I use, and what specific rate or policy term do you want to check?",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 442.23,
+        "parent_ms": 85.85,
+        "total_ms": 528.33
+      },
+      "generation_ms": 2273.36,
+      "datadog_span_id": "6635950499938503251"
+    }
+  },
+  {
+    "name": "ambiguous",
+    "request": {
+      "query": "What is the rate?",
+      "as_of": "2026-10-01",
+      "product_id": null,
+      "top_k": 5
+    },
+    "http_status": 200,
+    "wall_ms": 2749.16,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "needs_clarification",
+      "answer": "Which product and policy date should I use, and what specific rate or policy term do you want to check?",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 502.94,
+        "parent_ms": 163.59,
+        "total_ms": 666.58
+      },
+      "generation_ms": 2071.8,
+      "datadog_span_id": "11847822694417638547"
+    }
+  },
+  {
+    "name": "before_circular",
+    "request": {
+      "query": "What is the current processing fee for a NexaHome Loan?",
+      "as_of": "2026-06-30",
+      "product_id": "NEXA-HL",
+      "top_k": 5
+    },
+    "http_status": 200,
+    "wall_ms": 4620.82,
+    "response": {
+      "as_of": "2026-06-30",
+      "status": "answered",
+      "answer": "The processing fee is 0.35% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹15,000, plus GST. GST is 18% and is charged additionally. [1]",
+      "citations": [
+        {
+          "evidence_id": 1,
+          "quote": "6.2 Processing fee. Processing fee is 0.35% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹15,000, plus GST.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "6.2",
+            "effective_date": "2025-10-01"
+          }
+        },
+        {
+          "evidence_id": 1,
+          "quote": "6.1 General. All fees are exclusive of GST at 18%, which is charged additionally.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "6.2",
+            "effective_date": "2025-10-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 768.92,
+        "parent_ms": 82.6,
+        "total_ms": 851.73
+      },
+      "generation_ms": 3758.7,
+      "datadog_span_id": "17600577846379123036"
+    }
+  },
+  {
+    "name": "date_conflict",
+    "request": {
+      "query": "What was the minimum part prepayment on a NexaHome Loan on 31 March 2024?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 5
+    },
+    "http_status": 200,
+    "wall_ms": 6144.64,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "needs_clarification",
+      "answer": "Which product and policy date should I use, and what specific rate or policy term do you want to check?",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 1109.19,
+        "parent_ms": 128.87,
+        "total_ms": 1238.3
+      },
+      "generation_ms": 4745.97,
+      "datadog_span_id": "9840178805803153692"
+    }
+  },
+  {
+    "name": "opt_in",
+    "request": {
+      "query": "I was sanctioned in March 2026 and want to prepay ₹12,000. Is that allowed?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 5
+    },
+    "http_status": 200,
+    "wall_ms": 10135.83,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "Since your loan was sanctioned before 2026-07-01, the ₹25,000 minimum continues unless you opt in to the revised minimum. [1] If you have opted in, ₹12,000 is allowed because the revised minimum is ₹10,000. [1]",
+      "citations": [
+        {
+          "evidence_id": 1,
+          "quote": "Borrowers whose NexaHome loans were sanctioned under POL-HL-V3 before 2026-07-01 may opt in to the revised ₹10,000 part prepayment minimum by written request to their branch or through a service request. There is no charge for opting in. Until a borrower opts in, the ₹25,000 minimum continues to apply to that loan.",
+          "matched_child": {
+            "doc_id": "CIR-2026-07",
+            "title": "Circular CIR-2026-07",
+            "policy_version": "1.0",
+            "clause": null,
+            "effective_date": "2026-07-01"
+          }
+        },
+        {
+          "evidence_id": 1,
+          "quote": "The minimum part prepayment amount is ₹10,000.",
+          "matched_child": {
+            "doc_id": "CIR-2026-07",
+            "title": "Circular CIR-2026-07",
+            "policy_version": "1.0",
+            "clause": null,
+            "effective_date": "2026-07-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 1116.63,
+        "parent_ms": 235.01,
+        "total_ms": 1351.71
+      },
+      "generation_ms": 8620.17,
+      "datadog_span_id": "12163255935898947344"
+    }
+  },
+  {
+    "name": "foreclosure",
+    "request": {
+      "query": "Is there a foreclosure charge on a NexaFlex personal loan?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-PL",
+      "top_k": 5
+    },
+    "http_status": 200,
+    "wall_ms": 4477.96,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "Yes. After 6 EMIs have been paid, foreclosure attracts a charge of 4.00% of the outstanding principal plus GST [1].",
+      "citations": [
+        {
+          "evidence_id": 1,
+          "quote": "7.1 Lock-in. No prepayment or foreclosure is permitted before 6 EMIs have been paid.\n7.2 Foreclosure charge. After the lock-in, foreclosure attracts a charge of 4.00% of the outstanding principal plus GST.",
+          "matched_child": {
+            "doc_id": "POL-PL-V1",
+            "title": "NexaFlex Personal Loan Policy",
+            "policy_version": "1.0",
+            "clause": "7.2",
+            "effective_date": "2024-01-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 503.66,
+        "parent_ms": 86.46,
+        "total_ms": 590.64
+      },
+      "generation_ms": 3874.27,
+      "datadog_span_id": "1497147920273067131"
+    }
+  },
+  {
+    "name": "maximum",
+    "request": {
+      "query": "What is the maximum loan amount for a NexaHome Loan?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 5
+    },
+    "http_status": 200,
+    "wall_ms": 3690.99,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "The maximum NexaHome Loan amount is ₹7,50,00,000 (₹7.5 crore). [2]",
+      "citations": [
+        {
+          "evidence_id": 2,
+          "quote": "Minimum loan amount is ₹5,00,000. Maximum loan amount is ₹7,50,00,000.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "4.1",
+            "effective_date": "2025-10-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 491.11,
+        "parent_ms": 169.37,
+        "total_ms": 660.69
+      },
+      "generation_ms": 3016.76,
+      "datadog_span_id": "7242484895931266564"
+    }
+  },
+  {
+    "name": "unsupported_rate",
+    "request": {
+      "query": "What is the current NRLR?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 5
+    },
+    "http_status": 200,
+    "wall_ms": 4345.07,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "insufficient_evidence",
+      "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+      "citations": [],
+      "retrieval_timings": {
+        "search_ms": 453.91,
+        "parent_ms": 128.48,
+        "total_ms": 582.52
+      },
+      "generation_ms": 3745.57,
+      "datadog_span_id": "18266347927812093185"
+    }
+  },
+  {
+    "name": "fee_top20",
+    "request": {
+      "query": "What is the current processing fee for a NexaHome Loan?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 20
+    },
+    "http_status": 200,
+    "wall_ms": 9429.43,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "For loans sanctioned on or after 2026-07-01, the processing fee is 0.30% of the sanctioned loan amount, with a minimum of ₹5,000 and maximum of ₹10,000, plus GST at 18%.[1][2] Loans sanctioned before that date keep the processing fee that applied at sanction.[1]",
+      "citations": [
+        {
+          "evidence_id": 1,
+          "quote": "3.1 Revised clause 6.2. Processing fee is 0.30% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹10,000, plus GST.",
+          "matched_child": {
+            "doc_id": "CIR-2026-07",
+            "title": "Circular CIR-2026-07",
+            "policy_version": "1.0",
+            "clause": null,
+            "effective_date": "2026-07-01"
+          }
+        },
+        {
+          "evidence_id": 2,
+          "quote": "6.1 General. All fees are exclusive of GST at 18%, which is charged additionally.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "6.2",
+            "effective_date": "2025-10-01"
+          }
+        },
+        {
+          "evidence_id": 1,
+          "quote": "5.1 Loans covered. The revised processing fee applies only to loans sanctioned on or after 2026-07-01. Loans sanctioned before that date keep the processing fee that applied at sanction, and no refund or adjustment is made.",
+          "matched_child": {
+            "doc_id": "CIR-2026-07",
+            "title": "Circular CIR-2026-07",
+            "policy_version": "1.0",
+            "clause": null,
+            "effective_date": "2026-07-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 1563.07,
+        "parent_ms": 130.33,
+        "total_ms": 1693.48
+      },
+      "generation_ms": 7716.37,
+      "datadog_span_id": "1524898366393746840"
+    }
+  }
+]

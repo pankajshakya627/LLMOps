@@ -1,0 +1,78 @@
+[
+  {
+    "id": "U3BhbkFubm90YXRpb246MjA=",
+    "created_at": "2026-10-24T12:38:07+00:00",
+    "updated_at": "2026-10-24T12:38:07+00:00",
+    "source": "API",
+    "user_id": null,
+    "name": "ragas_context_recall",
+    "annotator_kind": "LLM",
+    "result": {
+      "label": "scored",
+      "score": 1.0,
+      "explanation": null
+    },
+    "metadata": {
+      "reference_source": "provided"
+    },
+    "identifier": "",
+    "span_id": "3357d048e66b4b4a"
+  },
+  {
+    "id": "U3BhbkFubm90YXRpb246MTk=",
+    "created_at": "2026-10-24T12:38:07+00:00",
+    "updated_at": "2026-10-24T12:38:07+00:00",
+    "source": "API",
+    "user_id": null,
+    "name": "ragas_context_precision",
+    "annotator_kind": "LLM",
+    "result": {
+      "label": "scored",
+      "score": 0.09999999999,
+      "explanation": null
+    },
+    "metadata": {
+      "reference_source": "provided"
+    },
+    "identifier": "",
+    "span_id": "3357d048e66b4b4a"
+  },
+  {
+    "id": "U3BhbkFubm90YXRpb246MTg=",
+    "created_at": "2026-10-24T12:38:07+00:00",
+    "updated_at": "2026-10-24T12:38:07+00:00",
+    "source": "API",
+    "user_id": null,
+    "name": "ragas_answer_relevancy",
+    "annotator_kind": "LLM",
+    "result": {
+      "label": "scored",
+      "score": 0.9583873236833522,
+      "explanation": null
+    },
+    "metadata": {
+      "reference_source": "provided"
+    },
+    "identifier": "",
+    "span_id": "3357d048e66b4b4a"
+  },
+  {
+    "id": "U3BhbkFubm90YXRpb246MTc=",
+    "created_at": "2026-10-24T12:38:07+00:00",
+    "updated_at": "2026-10-24T12:38:07+00:00",
+    "source": "API",
+    "user_id": null,
+    "name": "ragas_faithfulness",
+    "annotator_kind": "LLM",
+    "result": {
+      "label": "scored",
+      "score": 1.0,
+      "explanation": null
+    },
+    "metadata": {
+      "reference_source": "provided"
+    },
+    "identifier": "",
+    "span_id": "3357d048e66b4b4a"
+  }
+]

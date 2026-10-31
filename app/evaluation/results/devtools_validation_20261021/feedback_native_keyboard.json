@@ -1,0 +1,42 @@
+{
+  "request": {
+    "query": "What are the age limits for a NexaHome Loan today?",
+    "as_of": "2026-10-01",
+    "top_k": 5,
+    "product_id": "NEXA-HL",
+    "jurisdiction": null
+  },
+  "response": {
+    "as_of": "2026-10-01",
+    "status": "answered",
+    "answer": "Under the policy in force today, the minimum age at application is 21. The maximum age at application is 62 for salaried applicants and 65 for self-employed applicants. At loan maturity, the maximum age is 70 for salaried applicants and 75 for self-employed applicants. [1]",
+    "citations": [
+      {
+        "evidence_id": 1,
+        "quote": "Minimum age at application is 21 years. Maximum age at application is 62 years for salaried applicants and 65 years for self-employed applicants. Age at loan maturity must not exceed 70 years (salaried) or 75 years (self-employed).",
+        "matched_child": {
+          "doc_id": "POL-HL-V3",
+          "title": "NexaHome Loan Policy",
+          "policy_version": "3.0",
+          "clause": "3.1",
+          "effective_date": "2025-10-01"
+        }
+      }
+    ],
+    "retrieval_timings": {
+      "search_ms": 980.58,
+      "parent_ms": 38.03,
+      "total_ms": 1018.72
+    },
+    "generation_ms": 4642.54,
+    "datadog_span_id": "3321970091690750240"
+  },
+  "helpful": true,
+  "submitter_id": "4ee6929c-f731-4dca-b6bf-f1a2a55fbca4",
+  "correction": "DEVTOOLS-UAT-20261021-02 Synthetic keyboard input test; answer verified; not a customer correction.",
+  "feedback_id": "deb6f401-7e51-4ae2-9bdf-bec84f7da2bf",
+  "created_at": "2026-10-21T08:55:28.994464Z",
+  "status": "pending",
+  "reviewer": null,
+  "review_note": ""
+}

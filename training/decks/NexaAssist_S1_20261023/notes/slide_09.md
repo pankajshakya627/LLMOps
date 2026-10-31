@@ -1,0 +1,1 @@
+chains/ owns pure LangChain runnables. database/ owns MongoDB client and retrieval setup. services/ coordinates; api/ validates; ui/ renders. Open CLAUDE.md and trace app/api/answer.py through app/services/answer.py into app/chains/answer.py. No model logic belongs in the UI.

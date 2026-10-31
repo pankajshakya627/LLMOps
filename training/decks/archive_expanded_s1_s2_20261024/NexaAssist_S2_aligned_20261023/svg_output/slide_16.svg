@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text xml:space="preserve" x="64" y="47" font-size="16" fill="#526375"><tspan x="64" y="47">NEXAASSIST  /  SESSION 02  /  DISTILL I</tspan></text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text xml:space="preserve" x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42"><tspan x="64" y="123">Exercise / preserve the complete policy condition</tspan></text></g>
+<g id="lab-command" data-pptx-bounds="64 205 1152 99"><rect x="64" y="205" width="1152" height="99" fill="#132C42" /><text xml:space="preserve" x="88" y="245" font-family="Courier New" font-size="20" fill="#FFFFFF"><tspan x="88" y="245">Find one table, one exception and one date caveat.</tspan></text></g>
+<g id="lab-task-1" data-pptx-bounds="64 350 1100 100"><text xml:space="preserve" x="64" y="385" font-size="26" fill="#132C42"><tspan x="64" y="385">Show the child text and its parent context.</tspan></text></g>
+<g id="lab-task-2" data-pptx-bounds="64 465 1100 100"><text xml:space="preserve" x="64" y="500" font-size="26" fill="#132C42"><tspan x="64" y="500">Explain which change could create an incomplete answer.</tspan></text></g>
+<g id="lab-mode" data-pptx-bounds="64 600 1152 30"><text xml:space="preserve" x="64" y="622" font-size="16" fill="#2463A6"><tspan x="64" y="622">PAIR LAB  /  Predict → run → inspect → explain  /  uv run --no-sync</tspan></text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" fill="#526375" font-size="16"><text xml:space="preserve" x="64" y="681"><tspan x="64" y="681">Educative L07 / Course concept + NexaAssist adaptation; URL in notes</tspan></text><text xml:space="preserve" x="1150" y="681"><tspan x="1150" y="681">16/33</tspan></text></g>
+</svg>

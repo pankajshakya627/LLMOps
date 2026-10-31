@@ -1,0 +1,5 @@
+{
+  "container": "nexaassist-observability-datadog-agent-1",
+  "health": "healthy",
+  "command_exit": 0
+}

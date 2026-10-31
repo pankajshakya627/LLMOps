@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#132C42" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 1050 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 1050 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 1113.36 31 L 1113.36 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#BBCBD7" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 02 / SESSION OUTCOMES</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62 156.67 1152 116" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62 156.67 1152 116" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62 156.67 L 1214 156.67 L 1214 272.67 L 62 272.67 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62" y="230" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="76" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">LLMOps Core</text>
+</g>
+</g>
+<g id="shape-7" data-pptx-object="group" data-pptx-frame="62.8 300 1100 48" data-pptx-source-ref="slide:7">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="62.8 300 1100 48" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 62.8 300 L 1162.8 300 L 1162.8 348 L 62.8 348 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.8" y="330" text-anchor="start" xml:space="preserve" font-size="30" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Observability, Evaluation &amp; Security</text>
+</g>
+</g>
+<g id="shape-10" data-pptx-object="group" data-pptx-frame="62.96 484 1100 79.6" data-pptx-source-ref="slide:10">
+<g id="shape-8" data-pptx-object="shape" data-pptx-frame="62.96 484 1100 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:8" data-pptx-semantic-object="shape">
+<path d="M 62.96 484 L 1162.96 484 L 1162.96 525.6 L 62.96 525.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="510" text-anchor="start" xml:space="preserve" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Ollama + OpenAI / retain the RAGOps foundation</text>
+</g>
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="62.96 522 1100 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 62.96 522 L 1162.96 522 L 1162.96 563.6 L 62.96 563.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="548" text-anchor="start" xml:space="preserve" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">19 slides / tools, failure drills and evidence</text>
+</g>
+</g>
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="64 402 160 6" data-pptx-prst="rect" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 64 402 L 224 402 L 224 408 L 64 408 Z" fill="#2463A6" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-14" data-pptx-object="group" data-pptx-frame="63.36 665 1151 25.6" data-pptx-source-ref="slide:14">
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="63.36 665 1050 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 1113.36 665 L 1113.36 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#BBCBD7" data-pptx-text-baseline="metrics-v1">Syllabus 03, 04, 05, 07, 09, 12 / Offline controls + optional live tools; full steps in handout</text>
+</g>
+<g id="shape-13" data-pptx-object="shape" data-pptx-frame="1149.36 665 65 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:13" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1214.36 665 L 1214.36 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#BBCBD7" data-pptx-text-baseline="metrics-v1">01/19</text>
+</g>
+</g></svg>

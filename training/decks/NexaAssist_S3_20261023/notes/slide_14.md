@@ -1,0 +1,1 @@
+Input includes question, date and product scope. Expected output/status and source references are explicit. Put verifier and review rationale in a companion memo. The schema forbids extra fields. A reviewer name added directly to the GoldenAnswer JSON would fail validation, so use the separate memo. The implementation or concept reference is app/evaluation/answer_evaluation.py.

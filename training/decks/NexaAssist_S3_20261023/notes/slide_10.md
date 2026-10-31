@@ -1,0 +1,1 @@
+An exact quote proves those bytes were supplied. It does not prove the claim follows from the quote. Semantic evaluation must still check grounding and scope. Use an unrelated policy claim paired with a real source quote as the counterexample. This is why citation integrity and faithfulness remain separate measurements.

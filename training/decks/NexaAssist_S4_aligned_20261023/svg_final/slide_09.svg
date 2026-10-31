@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text font-size="16" fill="#526375" xml:space="preserve" x="64" y="47">NEXAASSIST  /  SESSION 04  /  DEPLOY</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text font-size="40" font-family="Trebuchet MS" fill="#132C42" xml:space="preserve" x="64" y="123">Risk names are stable; numbering is versioned</text></g>
+<g id="point-1" data-pptx-bounds="64 207 1152 105"><rect x="64" y="213" width="5" height="42" fill="#B86416" /><text font-size="26" fill="#132C42" xml:space="preserve" x="92" y="235">The lesson uses older OWASP LLM01 / LLM04 / LLM06 labels.</text></g>
+<g id="point-2" data-pptx-bounds="64 327 1152 105"><rect x="64" y="333" width="5" height="42" fill="#B86416" /><text font-size="26" fill="#132C42" xml:space="preserve" x="92" y="355">OWASP 2025 maps disclosure to LLM02 and consumption to LLM10.</text></g>
+<g id="point-3" data-pptx-bounds="64 447 1152 105"><rect x="64" y="453" width="5" height="42" fill="#B86416" /><text font-size="26" fill="#132C42" xml:space="preserve" x="92" y="475">Record the list version when naming a risk.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" fill="#526375" font-size="16"><text xml:space="preserve" x="64" y="681">Educative L11 / Course concept + NexaAssist adaptation; URL in notes</text><text xml:space="preserve" x="1150" y="681">09/41</text></g>
+</svg>

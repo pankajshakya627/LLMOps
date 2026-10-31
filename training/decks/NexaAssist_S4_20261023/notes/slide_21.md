@@ -1,0 +1,1 @@
+Submit API failure matrix and limitation note. Define representative staging traffic and approved budgets. Hold a live release when required SLOs are unmeasured. A fake returning 503 proves error handling. It does not prove readiness recovery, production capacity or model quality under load.

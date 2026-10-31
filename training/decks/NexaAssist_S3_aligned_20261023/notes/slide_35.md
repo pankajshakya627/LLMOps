@@ -1,0 +1,1 @@
+Three valid cases and human review memo. A named failure type for every failing example. Thresholds met or a documented release hold. A classroom pass requires a defensible interpretation. A real release remains blocked by unmeasured quality or unapproved targets.

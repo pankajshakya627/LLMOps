@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#132C42" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 361.78 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 361.78 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 425.14 31 L 425.14 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-size="16" fill="#BBCBD7" data-pptx-text-baseline="metrics-v1">NEXAASSIST  /  SESSION 01  /  DISCOVER</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62 156.67 308.96 116" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62 156.67 308.96 116" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62 156.67 L 370.96 156.67 L 370.96 272.67 L 62 272.67 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62" y="230" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="76" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Discover</text>
+</g>
+</g>
+<g id="shape-7" data-pptx-object="group" data-pptx-frame="62.8 300 701.985 48" data-pptx-source-ref="slide:7">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="62.8 300 701.985 48" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 62.8 300 L 764.785 300 L 764.785 348 L 62.8 348 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.8" y="330" text-anchor="start" xml:space="preserve" font-size="30" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Release decisions, ownership and evidence</text>
+</g>
+</g>
+<g id="shape-10" data-pptx-object="group" data-pptx-frame="62.96 484 883.73 79.6" data-pptx-source-ref="slide:10">
+<g id="shape-8" data-pptx-object="shape" data-pptx-frame="62.96 484 668.64 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:8" data-pptx-semantic-object="shape">
+<path d="M 62.96 484 L 731.6 484 L 731.6 525.6 L 62.96 525.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="510" text-anchor="start" xml:space="preserve" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Session 1 / lifecycle, evaluation and governance</text>
+</g>
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="62.96 522 544.086 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 62.96 522 L 607.046 522 L 607.046 563.6 L 62.96 563.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="548" text-anchor="start" xml:space="preserve" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">16 slides / offline labs + release review</text>
+</g>
+</g>
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="64 402 160 6" data-pptx-prst="rect" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 64 402 L 224 402 L 224 408 L 64 408 Z" fill="#087E8B" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-14" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:14">
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="63.36 665 839.617 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 902.977 665 L 902.977 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#BBCBD7" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 01, 03, 09, 10, 11 / Platform agnostic controls; NexaAssist worked example</text>
+</g>
+<g id="shape-13" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:13" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#BBCBD7" data-pptx-text-baseline="metrics-v1">01/16</text>
+</g>
+</g></svg>

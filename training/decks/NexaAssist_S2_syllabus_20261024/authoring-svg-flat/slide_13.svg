@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 343.86 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 343.86 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 407.22 31 L 407.22 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST  /  SESSION 02  /  DISTILL I</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 83 925.66 64" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 83 860.134 64" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 83 L 922.534 83 L 922.534 147 L 62.4 147 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Retrieval quality / coverage and ranking</text>
+</g>
+</g>
+<g id="shape-8" data-pptx-object="group" data-pptx-frame="64 209 837.245 46" data-pptx-source-ref="slide:8">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 213 5 42" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 213 L 69 213 L 69 255 L 64 255 Z" fill="#2463A6" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="90.96 209 810.285 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 90.96 209 L 901.245 209 L 901.245 250.6 L 90.96 250.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="90.96" y="235" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Recall@k: required references found / references required.</text>
+</g>
+</g>
+<g id="shape-11" data-pptx-object="group" data-pptx-frame="64 329 812.7 46" data-pptx-source-ref="slide:11">
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="64 333 5 42" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 64 333 L 69 333 L 69 375 L 64 375 Z" fill="#2463A6" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-10" data-pptx-object="shape" data-pptx-frame="90.96 329 700.56 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:10" data-pptx-semantic-object="shape">
+<path d="M 90.96 329 L 791.52 329 L 791.52 370.6 L 90.96 370.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="90.96" y="355" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">MRR: mean reciprocal rank of the first required hit.</text>
+</g>
+</g>
+<g id="shape-14" data-pptx-object="group" data-pptx-frame="64 449 824.955 46" data-pptx-source-ref="slide:14">
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="64 453 5 42" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 64 453 L 69 453 L 69 495 L 64 495 Z" fill="#2463A6" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-13" data-pptx-object="shape" data-pptx-frame="90.96 449 797.995 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:13" data-pptx-semantic-object="shape">
+<path d="M 90.96 449 L 888.955 449 L 888.955 490.6 L 90.96 490.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="90.96" y="475" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">NDCG@k: graded ranking / ideal ranking; worksheet only.</text>
+</g>
+</g>
+<g id="shape-17" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:17">
+<g id="shape-15" data-pptx-object="shape" data-pptx-frame="63.36 665 780.075 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:15" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 843.435 665 L 843.435 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 03, 12 / Concept + inspected local implementation; sources in notes</text>
+</g>
+<g id="shape-16" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:16" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">13/16</text>
+</g>
+</g></svg>

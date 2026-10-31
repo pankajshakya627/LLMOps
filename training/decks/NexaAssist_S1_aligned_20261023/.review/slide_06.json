@@ -1,0 +1,43 @@
+{
+  "page": "slide_06.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "fixed",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_06.png"
+  ],
+  "findings": [
+    {
+      "iter": 1,
+      "rule": "H6",
+      "severity": "hard",
+      "evidence": "The model-provider diagonal intersects the final letter of HTTPS (x\u2248864\u2013868, y\u2248293\u2013296).",
+      "fix_applied": {
+        "element": "#edge-nexa-model text:nth-of-type(2)",
+        "before": "x=\"804\" y=\"296\"",
+        "after": "x=\"792\" y=\"296\""
+      },
+      "backup_path": ".review/backup/slide_06.iter1.svg",
+      "verified_in_iter": 2
+    }
+  ],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "C4 system context: people ask, review and maintain policy knowledge; NexaAssist depends on models, Atlas and optional telemetry.",
+    "render_delivers": true,
+    "note": "People, the system in scope, typed external dependencies and initiating arrows are present. HTTPS moved 12px left to clear the diagonal; not re-rendered in the one-iteration budget. Author verified the corrected browser PNG."
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "roles": {
+    "body": {
+      "family": "Arial",
+      "size": 26.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 3.6,
+      "latin_chars_per_100px": 7.7,
+      "caps_chars_per_100px": 6.0,
+      "digits_chars_per_100px": 6.5,
+      "citation_chars_per_100px": 7.6,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": {
+        "px": 1889.3,
+        "slide": "P16",
+        "text": "Per-metric means and failed cases make …"
+      }
+    },
+    "title": {
+      "family": "Trebuchet MS",
+      "size": 40.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 2.4,
+      "latin_chars_per_100px": 5.2,
+      "caps_chars_per_100px": 4.6,
+      "digits_chars_per_100px": 4.5,
+      "citation_chars_per_100px": 5.0,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": {
+        "px": 907.2,
+        "slide": "P07",
+        "text": "LCEL composes prompt and strict model o…"
+      }
+    },
+    "subtitle": {
+      "family": "Trebuchet MS",
+      "size": 30.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 3.1,
+      "latin_chars_per_100px": 7.0,
+      "caps_chars_per_100px": 6.1,
+      "digits_chars_per_100px": 6.0,
+      "citation_chars_per_100px": 6.7,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": {
+        "px": 1010.2,
+        "slide": "P05",
+        "text": "Prompt ID, version and fingerprint trav…"
+      }
+    },
+    "annotation": {
+      "family": "Arial",
+      "size": 20.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 4.7,
+      "latin_chars_per_100px": 10.1,
+      "caps_chars_per_100px": 7.9,
+      "digits_chars_per_100px": 8.5,
+      "citation_chars_per_100px": 9.8,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": null
+    },
+    "code": {
+      "family": "Consolas",
+      "size": 20.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 4.7,
+      "latin_chars_per_100px": 8.5,
+      "caps_chars_per_100px": 8.1,
+      "digits_chars_per_100px": 8.6,
+      "citation_chars_per_100px": 8.4,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": null
+    },
+    "display": {
+      "family": "Trebuchet MS",
+      "size": 76.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 1.2,
+      "latin_chars_per_100px": 2.8,
+      "caps_chars_per_100px": 2.4,
+      "digits_chars_per_100px": 2.4,
+      "citation_chars_per_100px": 2.7,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": null
+    },
+    "footnote": {
+      "family": "Arial",
+      "size": 16.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 5.9,
+      "latin_chars_per_100px": 12.6,
+      "caps_chars_per_100px": 9.8,
+      "digits_chars_per_100px": 10.6,
+      "citation_chars_per_100px": 12.3,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": null
+    }
+  },
+  "script_samples": {},
+  "source": "spec_lock.md",
+  "generated_at": "2026-10-23T16:21:07Z",
+  "notes": [
+    "every role is measured at normal weight; recalibrate a role realized as bold deck-wide with --role NAME:FAMILY:SIZE:bold: bold widens Latin and digits about 7%, while the bundled advance table gives CJK one width for both weights"
+  ]
+}

@@ -1,0 +1,1 @@
+Dependency injection supplies settings; the service owns the workflow. Open app/api/answer.py and locate @router.post("/answer"). Read the displayed excerpt in context; it is taken directly from the application. Dependency injection supplies settings; the service owns the workflow. The implementation or concept reference is app/api/answer.py.

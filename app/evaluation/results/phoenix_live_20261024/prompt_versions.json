@@ -1,0 +1,18 @@
+{
+  "name": "nexaassist-policy-answer",
+  "versions": {
+    "baseline": {
+      "id": "UHJvbXB0VmVyc2lvbjox",
+      "tag": "code-1-1-0-dca0041f402b",
+      "description": "Application source baseline 1.1.0; SHA dca0041f402b."
+    },
+    "candidate": {
+      "id": "UHJvbXB0VmVyc2lvbjoy",
+      "tag": "candidate-1-1-0-dca0041f402b",
+      "description": "Classroom wording candidate from 1.1.0; not deployed."
+    }
+  },
+  "active_application_version": "1.1.0",
+  "active_application_sha": "dca0041f402b",
+  "candidate_deployed": false
+}

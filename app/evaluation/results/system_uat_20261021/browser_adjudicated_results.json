@@ -1,0 +1,82 @@
+[
+  {
+    "name": "blank_question_no_turn",
+    "result": "pass"
+  },
+  {
+    "name": "browser_live_answer",
+    "result": "pass",
+    "detail": {
+      "wall_ms": 3821
+    }
+  },
+  {
+    "name": "browser_citations_visible",
+    "result": "pass"
+  },
+  {
+    "name": "quality_cards_stay_hidden",
+    "result": "pass"
+  },
+  {
+    "name": "one_submit_one_retrieval",
+    "result": "pass",
+    "detail": {
+      "before": 19,
+      "after": 20
+    }
+  },
+  {
+    "name": "browser_feedback_persisted",
+    "result": "pass",
+    "detail": {
+      "feedback_id": "aeae4094-e8df-4676-8172-99d0669d4c07",
+      "span_id": "9786084634429961595"
+    }
+  },
+  {
+    "name": "new_chat_is_empty",
+    "result": "pass"
+  },
+  {
+    "name": "second_browser_has_no_first_users_chat",
+    "result": "pass"
+  },
+  {
+    "name": "second_browser_has_independent_filters",
+    "result": "pass"
+  },
+  {
+    "name": "reopened_chat_keeps_saved_feedback",
+    "result": "pass"
+  },
+  {
+    "name": "reopen_does_not_regenerate",
+    "result": "pass"
+  },
+  {
+    "name": "browser_no_unhandled_js_errors",
+    "result": "pass",
+    "detail": {
+      "errors": []
+    }
+  },
+  {
+    "name": "mobile_no_horizontal_overflow",
+    "result": "pass",
+    "detail": {
+      "scroll": 390,
+      "width": 390
+    }
+  },
+  {
+    "name": "review_persisted_accepted",
+    "result": "pass",
+    "detail": "Database readback matches the saved accepted review. Selecting rejected was not demonstrated by the browser harness; its original expectation failed."
+  },
+  {
+    "scenario": "second_review_cannot_overwrite",
+    "http_status": 409,
+    "result": "pass"
+  }
+]

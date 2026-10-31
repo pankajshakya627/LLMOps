@@ -1,0 +1,54 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+!.env*.example
+.aws/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python bytecode and tooling caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Virtual environments and build artifacts
+.venv/
+venv/
+env/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Local IDE and OS files
+.DS_Store
+.idea/
+.vscode/
+
+# Application runtime output
+logs/
+*.log
+app/evaluation/reports/
+
+.cursor/
+
+# Student copies of the thresholds file (training Session 1)
+evaluation/gates.mine.json
+
+# Disposable AWS session artifacts (keep source templates and the decision ledger).
+session-outputs.json
+session-created.json
+images.json
+release.tar.gz

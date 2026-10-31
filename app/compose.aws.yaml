@@ -1,0 +1,117 @@
+name: nexaassist-aws
+
+# All published ports are loopback-only. Reach them through SSM port forwarding.
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.2-pg17
+    environment:
+      POSTGRES_DB: nexaassist
+      POSTGRES_USER: nexaassist
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?required}
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nexaassist -d nexaassist"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+  phoenix:
+    image: arizephoenix/phoenix:20.26.0
+    environment:
+      PHOENIX_HOST: 0.0.0.0
+      PHOENIX_PORT: "6006"
+      PHOENIX_WORKING_DIR: /data
+      PHOENIX_TELEMETRY_ENABLED: "false"
+    ports: ["127.0.0.1:6006:6006"]
+    volumes: ["phoenix-data:/data"]
+    restart: unless-stopped
+  gateway:
+    image: ${GATEWAY_IMAGE:?required}
+    command: ["litellm", "--config", "/opt/gateway/litellm_bedrock.yaml", "--host", "0.0.0.0", "--port", "4000", "--num_workers", "1"]
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?required}
+      BEDROCK_CHAT_ROUTE: ${BEDROCK_CHAT_ROUTE:?required}
+      BEDROCK_JUDGE_ROUTE: ${BEDROCK_JUDGE_ROUTE:?required}
+      AWS_REGION_NAME: ${AWS_REGION:?required}
+      LITELLM_LOCAL_MODEL_COST_MAP: "True"
+      LITELLM_OTEL_V2: "true"
+      PHOENIX_COLLECTOR_HTTP_ENDPOINT: http://phoenix:6006/v1/traces
+      PHOENIX_PROJECT_NAME: nexaassist-gateway
+      OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT: no_content
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:4000/health/liveliness', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    restart: unless-stopped
+  guardrails:
+    image: ${GUARDRAILS_IMAGE:?required}
+    restart: unless-stopped
+  api:
+    image: ${APP_IMAGE:?required}
+    env_file: .env
+    environment:
+      STORAGE_BACKEND: pgvector
+      POSTGRES_DSN: postgresql://nexaassist:${POSTGRES_PASSWORD:?required}@postgres:5432/nexaassist
+      INSTITUTION: NexaBank
+      JURISDICTION: IN
+      CONFIDENTIALITY_LEVEL: internal
+      CHAT_MODEL: nexa-chat-bedrock
+      CHAT_API_MODE: chat_completions
+      CHAT_BASE_URL: http://gateway:4000/v1
+      CHAT_API_KEY: ${LITELLM_MASTER_KEY:?required}
+      CHAT_REASONING_EFFORT: ""
+      # Bedrock can spend ~90 seconds compiling a new structured-output schema.
+      CHAT_TIMEOUT_SECONDS: "120"
+      CHAT_CACHE_NAMESPACE: ""
+      OPENAI_FALLBACK_MODEL: ""
+      EMBEDDING_MODEL: nexa-embed-bedrock
+      EMBEDDING_BASE_URL: http://gateway:4000/v1
+      EMBEDDING_API_KEY: ${LITELLM_MASTER_KEY:?required}
+      EMBEDDING_DIMENSIONS: "1024"
+      EMBEDDING_PROFILE: titan-v2-1024-v1
+      MONGODB_COLLECTION: lab_chunks_titan_v2
+      MONGODB_PARENT_COLLECTION: lab_parents_titan_v2
+      RETRIEVAL_MODE: dense
+      RERANK_ENABLED: "false"
+      EVAL_JUDGE_MODEL: nexa-judge-bedrock
+      EVAL_JUDGE_API_MODE: chat_completions
+      EVAL_JUDGE_BASE_URL: http://gateway:4000/v1
+      EVAL_JUDGE_API_KEY: ${LITELLM_MASTER_KEY:?required}
+      EVAL_EMBEDDING_MODEL: nexa-embed-bedrock
+      EVAL_EMBEDDING_BASE_URL: http://gateway:4000/v1
+      EVAL_EMBEDDING_API_KEY: ${LITELLM_MASTER_KEY:?required}
+      EVAL_EMBEDDING_DIMENSIONS: "1024"
+      EVAL_EMBEDDING_PROFILE: titan-v2-1024-v1
+      LIVE_EVAL_SAMPLE_RATE: "0"
+      RATE_LIMIT_PER_MINUTE: "3"
+      PHOENIX_BASE_URL: http://phoenix:6006
+      PHOENIX_CAPTURE_CONTENT: "false"
+      GUARDRAILS_BASE_URL: http://guardrails:8101
+      BEDROCK_REGION: ${AWS_REGION:?required}
+      BEDROCK_GUARDRAIL_ID: ${BEDROCK_GUARDRAIL_ID:?required}
+      BEDROCK_GUARDRAIL_VERSION: ${BEDROCK_GUARDRAIL_VERSION:?required}
+      RAGAS_DO_NOT_TRACK: "true"
+    ports: ["127.0.0.1:8000:8000"]
+    volumes: ["./corpus:/data:ro", "./reports:/reports"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      gateway: {condition: service_healthy}
+      guardrails: {condition: service_healthy}
+    restart: unless-stopped
+  ui:
+    image: ${APP_IMAGE:?required}
+    command: ["python", "-m", "streamlit", "run", "app/streamlit_app.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+    environment:
+      API_BASE_URL: http://api:8000
+      UI_TIMEZONE: Asia/Kolkata
+    ports: ["127.0.0.1:8501:8501"]
+    depends_on:
+      api: {condition: service_healthy}
+    restart: unless-stopped
+
+# shortcut: state lasts for one lab session; use RDS and managed telemetry for persistent service.
+volumes:
+  postgres-data:
+  phoenix-data:

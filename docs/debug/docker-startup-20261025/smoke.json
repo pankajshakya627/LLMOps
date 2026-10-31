@@ -1,0 +1,18 @@
+{
+  "api_health": 200,
+  "api_docs": 200,
+  "ui_health": 200,
+  "phoenix_ui": 200,
+  "guardrails_health": 200,
+  "gateway_models_status": 200,
+  "gateway_routes": [
+    "nexa-chat",
+    "nexa-chat-openai",
+    "nexa-embed-local",
+    "nexa-embed-openai"
+  ],
+  "validator_valid_and_invalid_cases": "passed",
+  "invalid_request_status": 422,
+  "injection_block_status": 400,
+  "phoenix_correlation_headers": true
+}

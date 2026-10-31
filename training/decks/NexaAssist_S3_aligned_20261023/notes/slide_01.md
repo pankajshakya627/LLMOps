@@ -1,0 +1,1 @@
+Prompts, generation and evaluation gates Session 3 of 5 · 3 hours · source-aligned workshop Today uses controlled model drafts through the actual LCEL chain. The class will explain both deterministic validation and semantic judgment. This revised deck follows the course lesson sequence; exact lesson URLs appear in section notes and the coverage map.

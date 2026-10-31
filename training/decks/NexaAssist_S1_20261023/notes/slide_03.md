@@ -1,0 +1,1 @@
+Trace one question across the application layers. Verify that trusted documents match the register. Propose a gate and explain who approves it. Ask learners to explain what each deliverable would change in a release decision. A running API alone does not demonstrate a correct answer.

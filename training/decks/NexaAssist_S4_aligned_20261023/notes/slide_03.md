@@ -1,0 +1,1 @@
+25 min serving/security + 20 min walkthrough 90 min labs, including a 10 min break 25 min SLO review + 20 min recap Use the API lab first so every learner sees failure responses before reading the relevant implementation.

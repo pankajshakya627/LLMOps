@@ -1,0 +1,16 @@
+{
+  "name": "nexaassist-policy-answer",
+  "versions": {
+    "baseline": {
+      "id": "UHJvbXB0VmVyc2lvbjoz",
+      "tag": "code-1-1-1-894fb2a14591",
+      "description": "Application source baseline 1.1.1; SHA 894fb2a14591."
+    }
+  },
+  "active_application_version": "1.1.1",
+  "active_application_sha": "894fb2a14591",
+  "candidate_deployed": false,
+  "serving_profile": "isolated 8001 evaluated candidate, then restored baseline",
+  "quality_decision": "rejected",
+  "reason": "Faithfulness 0.0 on live question"
+}

@@ -1,0 +1,296 @@
+FFFFFFFF                                                                 [100%]
+=================================== FAILURES ===================================
+_________ test_amendments_follow_links_until_no_new_instrument_remains _________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d3a23f0>
+settings = Settings(mongodb_uri=SecretStr('**********'), mongodb_db='unused', mongodb_collection='chunks', vector_index_name='pol...ality_level='internal', log_level='INFO', dd_trace_enabled=False, dd_service='nexaassist-api', dd_site='datadoghq.com')
+
+    def test_amendments_follow_links_until_no_new_instrument_remains(
+        monkeypatch: pytest.MonkeyPatch, settings: Settings
+    ) -> None:
+        storage: Any = mongomock.MongoClient().db
+        monkeypatch.setattr(database, "_database", lambda _: storage)
+        for name, supersedes in (("A", "P"), ("B", "A"), ("C", "B")):
+            storage[settings.mongodb_collection].insert_one(
+                {
+                    "doc_id": name,
+                    "policy_version": "1",
+                    "institution": settings.institution,
+                    "doc_type": "circular",
+                    "supersedes": supersedes,
+                    "text": name,
+                }
+            )
+        result = asyncio.run(
+            database.build_amendment_search(settings).ainvoke(
+                {"doc_ids": ["P"], "pre_filter": {"institution": settings.institution}}
+            )
+        )
+>       assert {x.metadata["doc_id"] for x in result} == {"A", "B", "C"}
+E       AssertionError: assert {'A'} == {'A', 'B', 'C'}
+E         
+E         Extra items in the right set:
+E         'B'
+E         'C'
+E         Use -v to get more diff
+
+tests/test_amendments.py:135: AssertionError
+_ test_inconsistent_circular_fails_closed_instead_of_returning_a_partial_instrument[effective_to_search-2025-01-01] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10ff96780>
+settings = Settings(mongodb_uri=SecretStr('**********'), mongodb_db='unused', mongodb_collection='chunks', vector_index_name='pol...ality_level='internal', log_level='INFO', dd_trace_enabled=False, dd_service='nexaassist-api', dd_site='datadoghq.com')
+changed_field = 'effective_to_search', changed_value = '2025-01-01'
+
+    @pytest.mark.parametrize(
+        "changed_field,changed_value",
+        [("effective_to_search", "2025-01-01"), ("effective_to_search", None), ("product_id", "NEXA-PL")],
+    )
+    def test_inconsistent_circular_fails_closed_instead_of_returning_a_partial_instrument(
+        monkeypatch: pytest.MonkeyPatch, settings: Settings, changed_field: str, changed_value: str | None
+    ) -> None:
+        storage: Any = mongomock.MongoClient().db
+        monkeypatch.setattr(database, "_database", lambda _: storage)
+        metadata = {
+            "institution": settings.institution,
+            "doc_id": "CIR-A",
+            "policy_version": "1",
+            "doc_type": "circular",
+            "product_id": "NEXA-HL",
+            "supersedes": "P",
+            "effective_to_search": "9999-12-31",
+        }
+        storage[settings.mongodb_collection].insert_many(
+            [
+                {**metadata, "text": "Fee changed"},
+                {**metadata, changed_field: changed_value, "text": "Sanction-date condition"},
+            ]
+        )
+>       with pytest.raises(ValueError, match="Inconsistent amendment metadata"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_amendments.py:162: Failed
+_ test_inconsistent_circular_fails_closed_instead_of_returning_a_partial_instrument[effective_to_search-None] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x110086210>
+settings = Settings(mongodb_uri=SecretStr('**********'), mongodb_db='unused', mongodb_collection='chunks', vector_index_name='pol...ality_level='internal', log_level='INFO', dd_trace_enabled=False, dd_service='nexaassist-api', dd_site='datadoghq.com')
+changed_field = 'effective_to_search', changed_value = None
+
+    @pytest.mark.parametrize(
+        "changed_field,changed_value",
+        [("effective_to_search", "2025-01-01"), ("effective_to_search", None), ("product_id", "NEXA-PL")],
+    )
+    def test_inconsistent_circular_fails_closed_instead_of_returning_a_partial_instrument(
+        monkeypatch: pytest.MonkeyPatch, settings: Settings, changed_field: str, changed_value: str | None
+    ) -> None:
+        storage: Any = mongomock.MongoClient().db
+        monkeypatch.setattr(database, "_database", lambda _: storage)
+        metadata = {
+            "institution": settings.institution,
+            "doc_id": "CIR-A",
+            "policy_version": "1",
+            "doc_type": "circular",
+            "product_id": "NEXA-HL",
+            "supersedes": "P",
+            "effective_to_search": "9999-12-31",
+        }
+        storage[settings.mongodb_collection].insert_many(
+            [
+                {**metadata, "text": "Fee changed"},
+                {**metadata, changed_field: changed_value, "text": "Sanction-date condition"},
+            ]
+        )
+>       with pytest.raises(ValueError, match="Inconsistent amendment metadata"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_amendments.py:162: Failed
+_ test_inconsistent_circular_fails_closed_instead_of_returning_a_partial_instrument[product_id-NEXA-PL] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x110120d10>
+settings = Settings(mongodb_uri=SecretStr('**********'), mongodb_db='unused', mongodb_collection='chunks', vector_index_name='pol...ality_level='internal', log_level='INFO', dd_trace_enabled=False, dd_service='nexaassist-api', dd_site='datadoghq.com')
+changed_field = 'product_id', changed_value = 'NEXA-PL'
+
+    @pytest.mark.parametrize(
+        "changed_field,changed_value",
+        [("effective_to_search", "2025-01-01"), ("effective_to_search", None), ("product_id", "NEXA-PL")],
+    )
+    def test_inconsistent_circular_fails_closed_instead_of_returning_a_partial_instrument(
+        monkeypatch: pytest.MonkeyPatch, settings: Settings, changed_field: str, changed_value: str | None
+    ) -> None:
+        storage: Any = mongomock.MongoClient().db
+        monkeypatch.setattr(database, "_database", lambda _: storage)
+        metadata = {
+            "institution": settings.institution,
+            "doc_id": "CIR-A",
+            "policy_version": "1",
+            "doc_type": "circular",
+            "product_id": "NEXA-HL",
+            "supersedes": "P",
+            "effective_to_search": "9999-12-31",
+        }
+        storage[settings.mongodb_collection].insert_many(
+            [
+                {**metadata, "text": "Fee changed"},
+                {**metadata, changed_field: changed_value, "text": "Sanction-date condition"},
+            ]
+        )
+>       with pytest.raises(ValueError, match="Inconsistent amendment metadata"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_amendments.py:162: Failed
+_ test_clarification_uses_a_fixed_scope_question_without_model_policy_claims[Which product and rate would you like to check?] _
+
+settings = Settings(mongodb_uri=SecretStr('**********'), mongodb_db='unused', mongodb_collection='chunks', vector_index_name='pol...ality_level='internal', log_level='INFO', dd_trace_enabled=False, dd_service='nexaassist-api', dd_site='datadoghq.com')
+question = 'Which product and rate would you like to check?'
+
+    @pytest.mark.parametrize(
+        "question",
+        [
+            "Which product and rate would you like to check?",
+            "Should I use 31 March 2024 or the date filter?",
+            "Is the fee 0.35%?",
+            "NexaFlex foreclosure is four percent plus GST. Which product did you mean?",
+        ],
+    )
+    def test_clarification_uses_a_fixed_scope_question_without_model_policy_claims(
+        settings: Settings, question: str
+    ) -> None:
+        response = run_answer(
+            settings,
+            [hit()],
+            {
+                "status": "needs_clarification",
+                "answer": question,
+                "evidence": [],
+            },
+        )
+        assert response.status == "needs_clarification"
+>       assert response.answer == (
+            "Which product and policy date should I use, "
+            "and what specific rate or policy term do you want to check?"
+        )
+E       AssertionError: assert 'Which produc...ike to check?' == 'Which produc...ant to check?'
+E         
+E         - Which product and policy date should I use, and what specific rate or policy term do you want to check?
+E         + Which product and rate would you like to check?
+
+tests/test_answer.py:125: AssertionError
+_ test_clarification_uses_a_fixed_scope_question_without_model_policy_claims[Should I use 31 March 2024 or the date filter?] _
+
+settings = Settings(mongodb_uri=SecretStr('**********'), mongodb_db='unused', mongodb_collection='chunks', vector_index_name='pol...ality_level='internal', log_level='INFO', dd_trace_enabled=False, dd_service='nexaassist-api', dd_site='datadoghq.com')
+question = 'Should I use 31 March 2024 or the date filter?'
+
+    @pytest.mark.parametrize(
+        "question",
+        [
+            "Which product and rate would you like to check?",
+            "Should I use 31 March 2024 or the date filter?",
+            "Is the fee 0.35%?",
+            "NexaFlex foreclosure is four percent plus GST. Which product did you mean?",
+        ],
+    )
+    def test_clarification_uses_a_fixed_scope_question_without_model_policy_claims(
+        settings: Settings, question: str
+    ) -> None:
+        response = run_answer(
+            settings,
+            [hit()],
+            {
+                "status": "needs_clarification",
+                "answer": question,
+                "evidence": [],
+            },
+        )
+        assert response.status == "needs_clarification"
+>       assert response.answer == (
+            "Which product and policy date should I use, "
+            "and what specific rate or policy term do you want to check?"
+        )
+E       AssertionError: assert 'Should I use... date filter?' == 'Which produc...ant to check?'
+E         
+E         - Which product and policy date should I use, and what specific rate or policy term do you want to check?
+E         + Should I use 31 March 2024 or the date filter?
+
+tests/test_answer.py:125: AssertionError
+_ test_clarification_uses_a_fixed_scope_question_without_model_policy_claims[Is the fee 0.35%?] _
+
+settings = Settings(mongodb_uri=SecretStr('**********'), mongodb_db='unused', mongodb_collection='chunks', vector_index_name='pol...ality_level='internal', log_level='INFO', dd_trace_enabled=False, dd_service='nexaassist-api', dd_site='datadoghq.com')
+question = 'Is the fee 0.35%?'
+
+    @pytest.mark.parametrize(
+        "question",
+        [
+            "Which product and rate would you like to check?",
+            "Should I use 31 March 2024 or the date filter?",
+            "Is the fee 0.35%?",
+            "NexaFlex foreclosure is four percent plus GST. Which product did you mean?",
+        ],
+    )
+    def test_clarification_uses_a_fixed_scope_question_without_model_policy_claims(
+        settings: Settings, question: str
+    ) -> None:
+        response = run_answer(
+            settings,
+            [hit()],
+            {
+                "status": "needs_clarification",
+                "answer": question,
+                "evidence": [],
+            },
+        )
+>       assert response.status == "needs_clarification"
+E       AssertionError: assert 'insufficient_evidence' == 'needs_clarification'
+E         
+E         - needs_clarification
+E         + insufficient_evidence
+
+tests/test_answer.py:124: AssertionError
+_ test_clarification_uses_a_fixed_scope_question_without_model_policy_claims[NexaFlex foreclosure is four percent plus GST. Which product did you mean?] _
+
+settings = Settings(mongodb_uri=SecretStr('**********'), mongodb_db='unused', mongodb_collection='chunks', vector_index_name='pol...ality_level='internal', log_level='INFO', dd_trace_enabled=False, dd_service='nexaassist-api', dd_site='datadoghq.com')
+question = 'NexaFlex foreclosure is four percent plus GST. Which product did you mean?'
+
+    @pytest.mark.parametrize(
+        "question",
+        [
+            "Which product and rate would you like to check?",
+            "Should I use 31 March 2024 or the date filter?",
+            "Is the fee 0.35%?",
+            "NexaFlex foreclosure is four percent plus GST. Which product did you mean?",
+        ],
+    )
+    def test_clarification_uses_a_fixed_scope_question_without_model_policy_claims(
+        settings: Settings, question: str
+    ) -> None:
+        response = run_answer(
+            settings,
+            [hit()],
+            {
+                "status": "needs_clarification",
+                "answer": question,
+                "evidence": [],
+            },
+        )
+        assert response.status == "needs_clarification"
+>       assert response.answer == (
+            "Which product and policy date should I use, "
+            "and what specific rate or policy term do you want to check?"
+        )
+E       AssertionError: assert 'NexaFlex for...did you mean?' == 'Which produc...ant to check?'
+E         
+E         - Which product and policy date should I use, and what specific rate or policy term do you want to check?
+E         + NexaFlex foreclosure is four percent plus GST. Which product did you mean?
+
+tests/test_answer.py:125: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_amendments.py::test_amendments_follow_links_until_no_new_instrument_remains
+FAILED tests/test_amendments.py::test_inconsistent_circular_fails_closed_instead_of_returning_a_partial_instrument[effective_to_search-2025-01-01]
+FAILED tests/test_amendments.py::test_inconsistent_circular_fails_closed_instead_of_returning_a_partial_instrument[effective_to_search-None]
+FAILED tests/test_amendments.py::test_inconsistent_circular_fails_closed_instead_of_returning_a_partial_instrument[product_id-NEXA-PL]
+FAILED tests/test_answer.py::test_clarification_uses_a_fixed_scope_question_without_model_policy_claims[Which product and rate would you like to check?]
+FAILED tests/test_answer.py::test_clarification_uses_a_fixed_scope_question_without_model_policy_claims[Should I use 31 March 2024 or the date filter?]
+FAILED tests/test_answer.py::test_clarification_uses_a_fixed_scope_question_without_model_policy_claims[Is the fee 0.35%?]
+FAILED tests/test_answer.py::test_clarification_uses_a_fixed_scope_question_without_model_policy_claims[NexaFlex foreclosure is four percent plus GST. Which product did you mean?]
+8 failed, 16 deselected in 1.25s

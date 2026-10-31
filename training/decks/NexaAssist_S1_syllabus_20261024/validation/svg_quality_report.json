@@ -1,0 +1,475 @@
+{
+  "schema": "ppt-master.svg-quality-report.v1",
+  "stage": "final",
+  "target": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024",
+  "source_fingerprint": {
+    "algorithm": "sha256",
+    "digest": "22b6bc546c0cff01d11df10da7843f2f1c95c5d58e11a4dd9606ebffed5c2b01",
+    "file_count": 16,
+    "files": [
+      {
+        "file": "authoring-svg-flat/slide_01.svg",
+        "sha256": "7ce709c8656a61172847d43fea846ca7ce3786cbbbc996c5d2336b732bfea5a7"
+      },
+      {
+        "file": "authoring-svg-flat/slide_02.svg",
+        "sha256": "a886a3dad8e5a8ec1d339a7c661ed01fc19169cf64257e9c5f290e79b52cb91c"
+      },
+      {
+        "file": "authoring-svg-flat/slide_03.svg",
+        "sha256": "3eece0b076e0979145de4d95f43e62f9ca64fcde20b5e1ec7c8e8788a5fd6d89"
+      },
+      {
+        "file": "authoring-svg-flat/slide_04.svg",
+        "sha256": "16e9c65ef51cff31088ff5c328f1c9a7791e05c1b29fc0752afab09cd1ccb493"
+      },
+      {
+        "file": "authoring-svg-flat/slide_05.svg",
+        "sha256": "c3613681f97e2b8ea28dd57c575a5a0a6a2c75482bf284ae424f1794870deae2"
+      },
+      {
+        "file": "authoring-svg-flat/slide_06.svg",
+        "sha256": "ab1ac0c56ab0b6e11f100150e10c74d6879a18333663dcfd20a13205e23c4eec"
+      },
+      {
+        "file": "authoring-svg-flat/slide_07.svg",
+        "sha256": "91b3d9f7af8a375a2b2dce43f6b487ae0d68feabb4d83bb7393a097ce1309d2d"
+      },
+      {
+        "file": "authoring-svg-flat/slide_08.svg",
+        "sha256": "253c4e4cfb7d9abf8eb5de114cce194fdaec618cec4166ee4a28bdbe4d0292aa"
+      },
+      {
+        "file": "authoring-svg-flat/slide_09.svg",
+        "sha256": "e7b18fb4c8ab7d434077074d9ea9c0f0763b509d3b95cb0f4eb5cfed025e3a1a"
+      },
+      {
+        "file": "authoring-svg-flat/slide_10.svg",
+        "sha256": "214321761592d60a8e06f40f0d36cf77a16a1e3defd2396985c3edeaa7c80b8d"
+      },
+      {
+        "file": "authoring-svg-flat/slide_11.svg",
+        "sha256": "6e64f25ebeb6d2ae7d437b119275a0f1c99e12966536ab9d5675de36d2b5a261"
+      },
+      {
+        "file": "authoring-svg-flat/slide_12.svg",
+        "sha256": "b49f022d56378e8ea5fe98b4d8892dbdf2fd31c7e7c259e70c4952c8325daa85"
+      },
+      {
+        "file": "authoring-svg-flat/slide_13.svg",
+        "sha256": "4ab7e7a07899b778a8896aafe403ba11004df12c46760bed0003c9c40905dfb6"
+      },
+      {
+        "file": "authoring-svg-flat/slide_14.svg",
+        "sha256": "7f6acaf1a09d72919c9262eb22c117281d146a9a13ac27d87068b931a9a3e0ba"
+      },
+      {
+        "file": "authoring-svg-flat/slide_15.svg",
+        "sha256": "12921acb91a74eb32638337cfed5d19b9617105bea9200659878e0337ea594cd"
+      },
+      {
+        "file": "authoring-svg-flat/slide_16.svg",
+        "sha256": "2592ad486d114a4eebe9fdbca855b058caaa00cfc1a348bf93b84250f15adbe9"
+      }
+    ]
+  },
+  "summary": {
+    "total": 16,
+    "passed": 16,
+    "warnings": 0,
+    "errors": 0
+  },
+  "issue_types": {},
+  "categories": {
+    "blocking": {
+      "count": 0,
+      "issues": []
+    },
+    "introduced": {
+      "count": 0,
+      "issues": []
+    },
+    "inherited": {
+      "count": 0,
+      "issues": []
+    },
+    "source-import": {
+      "count": 0,
+      "summary": {
+        "warning_count": 0,
+        "by_code": {}
+      }
+    }
+  },
+  "drift": {
+    "colors": {},
+    "fonts": {},
+    "sizes": {}
+  },
+  "carrier_receipt": {
+    "scope": "informational-not-a-quota",
+    "pages": 0,
+    "totals": {
+      "text_elements": 0,
+      "image_placements": 0,
+      "icons": 0,
+      "svg_geometry_elements": 0,
+      "preset_shapes": 0,
+      "page_frame_elements": 0,
+      "marker_uses": 0,
+      "inline_emphasis_runs": 0,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "pages_with": {
+      "images": 0,
+      "icons": 0,
+      "presets": 0,
+      "charts": 0,
+      "tables": 0,
+      "formulas": 0,
+      "inline_emphasis_runs": 0,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "relationship_pages": null,
+    "geometry_elements": {},
+    "preset_names": {},
+    "native_objects": {},
+    "image_page_max_frame_share_range": []
+  },
+  "project_issues": {
+    "template": [],
+    "animation": [],
+    "illustration": [],
+    "communication_trace": [],
+    "pptx_structure": []
+  },
+  "files": [
+    {
+      "file": "slide_01.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_01.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 1,
+        "source_slide": 1,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 4,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 3,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "7ce709c8656a61172847d43fea846ca7ce3786cbbbc996c5d2336b732bfea5a7"
+    },
+    {
+      "file": "slide_02.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_02.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 2,
+        "source_slide": 2,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 5,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 2,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "a886a3dad8e5a8ec1d339a7c661ed01fc19169cf64257e9c5f290e79b52cb91c"
+    },
+    {
+      "file": "slide_03.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_03.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 3,
+        "source_slide": 3,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 5,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 2,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "3eece0b076e0979145de4d95f43e62f9ca64fcde20b5e1ec7c8e8788a5fd6d89"
+    },
+    {
+      "file": "slide_04.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_04.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 4,
+        "source_slide": 4,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 10,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 2,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "16e9c65ef51cff31088ff5c328f1c9a7791e05c1b29fc0752afab09cd1ccb493"
+    },
+    {
+      "file": "slide_05.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_05.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 5,
+        "source_slide": 5,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 6,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 9,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "c3613681f97e2b8ea28dd57c575a5a0a6a2c75482bf284ae424f1794870deae2"
+    },
+    {
+      "file": "slide_06.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_06.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 6,
+        "source_slide": 6,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 1,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 34,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "ab1ac0c56ab0b6e11f100150e10c74d6879a18333663dcfd20a13205e23c4eec"
+    },
+    {
+      "file": "slide_07.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_07.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 7,
+        "source_slide": 7,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 1,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 33,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "91b3d9f7af8a375a2b2dce43f6b487ae0d68feabb4d83bb7393a097ce1309d2d"
+    },
+    {
+      "file": "slide_08.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_08.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 8,
+        "source_slide": 8,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 2,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 22,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "253c4e4cfb7d9abf8eb5de114cce194fdaec618cec4166ee4a28bdbe4d0292aa"
+    },
+    {
+      "file": "slide_09.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_09.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 9,
+        "source_slide": 9,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 1,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 22,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "e7b18fb4c8ab7d434077074d9ea9c0f0763b509d3b95cb0f4eb5cfed025e3a1a"
+    },
+    {
+      "file": "slide_10.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_10.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 10,
+        "source_slide": 10,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 5,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 2,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "214321761592d60a8e06f40f0d36cf77a16a1e3defd2396985c3edeaa7c80b8d"
+    },
+    {
+      "file": "slide_11.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_11.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 11,
+        "source_slide": 11,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 8,
+        "fonts": [
+          "Arial, sans-serif"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 1,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "6e64f25ebeb6d2ae7d437b119275a0f1c99e12966536ab9d5675de36d2b5a261"
+    },
+    {
+      "file": "slide_12.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_12.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 12,
+        "source_slide": 12,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 5,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 2,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "b49f022d56378e8ea5fe98b4d8892dbdf2fd31c7e7c259e70c4952c8325daa85"
+    },
+    {
+      "file": "slide_13.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_13.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 13,
+        "source_slide": 13,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 1,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 10,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "4ab7e7a07899b778a8896aafe403ba11004df12c46760bed0003c9c40905dfb6"
+    },
+    {
+      "file": "slide_14.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_14.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 14,
+        "source_slide": 14,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 4,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 3,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "7f6acaf1a09d72919c9262eb22c117281d146a9a13ac27d87068b931a9a3e0ba"
+    },
+    {
+      "file": "slide_15.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_15.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 15,
+        "source_slide": 15,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 5,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 2,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "12921acb91a74eb32638337cfed5d19b9617105bea9200659878e0337ea594cd"
+    },
+    {
+      "file": "slide_16.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_16.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 16,
+        "source_slide": 16,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 5,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 2,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "2592ad486d114a4eebe9fdbca855b058caaa00cfc1a348bf93b84250f15adbe9"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "captured_at": "2026-10-20T08:50:03.857520+00:00",
+  "scope": "Current working-tree validation; local/offline checks and isolated Docker smoke check",
+  "branch": "main",
+  "base_commit": "dc1fe074967cad4c20a7327de7b852492faee4e8",
+  "uncommitted_changes_present": true,
+  "recon": {
+    "commits": 8,
+    "branch_refs": 5,
+    "authors": 1,
+    "active_authors_3_months": 1,
+    "commits_by_month": {
+      "2026-10": 8
+    },
+    "emergency_message_matches": 0,
+    "trend": "insufficient_history"
+  },
+  "checks": {
+    "pytest": {
+      "status": "passed",
+      "baseline_cases": 74,
+      "passed": 83,
+      "duration_seconds": 8.78
+    },
+    "ruff_format": {
+      "status": "passed",
+      "files": 68
+    },
+    "ruff_check": {
+      "status": "passed"
+    },
+    "mypy": {
+      "status": "passed",
+      "source_files": 69
+    },
+    "uv_lock_check_offline": {
+      "status": "passed",
+      "resolved_packages": 210
+    },
+    "uv_pip_check": {
+      "status": "passed",
+      "installed_packages": 205
+    },
+    "layer_imports": {
+      "status": "passed",
+      "violations": 0
+    },
+    "corpus_and_golden_contracts": {
+      "status": "passed",
+      "authoritative_source_files": 8,
+      "answer_cases": 10,
+      "expected_abstentions": 2,
+      "missing_source_files": 0
+    },
+    "main_guide_links": {
+      "status": "passed",
+      "missing_local_targets": 0,
+      "files": [
+        "README.md",
+        "APP_COMPONENT_GUIDE.md",
+        "DATADOG_README.md"
+      ]
+    },
+    "docker": {
+      "status": "passed",
+      "image": "nexaassist-api:repo-validation",
+      "platform": "linux/arm64",
+      "ragas_version": "0.4.3",
+      "startup": "passed",
+      "health_http": 200,
+      "invalid_answer_http": 422,
+      "invalid_evaluated_answer_http": 422,
+      "golden_cases": 10,
+      "ragas_import": "passed",
+      "scikit_network_import": "passed",
+      "compiler_absent": true,
+      "env_git_and_result_reports_absent": true,
+      "database_or_model_calls": 0,
+      "host_ports_published": false
+    },
+    "git_diff_check": {
+      "status": "passed"
+    }
+  },
+  "fixes": [
+    "Configured hybrid/reranker wiring in the shared retrieval service",
+    "Batch judge selection and accurate report metadata",
+    "Shared Responses API and embedding adapter for batch and live RAGAS",
+    "Consistent finite bounded metric validation and 120-second batch metric timeouts",
+    "Working multi-stage API image with evaluation dependencies and golden dataset",
+    "Docker build-context allowlist",
+    "PyMongo compatibility ceiling in requirements.txt",
+    "Retrieval settings in .env.example",
+    "Documentation links and implementation claims"
+  ],
+  "not_verified": [
+    "Current Atlas text-index readiness and live dense/hybrid quality comparison",
+    "Compatible local reranker scoring",
+    "Representative full-dataset quality targets",
+    "Streaming responses",
+    "Authentication and fleet SLOs",
+    "Cloud container deployment",
+    "Instructor walkthrough"
+  ],
+  "running_mac_api_restarted": false,
+  "atlas_mutations": false,
+  "new_paid_evaluations": false,
+  "commit_created": false
+}

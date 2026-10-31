@@ -1,0 +1,15 @@
+{
+  "event": "answer_quality_completed",
+  "reference_source": "golden_dataset",
+  "metric_statuses": {
+    "faithfulness": "scored",
+    "answer_relevancy": "scored",
+    "context_precision": "scored",
+    "context_recall": "scored"
+  },
+  "datadog_status": "queued",
+  "dd.trace_id": "6ad87ca800000000a97aab056fb7ddb8",
+  "dd.span_id": "10729630315149745813",
+  "timestamp": "2026-10-21T08:50:24.648903Z",
+  "evidence_source": "Exact structured event observed in the running API terminal; transcript filtered to this test workflow"
+}

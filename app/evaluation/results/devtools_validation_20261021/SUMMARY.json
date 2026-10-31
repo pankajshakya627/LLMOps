@@ -1,0 +1,56 @@
+{
+  "automated_tests": {
+    "main": 98,
+    "mock_api": 22,
+    "failures": 0
+  },
+  "quality_checks": {
+    "ruff": "pass",
+    "ruff_format_files": 69,
+    "mypy_app_files": 55
+  },
+  "api_boundaries": {
+    "passed": 17,
+    "failed": 0
+  },
+  "operations_in_openapi": 9,
+  "browser_mcp": {
+    "server": "chrome-devtools-mcp",
+    "version": "1.10.1",
+    "isolated": true,
+    "personal_profile_used": false,
+    "usage_statistics_enabled": false,
+    "crux_enabled": false
+  },
+  "network_after_recovery": {
+    "requests": 122,
+    "statuses": {
+      "200": 121,
+      "304": 1
+    }
+  },
+  "lighthouse": {
+    "accessibility_score": 92,
+    "best_practices_score": 100,
+    "note": "Automated snapshot scores, not accessibility compliance or application correctness percentages"
+  },
+  "local_lab_traces": [
+    {
+      "lcp_ms": 304,
+      "cls": 0.24
+    },
+    {
+      "lcp_ms": 243,
+      "cls": 0.24
+    }
+  ],
+  "new_live_policy_checks": [
+    "fee API retest",
+    "desktop evidence",
+    "desktop evaluated answer",
+    "desktop age answer",
+    "mobile evidence"
+  ],
+  "prior_19_case_results": "../system_uat_20261021/adjudicated_results.json (not rerun in this pass)",
+  "production_code_changed": false
+}

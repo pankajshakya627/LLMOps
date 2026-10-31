@@ -1,0 +1,1 @@
+Open app/database/indexes.md. Use the exact JSON matching configured dimensions. Check every metadata filter field in the live index. No new vector-store configuration is introduced by this training kit. The existing index JSON remains the authority; never infer a new cluster layout from a slide. The implementation or concept reference is app/database/indexes.md.

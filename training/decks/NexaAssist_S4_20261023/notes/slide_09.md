@@ -1,0 +1,1 @@
+Check answer text and evidence quotes; return the existing safe abstention. Open app/chains/answer.py and locate if any(redact(text). Read the displayed excerpt in context; it is taken directly from the application. Check answer text and evidence quotes; return the existing safe abstention. The implementation or concept reference is app/chains/answer.py.

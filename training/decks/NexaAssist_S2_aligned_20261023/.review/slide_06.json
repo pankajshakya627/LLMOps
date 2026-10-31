@@ -1,0 +1,16 @@
+{
+  "page": "slide_06.svg",
+  "page_role": "content",
+  "canvas": {"view_box": [0, 0, 1280, 720], "width": 1280, "height": 720, "png_width": 1280, "png_height": 720},
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [".preview/slide_06.png"],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Show the ingestion fingerprint code and explain that text, metadata, model and dimensions determine re-embedding.",
+    "render_delivers": true,
+    "note": "Rendered PNG is nonblank at the supplied 1280 × 720 canvas. The literal code fits its dark field, the interpretation remains readable, and the declared title and footer are intact. No Hard or clearly bad Soft rule hits."
+  }
+}

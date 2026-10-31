@@ -1,0 +1,29 @@
+{
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "page": "slide_02.svg",
+  "screenshot_paths": [
+    ".preview/slide_02.png"
+  ],
+  "design_intent_check": {
+    "spec_says": "Explain correctness and safety, service latency, and token cost as LLMOps operating constraints.",
+    "render_delivers": true,
+    "note": "All three stated constraints are present in aligned, separated text blocks. Title, body and footer remain inside the canvas; no overlap, overflow, contrast or missing-element hit."
+  }
+}

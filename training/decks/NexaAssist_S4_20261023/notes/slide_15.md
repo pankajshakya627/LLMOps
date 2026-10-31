@@ -1,0 +1,1 @@
+Read app/Dockerfile and Dockerfile.dockerignore. Inspect locked dependencies, non-root user and probe. Keep API secrets outside the image build context. This delivery does not claim a fresh container build. The handoff describes an earlier dummy-settings smoke test; learners should rerun their deployment checks in their environment.

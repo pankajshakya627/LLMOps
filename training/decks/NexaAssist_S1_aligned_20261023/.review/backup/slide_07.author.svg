@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#087E8B" /></marker></defs>
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 01 / C4 LEVEL 2</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42">C4 / containers and ownership</text></g>
+<g id="diagram-root" data-pptx-bounds="64 205 1152 440" fill="#132C42">
+<g id="system-boundary"><rect x="65" y="211" width="758" height="422" fill="none" stroke="#087E8B" stroke-width="2" stroke-dasharray="6 5" /><text x="85" y="239" font-size="20" fill="#132C42">NexaAssist / application boundary</text></g>
+<g id="node-cli"><rect x="90" y="265" width="280" height="115" /><text x="110" y="295" font-size="20" fill="#FFFFFF">[Container] Python CLI</text><text x="110" y="331" font-size="26" fill="#FFFFFF">Registered ingestion</text><text x="110" y="363" font-size="20" fill="#FFFFFF">LangChain runs inside</text></g>
+<g id="node-ui"><rect x="90" y="495" width="280" height="115" /><text x="110" y="525" font-size="20" fill="#FFFFFF">[Container] Streamlit</text><text x="110" y="561" font-size="26" fill="#FFFFFF">Staff + reviewer UI</text><text x="110" y="593" font-size="20" fill="#FFFFFF">Render and call the API</text></g>
+<g id="node-api"><rect x="490" y="480" width="300" height="130" /><text x="510" y="510" font-size="20" fill="#FFFFFF">[Container] FastAPI / Python</text><text x="510" y="546" font-size="26" fill="#FFFFFF">Policy API</text><text x="510" y="580" font-size="20" fill="#FFFFFF">Services + LangChain inside</text></g>
+<g id="node-provider"><rect x="915" y="220" width="300" height="120" fill="#E8EDF0" /><text x="935" y="251" font-size="20">[External system]</text><text x="935" y="286" font-size="26">Model provider</text><text x="935" y="319" font-size="20">Embedding / chat APIs</text></g>
+<g id="node-datadog"><rect x="915" y="370" width="300" height="95" fill="#E8EDF0" /><text x="935" y="400" font-size="20">[External system]</text><text x="935" y="437" font-size="26">Datadog / optional</text></g>
+<g id="node-collections"><rect x="915" y="505" width="300" height="125" fill="#E8EDF0" /><text x="935" y="535" font-size="20">[Data store] Atlas collections</text><text x="935" y="571" font-size="26">Vectors + parents</text><text x="935" y="604" font-size="20">Feedback in a plain collection</text></g>
+<g id="edge-ui-api"><line x1="370" y1="552" x2="490" y2="552" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="386" y="529" font-size="20">Requests</text><text x="378" y="592" font-size="20">JSON HTTP</text></g>
+<g id="edge-cli-provider"><line x1="370" y1="300" x2="915" y2="280" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="520" y="278" font-size="20">Embeds changed text / HTTPS</text></g>
+<g id="edge-cli-atlas"><line x1="370" y1="380" x2="915" y2="520" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="492" y="420" font-size="20">Upserts chunks + parents</text><text x="575" y="458" font-size="20">MongoDB</text></g>
+<g id="edge-api-provider"><line x1="790" y1="480" x2="915" y2="340" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="777" y="353" font-size="20">Query/chat</text><text x="790" y="380" font-size="20">HTTPS</text></g>
+<g id="edge-api-datadog"><line x1="790" y1="510" x2="915" y2="418" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="811" y="480" font-size="20">Traces</text></g>
+<g id="edge-api-atlas"><line x1="790" y1="565" x2="915" y2="565" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="807" y="547" font-size="20">Read/write</text><text x="807" y="603" font-size="20">MongoDB</text></g>
+<g id="diagram-legend" fill="#526375" font-size="20"><text x="90" y="453">Navy: application process</text><text x="90" y="480">Gray: managed dependency</text></g>
+</g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Educative L05 / Logical runtime view; collections are not separate database servers</text><text x="1150" y="681">07/16</text></g>
+</svg>

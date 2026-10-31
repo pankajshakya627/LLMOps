@@ -1,0 +1,26 @@
+{
+ "schema_version":1,"diagram_type":"architecture",
+ "meta":{"title":"LLMOps RAG Reference Architecture — Course Concept","locale":"en","output":".archify/architecture-llmops-reference-20261023-220000/llmops-reference.html","quality_profile":"showcase"},
+ "components":[
+  {"id":"reader","type":"external","label":"Staff user","sublabel":"Question + scope","pos":[40,40],"size":[130,65]},
+  {"id":"api","type":"backend","label":"Serving API","sublabel":"Validate + quotas","pos":[335,40],"size":[150,65]},
+  {"id":"engine","type":"backend","label":"RAG engine","sublabel":"Retrieve + prompt + rails","pos":[660,40],"size":[170,65]},
+  {"id":"model","type":"cloud","label":"Model provider","sublabel":"Embedding / generation","pos":[1020,40],"size":[170,65]},
+  {"id":"docs","type":"external","label":"Trusted sources","sublabel":"Versioned documents","pos":[40,335],"size":[150,65]},
+  {"id":"ingest","type":"backend","label":"Ingestion job","sublabel":"Parse / redact / embed","pos":[335,335],"size":[170,65]},
+  {"id":"index","type":"database","label":"Knowledge store","sublabel":"Vectors + source metadata","pos":[660,335],"size":[180,65]}
+ ],
+ "connections":[
+  {"id":"ask","from":"reader","to":"api","label":"Ask / HTTP","variant":"emphasis"},
+  {"id":"invoke","from":"api","to":"engine","label":"Scoped query","variant":"emphasis"},
+  {"id":"infer","from":"engine","to":"model","label":"Context / HTTPS","variant":"emphasis"},
+  {"id":"retrieve","from":"engine","to":"index","label":"Scoped search"},
+  {"id":"load","from":"docs","to":"ingest","label":"Read files"},
+  {"id":"upsert","from":"ingest","to":"index","label":"Index chunks"}
+ ],
+ "cards":[
+  {"dot":"cyan","title":"Online lifecycle","items":["Budget latency and cost per question.","Return cited answers or safe abstention.","Model output passes application checks."]},
+  {"dot":"emerald","title":"Offline lifecycle","items":["Clean and redact before embedding.","Use stable IDs and compatible index versions.","Evaluate a candidate before switching traffic."]},
+  {"dot":"rose","title":"Scope and source","items":["Conceptual adaptation of Educative lessons 4–8.","Not a deployed or commit-pinned topology.","Ingestion embedding calls are omitted from this focused view."]}
+ ]
+}

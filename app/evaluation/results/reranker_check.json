@@ -1,0 +1,10 @@
+{
+  "captured_at": "2026-10-18T10:59:48.876682+00:00",
+  "model": "dengcao/Qwen3-Reranker-0.6B:Q8_0",
+  "endpoint": "http://127.0.0.1:11434",
+  "api": "ollama",
+  "status": "failed",
+  "input_kind": "fixed fictional passages; no Atlas or OpenAI cloud calls",
+  "error_type": "ValueError",
+  "reason": "Reranker endpoint must return finite yes AND no token logprobs"
+}

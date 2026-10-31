@@ -1,0 +1,527 @@
+[
+  {
+    "session": 1,
+    "slide": 1,
+    "title": "Discover",
+    "topics": [
+      1,
+      3,
+      9,
+      10,
+      11
+    ],
+    "source_slide": 1,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "Discover"
+  },
+  {
+    "session": 1,
+    "slide": 2,
+    "title": "LLMOps controls behavior across releases",
+    "topics": [
+      1,
+      3,
+      8,
+      14
+    ],
+    "source_slide": 2,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "LLMOps manages behavior under real constraints"
+  },
+  {
+    "session": 1,
+    "slide": 3,
+    "title": "Lifecycle / inventory before promotion",
+    "topics": [
+      1,
+      10,
+      11
+    ],
+    "source_slide": 3,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "From models to operated applications"
+  },
+  {
+    "session": 1,
+    "slide": 4,
+    "title": "Version the release bundle and name its owners",
+    "topics": [
+      1,
+      2,
+      3,
+      10,
+      11
+    ],
+    "source_slide": 4,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "What changes from MLOps to LLMOps"
+  },
+  {
+    "session": 1,
+    "slide": 5,
+    "title": "Four phases / explicit release decisions",
+    "topics": [
+      1,
+      3,
+      11,
+      14
+    ],
+    "source_slide": 5,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "Four phases, four decisions"
+  },
+  {
+    "session": 1,
+    "slide": 6,
+    "title": "C4 / system context",
+    "topics": [
+      10,
+      15
+    ],
+    "source_slide": 6,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "C4 / system context"
+  },
+  {
+    "session": 1,
+    "slide": 7,
+    "title": "C4 / containers and ownership",
+    "topics": [
+      4,
+      10,
+      12
+    ],
+    "source_slide": 7,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "C4 / containers and ownership"
+  },
+  {
+    "session": 1,
+    "slide": 8,
+    "title": "Two paths share one knowledge contract",
+    "topics": [
+      1,
+      4,
+      12
+    ],
+    "source_slide": 8,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "Two paths share one knowledge contract"
+  },
+  {
+    "session": 1,
+    "slide": 9,
+    "title": "One answer / request and failure flow",
+    "topics": [
+      3,
+      4,
+      5,
+      9
+    ],
+    "source_slide": 9,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "One answer / request and failure flow"
+  },
+  {
+    "session": 1,
+    "slide": 10,
+    "title": "Governance / three independent checks",
+    "topics": [
+      9,
+      10,
+      12
+    ],
+    "source_slide": 10,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "Freshness, permission and traceability are"
+  },
+  {
+    "session": 1,
+    "slide": 11,
+    "title": "EvalOps / freeze a trustworthy baseline",
+    "topics": [
+      3,
+      5,
+      11
+    ],
+    "source_slide": 11,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "Code / pure chain, strict draft"
+  },
+  {
+    "session": 1,
+    "slide": 12,
+    "title": "Practical / validate gates, then decide",
+    "topics": [
+      1,
+      3,
+      10,
+      11
+    ],
+    "source_slide": 12,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "Scope the policy assistant before release"
+  },
+  {
+    "session": 1,
+    "slide": 13,
+    "title": "Code / reject changed source bytes",
+    "topics": [
+      9,
+      10,
+      12
+    ],
+    "source_slide": 13,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "Code / reject changed source bytes"
+  },
+  {
+    "session": 1,
+    "slide": 14,
+    "title": "Practical / prove the source boundary",
+    "topics": [
+      9,
+      10,
+      11
+    ],
+    "source_slide": 14,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "Practical / prove the source boundary"
+  },
+  {
+    "session": 1,
+    "slide": 15,
+    "title": "Practical / review a provider change",
+    "topics": [
+      1,
+      2,
+      3,
+      10,
+      11,
+      14
+    ],
+    "source_slide": 15,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "The release file is more than application code"
+  },
+  {
+    "session": 1,
+    "slide": 16,
+    "title": "Session 1 / release-readiness exit gate",
+    "topics": [
+      1,
+      3,
+      10,
+      11,
+      14
+    ],
+    "source_slide": 16,
+    "change": "edited",
+    "reason": "Align operating control and practical evidence with the supplied syllabus",
+    "previous_title": "Session 1 / architecture exit gate"
+  },
+  {
+    "session": 2,
+    "slide": 1,
+    "title": "LLMOps Core",
+    "topics": [
+      3,
+      4,
+      5,
+      7,
+      9,
+      12
+    ],
+    "source_slide": 1,
+    "change": "edited copy",
+    "reason": "SESSION OUTCOMES",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_01.svg"
+  },
+  {
+    "session": 2,
+    "slide": 2,
+    "title": "Four operating questions / one evidence pack",
+    "topics": [
+      3,
+      4,
+      7,
+      9,
+      12
+    ],
+    "source_slide": 2,
+    "change": "edited copy",
+    "reason": "TOPICS AND PRACTICALS",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_02.svg"
+  },
+  {
+    "session": 2,
+    "slide": 3,
+    "title": "RAGOps recap / publish verifiable evidence",
+    "topics": [
+      4,
+      9,
+      12
+    ],
+    "source_slide": 3,
+    "change": "edited copy",
+    "reason": "EXISTING FOUNDATION",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_03.svg"
+  },
+  {
+    "session": 2,
+    "slide": 4,
+    "title": "Practical / chunking and repeat ingestion",
+    "topics": [
+      1,
+      3,
+      8,
+      12
+    ],
+    "source_slide": 5,
+    "change": "edited copy",
+    "reason": "RAGOPS LAB / OFFLINE",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_04.svg"
+  },
+  {
+    "session": 2,
+    "slide": 5,
+    "title": "Retrieve scoped and complete evidence",
+    "topics": [
+      3,
+      4,
+      9,
+      12
+    ],
+    "source_slide": 9,
+    "change": "edited copy",
+    "reason": "EXISTING FOUNDATION",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_05.svg"
+  },
+  {
+    "session": 2,
+    "slide": 6,
+    "title": "Practical / keep the policy regression baseline",
+    "topics": [
+      3,
+      5,
+      9,
+      12
+    ],
+    "source_slide": 14,
+    "change": "edited copy",
+    "reason": "RAGOPS LAB / OFFLINE",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_06.svg"
+  },
+  {
+    "session": 2,
+    "slide": 7,
+    "title": "Observability / follow one request across stages",
+    "topics": [
+      4,
+      12,
+      14
+    ],
+    "source_slide": 4,
+    "change": "edited copy",
+    "reason": "OBSERVABILITY AND TRACING",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_07.svg"
+  },
+  {
+    "session": 2,
+    "slide": 8,
+    "title": "Measure latency, usage and failure signals",
+    "topics": [
+      4,
+      5,
+      8,
+      14
+    ],
+    "source_slide": 13,
+    "change": "edited copy",
+    "reason": "OBSERVABILITY SIGNALS",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_08.svg"
+  },
+  {
+    "session": 2,
+    "slide": 9,
+    "title": "Practical / inspect a correlated Datadog trace",
+    "topics": [
+      4,
+      5,
+      14
+    ],
+    "source_slide": 7,
+    "change": "edited copy",
+    "reason": "OBSERVABILITY LAB",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_09.svg"
+  },
+  {
+    "session": 2,
+    "slide": 10,
+    "title": "EvalOps / build the evaluation harness",
+    "topics": [
+      2,
+      3,
+      5,
+      11
+    ],
+    "source_slide": 12,
+    "change": "edited copy",
+    "reason": "EVALUATION OPERATIONS",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_10.svg"
+  },
+  {
+    "session": 2,
+    "slide": 11,
+    "title": "Evals / separate coverage from supported claims",
+    "topics": [
+      3,
+      5,
+      12
+    ],
+    "source_slide": 13,
+    "change": "edited copy",
+    "reason": "LLM-AS-A-JUDGE METRICS",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_11.svg"
+  },
+  {
+    "session": 2,
+    "slide": 12,
+    "title": "Practical / score candidates and enforce gates",
+    "topics": [
+      3,
+      5,
+      11,
+      12
+    ],
+    "source_slide": 15,
+    "change": "edited copy",
+    "reason": "EVALS LAB",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_12.svg"
+  },
+  {
+    "session": 2,
+    "slide": 13,
+    "title": "Gateway / Ollama and OpenAI behind stable aliases",
+    "topics": [
+      7,
+      8,
+      9,
+      12,
+      14
+    ],
+    "source_slide": 9,
+    "change": "edited copy",
+    "reason": "GATEWAYS AND ROUTING",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_13.svg"
+  },
+  {
+    "session": 2,
+    "slide": 14,
+    "title": "LiteLLM / explicit routing and bounded failure",
+    "topics": [
+      7,
+      8,
+      9,
+      14
+    ],
+    "source_slide": 6,
+    "change": "edited copy",
+    "reason": "GATEWAY CONFIGURATION",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_14.svg"
+  },
+  {
+    "session": 2,
+    "slide": 15,
+    "title": "Practical / fail over, balance and cache",
+    "topics": [
+      7,
+      8,
+      9,
+      14
+    ],
+    "source_slide": 7,
+    "change": "edited copy",
+    "reason": "GATEWAY LAB",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_15.svg"
+  },
+  {
+    "session": 2,
+    "slide": 16,
+    "title": "Guardrails / validate at each trust boundary",
+    "topics": [
+      7,
+      9,
+      10,
+      12
+    ],
+    "source_slide": 3,
+    "change": "edited copy",
+    "reason": "SECURITY AND GUARDRAILS",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_16.svg"
+  },
+  {
+    "session": 2,
+    "slide": 17,
+    "title": "Practical / PII and prompt injection defenses",
+    "topics": [
+      3,
+      9,
+      10,
+      12
+    ],
+    "source_slide": 15,
+    "change": "edited copy",
+    "reason": "SECURITY LAB / OFFLINE",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_17.svg"
+  },
+  {
+    "session": 2,
+    "slide": 18,
+    "title": "Practical / strict output with Guardrails AI",
+    "topics": [
+      3,
+      9,
+      11
+    ],
+    "source_slide": 15,
+    "change": "edited copy",
+    "reason": "OUTPUT VALIDATION LAB",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_18.svg"
+  },
+  {
+    "session": 2,
+    "slide": 19,
+    "title": "Session 2 / operating-readiness exit gate",
+    "topics": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      11,
+      12,
+      14
+    ],
+    "source_slide": 16,
+    "change": "edited copy",
+    "reason": "EVIDENCE AND NEXT STEPS",
+    "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_19.svg"
+  }
+]

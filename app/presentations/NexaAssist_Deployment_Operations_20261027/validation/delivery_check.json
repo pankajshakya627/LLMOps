@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "date": "2026-10-27",
+  "slides": 24,
+  "aspect_ratio": "16:9",
+  "speaker_note_slides": 24,
+  "editable_text_runs": 464,
+  "native_shapes": 457,
+  "raster_pictures": 0,
+  "bash_blocks_syntax_checked": 18,
+  "source_anchors_verified": 68,
+  "canonical_svg_errors": 0,
+  "canonical_svg_warnings": 0,
+  "export_postflight": "passed",
+  "pptx_bytes": 114906,
+  "live_calls_run": false,
+  "services_modified": false,
+  "limits": [
+    "No new provider requests or fault drills",
+    "No native PowerPoint application rendering inspection",
+    "Historical live observations are dated 25 October 2026",
+    "Reference deployment is not production-qualified"
+  ]
+}

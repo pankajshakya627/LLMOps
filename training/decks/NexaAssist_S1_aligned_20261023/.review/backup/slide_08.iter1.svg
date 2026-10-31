@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#087E8B" /></marker></defs>
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 01 / DATA AND REQUEST PATHS</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42">Two paths share one knowledge contract</text></g>
+<g id="diagram-root" data-pptx-bounds="64 205 1152 440" fill="#132C42">
+<g id="offline-label"><text x="64" y="238" font-size="20" fill="#132C42">OFFLINE / INGESTION CLI</text></g>
+<g id="node-source"><rect x="64" y="260" width="300" height="110" fill="#E8EDF0" /><text x="84" y="299" font-size="26">Registered sources</text><text x="84" y="337" font-size="20">Identity, dates and hash</text></g>
+<g id="node-ingest"><rect x="465" y="260" width="350" height="110" fill="#E8EDF0" /><text x="485" y="299" font-size="26">Parse → chunk → redact</text><text x="485" y="337" font-size="20">Compare; embed changed text</text></g>
+<g id="node-knowledge"><rect x="915" y="260" width="300" height="110" /><text x="935" y="299" font-size="26" fill="#FFFFFF">Atlas knowledge</text><text x="935" y="337" font-size="20" fill="#FFFFFF">Child vectors + parent text</text></g>
+<g id="edge-source-ingest"><line x1="364" y1="315" x2="465" y2="315" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="374" y="295" font-size="20">verify</text></g>
+<g id="edge-ingest-knowledge"><line x1="815" y1="315" x2="915" y2="315" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="827" y="295" font-size="20">upsert</text></g>
+<g id="online-label"><text x="64" y="435" font-size="20" fill="#132C42">ONLINE / API + CHAIN</text></g>
+<g id="node-request"><rect x="64" y="455" width="300" height="110" fill="#E8EDF0" /><text x="84" y="494" font-size="26">Question + scope</text><text x="84" y="532" font-size="20">Validate and scrub query</text></g>
+<g id="node-retrieve"><rect x="465" y="455" width="350" height="110" fill="#E8EDF0" /><text x="485" y="494" font-size="26">Retrieve → expand</text><text x="485" y="532" font-size="20">Parents + linked amendments</text></g>
+<g id="node-answer"><rect x="915" y="455" width="300" height="110" /><text x="935" y="494" font-size="26" fill="#FFFFFF">Generate → validate</text><text x="935" y="532" font-size="20" fill="#FFFFFF">Cite, clarify or abstain</text></g>
+<g id="edge-request-retrieve"><line x1="364" y1="510" x2="465" y2="510" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="377" y="490" font-size="20">filter</text></g>
+<g id="edge-retrieve-answer"><line x1="815" y1="510" x2="915" y2="510" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="825" y="490" font-size="20">context</text></g>
+<g id="edge-knowledge-retrieve"><line x1="1065" y1="370" x2="785" y2="455" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="893" y="418" font-size="20">load evidence</text></g>
+<g id="diagram-legend"><text x="64" y="625" font-size="20" fill="#526375">Both paths share document identity, effective dates and a compatible embedding space.</text></g>
+</g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Educative L05 / LangChain + MongoDB / application sequence verified in source</text><text x="1150" y="681">08/16</text></g>
+</svg>

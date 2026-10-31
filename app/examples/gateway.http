@@ -1,0 +1,43 @@
+# Use a REST client or Swagger. Replace only the private key placeholder locally.
+@api = http://127.0.0.1:8000
+@gateway = http://127.0.0.1:4000
+@gateway_key = replace-with-your-private-LITELLM_MASTER_KEY
+
+### Registered routes (requires the gateway key)
+GET {{gateway}}/v1/models
+Authorization: Bearer {{gateway_key}}
+
+### Local chat with provider-error fallback to the configured OpenAI route
+POST {{gateway}}/v1/chat/completions
+Authorization: Bearer {{gateway_key}}
+Content-Type: application/json
+
+{"model":"nexa-chat","messages":[{"role":"user","content":"Say hello in one sentence."}],"max_tokens":80}
+
+### Explicit OpenAI chat comparison
+POST {{gateway}}/v1/chat/completions
+Authorization: Bearer {{gateway_key}}
+Content-Type: application/json
+
+{"model":"nexa-chat-openai","messages":[{"role":"user","content":"Say hello in one sentence."}],"max_tokens":80}
+
+### Local Qwen embedding: expected 1024 dimensions; verify your runtime
+POST {{gateway}}/v1/embeddings
+Authorization: Bearer {{gateway_key}}
+Content-Type: application/json
+
+{"model":"nexa-embed-local","input":["Maximum NexaHome loan amount"]}
+
+### OpenAI embedding: 1536 dimensions, a separate index/profile
+POST {{gateway}}/v1/embeddings
+Authorization: Bearer {{gateway_key}}
+Content-Type: application/json
+
+{"model":"nexa-embed-openai","input":["Maximum NexaHome loan amount"]}
+
+### Application request: repeat unchanged with the cache config enabled
+# Inspect provenance.observed_chat_model and provenance.gateway_cache_hit.
+POST {{api}}/answer
+Content-Type: application/json
+
+{"query":"What is the maximum loan amount for a NexaHome Loan?","as_of":"2026-10-01","product_id":"NEXA-HL","top_k":5}

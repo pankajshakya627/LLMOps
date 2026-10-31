@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><defs><marker id="marrow1" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="2.5" markerHeight="2.5" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2463A6" /></marker></defs><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 457.36 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 457.36 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 520.72 31 L 520.72 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 02 / KNOWLEDGE STORAGE</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 84.33 904.7 61.6" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 84.33 904.7 61.6" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 84.33 L 967.1 84.33 L 967.1 145.93 L 62.4 145.93 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Storage / search children, read parent sections</text>
+</g>
+</g>
+<g id="shape-32" data-pptx-object="group" data-pptx-frame="63.2 230 1152.8 413.8" data-pptx-source-ref="slide:32">
+<g id="shape-8" data-pptx-object="group" data-pptx-frame="64 230 440 325" data-pptx-source-ref="slide:8">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 230 440 325" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 230 L 504 230 L 504 555 L 64 555 Z" fill="#E8EDF0" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="86.96 242.67 295.59 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 86.96 242.67 L 382.55 242.67 L 382.55 282.71 L 86.96 282.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="86.96" y="268" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Embedded child chunks</text>
+</g>
+</g>
+<g id="shape-12" data-pptx-object="group" data-pptx-frame="88 290 392 100" data-pptx-source-ref="slide:12">
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="88 290 392 100" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 88 290 L 480 290 L 480 390 L 88 390 Z" fill="#FFFFFF" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-10" data-pptx-object="shape" data-pptx-frame="106.96 300.67 246.73 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:10" data-pptx-semantic-object="shape">
+<path d="M 106.96 300.67 L 353.69 300.67 L 353.69 340.71 L 106.96 340.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="106.96" y="326" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">6.2 / Processing fee</text>
+</g>
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="107.2 341 207.96 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 107.2 341 L 315.16 341 L 315.16 371.8 L 107.2 371.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="107.2" y="361" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">POL-HL-V3_6.2_c01</text>
+</g>
+</g>
+<g id="shape-16" data-pptx-object="group" data-pptx-frame="88 420 392 100" data-pptx-source-ref="slide:16">
+<g id="shape-13" data-pptx-object="shape" data-pptx-frame="88 420 392 100" data-pptx-prst="rect" data-pptx-source-ref="slide:13" data-pptx-semantic-object="shape">
+<path d="M 88 420 L 480 420 L 480 520 L 88 520 Z" fill="#FFFFFF" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-14" data-pptx-object="shape" data-pptx-frame="106.96 430.67 285.01 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:14" data-pptx-semantic-object="shape">
+<path d="M 106.96 430.67 L 391.97 430.67 L 391.97 470.71 L 106.96 470.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="106.96" y="456" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">6.1 / General fee terms</text>
+</g>
+<g id="shape-15" data-pptx-object="shape" data-pptx-frame="107.2 471 217.87 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:15" data-pptx-semantic-object="shape">
+<path d="M 107.2 471 L 325.07 471 L 325.07 501.8 L 107.2 501.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="107.2" y="491" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">Neighboring conditions</text>
+</g>
+</g>
+<g id="shape-22" data-pptx-object="group" data-pptx-frame="760 285 456 240" data-pptx-source-ref="slide:22">
+<g id="shape-17" data-pptx-object="shape" data-pptx-frame="760 285 456 240" data-pptx-prst="rect" data-pptx-source-ref="slide:17" data-pptx-semantic-object="shape">
+<path d="M 760 285 L 1216 285 L 1216 525 L 760 525 Z" fill="#132C42" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-18" data-pptx-object="shape" data-pptx-frame="782.96 300.67 221.98 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:18" data-pptx-semantic-object="shape">
+<path d="M 782.96 300.67 L 1004.94 300.67 L 1004.94 340.71 L 782.96 340.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="782.96" y="326" text-anchor="start" xml:space="preserve" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Whole fee section</text>
+</g>
+<g id="shape-19" data-pptx-object="shape" data-pptx-frame="783.2 350 139.02 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:19" data-pptx-semantic-object="shape">
+<path d="M 783.2 350 L 922.22 350 L 922.22 380.8 L 783.2 380.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="783.2" y="370" text-anchor="start" xml:space="preserve" font-size="20" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Key: parent_id</text>
+</g>
+<g id="shape-20" data-pptx-object="shape" data-pptx-frame="783.2 388 366.58 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:20" data-pptx-semantic-object="shape">
+<path d="M 783.2 388 L 1149.78 388 L 1149.78 418.8 L 783.2 418.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="783.2" y="408" text-anchor="start" xml:space="preserve" font-size="20" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Includes 6.1, 6.2 and other fee clauses</text>
+</g>
+<g id="shape-21" data-pptx-object="shape" data-pptx-frame="783.2 434 295.72 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:21" data-pptx-semantic-object="shape">
+<path d="M 783.2 434 L 1078.92 434 L 1078.92 464.8 L 783.2 464.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="783.2" y="454" text-anchor="start" xml:space="preserve" font-size="20" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Plain text store / not embedded</text>
+</g>
+</g>
+<g id="shape-25" data-pptx-object="group" data-pptx-frame="480 300 280 40" data-pptx-source-ref="slide:25">
+<g id="shape-23" data-pptx-object="shape" data-pptx-frame="480 340 280 0" data-pptx-prst="line" data-pptx-source-ref="slide:23" data-pptx-semantic-object="shape">
+<path d="M 480 340 L 760 340" fill="none" stroke-width="2" stroke="#2463A6" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-24" data-pptx-object="shape" data-pptx-frame="539.2 300 158.37 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:24" data-pptx-semantic-object="shape">
+<path d="M 539.2 300 L 697.57 300 L 697.57 330.8 L 539.2 330.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="539.2" y="320" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">parent_id lookup</text>
+</g>
+</g>
+<g id="shape-28" data-pptx-object="group" data-pptx-frame="480 470 280 44.8" data-pptx-source-ref="slide:28">
+<g id="shape-26" data-pptx-object="shape" data-pptx-frame="480 470 280 0" data-pptx-prst="line" data-pptx-source-ref="slide:26" data-pptx-semantic-object="shape">
+<path d="M 480 470 L 760 470" fill="none" stroke-width="2" stroke="#2463A6" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-27" data-pptx-object="shape" data-pptx-frame="539.2 484 157.15 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:27" data-pptx-semantic-object="shape">
+<path d="M 539.2 484 L 696.35 484 L 696.35 514.8 L 539.2 514.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="539.2" y="504" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">same parent link</text>
+</g>
+</g>
+<g id="shape-31" data-pptx-object="group" data-pptx-frame="63.2 583 946.84 60.8" data-pptx-source-ref="slide:31">
+<g id="shape-29" data-pptx-object="shape" data-pptx-frame="63.2 583 946.84 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:29" data-pptx-semantic-object="shape">
+<path d="M 63.2 583 L 1010.04 583 L 1010.04 613.8 L 63.2 613.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.2" y="603" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">Search the child; expand a scope-compatible parent. Missing or mismatched parent → child fallback.</text>
+</g>
+<g id="shape-30" data-pptx-object="shape" data-pptx-frame="63.2 613 832.52 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:30" data-pptx-semantic-object="shape">
+<path d="M 63.2 613 L 895.72 613 L 895.72 643.8 L 63.2 643.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.2" y="633" text-anchor="start" xml:space="preserve" font-size="20" fill="#526375" data-pptx-text-baseline="metrics-v1">The matched child does not own every claim in the parent. Keep citation identity precise.</text>
+</g>
+</g>
+</g>
+<g id="shape-35" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:35">
+<g id="shape-33" data-pptx-object="shape" data-pptx-frame="63.36 665 780.075 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:33" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 843.435 665 L 843.435 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 09, 12 / Concept + inspected local implementation; sources in notes</text>
+</g>
+<g id="shape-34" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:34" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">04/16</text>
+</g>
+</g></svg>

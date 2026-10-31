@@ -1,0 +1,9 @@
+[
+  {
+    "date": "2026-10-25",
+    "mode": "Test Quality Review",
+    "score": 95,
+    "findings": {"critical": 0, "warning": 1, "suggestion": 0},
+    "scope": "37 default-suite test files, synthetic banking API and Phoenix SDK checks"
+  }
+]

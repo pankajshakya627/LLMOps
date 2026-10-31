@@ -1,0 +1,667 @@
+{
+  "schema": "ppt-master.svg-quality-report.v1",
+  "stage": "final",
+  "target": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024",
+  "source_fingerprint": {
+    "algorithm": "sha256",
+    "digest": "bd2eed953a7dc65193fb0af9b774852646938d82051794e9a7a130cba35a1214",
+    "file_count": 36,
+    "files": [
+      {
+        "file": "authoring-svg-flat/core_01.svg",
+        "sha256": "2ef4d1a3527a2a1cf535ac23b670d54c73e5197241c826bce377ab8e7bfd6eb2"
+      },
+      {
+        "file": "authoring-svg-flat/core_02.svg",
+        "sha256": "eba9ae227724116ab20e2ab7fa7a198aec9f6c6e7bd1fde17f6cbc1f86ed9261"
+      },
+      {
+        "file": "authoring-svg-flat/core_03.svg",
+        "sha256": "43d5d78a5a79e3d417d70910413d7070b51d7fda393e3f98a5d70a6292479694"
+      },
+      {
+        "file": "authoring-svg-flat/core_04.svg",
+        "sha256": "f8622ffd80dbecff521c84ddcd844cd60b878081c1e66bfa3c3a51df4ab55d8e"
+      },
+      {
+        "file": "authoring-svg-flat/core_05.svg",
+        "sha256": "7903a9988de80a56c853a6767c2b32e00a1674b4d96fe507f5452a9987027af5"
+      },
+      {
+        "file": "authoring-svg-flat/core_06.svg",
+        "sha256": "016e37c28842f572bfb348891a90afbd85b8522d8459c7b7fd309308925890cb"
+      },
+      {
+        "file": "authoring-svg-flat/core_07.svg",
+        "sha256": "04bc45b5af2d99a44da6b6a6801fc7c3ff7b8c270411142e0c928b8f08169258"
+      },
+      {
+        "file": "authoring-svg-flat/core_08.svg",
+        "sha256": "24c565b258329b20081b819d438f202465aa6357e8e4e183608afcfcc72a7d73"
+      },
+      {
+        "file": "authoring-svg-flat/core_09.svg",
+        "sha256": "faa02bf449721ca7572c1679381ad971a1976e775f9c8cafc72044fe3263a277"
+      },
+      {
+        "file": "authoring-svg-flat/core_10.svg",
+        "sha256": "f8eba152faf16dae6adcb6a414ba30260d01005810f0dcabebfbb778f9d75576"
+      },
+      {
+        "file": "authoring-svg-flat/core_11.svg",
+        "sha256": "bf35ee150897f0ff000e46342c550db95e0ae4c8931bf19160426effb0cc4d8f"
+      },
+      {
+        "file": "authoring-svg-flat/core_12.svg",
+        "sha256": "b71b0949ee0d1fe1774dd2f5c67d92fc73ff4178cce471f92a017b1dfc9dcbc7"
+      },
+      {
+        "file": "authoring-svg-flat/core_13.svg",
+        "sha256": "8fa1b0051351459340ad878ce81534576e918eb5e74765e158f88cfc8f3b72dd"
+      },
+      {
+        "file": "authoring-svg-flat/core_14.svg",
+        "sha256": "c1a1685d8dafaa045a41e644136338f24df3d14c91ada580d3ac5a894673ad0b"
+      },
+      {
+        "file": "authoring-svg-flat/core_15.svg",
+        "sha256": "245e02cac7ab9f63583073d9581ef259e8e37d7feda3e6aa8fdd8a0386105c93"
+      },
+      {
+        "file": "authoring-svg-flat/core_16.svg",
+        "sha256": "5ba579262601e146025bd6e5dd4131cd69b5363c1f12583decebca98b726ba71"
+      },
+      {
+        "file": "authoring-svg-flat/core_17.svg",
+        "sha256": "8941ba6c93ed4e42b9f6364a88e632c0353134d2cd1aab0a446b07222744fd84"
+      },
+      {
+        "file": "authoring-svg-flat/core_18.svg",
+        "sha256": "16eb220f2b7a740bb84795c193206fcf636d2272121e3f55f781547f2999ed71"
+      },
+      {
+        "file": "authoring-svg-flat/core_19.svg",
+        "sha256": "9d87429a2353c703508dccd8935b594d8e07678c00b3523a7503679c08df1d5f"
+      },
+      {
+        "file": "authoring-svg-flat/slide_01.svg",
+        "sha256": "523e0eb40f2bad98eac134e7a30d439513d28dbc2015c511cdd4d0ffcbd9f3d3"
+      },
+      {
+        "file": "authoring-svg-flat/slide_02.svg",
+        "sha256": "c33dc4cd1769472896883f05e957d9dfa262a55f45b5bc9ddfd700ade7451463"
+      },
+      {
+        "file": "authoring-svg-flat/slide_03.svg",
+        "sha256": "813ade7904783d801d817a098b28071c21de8e0f74feee2b1f7c0e61bbf5b7ef"
+      },
+      {
+        "file": "authoring-svg-flat/slide_04.svg",
+        "sha256": "5e9edf705150e3941db233a1c69b5a9d0b701e392b426617e390dd8e63ed65c6"
+      },
+      {
+        "file": "authoring-svg-flat/slide_05.svg",
+        "sha256": "c2f1c3357abdebd3084cb3e424fcbc5936a93c946cce44f561fb2f72d389b1a8"
+      },
+      {
+        "file": "authoring-svg-flat/slide_06.svg",
+        "sha256": "05c353f278df47f12b969d115884ea52707ecbd2e591f4fc18e4b08beada3081"
+      },
+      {
+        "file": "authoring-svg-flat/slide_07.svg",
+        "sha256": "7e268cd82f2d1c6081e1e37687dc3e96e9746b9ca45de1ee552e98c1c9b3bb3d"
+      },
+      {
+        "file": "authoring-svg-flat/slide_08.svg",
+        "sha256": "7ae3649aa92f75db447dd564d28a3a2360214dd59e6edf1877fd5056987d511a"
+      },
+      {
+        "file": "authoring-svg-flat/slide_09.svg",
+        "sha256": "b03a38b9fa592c55aa3cbdd89970daae2542e4e99e443dcffe3e9eff4f59a340"
+      },
+      {
+        "file": "authoring-svg-flat/slide_10.svg",
+        "sha256": "19a62ccfb53640a318536b441883a4c66ce1bbcd9596873c2fecebe8ca6e8107"
+      },
+      {
+        "file": "authoring-svg-flat/slide_11.svg",
+        "sha256": "396477d6920c368fe7e6f8cb9242003bea0cb48e9c94377e2927020a92365d6d"
+      },
+      {
+        "file": "authoring-svg-flat/slide_12.svg",
+        "sha256": "bb543c648b3016bf672004fd03bbe494db4582da9d9c3939a88ec708cc075e35"
+      },
+      {
+        "file": "authoring-svg-flat/slide_13.svg",
+        "sha256": "e8d3e630ef92161f29e88b26f6f11ffcc1f654c3b000b59232d59fef3d1de466"
+      },
+      {
+        "file": "authoring-svg-flat/slide_14.svg",
+        "sha256": "3657ab4dbb2fcab1195b9abd0d8ec8f30292aff8bf440795020563d62fdc6d99"
+      },
+      {
+        "file": "authoring-svg-flat/slide_15.svg",
+        "sha256": "48ced3d1d531e41d92a8c7938027696932a856079f8b1caeeea572b4230754d4"
+      },
+      {
+        "file": "authoring-svg-flat/slide_16.svg",
+        "sha256": "28fa060b57aaf4253be9a59908adc548e59c52b52b2cab3790872fdf62eee2e1"
+      },
+      {
+        "file": "page_plan.json",
+        "sha256": "13e7b104baa2e424418d4232960c9c1133b71794fd4e7e29c54ca5228bdaa93e"
+      }
+    ]
+  },
+  "summary": {
+    "total": 19,
+    "passed": 19,
+    "warnings": 0,
+    "errors": 0
+  },
+  "issue_types": {},
+  "categories": {
+    "blocking": {
+      "count": 0,
+      "issues": []
+    },
+    "introduced": {
+      "count": 0,
+      "issues": []
+    },
+    "inherited": {
+      "count": 0,
+      "issues": []
+    },
+    "source-import": {
+      "count": 0,
+      "summary": {
+        "warning_count": 0,
+        "by_code": {}
+      }
+    }
+  },
+  "drift": {
+    "colors": {},
+    "fonts": {},
+    "sizes": {}
+  },
+  "carrier_receipt": {
+    "scope": "informational-not-a-quota",
+    "pages": 0,
+    "totals": {
+      "text_elements": 0,
+      "image_placements": 0,
+      "icons": 0,
+      "svg_geometry_elements": 0,
+      "preset_shapes": 0,
+      "page_frame_elements": 0,
+      "marker_uses": 0,
+      "inline_emphasis_runs": 0,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "pages_with": {
+      "images": 0,
+      "icons": 0,
+      "presets": 0,
+      "charts": 0,
+      "tables": 0,
+      "formulas": 0,
+      "inline_emphasis_runs": 0,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "relationship_pages": null,
+    "geometry_elements": {},
+    "preset_names": {},
+    "native_objects": {},
+    "image_page_max_frame_share_range": []
+  },
+  "project_issues": {
+    "template": [],
+    "animation": [],
+    "illustration": [],
+    "communication_trace": [],
+    "pptx_structure": []
+  },
+  "files": [
+    {
+      "file": "core_01.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_01.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 1,
+        "source_slide": 1,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 7,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "2ef4d1a3527a2a1cf535ac23b670d54c73e5197241c826bce377ab8e7bfd6eb2"
+    },
+    {
+      "file": "core_02.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_02.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 2,
+        "source_slide": 2,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 12,
+        "fonts": [
+          "Arial"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "eba9ae227724116ab20e2ab7fa7a198aec9f6c6e7bd1fde17f6cbc1f86ed9261"
+    },
+    {
+      "file": "core_03.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_03.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 3,
+        "source_slide": 3,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 4,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 18,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "43d5d78a5a79e3d417d70910413d7070b51d7fda393e3f98a5d70a6292479694"
+    },
+    {
+      "file": "core_04.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_04.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 4,
+        "source_slide": 5,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 10,
+        "fonts": [
+          "Arial",
+          "Courier New"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "f8622ffd80dbecff521c84ddcd844cd60b878081c1e66bfa3c3a51df4ab55d8e"
+    },
+    {
+      "file": "core_05.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_05.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 5,
+        "source_slide": 9,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 4,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 24,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "7903a9988de80a56c853a6767c2b32e00a1674b4d96fe507f5452a9987027af5"
+    },
+    {
+      "file": "core_06.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_06.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 6,
+        "source_slide": 14,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 10,
+        "fonts": [
+          "Arial",
+          "Courier New"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "016e37c28842f572bfb348891a90afbd85b8522d8459c7b7fd309308925890cb"
+    },
+    {
+      "file": "core_07.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_07.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 7,
+        "source_slide": 4,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 23,
+        "fonts": [
+          "Arial"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "04bc45b5af2d99a44da6b6a6801fc7c3ff7b8c270411142e0c928b8f08169258"
+    },
+    {
+      "file": "core_08.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_08.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 8,
+        "source_slide": 13,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 12,
+        "fonts": [
+          "Arial"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "24c565b258329b20081b819d438f202465aa6357e8e4e183608afcfcc72a7d73"
+    },
+    {
+      "file": "core_09.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_09.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 9,
+        "source_slide": 7,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 10,
+        "fonts": [
+          "Arial",
+          "Courier New"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "faa02bf449721ca7572c1679381ad971a1976e775f9c8cafc72044fe3263a277"
+    },
+    {
+      "file": "core_10.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_10.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 10,
+        "source_slide": 12,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 23,
+        "fonts": [
+          "Arial"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "f8eba152faf16dae6adcb6a414ba30260d01005810f0dcabebfbb778f9d75576"
+    },
+    {
+      "file": "core_11.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_11.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 11,
+        "source_slide": 13,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 12,
+        "fonts": [
+          "Arial"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "bf35ee150897f0ff000e46342c550db95e0ae4c8931bf19160426effb0cc4d8f"
+    },
+    {
+      "file": "core_12.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_12.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 12,
+        "source_slide": 15,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 10,
+        "fonts": [
+          "Arial",
+          "Courier New"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "b71b0949ee0d1fe1774dd2f5c67d92fc73ff4178cce471f92a017b1dfc9dcbc7"
+    },
+    {
+      "file": "core_13.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_13.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 13,
+        "source_slide": 9,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 16,
+        "fonts": [
+          "Arial"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "8fa1b0051351459340ad878ce81534576e918eb5e74765e158f88cfc8f3b72dd"
+    },
+    {
+      "file": "core_14.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_14.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 14,
+        "source_slide": 6,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 12,
+        "fonts": [
+          "Arial",
+          "Courier New"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "c1a1685d8dafaa045a41e644136338f24df3d14c91ada580d3ac5a894673ad0b"
+    },
+    {
+      "file": "core_15.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_15.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 15,
+        "source_slide": 7,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 12,
+        "fonts": [
+          "Arial"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "245e02cac7ab9f63583073d9581ef259e8e37d7feda3e6aa8fdd8a0386105c93"
+    },
+    {
+      "file": "core_16.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_16.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 16,
+        "source_slide": 3,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 23,
+        "fonts": [
+          "Arial"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "5ba579262601e146025bd6e5dd4131cd69b5363c1f12583decebca98b726ba71"
+    },
+    {
+      "file": "core_17.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_17.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 17,
+        "source_slide": 15,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 10,
+        "fonts": [
+          "Arial",
+          "Courier New"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "8941ba6c93ed4e42b9f6364a88e632c0353134d2cd1aab0a446b07222744fd84"
+    },
+    {
+      "file": "core_18.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_18.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 18,
+        "source_slide": 15,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 12,
+        "fonts": [
+          "Arial",
+          "Courier New"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "16eb220f2b7a740bb84795c193206fcf636d2272121e3f55f781547f2999ed71"
+    },
+    {
+      "file": "core_19.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/authoring-svg-flat/core_19.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 19,
+        "source_slide": 16,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 10,
+        "fonts": [
+          "Arial"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "9d87429a2353c703508dccd8935b594d8e07678c00b3523a7503679c08df1d5f"
+    }
+  ]
+}

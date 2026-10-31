@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#087E8B" /></marker></defs>
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 01 / REQUEST FLOW</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42">One answer / request and failure flow</text></g>
+<g id="diagram-root" data-pptx-bounds="64 205 1152 440" fill="#132C42">
+<g id="node-route"><rect x="64" y="230" width="300" height="110" fill="#E8EDF0" /><text x="84" y="269" font-size="26">1 / Validate + quota</text><text x="84" y="307" font-size="20">Thin FastAPI route</text></g>
+<g id="node-retrieval"><rect x="465" y="230" width="350" height="110" fill="#E8EDF0" /><text x="485" y="269" font-size="26">2 / Scrub + retrieve</text><text x="485" y="307" font-size="20">Scope, parents, amendments</text></g>
+<g id="node-context"><rect x="915" y="230" width="300" height="110" fill="#E8EDF0" /><text x="935" y="269" font-size="26">3 / Pack evidence</text><text x="935" y="307" font-size="20">No complete evidence? Stop.</text></g>
+<g id="node-draft"><rect x="915" y="455" width="300" height="110" fill="#E8EDF0" /><text x="935" y="494" font-size="26">4 / Structured draft</text><text x="935" y="532" font-size="20">Model call / strict schema</text></g>
+<g id="node-check"><rect x="465" y="455" width="350" height="110" fill="#E8EDF0" /><text x="485" y="494" font-size="26">5 / Validate output</text><text x="485" y="532" font-size="20">PII + IDs + exact quotes</text></g>
+<g id="node-response"><rect x="64" y="455" width="300" height="110" /><text x="84" y="494" font-size="26" fill="#FFFFFF">6 / Return result</text><text x="84" y="532" font-size="20" fill="#FFFFFF">Answer, clarify or abstain</text></g>
+<g id="edge-1-2"><line x1="364" y1="285" x2="465" y2="285" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="379" y="268" font-size="20">invoke</text></g>
+<g id="edge-2-3"><line x1="815" y1="285" x2="915" y2="285" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="830" y="268" font-size="20">supply</text></g>
+<g id="edge-3-4"><line x1="1065" y1="340" x2="1065" y2="455" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="1080" y="404" font-size="20">prompt</text></g>
+<g id="edge-4-5"><line x1="915" y1="510" x2="815" y2="510" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="830" y="490" font-size="20">check</text></g>
+<g id="edge-5-6"><line x1="465" y1="510" x2="364" y2="510" stroke="#087E8B" stroke-width="2" marker-end="url(#arrow)" /><text x="379" y="490" font-size="20">return</text></g>
+<g id="repair-rule"><text x="64" y="398" font-size="20" fill="#98521A">Invalid citation: one repair, then abstain.</text></g>
+<g id="diagram-legend"><text x="64" y="625" font-size="20" fill="#526375">Numbered boxes show the main path. Early abstention and the bounded repair are explained in notes.</text></g>
+</g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Educative L05 / app/api/answer.py → services → chains / buffered JSON response</text><text x="1150" y="681">09/16</text></g>
+</svg>

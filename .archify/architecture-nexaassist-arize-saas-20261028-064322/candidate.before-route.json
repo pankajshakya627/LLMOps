@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "NexaAssist | AWS Claude + Arize AX SaaS",
+    "locale": "en",
+    "output": ".archify/architecture-nexaassist-arize-saas-20261028-064322/nexaassist-aws-arize-ax.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "aws_answer",
+        "label": "AWS answer request",
+        "focus": [
+          "staff",
+          "edge",
+          "ui",
+          "api",
+          "policy",
+          "rag",
+          "rds",
+          "gateway",
+          "bedrock",
+          "bedrock_guardrails"
+        ],
+        "note": "Target path: authenticated HTTPS, private tasks, Bedrock Claude/Titan and input/output guardrails."
+      },
+      {
+        "id": "aws_eval",
+        "label": "Quality and tracing",
+        "focus": [
+          "api",
+          "ragas",
+          "arize_ax",
+          "gateway"
+        ],
+        "note": "Ragas scores in the app; masked OTLP spans and imported scores reach enterprise Arize AX after migration."
+      },
+      {
+        "id": "aws_ingest",
+        "label": "Corpus migration",
+        "focus": [
+          "s3",
+          "ingest",
+          "gateway",
+          "bedrock",
+          "rds"
+        ],
+        "note": "Stage a versioned corpus into a one-off task and re-embed with Titan."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "staff",
+      "type": "external",
+      "label": "Staff browser",
+      "sublabel": "authenticated policy user",
+      "pos": [
+        40,
+        45
+      ],
+      "size": [
+        125,
+        64
+      ]
+    },
+    {
+      "id": "edge",
+      "type": "security",
+      "label": "HTTPS entry",
+      "sublabel": "ALB + enterprise auth",
+      "pos": [
+        235,
+        45
+      ],
+      "size": [
+        150,
+        68
+      ]
+    },
+    {
+      "id": "ui",
+      "type": "frontend",
+      "label": "Streamlit on ECS",
+      "sublabel": "Fargate service",
+      "pos": [
+        435,
+        45
+      ],
+      "size": [
+        155,
+        68
+      ]
+    },
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "FastAPI on ECS",
+      "sublabel": "Fargate service",
+      "pos": [
+        675,
+        45
+      ],
+      "size": [
+        160,
+        68
+      ]
+    },
+    {
+      "id": "bedrock",
+      "type": "cloud",
+      "label": "Bedrock Claude + Titan",
+      "sublabel": "chat + 1024D embeddings",
+      "pos": [
+        1040,
+        45
+      ],
+      "size": [
+        175,
+        68
+      ]
+    },
+    {
+      "id": "arize_ax",
+      "type": "external",
+      "label": "Arize AX SaaS",
+      "sublabel": "enterprise space + OTLP",
+      "pos": [
+        40,
+        635
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "policy",
+      "type": "security",
+      "label": "App safety controls",
+      "sublabel": "PII, injection, output checks",
+      "pos": [
+        635,
+        235
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "rag",
+      "type": "backend",
+      "label": "RAG answer chain",
+      "sublabel": "scoped evidence + citations",
+      "pos": [
+        835,
+        235
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "gateway",
+      "type": "backend",
+      "label": "LiteLLM on ECS",
+      "sublabel": "planned Bedrock aliases",
+      "pos": [
+        1040,
+        235
+      ],
+      "size": [
+        175,
+        72
+      ]
+    },
+    {
+      "id": "bedrock_guardrails",
+      "type": "security",
+      "label": "Bedrock Guardrails",
+      "sublabel": "planned INPUT + OUTPUT calls",
+      "pos": [
+        635,
+        445
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "rds",
+      "type": "database",
+      "label": "RDS PostgreSQL",
+      "sublabel": "pgvector + feedback",
+      "pos": [
+        835,
+        445
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "ragas",
+      "type": "backend",
+      "label": "Ragas in FastAPI",
+      "sublabel": "app judge + score export",
+      "pos": [
+        435,
+        635
+      ],
+      "size": [
+        155,
+        72
+      ]
+    },
+    {
+      "id": "s3",
+      "type": "database",
+      "label": "Versioned S3 corpus",
+      "sublabel": "staged policy files",
+      "pos": [
+        635,
+        635
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "ingest",
+      "type": "backend",
+      "label": "One-off ECS ingest",
+      "sublabel": "re-embed into new profile",
+      "pos": [
+        835,
+        635
+      ],
+      "size": [
+        160,
+        72
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "AWS target Region \u2014 design only",
+      "wraps": [
+        "edge",
+        "ui",
+        "api",
+        "bedrock",
+        "policy",
+        "rag",
+        "gateway",
+        "bedrock_guardrails",
+        "rds",
+        "ragas",
+        "s3",
+        "ingest"
+      ],
+      "pad": 12
+    }
+  ],
+  "connections": [
+    {
+      "from": "staff",
+      "to": "edge",
+      "label": "HTTPS"
+    },
+    {
+      "from": "edge",
+      "to": "ui",
+      "label": "authenticated",
+      "variant": "security"
+    },
+    {
+      "from": "ui",
+      "to": "api",
+      "label": "private HTTP"
+    },
+    {
+      "from": "api",
+      "to": "policy",
+      "label": "check input",
+      "variant": "security"
+    },
+    {
+      "from": "policy",
+      "to": "rag",
+      "label": "safe query"
+    },
+    {
+      "from": "rag",
+      "to": "rds",
+      "label": "retrieve"
+    },
+    {
+      "from": "rag",
+      "to": "gateway",
+      "label": "chat + embed"
+    },
+    {
+      "from": "gateway",
+      "to": "bedrock",
+      "label": "IAM / VPCE"
+    },
+    {
+      "from": "policy",
+      "to": "bedrock_guardrails",
+      "label": "INPUT + OUTPUT",
+      "variant": "security"
+    },
+    {
+      "from": "api",
+      "to": "arize_ax",
+      "label": "masked OTLP",
+      "variant": "dashed"
+    },
+    {
+      "from": "api",
+      "to": "ragas",
+      "label": "score answer"
+    },
+    {
+      "from": "ragas",
+      "to": "arize_ax",
+      "label": "Ragas evals",
+      "variant": "dashed"
+    },
+    {
+      "from": "s3",
+      "to": "ingest",
+      "label": "stage corpus",
+      "variant": "dashed"
+    },
+    {
+      "from": "ingest",
+      "to": "rds",
+      "label": "new vectors"
+    },
+    {
+      "from": "gateway",
+      "to": "arize_ax",
+      "label": "model spans",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "Proposed, not running",
+      "items": [
+        "Local Compose still uses Ollama/OpenAI and self-hosted Phoenix; this AWS target is not deployed.",
+        "Claude chat and Titan V2 embeddings need new LiteLLM routes, model access and a re-embedded corpus.",
+        "Bedrock Guardrails need new fail-closed input/output calls in the application."
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Arize AX enterprise SaaS",
+      "items": [
+        "No Phoenix container or trace database in AWS. API and gateway export masked OTLP over approved outbound TLS.",
+        "Use the enterprise space ID, API key, tenant endpoint and separate API/gateway project names.",
+        "Migrate API tracing to arize-otel, LiteLLM to the arize callback, and Ragas export to Arize span evaluations."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "AWS service split",
+      "items": [
+        "ECS Fargate runs UI, API, LiteLLM and one-off ingestion; RDS pgvector stores policy evidence and feedback.",
+        "Bedrock runs Claude and Titan V2; versioned S3 supplies the corpus and receives evaluation reports.",
+        "Use scoped IAM, Secrets Manager and an approved Bedrock Runtime VPC endpoint."
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Code and design map",
+      "items": [
+        "AWS target: app/operations/AWS_DEPLOYMENT.md:20-70,104-129",
+        "Current tracing: app/phoenix_main.py:29; app/evaluation/phoenix_export.py:55",
+        "Routing: app/gateway/litellm.yaml:3-37; target callback: AWS_DEPLOYMENT.md:102",
+        "Answer checks: app/services/retrieval.py:23; app/chains/answer.py:97",
+        "Ragas: app/evaluation/live.py:18; storage: app/database/mongo.py:69"
+      ]
+    }
+  ]
+}

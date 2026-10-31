@@ -1,0 +1,86 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+___________ test_invalid_citations_get_only_one_repair_attempt[True] ___________
+
+settings = Settings(mongodb_uri=SecretStr('**********'), mongodb_db='unused', mongodb_collection='chunks', vector_index_name='pol...ality_level='internal', log_level='INFO', dd_trace_enabled=False, dd_service='nexaassist-api', dd_site='datadoghq.com')
+repair_succeeds = True
+
+    @pytest.mark.parametrize("repair_succeeds", [True, False])
+    def test_invalid_citations_get_only_one_repair_attempt(
+        settings: Settings, repair_succeeds: bool
+    ) -> None:
+        invalid = {
+            "status": "answered",
+            "answer": "The maximum is 7.5 crore [1].",
+            "evidence": [{"evidence_id": 1, "quote": "invented quote"}],
+        }
+        valid = {
+            **invalid,
+            "evidence": [{"evidence_id": 1, "quote": "Maximum amount is 7.5 crore."}],
+        }
+        generate = Mock(side_effect=[invalid, valid if repair_succeeds else invalid])
+        llm = Mock(spec=BaseChatModel)
+        llm.with_structured_output.return_value = RunnableLambda(generate)
+        retrieved = RetrieveResponse(
+            as_of=date(2026, 10, 1),
+            results=[hit()],
+            timings=RetrieveTimings(search_ms=0, parent_ms=0, total_ms=0),
+        )
+        retrieve = Mock(return_value=retrieved)
+        result = asyncio.run(
+            build_answer_chain(RunnableLambda(retrieve), llm, settings).ainvoke(
+                RetrieveRequest(query="maximum", as_of=retrieved.as_of)
+            )
+        )
+        retrieve.assert_called_once()
+>       assert generate.call_count == 2
+E       AssertionError: assert 1 == 2
+E        +  where 1 = <Mock id='4557911248'>.call_count
+
+tests/test_answer.py:131: AssertionError
+----------------------------- Captured stdout call -----------------------------
+2026-10-21 15:42:27 [warning  ] answer_citation_validation_failed
+__________ test_invalid_citations_get_only_one_repair_attempt[False] ___________
+
+settings = Settings(mongodb_uri=SecretStr('**********'), mongodb_db='unused', mongodb_collection='chunks', vector_index_name='pol...ality_level='internal', log_level='INFO', dd_trace_enabled=False, dd_service='nexaassist-api', dd_site='datadoghq.com')
+repair_succeeds = False
+
+    @pytest.mark.parametrize("repair_succeeds", [True, False])
+    def test_invalid_citations_get_only_one_repair_attempt(
+        settings: Settings, repair_succeeds: bool
+    ) -> None:
+        invalid = {
+            "status": "answered",
+            "answer": "The maximum is 7.5 crore [1].",
+            "evidence": [{"evidence_id": 1, "quote": "invented quote"}],
+        }
+        valid = {
+            **invalid,
+            "evidence": [{"evidence_id": 1, "quote": "Maximum amount is 7.5 crore."}],
+        }
+        generate = Mock(side_effect=[invalid, valid if repair_succeeds else invalid])
+        llm = Mock(spec=BaseChatModel)
+        llm.with_structured_output.return_value = RunnableLambda(generate)
+        retrieved = RetrieveResponse(
+            as_of=date(2026, 10, 1),
+            results=[hit()],
+            timings=RetrieveTimings(search_ms=0, parent_ms=0, total_ms=0),
+        )
+        retrieve = Mock(return_value=retrieved)
+        result = asyncio.run(
+            build_answer_chain(RunnableLambda(retrieve), llm, settings).ainvoke(
+                RetrieveRequest(query="maximum", as_of=retrieved.as_of)
+            )
+        )
+        retrieve.assert_called_once()
+>       assert generate.call_count == 2
+E       AssertionError: assert 1 == 2
+E        +  where 1 = <Mock id='4463630656'>.call_count
+
+tests/test_answer.py:131: AssertionError
+----------------------------- Captured stdout call -----------------------------
+2026-10-21 15:42:27 [warning  ] answer_citation_validation_failed
+=========================== short test summary info ============================
+FAILED tests/test_answer.py::test_invalid_citations_get_only_one_repair_attempt[True]
+FAILED tests/test_answer.py::test_invalid_citations_get_only_one_repair_attempt[False]
+2 failed, 16 deselected in 1.45s

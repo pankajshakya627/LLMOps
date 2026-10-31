@@ -1,0 +1,5 @@
+# Mirrors the pinned application instrumentation/client versions for standalone tooling.
+arize-phoenix-otel==0.17.2
+arize-phoenix-client==3.5.0
+openinference-instrumentation-langchain==0.1.80
+opentelemetry-instrumentation-fastapi==0.66b1

@@ -1,0 +1,7 @@
+{
+  "max_clients": 3,
+  "fixed_clock_seconds": 0.0,
+  "distinct_active_clients": 100,
+  "observed_tracked_clients": 100,
+  "note": "max_clients triggers expired-entry purging; it does not enforce an active-client cap."
+}

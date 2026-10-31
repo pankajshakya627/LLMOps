@@ -1,0 +1,29 @@
+{
+  "page": "slide_12.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_12.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Explain why a fee quote requires its full amendment condition and resolve the linked instrument as a complete unit.",
+    "render_delivers": true,
+    "note": "The base-policy hit links to the circular and its precedence, fee and scope clauses. Labelled links and the full-instrument clarification are visible; text fits its fields and is clear of the connectors."
+  }
+}

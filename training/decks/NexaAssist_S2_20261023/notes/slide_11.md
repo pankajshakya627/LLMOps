@@ -1,0 +1,1 @@
+Run: python -m training.session2.redact Inspect EMAIL, PHONE, PAN and AADHAAR placeholders. Verify loan amounts remain readable. Regex has false positives and misses free-form personal data. The lab distinguishes identifiers from grouped currency values, but cannot establish complete privacy protection. The implementation or concept reference is app/chains/redaction.py.

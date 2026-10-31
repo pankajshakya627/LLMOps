@@ -1,0 +1,1 @@
+Read app/chains/chunking.py. Bring a table question and an effective-date trap. Carry the manifest into Session 2. The next class measures the evidence path without asking an answer model to hide retrieval faults. Required exercises stay offline; optional Atlas work is separately marked.

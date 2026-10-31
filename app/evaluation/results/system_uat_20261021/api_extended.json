@@ -1,0 +1,163 @@
+[
+  {
+    "id": "U16",
+    "scenario": "home_ltv",
+    "endpoint": "/answer",
+    "request": {
+      "query": "What loan to value ratio applies to a NexaHome Loan of ₹80 lakh?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 5
+    },
+    "started_at": "2026-10-21T08:35:06.578784+00:00",
+    "http_status": 200,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "For a NexaHome Loan of ₹80 lakh, the maximum LTV is 75%, calculated against the lower of the agreement value and NexaBank’s technical valuation [1]. This applies if the loan is governed by policy v3.0; the policy version in force on the sanction date governs the loan, and applications sanctioned on or after 2025-10-01 are governed by this version [3].",
+      "citations": [
+        {
+          "evidence_id": 1,
+          "quote": "The maximum LTV depends on the loan amount and is applied to the lower of the agreement value and NexaBank's technical valuation.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "7.2",
+            "effective_date": "2025-10-01"
+          }
+        },
+        {
+          "evidence_id": 1,
+          "quote": "Above ₹75,00,000</td><td>75%</td>",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "7.2",
+            "effective_date": "2025-10-01"
+          }
+        },
+        {
+          "evidence_id": 3,
+          "quote": "The version of this policy in force on the sanction date of a loan governs that loan for its life, except where a later instrument expressly states otherwise. Applications received under an earlier version but sanctioned after the effective date are governed by this version.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "1.1",
+            "effective_date": "2025-10-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 627.81,
+        "parent_ms": 37.48,
+        "total_ms": 665.62
+      },
+      "generation_ms": 7969.0,
+      "datadog_span_id": "7606614736785934029"
+    },
+    "contract": "pass",
+    "wall_ms": 8658.3
+  },
+  {
+    "id": "U17",
+    "scenario": "home_age",
+    "endpoint": "/answer",
+    "request": {
+      "query": "What are the age limits for a NexaHome Loan today?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 5
+    },
+    "started_at": "2026-10-21T08:35:15.237687+00:00",
+    "http_status": 200,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "Under the NexaHome Loan policy effective 2025-10-01, the minimum age at application is 21. The maximum age at application is 62 for salaried applicants and 65 for self-employed applicants. At loan maturity, the maximum age is 70 for salaried applicants and 75 for self-employed applicants. [1]",
+      "citations": [
+        {
+          "evidence_id": 1,
+          "quote": "3.1 Age. Minimum age at application is 21 years. Maximum age at application is 62 years for salaried applicants and 65 years for self-employed applicants. Age at loan maturity must not exceed 70 years (salaried) or 75 years (self-employed).",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "3.1",
+            "effective_date": "2025-10-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 712.94,
+        "parent_ms": 39.09,
+        "total_ms": 752.4
+      },
+      "generation_ms": 7021.69,
+      "datadog_span_id": "14511861499489473715"
+    },
+    "contract": "pass",
+    "wall_ms": 7788.59
+  },
+  {
+    "id": "U18",
+    "scenario": "fee_wider_retrieval_evaluated",
+    "endpoint": "/answer/evaluated",
+    "request": {
+      "query": "What is the current processing fee for a NexaHome Loan?",
+      "as_of": "2026-10-01",
+      "product_id": "NEXA-HL",
+      "top_k": 20
+    },
+    "started_at": "2026-10-21T08:35:23.026971+00:00",
+    "http_status": 200,
+    "response": {
+      "answer": {
+        "as_of": "2026-10-01",
+        "status": "insufficient_evidence",
+        "answer": "I cannot answer this question reliably from the retrieved policy evidence.",
+        "citations": [],
+        "retrieval_timings": {
+          "search_ms": 523.47,
+          "parent_ms": 42.47,
+          "total_ms": 566.3
+        },
+        "generation_ms": 7501.23,
+        "datadog_span_id": "6617265511468846186"
+      },
+      "quality": {
+        "metrics": {
+          "faithfulness": {
+            "status": "unavailable",
+            "value": null,
+            "reason": "The answer abstained; this metric is not applicable."
+          },
+          "answer_relevancy": {
+            "status": "unavailable",
+            "value": null,
+            "reason": "The answer abstained; this metric is not applicable."
+          },
+          "context_precision": {
+            "status": "scored",
+            "value": 0.19999999999,
+            "reason": null
+          },
+          "context_recall": {
+            "status": "scored",
+            "value": 1.0,
+            "reason": null
+          }
+        },
+        "reference_source": "golden_dataset",
+        "reference_answer": "For loans sanctioned on or after 1 July 2026 the processing fee is 0.30% of the sanctioned amount, minimum ₹5,000 and maximum ₹10,000, plus 18% GST. This comes from circular CIR-2026-07, which replaced clause 6.2 of POL-HL-V3. Loans sanctioned earlier keep the fee that applied at their sanction.",
+        "evaluated_at": "2026-10-21T08:36:41.856850Z",
+        "datadog_status": "queued",
+        "datadog_url": "https://app.datadoghq.com/llm/traces?query=service%3Anexaassist-api+%40name%3Apolicy_answer_live_evaluation&start=1792571663031&end=1792571861856&paused=true"
+      }
+    },
+    "contract": "pass",
+    "wall_ms": 78831.06
+  }
+]

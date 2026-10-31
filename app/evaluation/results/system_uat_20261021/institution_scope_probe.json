@@ -1,0 +1,12 @@
+{
+  "scenario": "institution_filter_contract",
+  "filter_fields": [
+    "effective_to_search",
+    "effective_date",
+    "confidentiality_level",
+    "jurisdiction"
+  ],
+  "institution_constraint_present": false,
+  "live_corpus_has_other_institutions": false,
+  "mode": "isolated filter capture; no provider/DB call"
+}

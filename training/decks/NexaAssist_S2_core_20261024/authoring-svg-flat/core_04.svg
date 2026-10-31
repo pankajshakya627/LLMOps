@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="&quot;Courier New&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 1050 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 1050 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 1113.36 31 L 1113.36 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 02 / RAGOPS LAB / OFFLINE</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 83 1152 64" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 83 1152 64" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 83 L 1214.4 83 L 1214.4 147 L 62.4 147 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Practical / chunking and repeat ingestion</text>
+</g>
+</g>
+<g id="shape-23" data-pptx-object="group" data-pptx-frame="63.36 665 1151 25.6" data-pptx-source-ref="slide:23">
+<g id="shape-21" data-pptx-object="shape" data-pptx-frame="63.36 665 1050 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:21" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 1113.36 665 L 1113.36 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">Syllabus 01, 03, 08, 12 / Fixtures and live exercises labeled / sources and lab steps in notes</text>
+</g>
+<g id="shape-22" data-pptx-object="shape" data-pptx-frame="1149.36 665 65 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:22" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1214.36 665 L 1214.36 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">04/19</text>
+</g>
+</g><g id="code-or-lab" data-pptx-bounds="64 202 1152 270"><rect x="64" y="202" width="1152" height="270" fill="#132C42" /><text x="88" y="240" font-size="23" font-family="Courier New" fill="#FFFFFF" font-weight="normal">python -m training.session2.chunks</text><text x="88" y="277" font-size="23" font-family="Courier New" fill="#FFFFFF" font-weight="normal">python -m training.session2.ingest_twin</text><text x="88" y="314" font-size="23" font-family="Courier New" fill="#FFFFFF" font-weight="normal" /><text x="88" y="351" font-size="23" font-family="Courier New" fill="#FFFFFF" font-weight="normal">chunk candidates 300 / 1200 / 5000 → 40 / 32 / 32</text><text x="88" y="388" font-size="23" font-family="Courier New" fill="#FFFFFF" font-weight="normal">embedded counts across four runs → 32 / 0 / 32 / 0</text></g><g id="practical-evidence" data-pptx-bounds="64 497 1152 80"><text x="64" y="537" font-size="24" font-family="Arial" fill="#132C42" font-weight="normal">Submit: preserved table, child/checksum/parent IDs and a version-change explanation.</text></g></svg>

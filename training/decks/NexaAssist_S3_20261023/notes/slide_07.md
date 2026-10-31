@@ -1,0 +1,1 @@
+The chain requests AnswerDraft with strict JSON-schema output. Open app/chains/answer.py and locate generation = ANSWER_PROMPT. Read the displayed excerpt in context; it is taken directly from the application. The chain requests AnswerDraft with strict JSON-schema output. The implementation or concept reference is app/chains/answer.py.

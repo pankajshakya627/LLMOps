@@ -1,0 +1,29 @@
+{
+  "page": "slide_04.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_04.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Explain the precise child match and expansion to its parent section for neighboring context.",
+    "render_delivers": true,
+    "note": "Two child clauses visibly point to a shared parent section through labelled links. Child and parent storage roles and citation/fallback notes are present, readable and clear of overlaps."
+  }
+}

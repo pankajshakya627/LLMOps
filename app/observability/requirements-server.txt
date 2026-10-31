@@ -1,0 +1,2 @@
+# Separate Python 3.13 collector environment; do not merge with the application overlay.
+arize-phoenix==20.26.0

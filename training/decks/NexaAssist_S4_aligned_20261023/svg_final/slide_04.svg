@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC"/>
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 04 / WORKING DEMONSTRATION</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42">Showcase / the service fails safely</text></g>
+<g id="provider" data-pptx-bounds="64 210 1152 110"><rect x="64" y="215" width="5" height="80" fill="#B86416"/><text x="92" y="239" font-size="20" fill="#98521A">PROVIDER FAILURE</text><text x="92" y="282" font-size="26" fill="#132C42">Provider failure → private details stay private.</text></g>
+<g id="quota" data-pptx-bounds="64 350 1152 110"><rect x="64" y="355" width="5" height="80" fill="#B86416"/><text x="92" y="379" font-size="20" fill="#98521A">REPEATED REQUESTS</text><text x="92" y="422" font-size="26" fill="#132C42">Repeated calls → the configured quota applies.</text></g>
+<g id="database" data-pptx-bounds="64 490 1152 110"><rect x="64" y="495" width="5" height="80" fill="#A13442"/><text x="92" y="519" font-size="20" fill="#A13442">DATABASE FAILURE</text><text x="92" y="562" font-size="26" fill="#132C42">Database failure → readiness reports unavailable.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Actual FastAPI routes and limiter / fake dependencies</text><text x="1150" y="681"><tspan>04/41</tspan></text></g>
+</svg>

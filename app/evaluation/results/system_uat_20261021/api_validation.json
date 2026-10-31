@@ -1,0 +1,86 @@
+[
+  {
+    "scenario": "blank",
+    "http_status": 422,
+    "expected": 422,
+    "pass": true
+  },
+  {
+    "scenario": "missing_date",
+    "http_status": 422,
+    "expected": 422,
+    "pass": true
+  },
+  {
+    "scenario": "invalid_date",
+    "http_status": 422,
+    "expected": 422,
+    "pass": true
+  },
+  {
+    "scenario": "negative_top_k",
+    "http_status": 422,
+    "expected": 422,
+    "pass": true
+  },
+  {
+    "scenario": "large_top_k",
+    "http_status": 422,
+    "expected": 422,
+    "pass": true
+  },
+  {
+    "scenario": "oversized_query",
+    "http_status": 422,
+    "expected": 422,
+    "pass": true
+  },
+  {
+    "scenario": "extra_scope_override",
+    "http_status": 422,
+    "expected": 422,
+    "pass": true
+  },
+  {
+    "scenario": "empty_reference",
+    "http_status": 422,
+    "expected": 422,
+    "pass": true
+  },
+  {
+    "scenario": "invalid_feedback_limit",
+    "http_status": 422,
+    "expected": 422,
+    "pass": true
+  },
+  {
+    "scenario": "/health",
+    "http_status": 200,
+    "response": {
+      "status": "ok"
+    },
+    "pass": true
+  },
+  {
+    "scenario": "/metrics",
+    "http_status": 200,
+    "response": {
+      "retrieval_requests_total": 18,
+      "retrieval_errors_total": 0,
+      "retrieval_empty_total": 0,
+      "retrieval_latency_ms_total": 17755.84
+    },
+    "pass": true
+  },
+  {
+    "scenario": "/metrics/latency",
+    "http_status": 200,
+    "response": {
+      "sample_count": 18,
+      "p50_ms": 551.38,
+      "p95_ms": 3755.16,
+      "p99_ms": 3755.16
+    },
+    "pass": true
+  }
+]

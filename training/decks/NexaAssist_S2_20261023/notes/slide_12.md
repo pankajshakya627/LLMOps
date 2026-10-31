@@ -1,0 +1,1 @@
+Configured model and dimensions must match indexed vectors. The Atlas index points to the embedding field. A dimension mismatch is a compatibility failure. Do not assume that changing a configuration variable transforms stored vectors. Re-embedding and compatible index configuration are required.

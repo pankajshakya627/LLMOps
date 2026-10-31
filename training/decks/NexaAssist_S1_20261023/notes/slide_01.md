@@ -1,0 +1,1 @@
+NexaAssist / LLMOps engineering workshop Session 1 of 5 · 3 hours · Python + REST prerequisite Introduce the running project: a synthetic banking-policy assistant. By the end, each pair will have a use-case manifest, a data access decision and measurable proposed targets.

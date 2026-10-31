@@ -1,0 +1,1 @@
+Set sampled_count=0 and the proxy to None. Predict not_measured rather than pass. Explain what evidence is needed before clearing an incident. Learners should preserve the incident until relevant observations support recovery. Operational latency recovery alone does not prove restored semantic quality.

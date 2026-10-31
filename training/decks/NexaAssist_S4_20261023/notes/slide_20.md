@@ -1,0 +1,1 @@
+Session history changes privacy and retrieval scope. Query rewriting needs its own failure behavior and evals. LangGraph and action tools remain future layers. The course discusses orchestration; this project deliberately remains stateless per question. The architecture is extended only when a concrete requirement justifies that cost.

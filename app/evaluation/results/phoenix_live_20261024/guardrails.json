@@ -1,0 +1,44 @@
+[
+  {
+    "case": "valid_draft",
+    "http_status": 200,
+    "validation_passed": true,
+    "expected": true
+  },
+  {
+    "case": "invalid_status",
+    "http_status": 200,
+    "validation_passed": false,
+    "expected": false
+  },
+  {
+    "case": "unknown_field",
+    "http_status": 200,
+    "validation_passed": false,
+    "expected": false
+  },
+  {
+    "case": "invalid_evidence_id",
+    "http_status": 200,
+    "validation_passed": false,
+    "expected": false
+  },
+  {
+    "case": "malformed_json",
+    "http_status": 200,
+    "validation_passed": false,
+    "expected": false
+  },
+  {
+    "case": "invalid_request_shape",
+    "http_status": 422,
+    "expected_http_status": 422
+  },
+  {
+    "case": "candidate_valid_schema_but_unfaithful_answer",
+    "http_status": 200,
+    "validation_passed": true,
+    "faithfulness": 0.0,
+    "explanation": "Schema validation does not establish factual correctness."
+  }
+]

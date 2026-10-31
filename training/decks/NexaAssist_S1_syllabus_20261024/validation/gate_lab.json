@@ -1,0 +1,12 @@
+[
+  {
+    "case": "valid-placeholder",
+    "exit": 0,
+    "stdout": "valid: status=placeholder p95_total_ms_max=2000.0\n"
+  },
+  {
+    "case": "invalid-field",
+    "exit": 1,
+    "stdout": "INVALID: faithfulness_min - Input should be less than or equal to 1\n"
+  }
+]

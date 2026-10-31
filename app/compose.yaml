@@ -1,0 +1,119 @@
+name: nexaassist
+
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.2-pg17
+    ports: ["127.0.0.1:${POSTGRES_PORT:-5433}:5432"]
+    environment:
+      POSTGRES_DB: nexaassist
+      POSTGRES_USER: nexaassist
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nexaassist -d nexaassist"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  phoenix:
+    image: arizephoenix/phoenix:20.26.0
+    ports: ["127.0.0.1:6006:6006"]
+    environment:
+      PHOENIX_HOST: 0.0.0.0
+      PHOENIX_PORT: "6006"
+      PHOENIX_WORKING_DIR: /data
+      PHOENIX_TELEMETRY_ENABLED: "false"
+    volumes: ["phoenix-data:/data"]
+
+  gateway:
+    build:
+      context: ..
+      dockerfile: app/gateway/Dockerfile
+    command: ["litellm", "--config", "/opt/gateway/active.yaml", "--host", "0.0.0.0", "--port", "4000", "--num_workers", "1"]
+    ports: ["127.0.0.1:${GATEWAY_PORT:-4000}:4000"]
+    volumes:
+      - ./gateway/${LITELLM_CONFIG:-litellm.yaml}:/opt/gateway/active.yaml:ro
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?Set LITELLM_MASTER_KEY in .env}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:?Set OPENAI_API_KEY for cloud fallback and evaluation}
+      OPENAI_LITELLM_CHAT_MODEL: ${OPENAI_LITELLM_CHAT_MODEL:-openai/gpt-6-luna}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      OLLAMA_OPENAI_BASE_URL: ${OLLAMA_OPENAI_BASE_URL:-http://host.docker.internal:11434/v1}
+      OLLAMA_REPLICA_A_BASE_URL: ${OLLAMA_REPLICA_A_BASE_URL:-http://host.docker.internal:11434}
+      OLLAMA_REPLICA_B_BASE_URL: ${OLLAMA_REPLICA_B_BASE_URL:-http://host.docker.internal:11435}
+      LITELLM_LOCAL_MODEL_COST_MAP: "True"
+      LITELLM_OTEL_V2: "true"
+      PHOENIX_COLLECTOR_HTTP_ENDPOINT: http://phoenix:6006/v1/traces
+      PHOENIX_PROJECT_NAME: nexaassist-gateway
+      OTEL_SERVICE_NAME: nexaassist-gateway
+      OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT: no_content
+    depends_on:
+      phoenix: {condition: service_started}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:4000/health/liveliness', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      start_period: 30s
+      retries: 10
+
+  guardrails:
+    build:
+      context: ..
+      dockerfile: app/security/Dockerfile
+    ports: ["127.0.0.1:8101:8101"]
+
+  api:
+    build:
+      context: ..
+      dockerfile: app/Dockerfile
+    env_file: ../.env
+    ports: ["127.0.0.1:${API_PORT:-8000}:8000"]
+    volumes: ["../nexa_synthetic_data:/data:ro"]
+    environment:
+      OTEL_SDK_DISABLED: "false"
+      STORAGE_BACKEND: ${STORAGE_BACKEND:-pgvector}
+      POSTGRES_DSN: postgresql://nexaassist:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/nexaassist
+      CHAT_MODEL: ${GATEWAY_CHAT_MODEL:-nexa-chat}
+      CHAT_BASE_URL: http://gateway:4000/v1
+      CHAT_API_MODE: chat_completions
+      CHAT_API_KEY: ${LITELLM_MASTER_KEY:?Set LITELLM_MASTER_KEY in .env}
+      CHAT_REASONING_EFFORT: ""
+      CHAT_CACHE_NAMESPACE: ${CHAT_CACHE_NAMESPACE:-nexaassist-private}
+      OPENAI_FALLBACK_MODEL: ""
+      EMBEDDING_BASE_URL: http://gateway:4000/v1
+      EMBEDDING_API_KEY: ${LITELLM_MASTER_KEY:?Set LITELLM_MASTER_KEY in .env}
+      EMBEDDING_MODEL: ${GATEWAY_EMBEDDING_MODEL:-nexa-embed-local}
+      EMBEDDING_DIMENSIONS: ${GATEWAY_EMBEDDING_DIMENSIONS:-1024}
+      EMBEDDING_PROFILE: ${GATEWAY_EMBEDDING_PROFILE:-qwen3-0.6b-gateway-v1}
+      MONGODB_COLLECTION: ${GATEWAY_MONGODB_COLLECTION:-policy_chunks_qwen3_gateway_v1}
+      MONGODB_PARENT_COLLECTION: ${GATEWAY_MONGODB_PARENT_COLLECTION:-policy_sections_qwen3_gateway_v1}
+      VECTOR_INDEX_NAME: ${GATEWAY_VECTOR_INDEX_NAME:-policy_qwen3_gateway_v1}
+      GUARDRAILS_BASE_URL: http://guardrails:8101
+      PHOENIX_BASE_URL: http://phoenix:6006
+    depends_on:
+      postgres: {condition: service_healthy}
+      gateway: {condition: service_healthy}
+      guardrails: {condition: service_healthy}
+      phoenix: {condition: service_started}
+
+  ui:
+    build:
+      context: ..
+      dockerfile: app/Dockerfile
+    command: ["python", "-m", "streamlit", "run", "app/streamlit_app.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+    ports: ["127.0.0.1:${UI_PORT:-8501}:8501"]
+    environment:
+      API_BASE_URL: http://api:8000
+      UI_TIMEZONE: Asia/Kolkata
+    depends_on:
+      api: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  phoenix-data:
+  postgres-data:

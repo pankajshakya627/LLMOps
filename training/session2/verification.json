@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-24",
+  "test_suite": {
+    "tests": 256,
+    "passed": 255,
+    "failed": 1,
+    "skipped": 0,
+    "seconds": 34.435
+  },
+  "baseline_failure": "tests/test_architecture_document.py::test_architecture_paths_and_walkthroughs_resolve",
+  "new_test_cases": {
+    "test_model_access": 11,
+    "test_embedding_profiles": 10,
+    "test_eval_profiles": 3,
+    "test_gateway": 6,
+    "test_gateway_config": 5,
+    "test_guardrails_integration": 5,
+    "test_guardrails_sidecar": 1
+  },
+  "ruff": "passed",
+  "mypy": {
+    "status": "passed",
+    "source_files": 133
+  },
+  "guardrails_selfcheck": {
+    "status": "passed",
+    "version": "0.11.0",
+    "python": "3.13",
+    "llm_calls": 0
+  },
+  "litellm_selfcheck": {
+    "status": "passed",
+    "version": "1.106.2",
+    "responses": "mock fixtures",
+    "live_llm_calls": 0
+  },
+  "protected_files": {
+    "CONSTRAINTS.md": "2b7f566acf9c3be7300bd21c4d8c4479d1e341d5555076c424fae41bd8bb54bd",
+    "pyproject.toml": "8ba7e0924daf08783124148c9f72da3f4bbbe7bc4a05aba27eddf8d83e8f435a",
+    "uv.lock": "2f760c2d38f99ee371787202ac2ab00886f6984022ca2038e3d4603bba897fa8",
+    "evaluation/gates.json": "c6250feae99b190f5f072726555432c77b60fb4814b34b55a649f9f3069f1305"
+  },
+  "existing_tests_unchanged": true,
+  "new_suppressions_or_skips": false,
+  "live_preflight": "not performed",
+  "simplification": "Shared custom embedding metadata between chunk and parent enrichment; full regression suite rerun after change."
+}

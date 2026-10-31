@@ -1,0 +1,11 @@
+{
+  "reviewed_pages": 16,
+  "ok": 16,
+  "fixed": 0,
+  "unresolved": 0,
+  "canvas": [
+    1280,
+    720
+  ],
+  "method": "All pages individually inspected as browser PNG and SVG source; corrected pages re-rendered and checked by author."
+}

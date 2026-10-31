@@ -1,0 +1,19 @@
+{
+  "project": "nexaassist-gateway",
+  "model_spans": [
+    {
+      "span_id": "547e5a0159084d4b",
+      "model": "ollama_chat/qwen3.5:9b-mlx",
+      "provider": "ollama_chat"
+    },
+    {
+      "span_id": "233d1cbe8de68c07",
+      "model": "openai/qwen3-embedding:0.6b",
+      "provider": "openai"
+    }
+  ],
+  "gateway_content_policy": "metadata only; no message text or vectors",
+  "api_result_span": "a649d98c799c0a52",
+  "api_trace_id": "51758907bb6e7718ded0f2782216d29f",
+  "automatic_ragas_annotations": 4
+}

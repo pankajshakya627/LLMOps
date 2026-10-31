@@ -1,0 +1,163 @@
+{
+  "schema": "ppt-master.pptx-delivery-check.v1",
+  "status": "passed",
+  "file": {
+    "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_core_20261024/exports/Session_2_core.pptx",
+    "bytes": 87169
+  },
+  "package": {
+    "zip_integrity": "passed",
+    "corrupt_member": null,
+    "duplicate_parts": [],
+    "canonical_part_collisions": [],
+    "parts": {
+      "entries": 95,
+      "unique": 95,
+      "slides": 19,
+      "notes": 19,
+      "masters": 1,
+      "layouts": 1,
+      "media": 0
+    },
+    "relationships": {
+      "problems": []
+    }
+  },
+  "slides": {
+    "count": 19,
+    "hidden_count": 0,
+    "hidden": []
+  },
+  "fonts": {
+    "theme": {
+      "title": {
+        "latin": "Trebuchet MS",
+        "ea": "Microsoft YaHei",
+        "cs": "Trebuchet MS",
+        "scripts": {
+          "Jpan": "Microsoft YaHei",
+          "Hang": "Microsoft YaHei",
+          "Hans": "Microsoft YaHei",
+          "Hant": "Microsoft YaHei"
+        }
+      },
+      "body": {
+        "latin": "Arial",
+        "ea": "Microsoft YaHei",
+        "cs": "Arial",
+        "scripts": {
+          "Jpan": "Microsoft YaHei",
+          "Hang": "Microsoft YaHei",
+          "Hans": "Microsoft YaHei",
+          "Hant": "Microsoft YaHei"
+        }
+      }
+    },
+    "declared": {
+      "latin": [
+        {
+          "value": "Arial",
+          "count": 177
+        },
+        {
+          "value": "+mn-lt",
+          "count": 68
+        },
+        {
+          "value": "Courier New",
+          "count": 33
+        },
+        {
+          "value": "Trebuchet MS",
+          "count": 21
+        },
+        {
+          "value": "+mj-lt",
+          "count": 1
+        }
+      ],
+      "ea": [
+        {
+          "value": "Arial",
+          "count": 175
+        },
+        {
+          "value": "+mn-ea",
+          "count": 68
+        },
+        {
+          "value": "Courier New",
+          "count": 33
+        },
+        {
+          "value": "Trebuchet MS",
+          "count": 19
+        },
+        {
+          "value": "Microsoft YaHei",
+          "count": 4
+        },
+        {
+          "value": "+mj-ea",
+          "count": 1
+        }
+      ],
+      "cs": [
+        {
+          "value": "Arial",
+          "count": 177
+        },
+        {
+          "value": "+mn-cs",
+          "count": 68
+        },
+        {
+          "value": "Courier New",
+          "count": 33
+        },
+        {
+          "value": "Trebuchet MS",
+          "count": 21
+        },
+        {
+          "value": "+mj-cs",
+          "count": 1
+        }
+      ]
+    },
+    "embedded_parts": [],
+    "portability_advisory_faces": []
+  },
+  "media": {
+    "embedded_count": 0,
+    "external_count": 0,
+    "embedded": [],
+    "external": [],
+    "uncompressed_bytes": 0,
+    "archive_compressed_bytes": 0,
+    "share_of_archive": 0.0,
+    "share_of_uncompressed_parts": 0.0,
+    "top_contributors": []
+  },
+  "motion": {
+    "transitions": {
+      "carrier_slide_count": 0,
+      "visual_effect_slide_count": 0,
+      "timed_advance_slide_count": 0,
+      "carrier_slides": [],
+      "visual_effect_slides": [],
+      "timed_advance_slides": [],
+      "effects": {}
+    },
+    "object_animations": {
+      "timing_slide_count": 0,
+      "object_animation_slide_count": 0,
+      "audio_timing_slide_count": 0,
+      "timing_slides": [],
+      "object_animation_slides": [],
+      "audio_timing_slides": []
+    }
+  },
+  "errors": [],
+  "advisories": []
+}

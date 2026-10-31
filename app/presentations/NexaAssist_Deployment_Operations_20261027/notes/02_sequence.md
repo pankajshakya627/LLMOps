@@ -1,0 +1,3 @@
+Ask learners: if every container is green, is the assistant ready to answer correctly? No: the model can be unavailable, the corpus can be empty, or the returned answer can fail policy validation. Our four checkpoints are infrastructure, retrieval, generation/validation and evaluation. The request scope is institution, jurisdiction, confidentiality, product and policy date. A successful deployment must be followed by a synthetic smoke test and inspection of the exact answer and evidence. Readiness in this repository checks the selected database; it does not probe the model or establish corpus completeness. Tracing records execution, whereas Ragas judges selected aspects of quality. Neither replaces business acceptance.
+
+A running container is only the first checkpoint.

@@ -1,0 +1,25 @@
+{
+  "revision": "syllabus-20261024",
+  "source": "exported LibreOffice PDF and imported SVG preview",
+  "reviewed_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "review_method": "Grouped four-page rendered views; additional full-size checks of new or dense slides",
+  "unresolved_findings": [],
+  "notes": "Every page has editable text, syllabus attribution and speaker notes; no clipped text or overlapping content found in reviewed export."
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 01 / ARCHITECTURE TO CODE</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42">Code / pure chain, strict draft</text></g>
+<g id="source-code" data-pptx-bounds="64 215 1152 250"><rect x="64" y="215" width="1152" height="250" fill="#132C42" /><text fill="#FFFFFF" font-family="Courier New" font-size="20" xml:space="preserve" x="88" y="280">    generation = ANSWER_PROMPT | llm.with_structured_output(</text><text fill="#FFFFFF" font-family="Courier New" font-size="20" xml:space="preserve" x="88" y="323">        AnswerDraft, method="json_schema", strict=True</text><text fill="#FFFFFF" font-family="Courier New" font-size="20" xml:space="preserve" x="88" y="366">    )</text></g>
+<g id="interpretation" data-pptx-bounds="64 500 1152 120"><text fill="#132C42" font-size="26" x="64" y="537">The same LCEL chain is callable from the service and evaluation.</text><text fill="#132C42" font-size="26" x="64" y="580">Strict structure still needs source and policy-meaning checks.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Educative L05 / Literal excerpt: app/chains/answer.py</text><text x="1150" y="681">11/16</text></g>
+</svg>

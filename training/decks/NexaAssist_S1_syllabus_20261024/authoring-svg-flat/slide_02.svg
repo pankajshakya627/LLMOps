@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 361.78 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 361.78 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 425.14 31 L 425.14 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST  /  SESSION 01  /  DISCOVER</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 83 936.17 64" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 83 875.265 64" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 83 L 937.665 83 L 937.665 147 L 62.4 147 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">LLMOps controls behavior across releases</text>
+</g>
+</g>
+<g id="shape-8" data-pptx-object="group" data-pptx-frame="64 209 872.585 46" data-pptx-source-ref="slide:8">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 213 5 42" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 213 L 69 213 L 69 255 L 64 255 Z" fill="#087E8B" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="90.96 209 845.625 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 90.96 209 L 936.585 209 L 936.585 250.6 L 90.96 250.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="90.96" y="235" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Quality and safety need baselines, owners and release gates.</text>
+</g>
+</g>
+<g id="shape-11" data-pptx-object="group" data-pptx-frame="64 329 862.86 46" data-pptx-source-ref="slide:11">
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="64 333 5 42" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 64 333 L 69 333 L 69 375 L 64 375 Z" fill="#087E8B" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-10" data-pptx-object="shape" data-pptx-frame="90.96 329 835.9 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:10" data-pptx-semantic-object="shape">
+<path d="M 90.96 329 L 926.86 329 L 926.86 370.6 L 90.96 370.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="90.96" y="355" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Latency, failures and tokens need measured operating limits.</text>
+</g>
+</g>
+<g id="shape-14" data-pptx-object="group" data-pptx-frame="64 449 902.51 46" data-pptx-source-ref="slide:14">
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="64 453 5 42" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 64 453 L 69 453 L 69 495 L 64 495 Z" fill="#087E8B" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-13" data-pptx-object="shape" data-pptx-frame="90.96 449 875.55 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:13" data-pptx-semantic-object="shape">
+<path d="M 90.96 449 L 966.51 449 L 966.51 490.6 L 90.96 490.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="90.96" y="475" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Every change needs evidence, an approver and a rollback path.</text>
+</g>
+</g>
+<g id="shape-17" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:17">
+<g id="shape-15" data-pptx-object="shape" data-pptx-frame="63.36 665 841.635 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:15" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 904.995 665 L 904.995 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 01, 03, 08, 14 / Concept + inspected local implementation; sources in notes</text>
+</g>
+<g id="shape-16" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:16" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">02/16</text>
+</g>
+</g></svg>

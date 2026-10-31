@@ -1,0 +1,1 @@
+In a lab copy, change the evidence ID to 99. Predict the marker/ID mismatch and repair count. Then explain a wrong answer with a valid quote. Do not edit shared production prompts during class. Review the valid and invalid branches and capture the prediction before running the modified copy.

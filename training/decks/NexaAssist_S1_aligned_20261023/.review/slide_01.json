@@ -1,0 +1,29 @@
+{
+  "page_role": "cover",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "page": "slide_01.svg",
+  "screenshot_paths": [
+    ".preview/slide_01.png"
+  ],
+  "design_intent_check": {
+    "spec_says": "Discover cover introducing NexaAssist / LLMOps engineering workshop, Session 1 of 5 and the 16-slide teaching edition.",
+    "render_delivers": true,
+    "note": "Dominant Discover title, workshop identity and session metadata are present, legible and separated. Renderer sanity record passed; inspected PNG and SVG with no rubric hits."
+  }
+}

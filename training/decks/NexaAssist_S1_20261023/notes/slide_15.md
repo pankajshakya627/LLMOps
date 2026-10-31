@@ -1,0 +1,1 @@
+Run: python -m training.session1.check_gates app/evaluation/gates.json Change a copied faithfulness minimum to 1.5. Expected: validation rejects a value outside [0, 1]. Use a copy in /tmp and rerun check_gates with that path. A syntactically valid threshold still needs business approval and a measured baseline.

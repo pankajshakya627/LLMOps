@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-25",
+  "automated": {
+    "tests": 349,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": "passed",
+  "types": "passed: 99 source files",
+  "lockfile": "uv lock --check --offline passed",
+  "retired_sdk_installed": false,
+  "live_models_retested": false,
+  "review_load_assumption": "Local training, single API worker; process-local limits and counters",
+  "limitations": [
+    "Existing clients must adopt the new response schema",
+    "Previously saved evaluated responses must be recaptured for export",
+    "No fresh live provider/Atlas, browser or Docker build check"
+  ],
+  "final_focused_checks": {
+    "tests": 37,
+    "failures": 0,
+    "seconds": 15.56
+  },
+  "changed_python_formatting": "passed: 28 files"
+}

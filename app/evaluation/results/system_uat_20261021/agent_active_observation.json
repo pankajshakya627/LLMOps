@@ -1,0 +1,24 @@
+{
+  "source": "Transcribed subset of actual Docker Agent status output captured during the active UAT; not an additional probe or cumulative run totals",
+  "receiver": [
+    {
+      "Service": "nexaassist-ui",
+      "PayloadAccepted": 2,
+      "PayloadRefused": 0,
+      "SpansReceived": 463,
+      "SpansDropped": 0,
+      "TracesReceived": 463
+    },
+    {
+      "Service": "nexaassist-api",
+      "PayloadAccepted": 2,
+      "PayloadRefused": 0,
+      "SpansReceived": 8,
+      "SpansDropped": 0,
+      "TracesReceived": 2,
+      "ClientDroppedP0Traces": 3,
+      "ClientDroppedP0Spans": 3
+    }
+  ],
+  "interpretation": "Receiver accepted API/UI spans in that snapshot. Client sampling/drop counters were nonzero. This does not establish cloud visibility or delivery of every request."
+}

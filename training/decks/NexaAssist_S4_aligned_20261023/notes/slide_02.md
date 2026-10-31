@@ -1,0 +1,1 @@
+Predict 422, 429 and 503 responses. Trace input, output and resource controls. Explain why an empty metrics window cannot pass an SLO. The deliverables are an API failure matrix, a security limitation note and an operational test plan.

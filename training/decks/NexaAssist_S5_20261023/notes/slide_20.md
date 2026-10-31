@@ -1,0 +1,1 @@
+New input types expand ingestion and privacy work. Distillation adds a versioned training-data lifecycle. Add capability only with a concrete use case and evaluation. Treat these as future directions rather than promises about latency, privacy or cost. Each new capability changes the evaluation and operational contract.

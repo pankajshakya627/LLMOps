@@ -1,0 +1,29 @@
+{
+  "page": "slide_12.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_12.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Scope the policy assistant: cited explanations or safe non-answers, excluded credit/account actions, and named permitted sources and unresolved owners.",
+    "render_delivers": true,
+    "note": "All three scope statements are complete and readable, with consistent left alignment and clear semantic accent on excluded actions. No overflow or collision observed."
+  }
+}

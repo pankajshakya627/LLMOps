@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC"/>
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 01 / USE-CASE MANIFEST</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42">Scope the policy assistant before release</text></g>
+<g id="scope" data-pptx-bounds="64 210 1152 105"><rect x="64" y="215" width="5" height="64" fill="#087E8B"/><text x="92" y="247" font-size="26" fill="#132C42">Staff receive cited explanations or safe non-answers.</text></g>
+<g id="excluded" data-pptx-bounds="64 350 1152 105"><rect x="64" y="355" width="5" height="64" fill="#A13442"/><text x="92" y="387" font-size="26" fill="#132C42">Credit decisions and account actions are outside scope.</text></g>
+<g id="owners" data-pptx-bounds="64 490 1152 105"><rect x="64" y="495" width="5" height="64" fill="#087E8B"/><text x="92" y="527" font-size="26" fill="#132C42">The manifest names permitted sources and unresolved owners.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Educative L06 / training/use_case_manifest.md / support-assistant adaptation in notes</text><text x="1150" y="681">12/16</text></g>
+</svg>

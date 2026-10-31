@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="&quot;Courier New&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 428.51 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 428.51 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 491.87 31 L 491.87 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 02 / SCOPED RETRIEVAL</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 84.33 657.09 61.6" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 84.33 657.09 61.6" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 84.33 L 719.49 84.33 L 719.49 145.93 L 62.4 145.93 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Code / date and permission filters</text>
+</g>
+</g>
+<g id="shape-16" data-pptx-object="group" data-pptx-frame="64 205 1152 340" data-pptx-source-ref="slide:16">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 205 1152 340" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 205 L 1216 205 L 1216 545 L 64 545 Z" fill="#132C42" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="87.28 222.67 505.15 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 87.28 222.67 L 592.43 222.67 L 592.43 250.39 L 87.28 250.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="240" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">        filters: list[dict[str, object]] = [</text>
+</g>
+<g id="shape-8" data-pptx-object="shape" data-pptx-frame="87.28 255.67 573.84 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:8" data-pptx-semantic-object="shape">
+<path d="M 87.28 255.67 L 661.12 255.67 L 661.12 283.39 L 87.28 283.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="273" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">            {"institution": settings.institution},</text>
+</g>
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="87.28 288.67 550.94 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 87.28 288.67 L 638.22 288.67 L 638.22 316.39 L 87.28 316.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="306" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">            {"effective_date": {"$lte": as_of}},</text>
+</g>
+<g id="shape-10" data-pptx-object="shape" data-pptx-frame="87.28 321.67 608.18 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:10" data-pptx-semantic-object="shape">
+<path d="M 87.28 321.67 L 695.46 321.67 L 695.46 349.39 L 87.28 349.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="339" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">            {"effective_to_search": {"$gte": as_of}},</text>
+</g>
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="87.28 354.67 871.49 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 87.28 354.67 L 958.77 354.67 L 958.77 382.39 L 87.28 382.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="372" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">            {"jurisdiction": request.jurisdiction or settings.jurisdiction},</text>
+</g>
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="87.28 387.67 802.8 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 87.28 387.67 L 890.08 387.67 L 890.08 415.39 L 87.28 415.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="405" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">            {"confidentiality_level": settings.confidentiality_level},</text>
+</g>
+<g id="shape-13" data-pptx-object="shape" data-pptx-frame="87.28 420.67 104.47 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:13" data-pptx-semantic-object="shape">
+<path d="M 87.28 420.67 L 191.75 420.67 L 191.75 448.39 L 87.28 448.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="438" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">        ]</text>
+</g>
+<g id="shape-14" data-pptx-object="shape" data-pptx-frame="87.28 453.67 483.26 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:14" data-pptx-semantic-object="shape">
+<path d="M 87.28 453.67 L 570.54 453.67 L 570.54 481.39 L 87.28 481.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="471" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">        if request.product_id is not None:</text>
+</g>
+<g id="shape-15" data-pptx-object="shape" data-pptx-frame="87.28 486.67 711.22 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:15" data-pptx-semantic-object="shape">
+<path d="M 87.28 486.67 L 798.5 486.67 L 798.5 514.39 L 87.28 514.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="504" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">            filters.append({"product_id": request.product_id})</text>
+</g>
+</g>
+<g id="shape-19" data-pptx-object="group" data-pptx-frame="62.96 564.67 680.05 75.04" data-pptx-source-ref="slide:19">
+<g id="shape-17" data-pptx-object="shape" data-pptx-frame="62.96 564.67 680.05 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:17" data-pptx-semantic-object="shape">
+<path d="M 62.96 564.67 L 743.01 564.67 L 743.01 604.71 L 62.96 604.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="590" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Product scope is added when supplied; model similarity</text>
+</g>
+<g id="shape-18" data-pptx-object="shape" data-pptx-frame="62.96 599.67 309.96 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:18" data-pptx-semantic-object="shape">
+<path d="M 62.96 599.67 L 372.92 599.67 L 372.92 639.71 L 62.96 639.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="625" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">never overrides this filter.</text>
+</g>
+</g>
+<g id="shape-22" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:22">
+<g id="shape-20" data-pptx-object="shape" data-pptx-frame="63.36 665 810.86 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:20" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 874.22 665 L 874.22 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 09, 10, 12 / Concept + inspected local implementation; sources in notes</text>
+</g>
+<g id="shape-21" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:21" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">10/16</text>
+</g>
+</g></svg>

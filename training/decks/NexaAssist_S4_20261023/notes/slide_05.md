@@ -1,0 +1,1 @@
+Before: validate, quota and redact the query. During: bound context and output tokens. After: detect PII and verify cited quotes. These controls reduce distinct risks. None demonstrates complete injection resistance, data-loss prevention or semantic correctness.

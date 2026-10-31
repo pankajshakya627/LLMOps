@@ -1,0 +1,5 @@
+# Run in Python 3.12/3.13; Guardrails AI 0.11 excludes the app's Python 3.14.
+guardrails-ai==0.11.0
+fastapi>=0.120,<1
+uvicorn>=0.30,<1
+httpx>=0.28,<1

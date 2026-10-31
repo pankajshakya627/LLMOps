@@ -1,0 +1,1 @@
+Status distinguishes placeholder numbers from owner-confirmed targets. Open app/evaluation/gates.py and locate class Gates. Read the displayed excerpt in context; it is taken directly from the application. Status distinguishes placeholder numbers from owner-confirmed targets. The implementation or concept reference is app/evaluation/gates.py.

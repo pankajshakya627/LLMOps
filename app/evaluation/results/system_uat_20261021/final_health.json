@@ -1,0 +1,22 @@
+{
+  "captured_at": "2026-10-21T08:42:23.895564+00:00",
+  "api_health": {
+    "http_status": 200,
+    "response": {
+      "status": "ok"
+    }
+  },
+  "ui_health": {
+    "http_status": 200,
+    "response": "ok"
+  },
+  "metrics": {
+    "http_status": 200,
+    "response": {
+      "retrieval_requests_total": 24,
+      "retrieval_errors_total": 0,
+      "retrieval_empty_total": 0,
+      "retrieval_latency_ms_total": 21982.54
+    }
+  }
+}

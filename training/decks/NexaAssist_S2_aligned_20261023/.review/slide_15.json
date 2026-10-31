@@ -1,0 +1,29 @@
+{
+  "page": "slide_15.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_15.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Run the retrieval practical, compare k values and distinguish partial multi-clause recall from rank.",
+    "render_delivers": true,
+    "note": "The command and both specified outcomes are visible and legible. Stable alignment and spacing keep title, command, content and footer separate; no hard or clearly bad soft hit was found."
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "captured_at": "2026-10-21T08:38:35.152455+00:00",
+  "scope": "Agent status snapshot; counters may represent a recent interval, not this whole UAT run",
+  "receiver": [
+    {
+      "Service": "",
+      "PayloadAccepted": 9,
+      "PayloadRefused": 0,
+      "SpansReceived": 0,
+      "SpansDropped": 0,
+      "TracesReceived": 0,
+      "ClientDroppedP0Traces": 19,
+      "ClientDroppedP0Spans": 94
+    }
+  ],
+  "trace_writer": {
+    "Bytes": 0,
+    "BytesUncompressed": 0,
+    "Errors": 0,
+    "Events": 0,
+    "Payloads": 0,
+    "Retries": 0,
+    "SingleMaxSize": 0,
+    "Spans": 0,
+    "Traces": 0
+  },
+  "stats_writer": {
+    "Bytes": 1549,
+    "ClientPayloads": 2,
+    "Errors": 0,
+    "Payloads": 2,
+    "Retries": 0,
+    "Splits": 0,
+    "StatsBuckets": 2,
+    "StatsEntries": 6
+  }
+}

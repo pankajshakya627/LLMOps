@@ -1,0 +1,3 @@
+Transition from gateway reliability to application security. Ask whether a cached or fallback response should be exempt from checks; the answer is no. This implementation uses Guardrails AI as a local schema sidecar, not as a replacement for application source validation. Portkey and NeMo are alternatives only. NeMo offers a broader rail model, but that integration is absent here. None of these checks replaces authorization or proves that every natural-language attack will be blocked.
+
+Source locations for this page are app/security/input_policy.py:26; app/models/answer.py:18; app/chains/answer.py:184. Open the Markdown guide app/operations/GATEWAYS_AND_GUARDRAILS_GUIDE.md for the complete walkthrough. Source lines describe the 25 October 2026 snapshot.

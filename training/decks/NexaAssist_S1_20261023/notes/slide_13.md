@@ -1,0 +1,1 @@
+Run: uv run --no-sync pytest -q tests Locate the missing architecture-document failure. Record it separately; do not delete or skip the test. The handoff reports one missing documentation artifact. Use the actual result in this copy rather than memorizing a historical test count. Keep the failure visible.

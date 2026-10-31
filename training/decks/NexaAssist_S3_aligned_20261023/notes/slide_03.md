@@ -1,0 +1,1 @@
+25 min prompts/evaluation + 20 min code walkthrough 90 min pair labs, including a 10 min break 25 min gate decisions + 20 min review Split the lab block across answer replay, failure classification and golden-case review. Use the detailed handout as the exercise sheet.

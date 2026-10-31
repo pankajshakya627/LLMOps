@@ -1,0 +1,3 @@
+# Carrier review
+
+Plain rectangular fields hold literal code so indentation and the source path remain readable; inflected carriers would imply an additional state or category. Straight arrowed lines carry the dependency diagrams. Numbered text carries ordered classroom actions. No organizational ownership grouping or attached object annotation requires brackets, plaques or callouts. No image or icon pool is registered. Typography and per-session solid color distinguish source, command and expected result; no intensity scale or material state calls for gradients or filters. The unchanged literal code excerpts carry their own emphasis through indentation, so no styled inline emphasis was introduced.

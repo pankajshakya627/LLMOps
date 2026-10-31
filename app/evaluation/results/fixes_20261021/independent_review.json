@@ -1,0 +1,9 @@
+{
+  "finding": "Parent expansion omitted product_id/effective_date/effective_to checks",
+  "classification": "valid and actionable",
+  "reproduction": "Three independently modified parent metadata fields accepted out-of-scope text with an otherwise in-scope child",
+  "action": "Compare parent source product and validity metadata with the scoped child; retain child on mismatch",
+  "regression_before": "3 failed; existing foreign-institution case passed",
+  "regression_after": "Full application suite: 115 passed",
+  "scope": "In-memory stores, no live calls by reviewer"
+}

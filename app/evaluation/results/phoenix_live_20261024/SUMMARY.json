@@ -1,0 +1,144 @@
+{
+  "project": "nexaassist-training",
+  "api_url": "http://127.0.0.1:8001",
+  "guardrails_url": "http://127.0.0.1:8101",
+  "baseline_span_id": "577d64549bb16e08",
+  "candidate_span_id": "27c80de8f1eddab8",
+  "baseline_answer_status": "insufficient_evidence",
+  "candidate_answer_status": "answered",
+  "candidate_metrics": {
+    "faithfulness": {
+      "status": "scored",
+      "value": 0.0,
+      "reason": null
+    },
+    "answer_relevancy": {
+      "status": "scored",
+      "value": 0.9958213525224018,
+      "reason": null
+    },
+    "context_precision": {
+      "status": "scored",
+      "value": 0.09999999999,
+      "reason": null
+    },
+    "context_recall": {
+      "status": "scored",
+      "value": 1.0,
+      "reason": null
+    }
+  },
+  "annotations_read_back": {
+    "577d64549bb16e08": {
+      "app_prompt_version": {
+        "label": "1.1.0",
+        "score": null,
+        "explanation": null
+      },
+      "ragas_context_recall": {
+        "label": "scored",
+        "score": 1.0,
+        "explanation": null
+      },
+      "ragas_context_precision": {
+        "label": "scored",
+        "score": 0.09999999999,
+        "explanation": null
+      },
+      "ragas_answer_relevancy": {
+        "label": "unavailable",
+        "score": null,
+        "explanation": "The answer abstained; this metric is not applicable."
+      },
+      "ragas_faithfulness": {
+        "label": "unavailable",
+        "score": null,
+        "explanation": "The answer abstained; this metric is not applicable."
+      }
+    },
+    "27c80de8f1eddab8": {
+      "quality_decision": {
+        "label": "rejected",
+        "score": null,
+        "explanation": "Single-case faithfulness was 0.0: the generated amount dropped a digit despite an exact supporting quote. Candidate not promoted; active source restored to 1.1.0."
+      },
+      "guardrails_output_schema": {
+        "label": "passed",
+        "score": null,
+        "explanation": "The actual candidate draft passed the live Guardrails schema validator. This is separate from factual faithfulness."
+      },
+      "app_prompt_version": {
+        "label": "1.1.1",
+        "score": null,
+        "explanation": null
+      },
+      "ragas_context_recall": {
+        "label": "scored",
+        "score": 1.0,
+        "explanation": null
+      },
+      "ragas_context_precision": {
+        "label": "scored",
+        "score": 0.09999999999,
+        "explanation": null
+      },
+      "ragas_answer_relevancy": {
+        "label": "scored",
+        "score": 0.9958213525224018,
+        "explanation": null
+      },
+      "ragas_faithfulness": {
+        "label": "scored",
+        "score": 0.0,
+        "explanation": null
+      }
+    }
+  },
+  "active_application_prompt": "1.1.0",
+  "candidate_promoted": false,
+  "guardrail_cases": [
+    {
+      "case": "valid_draft",
+      "http_status": 200,
+      "validation_passed": true,
+      "expected": true
+    },
+    {
+      "case": "invalid_status",
+      "http_status": 200,
+      "validation_passed": false,
+      "expected": false
+    },
+    {
+      "case": "unknown_field",
+      "http_status": 200,
+      "validation_passed": false,
+      "expected": false
+    },
+    {
+      "case": "invalid_evidence_id",
+      "http_status": 200,
+      "validation_passed": false,
+      "expected": false
+    },
+    {
+      "case": "malformed_json",
+      "http_status": 200,
+      "validation_passed": false,
+      "expected": false
+    },
+    {
+      "case": "invalid_request_shape",
+      "http_status": 422,
+      "expected_http_status": 422
+    },
+    {
+      "case": "candidate_valid_schema_but_unfaithful_answer",
+      "http_status": 200,
+      "validation_passed": true,
+      "faithfulness": 0.0,
+      "explanation": "Schema validation does not establish factual correctness."
+    }
+  ],
+  "offline_tests": "269 passed"
+}

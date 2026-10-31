@@ -1,0 +1,29 @@
+{
+  "page": "slide_11.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_11.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Pure chain, strict draft: the same LCEL chain is callable from the service and evaluation, with the literal structured-output excerpt.",
+    "render_delivers": true,
+    "note": "The three source lines are readable in the dark code field; interpretation establishes reuse and the limits of strict structure. No overflow, collision or contrast issue observed."
+  }
+}

@@ -1,0 +1,1 @@
+Dense search matches embedding similarity. Hybrid adds lexical evidence; reranking changes order. Evaluate each configuration on the same cases. Optional retrieval modes already exist. Avoid assuming that a hybrid configuration is better until a comparable retrieval evaluation supports that claim. The implementation or concept reference is app/chains/retrieval.py.

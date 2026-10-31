@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC"/>
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 02 / OFFLINE POLICY DEMONSTRATION</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42">Practical / replay the July policy boundary</text></g>
+<g id="command" data-pptx-bounds="64 215 1152 105"><rect x="64" y="215" width="1152" height="105" fill="#132C42"/><text x="88" y="276" font-family="Courier New" font-size="20" fill="#FFFFFF">python -m training.showcase --session 2</text></g>
+<g id="fee-cases" data-pptx-bounds="64 355 1152 110"><text x="64" y="392" font-size="26" fill="#132C42"><tspan x="64" y="392">June: 0.35% / POL-HL-V3; July: 0.30% / CIR-2026-07.</tspan><tspan x="64" y="432">Each example states both lookup and sanction dates.</tspan></text></g>
+<g id="product-case" data-pptx-bounds="64 495 1152 100"><text x="64" y="532" font-size="26" fill="#132C42">Wrong product: insufficient_evidence; no citations.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Educative L08 / Real PDFs and controls / Fake ranking, embeddings, transport and model</text><text x="1150" y="681">14/16</text></g>
+</svg>

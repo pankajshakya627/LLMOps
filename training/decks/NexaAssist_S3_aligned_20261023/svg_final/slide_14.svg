@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text fill="#526375" font-size="16" xml:space="preserve" x="64" y="47">NEXAASSIST  /  SESSION 03  /  DISTILL II</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text fill="#132C42" font-family="Trebuchet MS" font-size="40" xml:space="preserve" x="64" y="123">LCEL composes prompt and strict model output</text></g>
+<g id="source-code" data-pptx-bounds="64 205 1152 335"><rect x="64" y="205" width="1152" height="335" fill="#132C42" /><text fill="#F5F3EC" font-family="Courier New" font-size="20" xml:space="preserve" x="88" y="237">generation = ANSWER_PROMPT | llm.with_structured_output(</text><text fill="#F5F3EC" font-family="Courier New" font-size="20" xml:space="preserve" x="88" y="262">    AnswerDraft, method="json_schema", strict=True</text><text fill="#F5F3EC" font-family="Courier New" font-size="20" xml:space="preserve" x="88" y="287">)</text></g>
+<g id="interpretation" data-pptx-bounds="64 565 1135 75"><text fill="#132C42" font-size="26" xml:space="preserve" x="64" y="592">The chain requests AnswerDraft with strict JSON-schema output.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" fill="#526375" font-size="16"><text xml:space="preserve" x="64" y="681">Educative L09 / app/chains/answer.py</text><text xml:space="preserve" x="1150" y="681">14/36</text></g>
+</svg>

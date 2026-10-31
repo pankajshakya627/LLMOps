@@ -1,0 +1,1 @@
+Signal → triage → source-supported correction Review → proposed golden case → regression replay Approved fix → measured release → observation This is our workshop interpretation of the course feedback loop. Each transition needs evidence and an owner, especially where policy meaning changes.

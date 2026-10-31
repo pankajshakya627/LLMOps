@@ -1,0 +1,29 @@
+{
+  "page": "slide_01.svg",
+  "page_role": "cover",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_01.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Introduce Distill I, data foundations, embeddings and retrieval, with Session 2 of 5 and 16-slide teaching scope.",
+    "render_delivers": true,
+    "note": "The dominant title, teaching focus and session metadata are present and legible. No clipping, collisions, contrast failures or clearly bad soft conditions were found."
+  }
+}

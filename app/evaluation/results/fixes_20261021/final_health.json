@@ -1,0 +1,6 @@
+{
+  "http://127.0.0.1:8000/health": 200,
+  "http://127.0.0.1:8000/metrics": 200,
+  "http://127.0.0.1:8000/metrics/latency": 200,
+  "http://127.0.0.1:8501/_stcore/health": 200
+}

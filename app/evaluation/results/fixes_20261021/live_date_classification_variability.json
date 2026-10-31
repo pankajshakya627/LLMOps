@@ -1,0 +1,9 @@
+{
+  "initial_followup_status": "insufficient_evidence",
+  "expected_user_guidance": "needs_clarification",
+  "source": "FastAPI answer_completed event, 2026-10-21T10:07:37.102510Z",
+  "trace_id": "6ad88ee6000000009eae03e60faebb01",
+  "span_id": "15344715974312806898",
+  "harness_limit": "Response body was not persisted because a status assertion ran before saving; the six earlier completed responses are retained. Outstanding cases are rerun separately.",
+  "action": "Scope-first prompt instruction and fixed abstention recovery guidance. Model intent classification is still probabilistic; do not claim guaranteed clarification."
+}

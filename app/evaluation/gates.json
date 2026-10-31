@@ -1,0 +1,15 @@
+{
+  "status": "placeholder",
+  "faithfulness_min": 0.85,
+  "answer_relevancy_min": 0.85,
+  "context_precision_min": 0.85,
+  "context_recall_min": 0.85,
+  "judge_correctness_min": 0.85,
+  "judge_groundedness_min": 0.85,
+  "status_match_rate_min": 0.85,
+  "p95_total_ms_max": 2000,
+  "cost_per_query_usd_max": 0.01,
+  "error_rate_max": 0.001,
+  "hallucination_rate_rollback": 0.05,
+  "regression_tolerance": 0.05
+}

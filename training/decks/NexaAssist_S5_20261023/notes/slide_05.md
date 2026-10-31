@@ -1,0 +1,1 @@
+Prompt ID, version and content fingerprint. Chat/embedding model and retrieval configuration. Evidence references and optional Datadog span ID. The response carries provenance, and feedback preserves the submitted response. Client-supplied provenance is useful context but is not tamper-proof attestation. The implementation or concept reference is app/models/answer.py.

@@ -1,0 +1,1 @@
+Parse structure → chunk clauses → mask identifiers Enrich metadata → compare checksums Embed changed children → upsert parents and chunks The parent sections provide readable context, while smaller child chunks serve search. A checksum includes embedding compatibility so a model change invalidates old vectors. The implementation or concept reference is app/chains/ingestion.py.

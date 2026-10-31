@@ -1,0 +1,44 @@
+# Replica URLs must identify two independent Ollama deployments.
+model_list:
+- model_name: nexa-chat-balanced
+  litellm_params:
+    model: ollama_chat/qwen3.5:9b-mlx
+    api_base: os.environ/OLLAMA_REPLICA_A_BASE_URL
+    reasoning_effort: none
+  model_info:
+    id: ollama-replica-a
+- model_name: nexa-chat-balanced
+  litellm_params:
+    model: ollama_chat/qwen3.5:9b-mlx
+    api_base: os.environ/OLLAMA_REPLICA_B_BASE_URL
+    reasoning_effort: none
+  model_info:
+    id: ollama-replica-b
+- model_name: nexa-chat-openai
+  litellm_params:
+    model: os.environ/OPENAI_LITELLM_CHAT_MODEL
+    api_key: os.environ/OPENAI_API_KEY
+    api_base: https://api.openai.com/v1
+- model_name: nexa-embed-local
+  litellm_params:
+    model: openai/qwen3-embedding:0.6b
+    api_base: os.environ/OLLAMA_OPENAI_BASE_URL
+    api_key: ollama
+- model_name: nexa-embed-openai
+  litellm_params:
+    model: openai/text-embedding-3-small
+    api_key: os.environ/OPENAI_API_KEY
+    api_base: https://api.openai.com/v1
+router_settings:
+  routing_strategy: simple-shuffle
+  num_retries: 1
+  max_fallbacks: 1
+  timeout: 30
+  fallbacks:
+  - nexa-chat-balanced:
+    - nexa-chat-openai
+litellm_settings:
+  callbacks: ["arize_phoenix"]
+  cache: false
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

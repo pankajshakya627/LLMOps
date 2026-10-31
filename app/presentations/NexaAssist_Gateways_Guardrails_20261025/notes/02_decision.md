@@ -1,0 +1,3 @@
+Ask learners to classify an outage, saturation, repeated question and injection attempt before naming a tool. Fallback improves availability, balancing spreads work across independent capacity, caching avoids eligible repeated generation, and security checks enforce boundaries. A low evaluation score is not a configured LiteLLM fallback trigger here. The lesson is mechanism selection, not adding all tools to every request.
+
+Source locations for this page are app/gateway/litellm.yaml:23; app/gateway/litellm_balanced.yaml:2; app/gateway/litellm_cache.yaml:31; app/chains/guardrails.py:9. Open the Markdown guide app/operations/GATEWAYS_AND_GUARDRAILS_GUIDE.md for the complete walkthrough. Source lines describe the 25 October 2026 snapshot.

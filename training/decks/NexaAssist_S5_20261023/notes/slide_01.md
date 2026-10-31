@@ -1,0 +1,1 @@
+Observability, human review and rollback Session 5 of 5 · 3 hours · complete the release file The final session uses synthetic incidents and actual checkers. Learners must distinguish an exercise decision from a production deployment action.

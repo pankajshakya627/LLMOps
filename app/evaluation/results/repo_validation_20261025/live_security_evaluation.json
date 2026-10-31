@@ -1,0 +1,208 @@
+{
+  "evaluated": {
+    "http_status": 200,
+    "response": {
+      "answer": {
+        "as_of": "2026-10-01",
+        "status": "answered",
+        "answer": "The maximum NexaHome Loan amount is ₹7,50,00,000 [2].",
+        "citations": [
+          {
+            "evidence_id": 2,
+            "quote": "Maximum loan amount is ₹7,50,00,000.",
+            "matched_child": {
+              "doc_id": "POL-HL-V3",
+              "title": "NexaHome Loan Policy",
+              "policy_version": "3.0",
+              "clause": "4.1",
+              "effective_date": "2025-10-01"
+            }
+          }
+        ],
+        "retrieval_timings": {
+          "search_ms": 384.57,
+          "parent_ms": 151.26,
+          "total_ms": 535.89
+        },
+        "generation_ms": 2974.7,
+        "datadog_span_id": null,
+        "provenance": {
+          "prompt_id": "nexaassist-policy-answer",
+          "prompt_version": "1.1.0",
+          "prompt_sha": "dca0041f402b",
+          "chat_model": "gpt-6-luna",
+          "observed_chat_model": "gpt-6-luna",
+          "gateway_cache_hit": null,
+          "embedding_model": "qwen3-embedding:0.6b",
+          "retrieval_mode": "dense",
+          "rerank_enabled": false,
+          "evidence_refs": [
+            "CIR-2026-07:1.0:full",
+            "POL-HL-V3:3.0:7.2",
+            "POL-HL-V3:3.0:full",
+            "POL-HL-V3:3.0:3.2",
+            "POL-HL-V3:3.0:8.3",
+            "POL-HL-V3:3.0:5.1",
+            "POL-HL-V3:3.0:10.2",
+            "POL-HL-V3:3.0:6.5",
+            "POL-HL-V3:3.0:1.1",
+            "POL-HL-V3:3.0:4.1"
+          ]
+        }
+      },
+      "quality": {
+        "metrics": {
+          "faithfulness": {
+            "status": "scored",
+            "value": 1.0,
+            "reason": null
+          },
+          "answer_relevancy": {
+            "status": "scored",
+            "value": 0.9583873236833522,
+            "reason": null
+          },
+          "context_precision": {
+            "status": "scored",
+            "value": 0.09999999999,
+            "reason": null
+          },
+          "context_recall": {
+            "status": "scored",
+            "value": 1.0,
+            "reason": null
+          }
+        },
+        "reference_source": "provided",
+        "reference_answer": "The maximum NexaHome Loan amount is ₹7,50,00,000 (₹7.5 crore). The minimum is ₹5,00,000. This is the limit under POL-HL-V3, clause 4.1.",
+        "evaluated_at": "2026-10-25T07:57:00.261129Z",
+        "datadog_status": "disabled",
+        "datadog_url": null
+      }
+    }
+  },
+  "pii": {
+    "http_status": 200,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "The maximum NexaHome loan amount is ₹7,50,00,000 [2].",
+      "citations": [
+        {
+          "evidence_id": 2,
+          "quote": "Maximum loan amount is ₹7,50,00,000.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "4.1",
+            "effective_date": "2025-10-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 229.48,
+        "parent_ms": 152.27,
+        "total_ms": 381.8
+      },
+      "generation_ms": 2501.16,
+      "datadog_span_id": null,
+      "provenance": {
+        "prompt_id": "nexaassist-policy-answer",
+        "prompt_version": "1.1.0",
+        "prompt_sha": "dca0041f402b",
+        "chat_model": "gpt-6-luna",
+        "observed_chat_model": "gpt-6-luna",
+        "gateway_cache_hit": null,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "retrieval_mode": "dense",
+        "rerank_enabled": false,
+        "evidence_refs": [
+          "CIR-2026-07:1.0:full",
+          "POL-HL-V3:3.0:7.2",
+          "POL-HL-V3:3.0:1.1",
+          "POL-HL-V3:3.0:6.5",
+          "POL-HL-V3:3.0:5.1",
+          "POL-HL-V3:3.0:8.3",
+          "POL-HL-V3:3.0:9.2",
+          "POL-HL-V3:3.0:10.2",
+          "POL-HL-V3:3.0:3.2",
+          "POL-HL-V3:3.0:full",
+          "POL-HL-V3:3.0:4.1"
+        ]
+      }
+    }
+  },
+  "injection": {
+    "http_status": 200,
+    "response": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "The maximum NexaHome loan amount is ₹7,50,00,000 [3].",
+      "citations": [
+        {
+          "evidence_id": 3,
+          "quote": "Minimum loan amount is ₹5,00,000. Maximum loan amount is ₹7,50,00,000.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "4.1",
+            "effective_date": "2025-10-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 129.43,
+        "parent_ms": 149.78,
+        "total_ms": 279.3
+      },
+      "generation_ms": 2204.76,
+      "datadog_span_id": null,
+      "provenance": {
+        "prompt_id": "nexaassist-policy-answer",
+        "prompt_version": "1.1.0",
+        "prompt_sha": "dca0041f402b",
+        "chat_model": "gpt-6-luna",
+        "observed_chat_model": "gpt-6-luna",
+        "gateway_cache_hit": null,
+        "embedding_model": "qwen3-embedding:0.6b",
+        "retrieval_mode": "dense",
+        "rerank_enabled": false,
+        "evidence_refs": [
+          "CIR-2026-07:1.0:full",
+          "POL-HL-V3:3.0:4.1",
+          "POL-HL-V3:3.0:10.2",
+          "POL-HL-V3:3.0:5.1",
+          "POL-HL-V3:3.0:3.1",
+          "POL-HL-V3:3.0:9.2",
+          "POL-HL-V3:3.0:6.2",
+          "POL-HL-V3:3.0:7.2",
+          "POL-HL-V3:3.0:1.1",
+          "POL-HL-V3:3.0:full"
+        ]
+      }
+    }
+  },
+  "guardrails_valid": {
+    "http_status": 200,
+    "response": {
+      "validation_passed": true
+    }
+  },
+  "guardrails_invalid_status": {
+    "http_status": 200,
+    "response": {
+      "validation_passed": false
+    }
+  },
+  "guardrails_invalid_extra": {
+    "http_status": 200,
+    "response": {
+      "validation_passed": false
+    }
+  },
+  "invalid_request": {
+    "http_status": 422
+  }
+}

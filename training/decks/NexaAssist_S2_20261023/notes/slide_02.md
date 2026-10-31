@@ -1,0 +1,1 @@
+Preserve policy structure and tables. Retrieve the right version for the requested date. Measure expected clauses before generating answers. Similarity is a ranking signal, not policy authority. The model cannot recover a policy clause that never enters the context.

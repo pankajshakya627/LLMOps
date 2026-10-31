@@ -1,0 +1,34 @@
+{
+  "as_of": "2026-10-01",
+  "status": "insufficient_evidence",
+  "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+  "citations": [],
+  "retrieval_timings": {
+    "search_ms": 469.9,
+    "parent_ms": 22.48,
+    "total_ms": 492.5
+  },
+  "generation_ms": 2135.98,
+  "phoenix_trace_id": "81c119ff0cacd9d7ae7c8dbad256f995",
+  "phoenix_span_id": "28a07805e27b140a",
+  "provenance": {
+    "prompt_id": "nexaassist-policy-answer",
+    "prompt_version": "1.2.0",
+    "prompt_sha": "f29e38485765",
+    "chat_model": "nexa-chat",
+    "observed_chat_model": "nexa-chat",
+    "gateway_cache_hit": null,
+    "fallback_from_model": null,
+    "fallback_reason": null,
+    "embedding_model": "nexa-embed-local",
+    "retrieval_mode": "dense",
+    "rerank_enabled": false,
+    "evidence_refs": [
+      "CIR-2026-07:1.0:full",
+      "POL-HL-V3:3.0:7.2",
+      "POL-HL-V3:3.0:full",
+      "POL-HL-V3:3.0:1.1",
+      "POL-HL-V3:3.0:4.1"
+    ]
+  }
+}

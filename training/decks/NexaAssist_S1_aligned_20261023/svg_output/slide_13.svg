@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC"/>
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 01 / SOURCE INTEGRITY</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42">Code / reject changed source bytes</text></g>
+<g id="source-code" data-pptx-bounds="64 215 1152 285"><rect x="64" y="215" width="1152" height="285" fill="#132C42"/><text xml:space="preserve" x="88" y="256" font-family="Courier New" font-size="18" fill="#FFFFFF"><tspan x="88" y="256">def _verify_source(path: Path, entry: dict[str, Any]) -&gt; str:</tspan><tspan x="88" y="294">    """Refuse a file whose bytes differ from the register's recorded sha256."""</tspan><tspan x="88" y="332">    digest = hashlib.sha256(path.read_bytes()).hexdigest()</tspan><tspan x="88" y="370">    if digest != entry["sha256"]:</tspan><tspan x="88" y="408">        raise ValueError(f"{entry['doc_id']}: file sha256 does not match the document register")</tspan><tspan x="88" y="446">    return str(path)</tspan></text></g>
+<g id="interpretation" data-pptx-bounds="64 535 1152 100"><text x="64" y="576" font-size="26" fill="#132C42">A source must match the register before parsing or embedding.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Educative L06 / Literal excerpt: app/services/ingestion.py</text><text x="1150" y="681">13/16</text></g>
+</svg>

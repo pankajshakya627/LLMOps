@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 466.35 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 466.35 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 529.71 31 L 529.71 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 02 / RETRIEVAL EVALUATION</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 83 892.619 64" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 83 892.619 64" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 83 L 955.019 83 L 955.019 147 L 62.4 147 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Practical / score, then triage the incident</text>
+</g>
+</g>
+<g id="shape-8" data-pptx-object="group" data-pptx-frame="64 215 1152 105" data-pptx-source-ref="slide:8">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 215 1152 105" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 215 L 1216 215 L 1216 320 L 64 320 Z" fill="#132C42" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="87.2 256 732.48 32" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 87.2 256 L 819.68 256 L 819.68 288 L 87.2 288 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.2" y="276" text-anchor="start" xml:space="preserve" font-family="&quot;Courier New&quot;, sans-serif" font-size="20" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">uv run --no-sync python -m training.session2.recall</text>
+</g>
+</g>
+<g id="shape-10" data-pptx-object="group" data-pptx-frame="62.96 371 744.735 41.6" data-pptx-source-ref="slide:10">
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="62.96 371 744.735 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 62.96 371 L 807.695 371 L 807.695 412.6 L 62.96 412.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="397" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Partial evidence: recall 0.5; first hit at rank 4: RR 0.25.</text>
+</g>
+</g>
+<g id="shape-12" data-pptx-object="group" data-pptx-frame="62.96 501 860.16 41.6" data-pptx-source-ref="slide:12">
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="62.96 501 860.16 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 62.96 501 L 923.12 501 L 923.12 542.6 L 62.96 542.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="527" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Classify: nonempty miss / stale chunks / embedding mismatch.</text>
+</g>
+</g>
+<g id="shape-15" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:15">
+<g id="shape-13" data-pptx-object="shape" data-pptx-frame="63.36 665 714.52 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:13" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 777.88 665 L 777.88 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 03, 04, 05, 12, 14 / Offline exercise; observed fixture results</text>
+</g>
+<g id="shape-14" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:14" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">15/16</text>
+</g>
+</g></svg>

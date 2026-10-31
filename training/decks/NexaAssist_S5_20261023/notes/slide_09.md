@@ -1,0 +1,1 @@
+Scenario faithfulness changes from 0.95 to 0.70. Delta −0.25 exceeds the placeholder tolerance. Investigate cases and configuration before interpreting it. These are visibly scenario values, not observed model scores. The helper compares aggregate metrics but does not verify identical datasets. The implementation or concept reference is app/evaluation/compare.py.

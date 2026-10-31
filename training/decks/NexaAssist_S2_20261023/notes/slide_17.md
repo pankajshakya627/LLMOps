@@ -1,0 +1,1 @@
+Recall@k: fraction of required references found. MRR: reciprocal rank of the first expected reference. A fee question can require more than one clause. With one required reference at rank four and k at least four, recall is one and reciprocal rank is 0.25. With two required clauses and only one found, recall is 0.5.

@@ -1,0 +1,1471 @@
+{
+  "schema": "ppt-master.svg-quality-report.v1",
+  "stage": "final",
+  "target": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025",
+  "source_fingerprint": {
+    "algorithm": "sha256",
+    "digest": "d7382380b9cd3863138c9ead61f21afa6d3e1643bee9c9d5e111c7016a44039b",
+    "file_count": 22,
+    "files": [
+      {
+        "file": "01_cover.svg",
+        "sha256": "47ddf449e1dd6ffe6a455e1e6f48b4fce6d6e3eb0ef916344906870b43c5d72c"
+      },
+      {
+        "file": "02_decision.svg",
+        "sha256": "b17df7c5a08192e5eb5d2acc63b7b363f1536a5aee2919ff067dc78e8640b569"
+      },
+      {
+        "file": "03_architecture.svg",
+        "sha256": "aa42d781f59ea3652d439bef210d81c43e58807ac16cfcacfaaac160c8e0af9d"
+      },
+      {
+        "file": "04_requestflow.svg",
+        "sha256": "ae4398e4c706b3f08ff6cd14419a4d00acb5addcf1ac89500458e83c96cc5779"
+      },
+      {
+        "file": "05_codemap.svg",
+        "sha256": "a3920212e58aa250d47d9fa27692d98a83c3bd617e37aeeb23f53dbdd6c3d027"
+      },
+      {
+        "file": "06_routes.svg",
+        "sha256": "15964f798af7c373720e297bdfcd9413f930e7380f65120ad8d3a17e76daf162"
+      },
+      {
+        "file": "07_fallback.svg",
+        "sha256": "f2f0ad2426a73411b863ef6abc94a9485c6c069aba1098aba08510a097c2378f"
+      },
+      {
+        "file": "08_code.svg",
+        "sha256": "9d65fa5d4fb4a09401f3d75a66e9ad6d189976230461de17c528ee8b22cb6aad"
+      },
+      {
+        "file": "09_balance.svg",
+        "sha256": "e60f6d62d00d84ad0a05b485daad4aeadeeaa5ba2ee98494337ce78c1c5a9db9"
+      },
+      {
+        "file": "10_cache.svg",
+        "sha256": "509e3e63523529349a29cdcb671ffa279e2906ed32a20b398a4d4f701d4f10b3"
+      },
+      {
+        "file": "11_embeddings.svg",
+        "sha256": "ee7993b3000a282565ef811164d3681713b8c6688c09ebd66dbc252f2f405275"
+      },
+      {
+        "file": "12_securitycover.svg",
+        "sha256": "fd2bde02f010357c29f472475ac4ddb76814368f2f986890bb88ba6528bfcc87"
+      },
+      {
+        "file": "13_pii.svg",
+        "sha256": "7ab0aaeb1a3f7d6f37b00f22e84680ccf2650047106976042fa4b50fe620e18d"
+      },
+      {
+        "file": "14_injection.svg",
+        "sha256": "4eba8340907c19f7928f65463d77a559870d9c7ba93659bcfe0e91fa991ce881"
+      },
+      {
+        "file": "15_code.svg",
+        "sha256": "2864b9b7433e1a527a64d846317df9876f2b3a2d3b90699c37a9d2d7d43d8c47"
+      },
+      {
+        "file": "16_validator.svg",
+        "sha256": "23ce536b14feba9ffac5640a080cc6f248e0adcf294e13424c6a4f5624a0de51"
+      },
+      {
+        "file": "17_citation.svg",
+        "sha256": "93b665671659cc8cf2d0a40dd030a6e715cc0b8466b509185fe6c2726bf741a1"
+      },
+      {
+        "file": "18_outage.svg",
+        "sha256": "13fda2c87ee6283f9ac4e49ce960bfc6dac7d7233c2f125a0721444ae17ec79a"
+      },
+      {
+        "file": "19_codemap.svg",
+        "sha256": "cb04f5c28e341bd6f2247cd845a87a2754b680730950bd4aaac17376881d3685"
+      },
+      {
+        "file": "20_lab.svg",
+        "sha256": "2ca1ec41b77c4f1aa70760ca903c09584f2e0ba2ea148013eb06358bb1b4ef4f"
+      },
+      {
+        "file": "21_results.svg",
+        "sha256": "54dd4ffa075a1e7363048f936cfbf9f1b670137a03ca8ca53fa4be6db3a5a20f"
+      },
+      {
+        "file": "22_ending.svg",
+        "sha256": "725899dead1b5fd3428cda9cd9c42dd125aa33c1be729b41378390da3dbe7c73"
+      }
+    ]
+  },
+  "summary": {
+    "total": 22,
+    "passed": 22,
+    "warnings": 0,
+    "errors": 0
+  },
+  "issue_types": {},
+  "categories": {
+    "blocking": {
+      "count": 0,
+      "issues": []
+    },
+    "introduced": {
+      "count": 0,
+      "issues": []
+    },
+    "inherited": {
+      "count": 0,
+      "issues": []
+    },
+    "source-import": {
+      "count": 0,
+      "summary": {
+        "warning_count": 0,
+        "by_code": {}
+      }
+    }
+  },
+  "drift": {
+    "colors": {},
+    "fonts": {},
+    "sizes": {}
+  },
+  "carrier_receipt": {
+    "scope": "informational-not-a-quota",
+    "pages": 22,
+    "totals": {
+      "text_elements": 379,
+      "image_placements": 0,
+      "icons": 0,
+      "svg_geometry_elements": 131,
+      "preset_shapes": 0,
+      "page_frame_elements": 22,
+      "marker_uses": 0,
+      "inline_emphasis_runs": 0,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "pages_with": {
+      "images": 0,
+      "icons": 0,
+      "presets": 0,
+      "charts": 0,
+      "tables": 0,
+      "formulas": 0,
+      "inline_emphasis_runs": 0,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "relationship_pages": 14,
+    "geometry_elements": {
+      "circle": 0,
+      "ellipse": 0,
+      "line": 69,
+      "path": 0,
+      "polygon": 0,
+      "polyline": 0,
+      "rect": 62
+    },
+    "preset_names": {},
+    "native_objects": {
+      "chart": 0,
+      "formula_block": 0,
+      "formula_inline": 0,
+      "other": 0,
+      "table": 0
+    },
+    "image_page_max_frame_share_range": []
+  },
+  "project_issues": {
+    "template": [],
+    "animation": [],
+    "illustration": [],
+    "communication_trace": [],
+    "pptx_structure": []
+  },
+  "files": [
+    {
+      "file": "01_cover.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/01_cover.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 14,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 4,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 14,
+        "tspan_elements": 2
+      },
+      "passed": true,
+      "source_sha256": "47ddf449e1dd6ffe6a455e1e6f48b4fce6d6e3eb0ef916344906870b43c5d72c"
+    },
+    {
+      "file": "02_decision.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/02_decision.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 14,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 1,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 5,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 14,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "b17df7c5a08192e5eb5d2acc63b7b363f1536a5aee2919ff067dc78e8640b569"
+    },
+    {
+      "file": "03_architecture.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/03_architecture.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 24,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 8,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 9,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 24,
+        "tspan_elements": 2
+      },
+      "passed": true,
+      "source_sha256": "aa42d781f59ea3652d439bef210d81c43e58807ac16cfcacfaaac160c8e0af9d"
+    },
+    {
+      "file": "04_requestflow.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/04_requestflow.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 23,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 7,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 5,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 23,
+        "tspan_elements": 12
+      },
+      "passed": true,
+      "source_sha256": "ae4398e4c706b3f08ff6cd14419a4d00acb5addcf1ac89500458e83c96cc5779"
+    },
+    {
+      "file": "05_codemap.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/05_codemap.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 26,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 1,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 6,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 26,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "a3920212e58aa250d47d9fa27692d98a83c3bd617e37aeeb23f53dbdd6c3d027"
+    },
+    {
+      "file": "06_routes.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/06_routes.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 18,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 5,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 1,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 18,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "15964f798af7c373720e297bdfcd9413f930e7380f65120ad8d3a17e76daf162"
+    },
+    {
+      "file": "07_fallback.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/07_fallback.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 16,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 3,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 3,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 16,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "f2f0ad2426a73411b863ef6abc94a9485c6c069aba1098aba08510a097c2378f"
+    },
+    {
+      "file": "08_code.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/08_code.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 14,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 1,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Courier New"
+        ],
+        "text_elements": 14,
+        "tspan_elements": 14
+      },
+      "passed": true,
+      "source_sha256": "9d65fa5d4fb4a09401f3d75a66e9ad6d189976230461de17c528ee8b22cb6aad"
+    },
+    {
+      "file": "09_balance.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/09_balance.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 16,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 5,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 16,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "e60f6d62d00d84ad0a05b485daad4aeadeeaa5ba2ee98494337ce78c1c5a9db9"
+    },
+    {
+      "file": "10_cache.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/10_cache.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 19,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 5,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 6,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Courier New"
+        ],
+        "text_elements": 19,
+        "tspan_elements": 2
+      },
+      "passed": true,
+      "source_sha256": "509e3e63523529349a29cdcb671ffa279e2906ed32a20b398a4d4f701d4f10b3"
+    },
+    {
+      "file": "11_embeddings.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/11_embeddings.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 16,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 3,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 1,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 16,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "ee7993b3000a282565ef811164d3681713b8c6688c09ebd66dbc252f2f405275"
+    },
+    {
+      "file": "12_securitycover.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/12_securitycover.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 10,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 1,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 1,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 10,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "fd2bde02f010357c29f472475ac4ddb76814368f2f986890bb88ba6528bfcc87"
+    },
+    {
+      "file": "13_pii.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/13_pii.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 15,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 1,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Courier New"
+        ],
+        "text_elements": 15,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "7ab0aaeb1a3f7d6f37b00f22e84680ccf2650047106976042fa4b50fe620e18d"
+    },
+    {
+      "file": "14_injection.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/14_injection.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 16,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 1,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 16,
+        "tspan_elements": 2
+      },
+      "passed": true,
+      "source_sha256": "4eba8340907c19f7928f65463d77a559870d9c7ba93659bcfe0e91fa991ce881"
+    },
+    {
+      "file": "15_code.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/15_code.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 14,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 1,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Courier New"
+        ],
+        "text_elements": 14,
+        "tspan_elements": 15
+      },
+      "passed": true,
+      "source_sha256": "2864b9b7433e1a527a64d846317df9876f2b3a2d3b90699c37a9d2d7d43d8c47"
+    },
+    {
+      "file": "16_validator.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/16_validator.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 19,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 1,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 19,
+        "tspan_elements": 6
+      },
+      "passed": true,
+      "source_sha256": "23ce536b14feba9ffac5640a080cc6f248e0adcf294e13424c6a4f5624a0de51"
+    },
+    {
+      "file": "17_citation.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/17_citation.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 18,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 1,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Courier New"
+        ],
+        "text_elements": 18,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "93b665671659cc8cf2d0a40dd030a6e715cc0b8466b509185fe6c2726bf741a1"
+    },
+    {
+      "file": "18_outage.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/18_outage.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 12,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 1,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 4,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 12,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "13fda2c87ee6283f9ac4e49ce960bfc6dac7d7233c2f125a0721444ae17ec79a"
+    },
+    {
+      "file": "19_codemap.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/19_codemap.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 26,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 1,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 6,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 26,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "cb04f5c28e341bd6f2247cd845a87a2754b680730950bd4aaac17376881d3685"
+    },
+    {
+      "file": "20_lab.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/20_lab.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 18,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 1,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 5,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 18,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "2ca1ec41b77c4f1aa70760ca903c09584f2e0ba2ea148013eb06358bb1b4ef4f"
+    },
+    {
+      "file": "21_results.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/21_results.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 13,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 1,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 13,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "54dd4ffa075a1e7363048f936cfbf9f1b670137a03ca8ca53fa4be6db3a5a20f"
+    },
+    {
+      "file": "22_ending.svg",
+      "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/svg_output/22_ending.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 18,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 1,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 1,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 18,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "725899dead1b5fd3428cda9cd9c42dd125aa33c1be729b41378390da3dbe7c73"
+    }
+  ]
+}

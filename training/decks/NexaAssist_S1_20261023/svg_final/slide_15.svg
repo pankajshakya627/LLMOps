@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text fill="#526375" font-size="16" xml:space="preserve" x="64" y="47">NEXAASSIST  /  SESSION 01  /  DISCOVER</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text fill="#132C42" font-family="Trebuchet MS" font-size="40" xml:space="preserve" x="64" y="123">Practical 3 / inspect the gate contract</text></g>
+<g id="lab-command" data-pptx-bounds="64 205 1152 99"><rect x="64" y="205" width="1152" height="99" fill="#132C42" /><text fill="#FFFFFF" font-family="Consolas" font-size="20" xml:space="preserve" x="88" y="245">Run: python -m training.session1.check_gates evaluation/gates.json</text></g>
+<g id="lab-task-1" data-pptx-bounds="64 350 1100 100"><text fill="#132C42" font-size="26" xml:space="preserve" x="64" y="385">Change a copied faithfulness minimum to 1.5.</text></g>
+<g id="lab-task-2" data-pptx-bounds="64 465 1100 100"><text fill="#132C42" font-size="26" xml:space="preserve" x="64" y="500">Expected: validation rejects a value outside [0, 1].</text></g>
+<g id="lab-mode" data-pptx-bounds="64 600 1152 30"><text fill="#087E8B" font-size="16" xml:space="preserve" x="64" y="622">PAIR LAB  /  Predict → run → inspect → explain  /  uv run --no-sync</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" fill="#526375" font-size="16"><text xml:space="preserve" x="64" y="681">Original workshop adaptation · Educative LLMOps + local NexaAssist code</text><text xml:space="preserve" x="1150" y="681">15/22</text></g>
+</svg>

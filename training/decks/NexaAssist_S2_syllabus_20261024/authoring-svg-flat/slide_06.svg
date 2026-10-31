@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="&quot;Courier New&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 433.45 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 433.45 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 496.81 31 L 496.81 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 02 / INGESTION IDENTITY</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 84.33 611.42 61.6" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 84.33 611.42 61.6" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 84.33 L 673.82 84.33 L 673.82 145.93 L 62.4 145.93 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Code / the ingestion fingerprint</text>
+</g>
+</g>
+<g id="shape-13" data-pptx-object="group" data-pptx-frame="64 210 1152 315" data-pptx-source-ref="slide:13">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 210 1152 315" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 210 L 1216 210 L 1216 525 L 64 525 Z" fill="#132C42" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="87.28 230.67 723.59 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 87.28 230.67 L 810.87 230.67 L 810.87 258.39 L 87.28 258.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="248" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">def chunk_checksum(text: str, metadata: dict[str, Any]) -&gt; str:</text>
+</g>
+<g id="shape-8" data-pptx-object="shape" data-pptx-frame="87.28 268.67 872.32 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:8" data-pptx-semantic-object="shape">
+<path d="M 87.28 268.67 L 959.6 268.67 L 959.6 296.39 L 87.28 296.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="286" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">    """Fingerprint text, metadata, embedding model and embedding dimensions.</text>
+</g>
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="87.28 344.67 975.31 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 87.28 344.67 L 1062.59 344.67 L 1062.59 372.39 L 87.28 372.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="362" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">    Enrichment includes both embedding settings, so either change invalidates chunks.</text>
+</g>
+<g id="shape-10" data-pptx-object="shape" data-pptx-frame="87.28 382.67 81.58 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:10" data-pptx-semantic-object="shape">
+<path d="M 87.28 382.67 L 168.86 382.67 L 168.86 410.39 L 87.28 410.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="400" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">    """</text>
+</g>
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="87.28 420.67 1125.21 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 87.28 420.67 L 1212.49 420.67 L 1212.49 448.39 L 87.28 448.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="438" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">    payload = json.dumps({"text": text, "metadata": metadata}, sort_keys=True, ensure_ascii=False)</text>
+</g>
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="87.28 458.67 768.46 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 87.28 458.67 L 855.74 458.67 L 855.74 486.39 L 87.28 486.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="476" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">    return "sha256:" + hashlib.sha256(payload.encode()).hexdigest()</text>
+</g>
+</g>
+<g id="shape-16" data-pptx-object="group" data-pptx-frame="62.96 549.67 752.13 78.04" data-pptx-source-ref="slide:16">
+<g id="shape-14" data-pptx-object="shape" data-pptx-frame="62.96 549.67 752.13 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:14" data-pptx-semantic-object="shape">
+<path d="M 62.96 549.67 L 815.09 549.67 L 815.09 589.71 L 62.96 589.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="575" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Text, metadata, embedding model and dimensions determine</text>
+</g>
+<g id="shape-15" data-pptx-object="shape" data-pptx-frame="62.96 587.67 264.04 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:15" data-pptx-semantic-object="shape">
+<path d="M 62.96 587.67 L 327 587.67 L 327 627.71 L 62.96 627.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="613" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">whether to re-embed.</text>
+</g>
+</g>
+<g id="shape-19" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:19">
+<g id="shape-17" data-pptx-object="shape" data-pptx-frame="63.36 665 810.855 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:17" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 874.215 665 L 874.215 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 01, 08, 12 / Concept + inspected local implementation; sources in notes</text>
+</g>
+<g id="shape-18" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:18" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">06/16</text>
+</g>
+</g></svg>

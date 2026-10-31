@@ -1,0 +1,1 @@
+Build a separate compatible candidate data store. Evaluate candidate retrieval and answer quality. Switch the full configuration only after review. Blue/green is discussed, not automated here. A new index name over the same mutated collection does not preserve old data; parent sections must remain compatible as well.

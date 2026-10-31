@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text font-size="16" fill="#526375" xml:space="preserve" x="64" y="47">NEXAASSIST  /  SESSION 05  /  DELIVER</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text font-size="40" font-family="Trebuchet MS" fill="#132C42" xml:space="preserve" x="64" y="123">Exercise / remove an observation</text></g>
+<g id="lab-command" data-pptx-bounds="64 205 1152 99"><rect x="64" y="205" width="1152" height="99" fill="#132C42" /><text font-size="20" font-family="Consolas" fill="#FFFFFF" xml:space="preserve" x="88" y="245">Set sampled_count=0 and the proxy to None.</text></g>
+<g id="lab-task-1" data-pptx-bounds="64 350 1100 100"><text font-size="26" fill="#132C42" xml:space="preserve" x="64" y="385">Predict not_measured rather than pass.</text></g>
+<g id="lab-task-2" data-pptx-bounds="64 465 1100 100"><text font-size="26" fill="#132C42" xml:space="preserve" x="64" y="500">Explain what evidence is needed before clearing an incident.</text></g>
+<g id="lab-mode" data-pptx-bounds="64 600 1152 30"><text font-size="16" fill="#AF476A" xml:space="preserve" x="64" y="622">PAIR LAB  /  Predict → run → inspect → explain  /  uv run --no-sync</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" fill="#526375" font-size="16"><text xml:space="preserve" x="64" y="681">Original workshop adaptation · Educative LLMOps + local NexaAssist code</text><text xml:space="preserve" x="1150" y="681">10/22</text></g>
+</svg>

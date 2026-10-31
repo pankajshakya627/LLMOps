@@ -1,0 +1,24 @@
+[
+  {
+    "name": "browser_review_saved",
+    "result": "fail",
+    "detail": {
+      "feedback_id": "aeae4094-e8df-4676-8172-99d0669d4c07"
+    }
+  },
+  {
+    "name": "browser_no_unhandled_js_errors",
+    "result": "pass",
+    "detail": {
+      "errors": []
+    }
+  },
+  {
+    "name": "mobile_no_horizontal_overflow",
+    "result": "pass",
+    "detail": {
+      "scroll": 390,
+      "width": 390
+    }
+  }
+]

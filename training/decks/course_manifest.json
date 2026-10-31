@@ -1,0 +1,2768 @@
+[
+  {
+    "number": 1,
+    "title": "Discover",
+    "subtitle": "Release decisions, ownership and evidence",
+    "accent": "#087E8B",
+    "lessons": "1, 2, 3, 4, 5, 6",
+    "slides": [
+      {
+        "title": "Discover",
+        "body": [
+          "Release decisions, ownership and evidence",
+          "Session 1 / lifecycle, evaluation and governance",
+          "16 slides / offline labs + release review"
+        ],
+        "kind": "cover",
+        "note": "Define the release contract and identify the evidence required to approve a change. The primary source is LLMOps_Syllabus.md; NexaAssist is the worked example, so the operating controls also apply with other frameworks, stores and vendors. Use 25 minutes for concepts, 20 for architecture, 90 for practicals including a 10-minute break, 25 for the exit review and 20 for recap. The practical block produces an inventory, a gate-validation transcript, a tamper transcript and a release decision; no credentials are needed. Primary syllabus: LLMOps_Syllabus.md sections 01, 03, 09, 10, 11.",
+        "source": "LLMOps_Syllabus.md",
+        "syllabus_topics": [
+          1,
+          3,
+          9,
+          10,
+          11
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_01.svg",
+        "supporting_lesson": null
+      },
+      {
+        "title": "LLMOps controls behavior across releases",
+        "body": [
+          "Quality and safety need baselines, owners and release gates.",
+          "Latency, failures and tokens need measured operating limits.",
+          "Every change needs evidence, an approver and a rollback path."
+        ],
+        "kind": "text",
+        "note": "Use the Friday-to-Monday failure story to identify which artifact changed and who owns it. Evaluate a model candidate on the same task and evaluation scope as the baseline, considering task quality, safety, latency, cost and compatibility. A hosted model can change behavior without an application code change, so retain model/provider metadata and comparison evidence. Today establishes the control contract; endpoint tuning, gateway policies and detailed FinOps are developed in later sessions. Primary syllabus: LLMOps_Syllabus.md sections 01, 03, 08, 14. Supporting lesson: https://www.educative.io/courses/llmops/what-is-llmops-and-why-does-it-exist.",
+        "source": "LLMOps_Syllabus.md",
+        "lesson": 1,
+        "lesson_title": "What Is LLMOps, and Why Does It Exist?",
+        "lesson_url": "https://www.educative.io/courses/llmops/what-is-llmops-and-why-does-it-exist",
+        "syllabus_topics": [
+          1,
+          3,
+          8,
+          14
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_02.svg",
+        "supporting_lesson": 1
+      },
+      {
+        "title": "Lifecycle / inventory before promotion",
+        "body": [
+          "Record model/provider ID, owner, purpose and approval state.",
+          "Benchmark candidates on one frozen dataset and configuration.",
+          "Check compatibility; retain a rollback bundle before retirement."
+        ],
+        "kind": "text",
+        "note": "Build a model inventory row with the configured model/provider identifier, owner, intended task, approval state and evaluation evidence. Read configured values from app/core/config.py rather than inventing a model name; in an offline exercise record unmeasured provider behavior explicitly. Compare baseline and candidate under the same dataset, task, prompt and retrieval scope, and check structured output, tool schema, token limits and embedding compatibility as applicable. A migration plan retains the previous prompt, configuration, corpus and compatible embedding/index/parent stores until rollback is validated; automated promotion and retirement are design work here. Primary syllabus: LLMOps_Syllabus.md sections 01, 10, 11. Supporting lesson: https://www.educative.io/courses/llmops/how-we-reached-llmops.",
+        "source": "LLMOps_Syllabus.md",
+        "lesson": 2,
+        "lesson_title": "How We Reached LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/how-we-reached-llmops",
+        "syllabus_topics": [
+          1,
+          10,
+          11
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_03.svg",
+        "supporting_lesson": 2
+      },
+      {
+        "title": "Version the release bundle and name its owners",
+        "body": [
+          "Corpus / data owner",
+          "Source hashes + chunk/embedding version",
+          "Prompt / prompt owner",
+          "Template + parameters + approval record",
+          "Runtime / service owner",
+          "Model/provider + configuration version",
+          "Evaluation / reviewer",
+          "Dataset + rubric + baseline + run ID"
+        ],
+        "kind": "diagram",
+        "note": "Turn the four cells into a release inventory with an owner and immutable identifier for each artifact. The PromptOps record includes template, parameters, test cases, change history and rollback target; a file-backed prompt is not a deployed shared registry. Dataset and rubric versions travel with the evaluation results, and a reviewer records disputed labels rather than editing the set until the candidate passes. Prompt experiments, judge calibration and the full approval workflow are developed in Session 3. Primary syllabus: LLMOps_Syllabus.md sections 01, 02, 03, 10, 11. Supporting lesson: https://www.educative.io/courses/llmops/mlops-to-llmops-what-changes-and-what-stays.",
+        "source": "LLMOps_Syllabus.md",
+        "nodes": [
+          [
+            "Data",
+            "Features → documents + vectors"
+          ],
+          [
+            "Tuning",
+            "Parameters → prompts + retrieval"
+          ],
+          [
+            "Artifacts",
+            "Weights → coupled runtime assets"
+          ],
+          [
+            "Evaluation",
+            "Labels → semantic criteria"
+          ]
+        ],
+        "edges": [],
+        "lesson": 3,
+        "lesson_title": "MLOps to LLMOps: What Changes and What Stays",
+        "lesson_url": "https://www.educative.io/courses/llmops/mlops-to-llmops-what-changes-and-what-stays",
+        "relationships": "compare: four independent MLOps-to-LLMOps changes; each cell maps before to after",
+        "syllabus_topics": [
+          1,
+          2,
+          3,
+          10,
+          11
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_04.svg",
+        "supporting_lesson": 3
+      },
+      {
+        "title": "Four phases / explicit release decisions",
+        "body": [
+          "scope",
+          "quality",
+          "SLO",
+          "Discover",
+          "Permitted data + named owners",
+          "Distill",
+          "Baseline + candidate comparison",
+          "Deploy",
+          "Compatibility + SLO evidence",
+          "Deliver",
+          "Monitor + rollback + retirement"
+        ],
+        "kind": "diagram",
+        "note": "Use Discover, Distill, Deploy and Deliver as checkpoints for the syllabus lifecycle rather than as an application-building tutorial. Discover records permitted data and owners; Distill compares a candidate with a frozen baseline; Deploy checks compatibility and measured service limits; Deliver watches production and exercises rollback. A valid thresholds file is only configuration validation, and offline fixtures do not approve production quality or capacity. A release reviewer holds a candidate when required evidence or an accountable approver is missing. Primary syllabus: LLMOps_Syllabus.md sections 01, 03, 11, 14. Supporting lesson: https://www.educative.io/courses/llmops/the-4d-framework-discover-distill-deploy-deliver.",
+        "source": "LLMOps_Syllabus.md",
+        "nodes": [
+          [
+            "Discover",
+            "Permitted data + named owners"
+          ],
+          [
+            "Distill",
+            "Baseline + candidate comparison"
+          ],
+          [
+            "Deploy",
+            "Compatibility + SLO evidence"
+          ],
+          [
+            "Deliver",
+            "Monitor + rollback + retirement"
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1,
+            "scope"
+          ],
+          [
+            1,
+            2,
+            "quality"
+          ],
+          [
+            2,
+            3,
+            "SLO"
+          ]
+        ],
+        "lesson": 4,
+        "lesson_title": "The 4D Framework (Discover, Distill, Deploy, Deliver)",
+        "lesson_url": "https://www.educative.io/courses/llmops/the-4d-framework-discover-distill-deploy-deliver",
+        "syllabus_topics": [
+          1,
+          3,
+          11,
+          14
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_05.svg",
+        "supporting_lesson": 4
+      },
+      {
+        "title": "C4 / system context",
+        "body": [
+          "[Person] Staff member",
+          "Ask policy questions",
+          "Browser / JSON HTTP",
+          "[Person] Reviewer",
+          "Review feedback",
+          "Bearer / JSON HTTP",
+          "[Person] Operator",
+          "Maintain sources",
+          "Registered-file CLI",
+          "[Software system]",
+          "NexaAssist",
+          "Cited policy explanations",
+          "[External system]",
+          "Model provider",
+          "Embeddings + generation",
+          "[External managed store]",
+          "MongoDB Atlas",
+          "Knowledge + feedback",
+          "[External system]",
+          "Datadog",
+          "Optional APM / LLMObs",
+          "asks",
+          "reviews",
+          "ingests",
+          "Calls APIs",
+          "HTTPS",
+          "Reads/writes",
+          "MongoDB",
+          "Exports",
+          "ddtrace",
+          "White: people · Navy: system in scope · Gray: external systems · Arrows name the initiating call."
+        ],
+        "kind": "architecture",
+        "note": "Read the context diagram as a worked example of operational ownership. Staff ask questions, reviewers assess feedback and operators maintain registered sources; assign actual owner names in the worksheet without treating these example roles as confirmed appointments. The provider, database and optional telemetry service are separate dependencies whose access, provenance, retention and failure behavior need review. Translate those responsibilities to any platform while preserving the boundary between end-user authorization and configured corpus filtering. Primary syllabus: LLMOps_Syllabus.md sections 10, 15. Supporting lesson: https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application.",
+        "source": "LLMOps_Syllabus.md; docs/architecture/c4-context.md",
+        "lesson": 5,
+        "lesson_title": "Architecture of a Retrieval-Augmented Generation Application",
+        "lesson_url": "https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application",
+        "architecture_view": "context",
+        "relationships": "link: labelled directed dependencies; boundary and element types distinguish C4 levels where named",
+        "syllabus_topics": [
+          10,
+          15
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_06.svg",
+        "supporting_lesson": 5
+      },
+      {
+        "title": "C4 / containers and ownership",
+        "body": [
+          "NexaAssist / application boundary",
+          "[Container] Python CLI",
+          "Registered ingestion",
+          "LangChain runs inside",
+          "[Container] Streamlit",
+          "Staff + reviewer UI",
+          "Render and call the API",
+          "[Container] FastAPI / Python",
+          "Policy API",
+          "Services + LangChain inside",
+          "[External system]",
+          "Model provider",
+          "Embedding / chat APIs",
+          "[External system]",
+          "Datadog / optional",
+          "[Data store] Atlas collections",
+          "Vectors + parents",
+          "Plus plain feedback storage",
+          "Requests",
+          "JSON HTTP",
+          "Embeds changed text / HTTPS",
+          "Upserts chunks + parents",
+          "MongoDB",
+          "Query/chat",
+          "HTTPS",
+          "Traces",
+          "Read/write",
+          "MongoDB",
+          "Navy: application process",
+          "Gray: managed dependency"
+        ],
+        "kind": "architecture",
+        "note": "Use this container view to assign a service owner, a data owner and a telemetry owner. LangChain runs inside the Python API and ingestion CLI; the UI calls FastAPI and the database stores child vectors, parent sections and feedback in logical collections. Trace correlation must preserve request and artifact identities across the relevant operations, and telemetry export is conditional on configuration. This is the inspected working copy and does not establish a production deployment, authenticated user-level permissions or live traces. Primary syllabus: LLMOps_Syllabus.md sections 04, 10, 12. Supporting lesson: https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application.",
+        "source": "LLMOps_Syllabus.md; docs/architecture/c4-containers.md",
+        "lesson": 5,
+        "lesson_title": "Architecture of a Retrieval-Augmented Generation Application",
+        "lesson_url": "https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application",
+        "architecture_view": "containers",
+        "relationships": "link: labelled directed dependencies; boundary and element types distinguish C4 levels where named",
+        "syllabus_topics": [
+          4,
+          10,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_07.svg",
+        "supporting_lesson": 5
+      },
+      {
+        "title": "Two paths share one knowledge contract",
+        "body": [
+          "OFFLINE / INGESTION CLI",
+          "Registered sources",
+          "Identity, dates and hash",
+          "Parse → chunk → redact",
+          "Compare; embed changed text",
+          "Atlas knowledge",
+          "Child vectors + parent text",
+          "verify",
+          "upsert",
+          "ONLINE / API + CHAIN",
+          "Question + scope",
+          "Validate and scrub query",
+          "Retrieve → expand",
+          "Parents + linked amendments",
+          "Generate → validate",
+          "Cite, clarify or abstain",
+          "filter",
+          "context",
+          "load evidence",
+          "Shared contract: source hash, policy date, embedding version and recoverable release identity."
+        ],
+        "kind": "architecture",
+        "note": "Use the offline and online paths to explain why a corpus or embedding change is also a release change. Record the document register hash, chunking settings, embedding model and dimensions, retrieval settings and prompt version together. A correlated diagnostic record should connect a request to evidence identities and relevant retrieval/model operations without retaining sensitive prompt data by default. These responsibilities are platform agnostic; Atlas and LangChain are the concrete implementation inspected in this example. Primary syllabus: LLMOps_Syllabus.md sections 01, 04, 12. Supporting lesson: https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application.",
+        "source": "LLMOps_Syllabus.md; app/chains/ingestion.py; app/services/retrieval.py; app/chains/answer.py",
+        "lesson": 5,
+        "lesson_title": "Architecture of a Retrieval-Augmented Generation Application",
+        "lesson_url": "https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application",
+        "architecture_view": "two-paths",
+        "relationships": "link: labelled directed dependencies; boundary and element types distinguish C4 levels where named",
+        "syllabus_topics": [
+          1,
+          4,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_08.svg",
+        "supporting_lesson": 5
+      },
+      {
+        "title": "One answer / request and failure flow",
+        "body": [
+          "1 / Validate + quota",
+          "Thin FastAPI route",
+          "2 / Scrub + retrieve",
+          "Scope, parents, amendments",
+          "3 / Pack evidence",
+          "No complete evidence? Stop.",
+          "4 / Structured draft",
+          "Model call / strict schema",
+          "5 / Validate output",
+          "PII + IDs + exact quotes",
+          "6 / Return result",
+          "Answer, clarify or abstain",
+          "invoke",
+          "supply",
+          "prompt",
+          "check",
+          "return",
+          "Invalid citation: one repair, then abstain.",
+          "Numbered boxes show the main path. Early abstention and the bounded repair are explained in notes."
+        ],
+        "kind": "architecture",
+        "note": "Ask learners to mark the validation, retrieval, generation and output checks on one request. Missing complete evidence causes abstention, and a bad citation permits one repair before abstention; the app returns buffered JSON, so this diagram does not demonstrate token streaming or TTFT/TPOT measurement. Use the same request identity to relate errors and timing with the prompt/model/retrieval versions, and propose trace sampling, redaction and retention controls as an operations worksheet. Distinguish an empty retrieval result, a schema failure, an unsupported claim and a provider timeout; full production monitoring is developed later. Primary syllabus: LLMOps_Syllabus.md sections 03, 04, 05, 09. Supporting lesson: https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application.",
+        "source": "LLMOps_Syllabus.md; app/api/answer.py; app/services/answer.py; app/chains/answer.py",
+        "lesson": 5,
+        "lesson_title": "Architecture of a Retrieval-Augmented Generation Application",
+        "lesson_url": "https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application",
+        "architecture_view": "answer-flow",
+        "relationships": "link: labelled directed dependencies; boundary and element types distinguish C4 levels where named",
+        "syllabus_topics": [
+          3,
+          4,
+          5,
+          9
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_09.svg",
+        "supporting_lesson": 5
+      },
+      {
+        "title": "Governance / three independent checks",
+        "body": [
+          "Freshness: does indexed evidence match the approved source?",
+          "Permission: may this scope access and disclose the content?",
+          "Audit: can a reviewer recover versions and the decision?"
+        ],
+        "kind": "text",
+        "note": "Treat freshness, authorization and auditability as independent controls. The source register and checksums establish byte identity, while effective dates, access policies and provider data rules answer different questions. Record the data owner, provider disclosure decision, retention and residency requirements, access-review owner and the evidence required for retirement. Configured metadata filters and redaction help enforce boundaries but are not proof of authenticated per-user authorization or complete sensitive-data detection. Primary syllabus: LLMOps_Syllabus.md sections 09, 10, 12. Supporting lesson: https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application.",
+        "source": "LLMOps_Syllabus.md",
+        "lesson": 5,
+        "lesson_title": "Architecture of a Retrieval-Augmented Generation Application",
+        "lesson_url": "https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application",
+        "syllabus_topics": [
+          9,
+          10,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_10.svg",
+        "supporting_lesson": 5
+      },
+      {
+        "title": "EvalOps / freeze a trustworthy baseline",
+        "body": [
+          "Dataset: input + expected_output + context + expected_status",
+          "Cases: normal, refusal, date boundary, adversarial",
+          "Compare: same dataset, rubric and release identities",
+          "Reference checks + a calibrated judge + human review.",
+          "Record disagreements; keep candidate tuning apart from the holdout."
+        ],
+        "kind": "concept",
+        "source": "LLMOps_Syllabus.md; evaluation/datasets/answer.jsonl; app/evaluation/gates.py",
+        "note": "Inspect evaluation/datasets/answer.jsonl and identify input, expected_output, context and expected_status. For the worksheet, select a normal case, a refusal case and a date-boundary case and propose one adversarial case; keep the scored holdout fixed rather than adding candidate-specific answers to it. Reference-based correctness uses an expected answer, while reference-free groundedness assesses claims against supplied evidence and still needs a defined rubric. Calibrate an LLM judge against human labels, inspect disagreement and bias, and version the rubric; no judge calls or measured model-quality claims are part of this offline lab. Primary syllabus: LLMOps_Syllabus.md sections 03, 05, 11. Supporting lesson: https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application.",
+        "lesson": 5,
+        "lesson_title": "Architecture of a Retrieval-Augmented Generation Application",
+        "lesson_url": "https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application",
+        "syllabus_topics": [
+          3,
+          5,
+          11
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_11.svg",
+        "supporting_lesson": 5
+      },
+      {
+        "title": "Practical / validate gates, then decide",
+        "body": [
+          "Run: python -m training.session1.check_gates evaluation/gates.json",
+          "In a temporary copy: set faithfulness_min=1.5; expect INVALID.",
+          "Valid + status=placeholder means HOLD for production approval."
+        ],
+        "kind": "lab",
+        "note": "Allow 15 minutes to run the gate loader against the shipped file and then against a temporary copy containing faithfulness_min set to 1.5. The shipped file is valid with status=placeholder and p95_total_ms_max=2000.0, while the edited copy reports INVALID for faithfulness_min and exits with code 1. Save both transcripts and restore or delete the temporary copy without weakening the class thresholds. Passing schema validation establishes neither achieved metrics nor approved targets, so the worksheet records a production hold pending owner-confirmed gates and measurement. Primary syllabus: LLMOps_Syllabus.md sections 01, 03, 10, 11. Supporting lesson: https://www.educative.io/courses/llmops/scoping-and-planning-a-production-rag-application.",
+        "source": "LLMOps_Syllabus.md; training/session1/check_gates.py; evaluation/gates.json",
+        "lesson": 6,
+        "lesson_title": "Scoping and Planning a Production RAG Application",
+        "lesson_url": "https://www.educative.io/courses/llmops/scoping-and-planning-a-production-rag-application",
+        "syllabus_topics": [
+          1,
+          3,
+          10,
+          11
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_12.svg",
+        "supporting_lesson": 6
+      },
+      {
+        "title": "Code / reject changed source bytes",
+        "body": [
+          "def _verify_source(path: Path, entry: dict[str, Any]) -> str:",
+          "    \"\"\"Refuse a file whose bytes differ from the register's recorded sha256.\"\"\"",
+          "    digest = hashlib.sha256(path.read_bytes()).hexdigest()",
+          "    if digest != entry[\"sha256\"]:",
+          "        raise ValueError(f\"{entry['doc_id']}: file sha256 does not match the document register\")",
+          "    return str(path)",
+          "A source must match the register before parsing or embedding."
+        ],
+        "kind": "code",
+        "code": "def _verify_source(path: Path, entry: dict[str, Any]) -> str:\n    \"\"\"Refuse a file whose bytes differ from the register's recorded sha256.\"\"\"\n    digest = hashlib.sha256(path.read_bytes()).hexdigest()\n    if digest != entry[\"sha256\"]:\n        raise ValueError(f\"{entry['doc_id']}: file sha256 does not match the document register\")\n    return str(path)",
+        "source": "LLMOps_Syllabus.md; app/services/ingestion.py",
+        "note": "Read the exact _verify_source excerpt and identify the validation boundary before parsing or embedding. The SHA-256 comparison rejects changed bytes against the registered source identity and supports an audit trail. A matching hash does not establish permission, freshness, policy correctness or approval to send text to an external provider. Keep those decisions as separate evidence in the inventory and governance worksheet. Primary syllabus: LLMOps_Syllabus.md sections 09, 10, 12. Supporting lesson: https://www.educative.io/courses/llmops/scoping-and-planning-a-production-rag-application.",
+        "lesson": 6,
+        "lesson_title": "Scoping and Planning a Production RAG Application",
+        "lesson_url": "https://www.educative.io/courses/llmops/scoping-and-planning-a-production-rag-application",
+        "syllabus_topics": [
+          9,
+          10,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_13.svg",
+        "supporting_lesson": 6
+      },
+      {
+        "title": "Practical / prove the source boundary",
+        "body": [
+          "uv run --no-sync python -m training.showcase --session 1",
+          "Predict → run: 8 originals verify; a changed copy is refused.",
+          "Submit: document ID, hash error, owner and HOLD decision."
+        ],
+        "kind": "lab",
+        "note": "Allow 20 minutes for the tamper lab and ask for a prediction before running the command. The showcase uses a temporary copy: eight original documents verify and a changed file is refused with a document-register hash mismatch. Capture the failing document ID, error and operational response, then explain why the release reviewer holds ingestion rather than changing the expected hash to hide the discrepancy. The expected result tests source integrity only; it is not a live model, database or security-coverage benchmark. Primary syllabus: LLMOps_Syllabus.md sections 09, 10, 11. Supporting lesson: https://www.educative.io/courses/llmops/scoping-and-planning-a-production-rag-application.",
+        "source": "LLMOps_Syllabus.md",
+        "lesson": 6,
+        "lesson_title": "Scoping and Planning a Production RAG Application",
+        "lesson_url": "https://www.educative.io/courses/llmops/scoping-and-planning-a-production-rag-application",
+        "syllabus_topics": [
+          9,
+          10,
+          11
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_14.svg",
+        "supporting_lesson": 6
+      },
+      {
+        "title": "Practical / review a provider change",
+        "body": [
+          "Complete inventory: prompt/model/config/data versions + owners.",
+          "Candidate lacks quality and compatibility evidence → HOLD.",
+          "Name approver, rollback bundle, trigger and retirement condition."
+        ],
+        "kind": "lab",
+        "note": "Allow 25 minutes for a release-review tabletop and 20 minutes to finish the inventory and baseline worksheet, with a 10-minute break completing the 90-minute practical block. Scenario: a provider/model change has passed schema validation but has no comparable golden-set results, compatibility report or owner approval. The expected decision is HOLD; list the missing checks, decide who can approve, and retain the old prompt, model/configuration and compatible corpus, embeddings, index and parent collections. Describe a rollback validation and retirement condition without claiming that CI, canary deployment, automatic promotion or a real provider switch was executed. Primary syllabus: LLMOps_Syllabus.md sections 01, 02, 03, 10, 11, 14. Supporting lesson: https://www.educative.io/courses/llmops/scoping-and-planning-a-production-rag-application.",
+        "source": "LLMOps_Syllabus.md; training/session1/handout.md",
+        "lesson": 6,
+        "lesson_title": "Scoping and Planning a Production RAG Application",
+        "lesson_url": "https://www.educative.io/courses/llmops/scoping-and-planning-a-production-rag-application",
+        "syllabus_topics": [
+          1,
+          2,
+          3,
+          10,
+          11,
+          14
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_15.svg",
+        "supporting_lesson": 6
+      },
+      {
+        "title": "Session 1 / release-readiness exit gate",
+        "body": [
+          "Hand in: inventory, baseline cases and two failure transcripts.",
+          "Defend: owner, evidence, HOLD or promote, rollback target.",
+          "Pass the exercise; keep unmeasured production gates open."
+        ],
+        "kind": "gate",
+        "note": "Use the 25-minute gate review to assess the submitted inventory, baseline worksheet, gate-validation transcript and source-tamper transcript. Ask each pair to defend its HOLD decision for the provider-change case and identify the owner and missing evidence that could change it. Require a recoverable rollback bundle rather than only a source-code revision. Distinguish passing this learning exercise from production approval, then use the recap to connect release controls to Session 2 RAGOps. Primary syllabus: LLMOps_Syllabus.md sections 01, 03, 10, 11, 14.",
+        "source": "LLMOps_Syllabus.md",
+        "syllabus_topics": [
+          1,
+          3,
+          10,
+          11,
+          14
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S1_syllabus_20261024/authoring-svg-flat/slide_16.svg",
+        "supporting_lesson": null
+      }
+    ],
+    "primary_syllabus": "LLMOps_Syllabus.md",
+    "syllabus_topics": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15
+    ]
+  },
+  {
+    "number": 2,
+    "title": "LLMOps Core",
+    "subtitle": "Observability, Evaluation & Security",
+    "accent": "#2463A6",
+    "lessons": "7, 8",
+    "slides": [
+      {
+        "title": "LLMOps Core",
+        "kind": "cover",
+        "body": [
+          "Observability, Evaluation & Security",
+          "Ollama + OpenAI / retain the RAGOps foundation",
+          "19 slides / tools, failure drills and evidence"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "This Session 2 extends the earlier RAGOps material with observability, evaluation, gateways and security, as requested. Nineteen slides support a three-hour class with a 90-minute practical block; optional live services are prepared before class. Required offline exercises reuse the existing project controls, while the live guide adds Datadog, Ragas, LiteLLM, Ollama/OpenAI and Guardrails AI work without claiming a production deployment. Primary syllabus: LLMOps_Syllabus.md sections 03, 04, 05, 07, 09, 12; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          3,
+          4,
+          5,
+          7,
+          9,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_01.svg"
+      },
+      {
+        "title": "Four operating questions / one evidence pack",
+        "kind": "concept",
+        "body": [
+          "Syllabus 03, 04, 07, 09, 12 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "02/19",
+          "Observe / Datadog; Phoenix alternative",
+          "Where did latency, token usage or the chain failure originate?",
+          "Evaluate / Ragas; DeepEval alternative",
+          "Are claims supported, required contexts present and regressions gated?",
+          "Route / LiteLLM; Portkey alternative",
+          "Which backend ran, when did fallback occur and was the cache valid?"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "The practical block allocates 15 minutes each to RAGOps, observability and evaluation, 20 to gateway routing, 15 to security and 10 to a break. Keep the same synthetic policy cases across the four disciplines and submit traces, evaluation decisions, a routing/cache matrix and guardrail outcomes. The listed alternatives explain transferable concepts; installing every framework is not required. Datadog, Ragas, LiteLLM and Guardrails AI are the main worked tools. Primary syllabus: LLMOps_Syllabus.md sections 03, 04, 07, 09, 12; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          3,
+          4,
+          7,
+          9,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_02.svg"
+      },
+      {
+        "title": "RAGOps recap / publish verifiable evidence",
+        "kind": "architecture",
+        "body": [
+          "1 / Verify register",
+          "Authority + source SHA-256",
+          "2 / Parse layout",
+          "Headings, text and tables",
+          "3 / Chunk clauses",
+          "Stable IDs + parent links",
+          "4 / Redact + hash",
+          "Before embedding disclosure",
+          "5 / Compare + embed",
+          "Changed children only",
+          "6 / Upsert stores",
+          "Child vectors + parent text",
+          "load",
+          "split",
+          "protect",
+          "check",
+          "write",
+          "Capture per-document outcome and changed counts; redaction precedes provider disclosure."
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Retain the existing verify, parse, chunk, redact, compare/embed and upsert sequence. Record source hashes, policy and embedding versions, changed/unchanged counts, parent scope and per-document failure outcomes before treating the corpus as ready. A successful ingestion log does not prove a queryable index or live retrieval quality. Complete parent sections remain unembedded, and freshness reconciliation needs a source-versus-stored manifest. Primary syllabus: LLMOps_Syllabus.md sections 04, 09, 12; full practicals: training/session2/handout.md and training/session2/live_practicals.md. Supporting lesson: https://www.educative.io/courses/llmops/data-foundations-for-llmops.",
+        "syllabus_topics": [
+          4,
+          9,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_03.svg",
+        "architecture_view": "ingestion"
+      },
+      {
+        "title": "Practical / chunking and repeat ingestion",
+        "kind": "lab",
+        "body": [
+          "Syllabus 01, 03, 08, 12 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "04/19",
+          "python -m training.session2.chunks",
+          "python -m training.session2.ingest_twin",
+          "",
+          "chunk candidates 300 / 1200 / 5000 → 40 / 32 / 32"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Use the 15-minute RAGOps block for a compact chunk/ingestion comparison, then retain the longer exercises as extensions. Expect 40, 32 and 32 chunks for the three settings and embedding counts 32, zero, 32 and zero across the four-run fixture. Inspect one complete table and a scope-compatible parent rather than selecting a chunker from counts alone. The real PDF and chain are used with fake embeddings and memory stores; model-name invalidation is not a live embedding migration. Primary syllabus: LLMOps_Syllabus.md sections 01, 03, 08, 12; full practicals: training/session2/handout.md and training/session2/live_practicals.md. Supporting lesson: https://www.educative.io/courses/llmops/data-foundations-for-llmops.",
+        "syllabus_topics": [
+          1,
+          3,
+          8,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_04.svg"
+      },
+      {
+        "title": "Retrieve scoped and complete evidence",
+        "kind": "architecture",
+        "body": [
+          "1 / Request + filters",
+          "Scrub query; constrain corpus",
+          "Dates, product, access scope",
+          "2 / Candidate search",
+          "Query embedding + Atlas",
+          "Dense or configured hybrid",
+          "3 / Rank + top_k",
+          "Reranker when enabled",
+          "Keep the requested hit count",
+          "4 / Expand parents",
+          "Validate matching scope",
+          "Otherwise retain child text",
+          "5 / Load amendments",
+          "Scoped linked instruments",
+          "Separate from top_k results",
+          "6 / Pack context",
+          "Preserve complete evidence",
+          "Then hand off to generation",
+          "search",
+          "rank",
+          "expand",
+          "link",
+          "pack",
+          "Numbered path: baseline retrieval. Hybrid search and reranking are explicit configuration branches."
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Keep date, institution, product and access filters ahead of evidence use, with optional ranking followed by parent and complete-amendment expansion. Lookup date and sanction applicability are different; a fee quote without the circular applicability can mislead. The project scorer includes complete linked amendments alongside the requested top-k child hits, so document its reference-coverage convention. Preserve original child/parent, embedding compatibility and rollback-bundle lessons in the handout; configured corpus filtering does not establish authenticated per-user authorization. Primary syllabus: LLMOps_Syllabus.md sections 03, 04, 09, 12; full practicals: training/session2/handout.md and training/session2/live_practicals.md. Supporting lesson: https://www.educative.io/courses/llmops/embeddings-vector-storage-and-evaluation.",
+        "syllabus_topics": [
+          3,
+          4,
+          9,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_05.svg",
+        "architecture_view": "retrieval"
+      },
+      {
+        "title": "Practical / keep the policy regression baseline",
+        "kind": "lab",
+        "body": [
+          "Syllabus 03, 05, 09, 12 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "06/19",
+          "python -m training.showcase --session 2",
+          "python -m training.session2.recall",
+          "",
+          "June 0.35% → July 0.30%; wrong product abstains"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Use the existing July-amendment showcase and recall script as pre-reading or as part of the RAGOps recap. Record lookup and sanction dates, product, status and citations; retain the synthetic fee minima, maxima and GST caveat from the complete evidence. A wrong-product case must abstain, one of two required references gives recall 0.5 and a first included hit at rank four gives reciprocal rank 0.25. These are controlled fixture observations; NDCG and migration/freshness incident worksheets remain supporting exercises in the handout. Primary syllabus: LLMOps_Syllabus.md sections 03, 05, 09, 12; full practicals: training/session2/handout.md and training/session2/live_practicals.md. Supporting lesson: https://www.educative.io/courses/llmops/embeddings-vector-storage-and-evaluation.",
+        "syllabus_topics": [
+          3,
+          5,
+          9,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_06.svg"
+      },
+      {
+        "title": "Observability / follow one request across stages",
+        "kind": "architecture",
+        "body": [
+          "Syllabus 04, 12, 14 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "07/19",
+          "Request / workflow",
+          "Request ID + parent links",
+          "Prompt/model/corpus versions",
+          "Validate + retrieve",
+          "Scope + embedding/search",
+          "Parents + amendments",
+          "Build prompt",
+          "Version + context budget",
+          "Redact captured fields",
+          "Return / score",
+          "Status + evidence + eval ID",
+          "Correlate errors and feedback",
+          "Validate output",
+          "Schema + citations + PII",
+          "Bound repair attempts",
+          "Model / gateway",
+          "Backend + attempts + tokens"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "A trace joins the request workflow to retrieval, model and validation work; use IDs and parent links to distinguish a slow model from a retrieval or output failure. Datadog is the existing project telemetry implementation, while Phoenix provides an OpenTelemetry/OpenInference alternative in a separate lab. The gateway node is a classroom extension, not a claim that the current application factories already call LiteLLM. Sources: app/core/observability.py, tests/test_telemetry.py, https://docs.datadoghq.com/llm_observability/quickstart/ and https://arize.com/docs/phoenix/learn/tracing/how-tracing-works. Primary syllabus: LLMOps_Syllabus.md sections 04, 12, 14; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          4,
+          12,
+          14
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_07.svg",
+        "architecture_view": "trace-map"
+      },
+      {
+        "title": "Measure latency, usage and failure signals",
+        "kind": "concept",
+        "body": [
+          "Syllabus 04, 05, 08, 14 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "08/19",
+          "Latency",
+          "Stage duration + request p50/p95/p99; TTFT/TPOT need token timestamps.",
+          "Usage and cost",
+          "Input/output/cached tokens, actual model/backend and measured unit cost.",
+          "Failure taxonomy",
+          "Timeout / rate limit / retrieval miss / schema error / invalid citation."
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Measure request and stage durations, and compute percentiles over repeated observations rather than a single trace. Track input, output and cached-token fields when the provider reports them, plus the selected model and retry/fallback attempts; local inference still consumes hardware resources. The current answer endpoint is buffered JSON, so TTFT and TPOT remain unmeasured without streaming instrumentation. Model errors, missing evidence and unsafe/invalid output have different operational owners, and query redaction alone does not prove all automatically captured trace fields are sanitized. Primary syllabus: LLMOps_Syllabus.md sections 04, 05, 08, 14; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          4,
+          5,
+          8,
+          14
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_08.svg"
+      },
+      {
+        "title": "Practical / inspect a correlated Datadog trace",
+        "kind": "lab",
+        "body": [
+          "Syllabus 04, 05, 14 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "09/19",
+          "uv run --no-sync pytest -q tests/test_telemetry.py",
+          "",
+          "Offline: captured spans + fake HTTP + scoped prompt metadata",
+          "Live: ddtrace-run + existing Datadog Agent configuration"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Allow 15 minutes to run and inspect the existing telemetry tests, which capture spans locally and mock external responses without exporting to Datadog. Identify the HTTP 422 failure, root/parent relationships, prompt version and model token usage in the test assertions. The live guide starts the existing Agent configuration and instrumented API for an instructor-prepared synthetic request; capture an observed trace only when those services are available. Mark missing spans and token-stream timings as gaps rather than reporting success; the Phoenix alternative is documented separately in training/session2/live_practicals.md. Primary syllabus: LLMOps_Syllabus.md sections 04, 05, 14; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          4,
+          5,
+          14
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_09.svg"
+      },
+      {
+        "title": "EvalOps / build the evaluation harness",
+        "kind": "architecture",
+        "body": [
+          "Syllabus 02, 03, 05, 11 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "10/19",
+          "Freeze cases",
+          "Input + expected output",
+          "Context + expected status",
+          "Run candidate",
+          "Version prompt and model",
+          "Retain actual backend ID",
+          "Capture evidence",
+          "Response + retrieved text",
+          "Case/run identifiers",
+          "Human decision",
+          "Review disagreements",
+          "Promote / hold / rollback",
+          "Apply gates",
+          "Per-case + aggregate checks",
+          "Regressions stay visible",
+          "Score / judge",
+          "Ragas or DeepEval"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "The harness freezes cases, runs a versioned candidate, captures contexts and answers, scores them, applies gates and records a human decision. Reuse app/evaluation/run.py and its RagasScorer adapter rather than inventing a second production evaluator. Include normal, refusal, date-boundary, adversarial and missing-evidence cases; preserve the holdout and case identities across comparisons. Judges are stochastic and require human-label calibration, bias review and an explicit rubric before automatic scores justify release decisions. Primary syllabus: LLMOps_Syllabus.md sections 02, 03, 05, 11; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          2,
+          3,
+          5,
+          11
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_10.svg",
+        "architecture_view": "evaluation-harness"
+      },
+      {
+        "title": "Evals / separate coverage from supported claims",
+        "kind": "concept",
+        "body": [
+          "Syllabus 03, 05, 12 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "11/19",
+          "Faithfulness",
+          "Are the answer claims supported by the supplied retrieved context?",
+          "Context recall",
+          "Does retrieved evidence cover the claims required by the reference?",
+          "Correctness / relevance",
+          "Is the answer right for the task, and does it answer the question?"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Ragas faithfulness assesses support for response claims, while context recall uses reference information to assess missing evidence; neither is the same as the repository reference-ID recall at k. Correctness, relevance and safety require separate criteria, and high faithfulness does not prove that the supplied source is true. Treat one minus faithfulness only as an unsupported-claim proxy, not a calibrated probability that an entire response hallucinated. Sources: https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/ and https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_recall/; DeepEval is an alternative framework rather than another installed scoring pipeline. Primary syllabus: LLMOps_Syllabus.md sections 03, 05, 12; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          3,
+          5,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_11.svg"
+      },
+      {
+        "title": "Practical / score candidates and enforce gates",
+        "kind": "lab",
+        "body": [
+          "Syllabus 03, 05, 11, 12 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "12/19",
+          "python -m training.session3.gates",
+          "",
+          "Fixture: healthy PASS; retrieval / generation faults FAIL",
+          "Live Ragas: compare Qwen chat with the OpenAI chat alias"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Allow 15 minutes for the existing offline gate scenarios: healthy passes, retrieval miss fails as retrieval_error and generation fault fails as generation_error. Those scores are explicitly synthetic and do not call an LLM judge. The live guide supplies a small Ragas harness comparing local Qwen and OpenAI generation under the same contexts, reference and OpenAI judge, with OpenAI metric embeddings held fixed. Record the backend actually selected, disable fallback for a pure local benchmark and separate generation comparison from a Qwen/OpenAI embedding-index experiment. Primary syllabus: LLMOps_Syllabus.md sections 03, 05, 11, 12; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          3,
+          5,
+          11,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_12.svg"
+      },
+      {
+        "title": "Gateway / Ollama and OpenAI behind stable aliases",
+        "kind": "architecture",
+        "body": [
+          "Syllabus 07, 08, 09, 12, 14 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "13/19",
+          "Lab caller",
+          "Stable chat alias",
+          "LiteLLM gateway",
+          "nexa-chat",
+          "Ollama / local chat",
+          "qwen3.5:9b-mlx",
+          "OpenAI / chat fallback",
+          "Approved model ID from env",
+          "route",
+          "on failure"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Use LiteLLM as the worked gateway and Portkey as a conceptual alternative. The four aliases are nexa-chat for Ollama qwen3.5:9b-mlx, nexa-chat-openai for an instructor-selected OpenAI model, nexa-embed-local for qwen3-embedding:0.6b and nexa-embed-openai for text-embedding-3-small. Chat fallback is conditional on compatible output contracts and permitted disclosure; different embedding spaces require separately embedded corpora and compatible query/index settings, even if vector lengths match. Sources: training/session2/litellm.yaml, https://ollama.com/library/qwen3.5:9b-mlx, https://ollama.com/library/qwen3-embedding and https://docs.ollama.com/api/openai-compatibility. Primary syllabus: LLMOps_Syllabus.md sections 07, 08, 09, 12, 14; full practicals: training/session2/handout.md and training/session2/live_practicals.md. Supporting lesson: https://www.educative.io/courses/llmops/embeddings-vector-storage-and-evaluation.",
+        "syllabus_topics": [
+          7,
+          8,
+          9,
+          12,
+          14
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_13.svg",
+        "architecture_view": "gateway-routing"
+      },
+      {
+        "title": "LiteLLM / explicit routing and bounded failure",
+        "kind": "concept",
+        "body": [
+          "Syllabus 07, 08, 09, 14 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "14/19",
+          "local chat: ollama_chat/qwen3.5:9b-mlx",
+          "local embed: openai/qwen3-embedding:0.6b  [local /v1]",
+          "router_settings:",
+          "  num_retries: 1",
+          "  timeout: 30",
+          "  fallbacks: [{nexa-chat: [nexa-chat-openai]}]"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Read the supplied classroom YAML: one retry, a timeout, an explicit chat fallback and the routing strategy are visible configuration. OpenAI chat model identity is selected through OPENAI_LITELLM_CHAT_MODEL with its provider prefix, and keys remain in environment variables rather than the presentation or YAML. The Ollama embedding alias uses the documented local OpenAI-compatible endpoint, with no fallback to a different embedding family. Sources: https://docs.litellm.ai/docs/proxy/configs and https://docs.litellm.ai/docs/proxy/reliability; a timeout setting alone does not establish measured end-to-end recovery time. Primary syllabus: LLMOps_Syllabus.md sections 07, 08, 09, 14; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          7,
+          8,
+          9,
+          14
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_14.svg"
+      },
+      {
+        "title": "Practical / fail over, balance and cache",
+        "kind": "lab",
+        "body": [
+          "Syllabus 07, 08, 09, 14 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "15/19",
+          "Fail over",
+          "In a temp config, break one chat URL; record attempts and actual fallback.",
+          "Balance",
+          "Use two healthy deployments under one alias; count uncached requests.",
+          "Cache",
+          "Repeat identical synthetic input; confirm a hit from upstream-call evidence."
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Allow 20 minutes to audit the route/failure matrix offline or run it on instructor-prepared services using training/session2/live_practicals.md. Inject failure only in a temporary gateway config by pointing a backend at an unreachable localhost port; test local-to-OpenAI, the reverse map in a separate config, and exhaustion without circular fallbacks. Demonstrate balancing only with two independent healthy endpoints, and verify cache hits with gateway/upstream evidence rather than latency alone. The lab cache is in memory for one worker, cache isolation must include relevant scope/version semantics before sensitive use, and the deprecated proxy mock_testing_fallbacks flag is not used; sources are the LiteLLM fallback, load-balancing and caching documentation linked in the live guide. Primary syllabus: LLMOps_Syllabus.md sections 07, 08, 09, 14; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          7,
+          8,
+          9,
+          14
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_15.svg"
+      },
+      {
+        "title": "Guardrails / validate at each trust boundary",
+        "kind": "architecture",
+        "body": [
+          "Syllabus 07, 09, 10, 12 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "16/19",
+          "Input / redaction",
+          "Mask recognized PII",
+          "Validate scope and limits",
+          "Prompt boundary",
+          "Separate trusted instructions",
+          "Treat retrieved text as data",
+          "Evidence access",
+          "Date/product/access filters",
+          "Least-privilege tools",
+          "Return / audit",
+          "Safe answer or abstention",
+          "Redacted failure evidence",
+          "Output checks",
+          "Strict schema + PII scan",
+          "Exact evidence/citation checks",
+          "Model / gateway",
+          "Authorized route + budgets"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Keep PII redaction before embedding, model disclosure and trace export, with access checks before evidence use and strict output validation afterwards. Prompt boundaries help preserve instruction/data separation, but malicious instructions inside legitimate prose still need adversarial behavioral tests and constrained tools. Guardrails AI can wrap the existing Pydantic contract, while a NeMo Guardrails policy is an alternative integration with its own evaluation and operational cost. No framework name establishes complete injection defense or authentication; the slide describes control responsibilities and the handout identifies implemented versus additional integrations. Primary syllabus: LLMOps_Syllabus.md sections 07, 09, 10, 12; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          7,
+          9,
+          10,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_16.svg",
+        "architecture_view": "guardrail-boundaries"
+      },
+      {
+        "title": "Practical / PII and prompt injection defenses",
+        "kind": "lab",
+        "body": [
+          "Syllabus 03, 09, 10, 12 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "17/19",
+          "python -m training.session2.redact",
+          "python -m training.session3.prompt_boundaries",
+          "",
+          "Recognized PII → typed placeholders before disclosure"
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Use part of the 15-minute security block for the existing redaction and prompt-boundary exercises. Recognized email, phone, PAN and Aadhaar patterns are masked, while policy amounts remain unchanged; learners should identify both missed identifiers and false positives. The actual rendered production prompt escapes injected XML and retains the system role, proving a syntax boundary rather than semantic injection immunity. Add direct and retrieved-document injection cases to the behavioral evaluation matrix and retain least-privilege, authorization and data-disclosure decisions as separate controls. Primary syllabus: LLMOps_Syllabus.md sections 03, 09, 10, 12; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          3,
+          9,
+          10,
+          12
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_17.svg"
+      },
+      {
+        "title": "Practical / strict output with Guardrails AI",
+        "kind": "lab",
+        "body": [
+          "Syllabus 03, 09, 11 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "18/19",
+          "from guardrails import Guard",
+          "from app.models.answer import AnswerDraft",
+          "guard = Guard.for_pydantic(output_class=AnswerDraft)",
+          "outcome = guard.parse(llm_output=raw_json, num_reasks=0)",
+          "assert outcome.validation_passed",
+          ""
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Complete the security block with the existing offline answer-control lab: a valid answer is accepted, an invented quotation receives one repair then abstention, and output PII causes abstention. The optional Guardrails AI extension parses known JSON against the existing AnswerDraft model without a model call and checks a valid status against an invalid approve_loan status. Guardrails AI is not installed in the application environment, and the framework snippet is a documented exercise rather than a measured integration; schema acceptance does not replace citation, PII or semantic checks. Source: https://github.com/guardrails-ai/guardrails/blob/main/guardrails/guard.py; NeMo Guardrails remains a named alternative, not an implemented application dependency. Primary syllabus: LLMOps_Syllabus.md sections 03, 09, 11; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          3,
+          9,
+          11
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_18.svg"
+      },
+      {
+        "title": "Session 2 / operating-readiness exit gate",
+        "kind": "gate",
+        "body": [
+          "Syllabus 03, 04, 05, 07, 08, 09, 11, 12, 14 / Fixtures and live exercises labeled / sources and lab steps in notes",
+          "19/19",
+          "RAGOps + trace pack",
+          "Versioned evidence, policy regressions, parent IDs and observed stage signals.",
+          "Evaluation pack",
+          "Fixed cases, metric/judge IDs, failures and a defended release decision."
+        ],
+        "source": "LLMOps_Syllabus.md; training/session2/handout.md; training/session2/live_practicals.md",
+        "note": "Use the exit review to inspect the RAGOps baseline and the trace, evaluation, gateway and guardrail evidence packs. Record which observations came from offline fixtures, which were actually measured live and which remain not_measured. Passing the class exercise does not approve placeholder production thresholds or prove a deployed gateway/guardrail integration. Continue in Session 3 with deeper prompt lifecycle, judge calibration, answer-quality regression and human review. Primary syllabus: LLMOps_Syllabus.md sections 03, 04, 05, 07, 08, 09, 11, 12, 14; full practicals: training/session2/handout.md and training/session2/live_practicals.md.",
+        "syllabus_topics": [
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          11,
+          12,
+          14
+        ],
+        "source_syllabus": "LLMOps_Syllabus.md",
+        "native_authoring_source": "NexaAssist_S2_core_20261024/authoring-svg-flat/core_19.svg"
+      }
+    ],
+    "primary_syllabus": "LLMOps_Syllabus.md",
+    "syllabus_topics": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14
+    ]
+  },
+  {
+    "number": 3,
+    "title": "Distill II",
+    "subtitle": "Version prompts and test grounded answers",
+    "accent": "#7954A3",
+    "lessons": "9, 10",
+    "slides": [
+      {
+        "title": "Distill II",
+        "body": [
+          "Prompts, generation and evaluation gates",
+          "Session 3 of 5 · 3 hours · source-aligned workshop"
+        ],
+        "kind": "cover",
+        "note": "Today uses controlled model drafts through the actual LCEL chain. The class will explain both deterministic validation and semantic judgment. This revised deck follows the course lesson sequence; exact lesson URLs appear in section notes and the coverage map.",
+        "source": ""
+      },
+      {
+        "title": "What you will produce",
+        "body": [
+          "A grounded answer replay and a failure diagnosis.",
+          "Three proposed golden cases with a review memo.",
+          "A documented quality gate decision."
+        ],
+        "kind": "text",
+        "note": "Carry retrieval evidence from Session 2. An answer-quality result needs the question, expected behavior, evidence references and actual response.",
+        "source": ""
+      },
+      {
+        "title": "The three-hour plan",
+        "body": [
+          "25 min prompts/evaluation + 20 min code walkthrough",
+          "90 min pair labs, including a 10 min break",
+          "25 min gate decisions + 20 min review"
+        ],
+        "kind": "text",
+        "note": "Split the lab block across answer replay, failure classification and golden-case review. Use the detailed handout as the exercise sheet.",
+        "source": ""
+      },
+      {
+        "title": "Showcase / reject a convincing bad answer",
+        "body": [
+          "An attacker supplies closing tags and instructions.",
+          "A generated draft cites an invented quote.",
+          "A candidate has a lower faithfulness score."
+        ],
+        "kind": "text",
+        "note": "Distinguish escaped syntax, citation validation and semantic evaluation. A delimiter test does not prove injection resistance; valid quotes do not establish every claim.",
+        "source": ""
+      },
+      {
+        "title": "Run prompt and evaluation demonstrations",
+        "body": [
+          "python -m training.showcase --session 3",
+          "Tag escape retained; bad quote → abstention.",
+          "Same cases: −0.25; changed dataset: refused."
+        ],
+        "kind": "lab",
+        "note": "Allow 25 minutes. Also exercise the output PII rail. Inspect prompt version 1.1.0, the one-repair limit and dataset/judge identity checks. Scores and drafts are visibly synthetic.\n\nCode walkthrough: app/evaluation/run.py\ndef case_fingerprint(case: GoldenCase) -> str:\n    canonical = json.dumps(case.model_dump(mode=\"json\"), sort_keys=True, ensure_ascii=False)\n    return hashlib.sha256(canonical.encode()).hexdigest()\n\n\nAlign reviewed cases and the judge contract. Inspect case flips alongside aggregate deltas. Regenerate reports that lack identity evidence. The application model or prompt may change deliberately. Dataset, judge model/prompt and metric versions must align. CLI exits 2 for incomparable evidence, 1 for regressions or newly failing cases. Live golden evaluation is still required before release.",
+        "source": ""
+      },
+      {
+        "title": "Prompt Engineering and Prompt Life Cycle Management",
+        "body": [
+          "Educative lesson 09",
+          "Concept → worked example → NexaAssist application"
+        ],
+        "kind": "section",
+        "note": "This section follows the lesson Prompt Engineering and Prompt Life Cycle Management. Teach the concept first, then distinguish the existing NexaAssist implementation from proposed extensions. The slides paraphrase the source rather than reproduce its text. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "A prompt has three responsibilities",
+        "body": [
+          "Role: what the assistant is authorized to do.",
+          "Evidence boundary: which supplied text supports claims.",
+          "Output contract: schema, status and citations."
+        ],
+        "kind": "text",
+        "note": "Prompts guide model behavior but cannot enforce every safety property. The application validates output and evidence after generation. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "app/chains/prompts/answer.py",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "A production prompt separates three concerns",
+        "body": [
+          "Instructions: Role, scope and abstention",
+          "Untrusted data: Question + retrieved documents",
+          "Output contract: Typed status + exact citations"
+        ],
+        "kind": "diagram",
+        "note": "The relationship is constraint and validation, not a claim that delimiters confer authority. System-role rules remain separate from untrusted user/context content. The source uses Jinja templates and XML; NexaAssist uses ChatPromptTemplate and JSON-serialized evidence. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "",
+        "nodes": [
+          [
+            "Instructions",
+            "Role, scope and abstention"
+          ],
+          [
+            "Untrusted data",
+            "Question + retrieved documents"
+          ],
+          [
+            "Output contract",
+            "Typed status + exact citations"
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1,
+            "constrain"
+          ],
+          [
+            1,
+            2,
+            "validate"
+          ]
+        ],
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "Delimiters mark structure; they do not stop every attack",
+        "body": [
+          "Wrap untrusted content with explicit boundaries.",
+          "Escape delimiter-like content before rendering examples.",
+          "Keep privileged instructions outside the data field."
+        ],
+        "kind": "text",
+        "note": "The shared answer chain now escapes every human-message variable, wraps request/evidence fields in XML boundaries and ends with a reminder. Prompt 1.1.0 is versioned and fingerprint-pinned. These controls preserve structure; live injection resistance and policy semantics require model evaluation. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "The sandwich pattern repeats a narrow rule",
+        "body": [
+          "Give scope and grounding instructions before the data.",
+          "Place the question inside its declared data boundary.",
+          "End with a reminder to follow the output contract."
+        ],
+        "kind": "text",
+        "note": "The source motivates this pattern with recency sensitivity. It is a prompt-design technique to evaluate, not a hard security boundary. Changing the actual answer prompt still requires versioning, pin updates and behavioral evaluation. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "JSON mode and strict schema solve different problems",
+        "body": [
+          "Valid JSON only guarantees a parseable representation.",
+          "A schema checks fields, types and allowed status values.",
+          "Source support and policy meaning need further checks."
+        ],
+        "kind": "text",
+        "note": "The course demonstrates JSON-object output. NexaAssist uses integration strict JSON-schema output and validates AnswerDraft. Neither mechanism makes the contents automatically correct or safe. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "The prompt is a tracked artifact",
+        "body": [
+          "Prompt ID, version and fingerprint travel with the answer provenance."
+        ],
+        "kind": "code",
+        "code": "ANSWER_PROMPT_ID = \"nexaassist-policy-answer\"\nANSWER_PROMPT_VERSION = \"1.1.0\"\nANSWER_PROMPT = ChatPromptTemplate.from_messages(\n    [\n        (\n            \"system\",\n            \"\"\"\nYou are NexaAssist, an assistant that explains synthetic NexaBank policies to staff.\n\nResolve product/date/rate ambiguity before judging whether evidence is sufficient.\nIf the user's requested policy-lookup date differs from as_of, ask for scope",
+        "source": "app/chains/prompts/answer.py",
+        "note": "Open app/chains/prompts/answer.py and locate ANSWER_PROMPT_ID. Read the displayed excerpt in context; it is taken directly from the application. Prompt ID, version and fingerprint travel with the answer provenance. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "Make a prompt change reviewable",
+        "body": [
+          "Run tests/test_prompts.py before changing wording.",
+          "A wording change requires a version and pin update.",
+          "Then replay cases; a new hash proves identity, not quality."
+        ],
+        "kind": "text",
+        "note": "The workshop does not alter the shared prompt. Delimiters and closing reminders remain a proposed future change that would need a version bump and live evaluation. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "LCEL composes prompt and strict model output",
+        "body": [
+          "The chain requests AnswerDraft with strict JSON-schema output."
+        ],
+        "kind": "code",
+        "code": "    generation = ANSWER_PROMPT | llm.with_structured_output(\n        AnswerDraft, method=\"json_schema\", strict=True\n    )\n",
+        "source": "app/chains/answer.py",
+        "note": "Open app/chains/answer.py and locate generation = ANSWER_PROMPT. Read the displayed excerpt in context; it is taken directly from the application. The chain requests AnswerDraft with strict JSON-schema output. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "Status is part of the API contract",
+        "body": [
+          "Distinguish answered, insufficient_evidence and needs_clarification."
+        ],
+        "kind": "code",
+        "code": "class AnswerDraft(BaseModel):\n    \"\"\"Model output; source identities are resolved by application code.\"\"\"\n\n    model_config = ConfigDict(extra=\"forbid\")\n\n    status: Literal[\"answered\", \"insufficient_evidence\", \"needs_clarification\"]\n    answer: str = Field(min_length=1)\n    evidence: list[EvidenceQuote]\n",
+        "source": "app/models/answer.py",
+        "note": "Open app/models/answer.py and locate class AnswerDraft. Read the displayed excerpt in context; it is taken directly from the application. Distinguish answered, insufficient_evidence and needs_clarification. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "A registry supports comparison and rollback",
+        "body": [
+          "Track prompt text, version, owner and evaluation evidence.",
+          "Compare candidates with the same cases and configuration.",
+          "Hot-swapping and A/B routing need their own controls."
+        ],
+        "kind": "text",
+        "note": "The existing code stores prompts as versioned Python artifacts and returns fingerprints. It is not a hot-swapping prompt registry. Teach the registry responsibility without claiming a new service exists. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "Practical / render a boundary attack safely",
+        "body": [
+          "Run: python -m training.session3.prompt_boundaries",
+          "Inspect escaped closing tags and retained question text.",
+          "Check template variables and compare the production rendering."
+        ],
+        "kind": "lab",
+        "note": "The lab runs the actual answer chain with a fake model and parses the prompt it receives. Closing tags remain data and the system role survives. The fixture abstention does not prove that a live model ignores every injected instruction. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "The answer path fails closed",
+        "body": [
+          "Retrieve and budget evidence → generate draft",
+          "Check output PII → check IDs, markers and exact quotes",
+          "Return supported response, repair once or abstain"
+        ],
+        "kind": "flow",
+        "note": "A clarification uses a fixed safe scope question. Citation failure allows one repair, while detected PII returns the existing safe abstention immediately. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "app/chains/answer.py",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "What exact quotes do and do not establish",
+        "body": [
+          "An exact quote proves those bytes were supplied.",
+          "It does not prove the claim follows from the quote.",
+          "Semantic evaluation must still check grounding and scope."
+        ],
+        "kind": "split",
+        "note": "Use an unrelated policy claim paired with a real source quote as the counterexample. This is why citation integrity and faithfulness remain separate measurements. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "Practical 1 / replay three model drafts",
+        "body": [
+          "Run: python -m training.session3.answers",
+          "Valid → answered; invented quote → abstention.",
+          "Output PII → abstention with no leaked citation."
+        ],
+        "kind": "lab",
+        "note": "Expect one call for the valid draft, two for the fixed invalid quote, and one for the PII draft. All model calls are fakes; the chain validation is real. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "Exercise / break evidence identity",
+        "body": [
+          "In a lab copy, change the evidence ID to 99.",
+          "Predict the marker/ID mismatch and repair count.",
+          "Then explain a wrong answer with a valid quote."
+        ],
+        "kind": "lab",
+        "note": "Do not edit shared production prompts during class. Review the valid and invalid branches and capture the prediction before running the modified copy. Source lesson: https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management.",
+        "source": "",
+        "lesson": 9,
+        "lesson_title": "Prompt Engineering and Prompt Life Cycle Management",
+        "lesson_url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management"
+      },
+      {
+        "title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "body": [
+          "Educative lesson 10",
+          "Concept → worked example → NexaAssist application"
+        ],
+        "kind": "section",
+        "note": "This section follows the lesson Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback. Teach the concept first, then distinguish the existing NexaAssist implementation from proposed extensions. The slides paraphrase the source rather than reproduce its text. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "source": "",
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "Meaning defeats exact string comparison",
+        "body": [
+          "Paraphrases can be correct despite little word overlap.",
+          "A tiny negation can reverse an otherwise similar answer.",
+          "Use semantic criteria plus deterministic contract checks."
+        ],
+        "kind": "text",
+        "note": "BLEU and ROUGE can remain useful for some tasks, but overlap alone is a poor release gate for policy answers. Use an original example: “eligible after twelve months” versus “ineligible after twelve months” to show why shared words are insufficient. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "source": "",
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "The RAG triad assigns different questions",
+        "body": [
+          "Question: What was asked?",
+          "Retrieved context: Was useful evidence found?",
+          "Generated answer: Is it supported and responsive?"
+        ],
+        "kind": "diagram",
+        "note": "The triad localizes faults. Specific Ragas metrics have their own implementation definitions and reference requirements; do not replace them with a vague all-purpose accuracy score. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "source": "",
+        "nodes": [
+          [
+            "Question",
+            "What was asked?"
+          ],
+          [
+            "Retrieved context",
+            "Was useful evidence found?"
+          ],
+          [
+            "Generated answer",
+            "Is it supported and responsive?"
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1,
+            "context relevance"
+          ],
+          [
+            1,
+            2,
+            "faithfulness"
+          ],
+          [
+            0,
+            2,
+            "answer relevance"
+          ]
+        ],
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "Use metrics that match the failure",
+        "body": [
+          "Context precision: relevance of retrieved material.",
+          "Context recall: coverage of reference information.",
+          "Faithfulness and answer relevance: grounding and fit."
+        ],
+        "kind": "text",
+        "note": "Judge scores are estimates influenced by context and rubric. We use the local evaluation implementation and human review rather than treating exact word overlap as truth. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "source": "",
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "Golden cases need human verification",
+        "body": [
+          "Input includes question, date and product scope.",
+          "Expected output/status and source references are explicit.",
+          "Put verifier and review rationale in a companion memo."
+        ],
+        "kind": "text",
+        "note": "The schema forbids extra fields. A reviewer name added directly to the GoldenAnswer JSON would fail validation, so use the separate memo. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "source": "app/evaluation/answer_evaluation.py",
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "A judge needs a rubric and calibration",
+        "body": [
+          "Provide query, context, response and explicit criteria.",
+          "Score claims against evidence and record reasons.",
+          "Compare a sample against human judgments."
+        ],
+        "kind": "text",
+        "note": "Low temperature can reduce variability but does not make a judge deterministic. Watch for preference, ordering and correlated model errors. Human agreement checking is an outstanding project improvement; it is taught here as a required design consideration. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "source": "",
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "Practical 2 / classify the fault",
+        "body": [
+          "Run: python -m training.session3.gates",
+          "Missing required context → retrieval_error.",
+          "Complete context, unsupported response → generation_error."
+        ],
+        "kind": "lab",
+        "note": "The scores are synthetic and deliberately chosen to trigger the production gate. Do not label the output a measured Ragas benchmark. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "source": "",
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "A gate names the metric that failed",
+        "body": [
+          "Per-metric means and failed cases make the decision actionable."
+        ],
+        "kind": "code",
+        "code": "def gate_failures(report: dict[str, Any], gates: Gates) -> list[dict[str, Any]]:\n    \"\"\"Offline quality gate: aggregate means plus the cases that fell short.\"\"\"\n    records = report[\"records\"]\n    failures: list[dict[str, Any]] = []\n\n    def check(metric: str, value: float, minimum: float) -> None:\n        if value < minimum:\n            failures.append({\"metric\": metric, \"value\": round(value, 4), \"minimum\": minimum})\n\n    for name, value in report[\"ragas\"][\"means\"].items():\n        check(name, value, getattr(gates, f\"{name}_min\"))\n    for key in (\"correctness\", \"groundedness\"):",
+        "source": "app/evaluation/gates.py",
+        "note": "Open app/evaluation/gates.py and locate def gate_failures. Read the displayed excerpt in context; it is taken directly from the application. Per-metric means and failed cases make the decision actionable. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "Practical 3 / propose three golden cases",
+        "body": [
+          "Copy the JSONL dataset into /tmp.",
+          "Add answer, abstention and clarification examples.",
+          "Validate with load_golden; review the actual source clauses."
+        ],
+        "kind": "lab",
+        "note": "Do not automatically translate refusal or prompt-injection categories. The correct expected status depends on the meaning of each input and must be reviewed. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "source": "training/session3/handout.md",
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "Offline does not always mean no provider",
+        "body": [
+          "Class labs use fakes and need no credentials.",
+          "A pre-release golden evaluation can call real models.",
+          "Live evaluation needs approved access, cost and data."
+        ],
+        "kind": "split",
+        "note": "Distinguish offline evaluation as a lifecycle concept from offline execution as a network constraint. The required class exercises satisfy both; optional Ragas runs use providers. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "source": "",
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "Compare like with like",
+        "body": [
+          "Keep case set, retrieval configuration and judge aligned.",
+          "Save the baseline before writing the next report.",
+          "Inspect per-metric deltas and newly failing cases."
+        ],
+        "kind": "text",
+        "note": "The comparison helper does not enforce dataset identity. The operator must verify comparability before interpreting a delta as a regression. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "source": "app/evaluation/compare.py",
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "Spend evaluation budget where it catches regressions",
+        "body": [
+          "A representative subset can gate frequent changes.",
+          "Broader release or scheduled evaluations cover more cases.",
+          "Keep judge, dataset and prompt identities in reports."
+        ],
+        "kind": "text",
+        "note": "The source distinguishes a small CI set from larger scheduled evaluation. This project has evaluation CLIs and local tests, but no CI pipeline is added in this revision. A subset passing does not validate unseen categories. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "source": "",
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "Optional live / run and compare",
+        "body": [
+          "Run app.evaluation.run --limit 3 with approved .env.",
+          "Preserve old and new reports under distinct paths.",
+          "Run app.evaluation.compare OLD.json NEW.json."
+        ],
+        "kind": "text",
+        "note": "Full commands are in the handout. Preserve provenance and investigate any newly failing case, even if aggregate metrics hide it. Source lesson: https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback.",
+        "source": "",
+        "lesson": 10,
+        "lesson_title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+        "lesson_url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback"
+      },
+      {
+        "title": "Exit gate / quality with an explanation",
+        "body": [
+          "Three valid cases and human review memo.",
+          "A named failure type for every failing example.",
+          "Thresholds met or a documented release hold."
+        ],
+        "kind": "gate",
+        "note": "A classroom pass requires a defensible interpretation. A real release remains blocked by unmeasured quality or unapproved targets.",
+        "source": ""
+      },
+      {
+        "title": "Next / make failure safe to serve",
+        "body": [
+          "Keep generation behind the service layer.",
+          "Bring one invalid input and one dependency outage.",
+          "Session 4 will measure the API failure contract."
+        ],
+        "kind": "ending",
+        "note": "The next class wraps the already-working intelligence in deterministic request validation, quotas, readiness checks and measurable operational constraints.",
+        "source": ""
+      }
+    ]
+  },
+  {
+    "number": 4,
+    "title": "Deploy",
+    "subtitle": "Serve safely within latency and cost budgets",
+    "accent": "#B86416",
+    "lessons": "11, 12, 13",
+    "slides": [
+      {
+        "title": "Deploy",
+        "body": [
+          "Secure serving, reliability and cost",
+          "Session 4 of 5 · 3 hours · source-aligned workshop"
+        ],
+        "kind": "cover",
+        "note": "Today exercises the existing FastAPI app without network access. Production-grade claims still require live staging traffic and a reviewed deployment environment. This revised deck follows the course lesson sequence; exact lesson URLs appear in section notes and the coverage map.",
+        "source": ""
+      },
+      {
+        "title": "Outcomes you can demonstrate",
+        "body": [
+          "Predict 422, 429 and 503 responses.",
+          "Trace input, output and resource controls.",
+          "Explain why an empty metrics window cannot pass an SLO."
+        ],
+        "kind": "text",
+        "note": "The deliverables are an API failure matrix, a security limitation note and an operational test plan.",
+        "source": ""
+      },
+      {
+        "title": "Three hours to harden the boundary",
+        "body": [
+          "25 min serving/security + 20 min walkthrough",
+          "90 min labs, including a 10 min break",
+          "25 min SLO review + 20 min recap"
+        ],
+        "kind": "text",
+        "note": "Use the API lab first so every learner sees failure responses before reading the relevant implementation.",
+        "source": ""
+      },
+      {
+        "title": "Showcase / the service fails safely",
+        "body": [
+          "Provider failure → private details stay private.",
+          "Repeated calls → the configured quota applies.",
+          "Database failure → readiness reports unavailable."
+        ],
+        "kind": "text",
+        "note": "Use actual FastAPI routing, dependency injection, limiter and schemas with fake dependencies. Readiness tests a database ping, not vector-index availability.",
+        "source": ""
+      },
+      {
+        "title": "Run the serving-failure demonstration",
+        "body": [
+          "python -m training.showcase --session 4",
+          "Provider failures then quota: [503, 503, 429].",
+          "Invalid input: 422; failed readiness: 503."
+        ],
+        "kind": "lab",
+        "note": "Allow 20 minutes. Predict which requests consume quota. The driver deadline is covered separately and is not a hard wall-clock guarantee. Limits are per process/client; this is not a distributed quota.\n\nCode walkthrough: app/database/mongo.py\ndef ping_database(settings: Settings) -> None:\n    \"\"\"Bound the readiness probe without shortening normal query deadlines.\"\"\"\n    with timeout(2):\n        _database(settings).command(\"ping\")\n\nStatus, retry behavior and response privacy. Measure latency and cost under representative traffic. Offline failures establish no capacity target. Retain an HTTP transcript. Explain health versus readiness and unknown versus passing measurements. Prices and SLO targets remain placeholders pending owner confirmation.",
+        "source": ""
+      },
+      {
+        "title": "Security, Compliance, and Responsible Operation in LLMOps",
+        "body": [
+          "Educative lesson 11",
+          "Concept → worked example → NexaAssist application"
+        ],
+        "kind": "section",
+        "note": "This section follows the lesson Security, Compliance, and Responsible Operation in LLMOps. Teach the concept first, then distinguish the existing NexaAssist implementation from proposed extensions. The slides paraphrase the source rather than reproduce its text. Source lesson: https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops.",
+        "source": "",
+        "lesson": 11,
+        "lesson_title": "Security, Compliance, and Responsible Operation in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops"
+      },
+      {
+        "title": "Grounded output can still be unsafe",
+        "body": [
+          "A source may contain private information.",
+          "A user may request an unauthorized disclosure.",
+          "A safe-looking request can consume excessive resources."
+        ],
+        "kind": "text",
+        "note": "Correctness and safety are different dimensions. A faithful reproduction of restricted information is still a privacy problem. The source organizes its security discussion around input, output and resource controls. Source lesson: https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops.",
+        "source": "",
+        "lesson": 11,
+        "lesson_title": "Security, Compliance, and Responsible Operation in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops"
+      },
+      {
+        "title": "Recognize direct and indirect injection",
+        "body": [
+          "Direct: the user tries to override the assistant’s rules.",
+          "Indirect: retrieved material contains hostile instructions.",
+          "Defend at data, prompt, authorization and output boundaries."
+        ],
+        "kind": "text",
+        "note": "Do not teach a list of forbidden words as complete injection protection. Text can be phrased or encoded many ways. Retrieved documents are untrusted data even when their surrounding system is useful. Source lesson: https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops.",
+        "source": "",
+        "lesson": 11,
+        "lesson_title": "Security, Compliance, and Responsible Operation in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops"
+      },
+      {
+        "title": "Risk names are stable; numbering is versioned",
+        "body": [
+          "The lesson uses older OWASP LLM01 / LLM04 / LLM06 labels.",
+          "OWASP 2025 maps disclosure to LLM02 and consumption to LLM10.",
+          "Record the list version when naming a risk."
+        ],
+        "kind": "text",
+        "note": "Verified against https://genai.owasp.org/llm-top-10/ on 2026-10-23. Prompt injection remains LLM01:2025. Explain the source’s historical numbering without presenting it as the current taxonomy. Source lesson: https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops.",
+        "source": "",
+        "lesson": 11,
+        "lesson_title": "Security, Compliance, and Responsible Operation in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops"
+      },
+      {
+        "title": "Layer the controls around generation",
+        "body": [
+          "Before: validate, quota and redact the query.",
+          "During: bound context and output tokens.",
+          "After: detect PII and verify cited quotes."
+        ],
+        "kind": "flow",
+        "note": "These controls reduce distinct risks. None demonstrates complete injection resistance, data-loss prevention or semantic correctness. Source lesson: https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops.",
+        "source": "",
+        "lesson": 11,
+        "lesson_title": "Security, Compliance, and Responsible Operation in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops"
+      },
+      {
+        "title": "Reuse the query PII rail",
+        "body": [
+          "scrub_request runs before embeddings and generation.",
+          "The same pattern engine masks corpus identifiers.",
+          "Regex misses names and addresses and can misclassify digits."
+        ],
+        "kind": "text",
+        "note": "These are known limits, not a promise of complete compliance. Real data needs an approved privacy policy and evidence appropriate to its risk. Source lesson: https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops.",
+        "source": "app/services/retrieval.py; app/chains/redaction.py",
+        "lesson": 11,
+        "lesson_title": "Security, Compliance, and Responsible Operation in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops"
+      },
+      {
+        "title": "New / block detected PII before returning",
+        "body": [
+          "Check answer text and evidence quotes; return the existing safe abstention."
+        ],
+        "kind": "code",
+        "code": "            if any(redact(text)[1] for text in (draft.answer, *(e.quote for e in draft.evidence))):\n                logger.warning(\"answer_output_pii_blocked\")\n                return response\n",
+        "source": "app/chains/answer.py",
+        "note": "Open app/chains/answer.py and locate if any(redact(text). Read the displayed excerpt in context; it is taken directly from the application. Check answer text and evidence quotes; return the existing safe abstention. Source lesson: https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops.",
+        "lesson": 11,
+        "lesson_title": "Security, Compliance, and Responsible Operation in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops"
+      },
+      {
+        "title": "Preserve citation integrity when blocking",
+        "body": [
+          "Never rewrite a quote and still call it exact.",
+          "On a detected identifier, discard the draft and citations.",
+          "Log only the event; never log the sensitive text."
+        ],
+        "kind": "text",
+        "note": "The new rail is always applied to generated answer and quote text. Source identities and arbitrary free-form private data are not comprehensively inspected by this pattern detector. Source lesson: https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops.",
+        "source": "",
+        "lesson": 11,
+        "lesson_title": "Security, Compliance, and Responsible Operation in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops"
+      },
+      {
+        "title": "Practical 2 / inspect security tests",
+        "body": [
+          "Run input_rail, output_cap and rate_limit tests.",
+          "Run test_readiness_timeout.py and the answer replay.",
+          "Explain both protected cases and known detector limits."
+        ],
+        "kind": "lab",
+        "note": "Use the complete pytest command in the handout. Extend a copy of the rate-limit exercise to three allowed requests and a fourth blocked one. Source lesson: https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops.",
+        "source": "training/session4/handout.md",
+        "lesson": 11,
+        "lesson_title": "Security, Compliance, and Responsible Operation in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops"
+      },
+      {
+        "title": "Resource governance has explicit bounds",
+        "body": [
+          "Request query length is capped.",
+          "CHAT_MAX_OUTPUT_TOKENS bounds answer generation.",
+          "RATE_LIMIT_PER_MINUTE is a per-process quota."
+        ],
+        "kind": "text",
+        "note": "The shipped token cap and quota are placeholders. Multiple workers and reverse proxies change their operational meaning; a fleet limit needs a shared gateway or store. Source lesson: https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops.",
+        "source": "app/core/config.py",
+        "lesson": 11,
+        "lesson_title": "Security, Compliance, and Responsible Operation in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops"
+      },
+      {
+        "title": "Treat residual risk as part of the result",
+        "body": [
+          "Patterns cover selected identifiers, not all personal data.",
+          "Quotas are per process; proxy behavior affects client identity.",
+          "Authorization and retention still need deployment decisions."
+        ],
+        "kind": "text",
+        "note": "Keep the source’s defense-in-depth lesson, while avoiding a claim that these controls alone make the service suitable for public internet exposure. NexaAssist remains a training app with explicit live and organizational gaps. Source lesson: https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops.",
+        "source": "",
+        "lesson": 11,
+        "lesson_title": "Security, Compliance, and Responsible Operation in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops"
+      },
+      {
+        "title": "Inference Infrastructure: Hardware, Economics, and Latency",
+        "body": [
+          "Educative lesson 12",
+          "Concept → worked example → NexaAssist application"
+        ],
+        "kind": "section",
+        "note": "This section follows the lesson Inference Infrastructure: Hardware, Economics, and Latency. Teach the concept first, then distinguish the existing NexaAssist implementation from proposed extensions. The slides paraphrase the source rather than reproduce its text. Source lesson: https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency.",
+        "source": "",
+        "lesson": 12,
+        "lesson_title": "Inference Infrastructure: Hardware, Economics, and Latency",
+        "lesson_url": "https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency"
+      },
+      {
+        "title": "Split response time into useful measurements",
+        "body": [
+          "TTFT: request start until the first output token.",
+          "TPS: generation rate after output begins.",
+          "End-to-end latency also includes queues and retrieval."
+        ],
+        "kind": "text",
+        "note": "A buffered API cannot expose user-visible TTFT from generation_ms. Streaming can improve perceived progress, but does not remove prompt processing or queueing delays. Targets should follow the product’s usage rather than universal numbers. Source lesson: https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency.",
+        "source": "",
+        "lesson": 12,
+        "lesson_title": "Inference Infrastructure: Hardware, Economics, and Latency",
+        "lesson_url": "https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency"
+      },
+      {
+        "title": "Weight memory is only the starting estimate",
+        "body": [
+          "Approximate decimal GB = parameter billions × bytes/parameter.",
+          "Scenario: 8B × 2 bytes = 16 GB for FP16 weights.",
+          "Reserve additional memory for cache, runtime and concurrency."
+        ],
+        "kind": "text",
+        "note": "This is a weight-size lower-bound estimate, not a complete GPU purchase recommendation. Runtimes can shard or offload models; memory layout, kernels and architecture influence feasibility. No hardware performance measurement is supplied. Source lesson: https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency.",
+        "source": "",
+        "lesson": 12,
+        "lesson_title": "Inference Infrastructure: Hardware, Economics, and Latency",
+        "lesson_url": "https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency"
+      },
+      {
+        "title": "Quantization changes the weight budget",
+        "body": [
+          "FP16 uses roughly 2 bytes per parameter.",
+          "INT8 uses roughly 1; packed INT4 roughly 0.5.",
+          "Quality, kernel support and metadata overhead still matter."
+        ],
+        "kind": "text",
+        "note": "Scenario: idealized 8B INT4 weights use about 4 decimal GB before overhead. Quantization is not a guarantee of identical behavior or usable throughput. Re-evaluate the actual model and task after changing precision. Source lesson: https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency.",
+        "source": "",
+        "lesson": 12,
+        "lesson_title": "Inference Infrastructure: Hardware, Economics, and Latency",
+        "lesson_url": "https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency"
+      },
+      {
+        "title": "The KV cache grows with workload shape",
+        "body": [
+          "Longer context requires more cached attention state.",
+          "Concurrent sequences increase the live memory footprint.",
+          "A model loading successfully does not prove capacity."
+        ],
+        "kind": "text",
+        "note": "KV memory depends on layer count, attention layout, sequence length, precision and batch size. Avoid treating a fixed “GB per 4000 tokens” number as universal. Capacity must be measured with the intended context and concurrency. Source lesson: https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency.",
+        "source": "",
+        "lesson": 12,
+        "lesson_title": "Inference Infrastructure: Hardware, Economics, and Latency",
+        "lesson_url": "https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency"
+      },
+      {
+        "title": "API versus self-hosting is a utilization decision",
+        "body": [
+          "API: variable token cost plus provider limits and governance.",
+          "Self-hosting: fixed capacity cost plus operating effort.",
+          "Compare representative traffic, privacy and reliability needs."
+        ],
+        "kind": "text",
+        "note": "Provider quotas, availability and network behavior limit effective scalability; API scale is not unlimited. A steady high-volume workload may justify owned capacity, while a bursty one may not. Use total cost, not token price alone. Source lesson: https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency.",
+        "source": "",
+        "lesson": 12,
+        "lesson_title": "Inference Infrastructure: Hardware, Economics, and Latency",
+        "lesson_url": "https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency"
+      },
+      {
+        "title": "Separate input and output prices in the estimate",
+        "body": [
+          "Scenario: 1,000 queries/day, 500 input + 200 output tokens.",
+          "At $0.10/$0.50 per 1M: $0.15/day, $4.50/30 days.",
+          "These are scenario prices, not a current provider quote."
+        ],
+        "kind": "text",
+        "note": "Compute input and output cost independently: 500,000 input tokens cost $0.05 and 200,000 output tokens cost $0.10. Multiply by 30 for this illustrative month. Include failed calls, retries, judges and embeddings in a complete estimate. Source lesson: https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency.",
+        "source": "",
+        "lesson": 12,
+        "lesson_title": "Inference Infrastructure: Hardware, Economics, and Latency",
+        "lesson_url": "https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency"
+      },
+      {
+        "title": "Parallelism and batching solve different constraints",
+        "body": [
+          "Replicas distribute requests when a model fits per worker.",
+          "Sharding distributes a model that needs multiple devices.",
+          "Batching trades queue delay for better resource utilization."
+        ],
+        "kind": "text",
+        "note": "The source covers data parallelism, model parallelism and asynchronous batching. None guarantees linear throughput in practice. Observe provider rate limits, memory pressure and per-request latency when tuning concurrency. Source lesson: https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency.",
+        "source": "",
+        "lesson": 12,
+        "lesson_title": "Inference Infrastructure: Hardware, Economics, and Latency",
+        "lesson_url": "https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency"
+      },
+      {
+        "title": "Practical / calculate capacity and spend",
+        "body": [
+          "Run: python -m training.session4.capacity",
+          "Verify weight-only estimates and scenario token costs.",
+          "Write down the missing cache, runtime and concurrency inputs."
+        ],
+        "kind": "lab",
+        "note": "The calculation is deterministic and offline. It demonstrates arithmetic and assumptions, not a live hardware sizing or pricing recommendation. Source lesson: https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency.",
+        "source": "",
+        "lesson": 12,
+        "lesson_title": "Inference Infrastructure: Hardware, Economics, and Latency",
+        "lesson_url": "https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency"
+      },
+      {
+        "title": "Measure latency, errors and priced tokens",
+        "body": [
+          "Use /metrics/answers and app.evaluation.slo_check.",
+          "Missing traffic or prices → not_measured.",
+          "Process metrics do not establish a fleet-wide SLO."
+        ],
+        "kind": "text",
+        "note": "Latency uses a rolling window, while request/token counters are cumulative. The teaching checker makes required inputs visible but is not a full production observability backend. Source lesson: https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency.",
+        "source": "app/api/operations.py; app/evaluation/slo_check.py",
+        "lesson": 12,
+        "lesson_title": "Inference Infrastructure: Hardware, Economics, and Latency",
+        "lesson_url": "https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency"
+      },
+      {
+        "title": "Streaming needs a separate contract",
+        "body": [
+          "Current answers are buffered and validated as a whole.",
+          "Total generation time does not measure TTFT or TPS.",
+          "Streaming requires deciding when validated content may leave."
+        ],
+        "kind": "text",
+        "note": "TTFT means time to first token; TPS means tokens per second. They are discussed as future metrics rather than inferred from the current generation_ms field. Source lesson: https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency.",
+        "source": "",
+        "lesson": 12,
+        "lesson_title": "Inference Infrastructure: Hardware, Economics, and Latency",
+        "lesson_url": "https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency"
+      },
+      {
+        "title": "Hosting, Serving, and Scaling LLMs in Production",
+        "body": [
+          "Educative lesson 13",
+          "Concept → worked example → NexaAssist application"
+        ],
+        "kind": "section",
+        "note": "This section follows the lesson Hosting, Serving, and Scaling LLMs in Production. Teach the concept first, then distinguish the existing NexaAssist implementation from proposed extensions. The slides paraphrase the source rather than reproduce its text. Source lesson: https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production.",
+        "source": "",
+        "lesson": 13,
+        "lesson_title": "Hosting, Serving, and Scaling LLMs in Production",
+        "lesson_url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production"
+      },
+      {
+        "title": "Async endpoints still need non-blocking internals",
+        "body": [
+          "Await asynchronous provider and HTTP clients.",
+          "Offload synchronous database/file work explicitly.",
+          "FastAPI does not offload every utility called inside async def."
+        ],
+        "kind": "text",
+        "note": "The source text overstates automatic threadpool handling. Official FastAPI documentation distinguishes synchronous path operations/dependencies from ordinary utility calls. NexaAssist explicitly uses asyncio.to_thread for synchronous PyMongo work. Reference: https://fastapi.tiangolo.com/async/. Source lesson: https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production.",
+        "source": "",
+        "lesson": 13,
+        "lesson_title": "Hosting, Serving, and Scaling LLMs in Production",
+        "lesson_url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production"
+      },
+      {
+        "title": "The API owns a strict contract",
+        "body": [
+          "Pydantic rejects invalid or extra request fields.",
+          "Depends injects settings and request controls.",
+          "Routers delegate; provider failures become safe 503s."
+        ],
+        "kind": "text",
+        "note": "Thin routers keep domain behavior reusable by both API and evaluation paths. Never expose provider exception strings in public responses. Source lesson: https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production.",
+        "source": "app/api/answer.py; app/models/retrieval.py",
+        "lesson": 13,
+        "lesson_title": "Hosting, Serving, and Scaling LLMs in Production",
+        "lesson_url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production"
+      },
+      {
+        "title": "Practical 1 / exercise the real API",
+        "body": [
+          "Run: python -m training.session4.serving",
+          "Observe health 200, readiness 503 and invalid input 422.",
+          "Two provider failures then quota: [503, 503, 429]."
+        ],
+        "kind": "lab",
+        "note": "ASGI transport keeps this offline. Settings and dependency behavior are injected, while routing, validation and rate-limit code remain real. Source lesson: https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production.",
+        "source": "",
+        "lesson": 13,
+        "lesson_title": "Hosting, Serving, and Scaling LLMs in Production",
+        "lesson_url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production"
+      },
+      {
+        "title": "A failure should reveal enough to act",
+        "body": [
+          "422 → repair the request.",
+          "429 + Retry-After → respect the quota.",
+          "503 → dependency unavailable; preserve private details."
+        ],
+        "kind": "split",
+        "note": "Ask learners what the UI should show for each status. The existing interface already handles rate-limit feedback separately from unavailable service errors. Source lesson: https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production.",
+        "source": "",
+        "lesson": 13,
+        "lesson_title": "Hosting, Serving, and Scaling LLMs in Production",
+        "lesson_url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production"
+      },
+      {
+        "title": "Dependency injection defines resource ownership",
+        "body": [
+          "Create or cache shared clients with clear lifecycle.",
+          "Inject application settings and replace services in tests.",
+          "Keep domain logic callable outside HTTP routes."
+        ],
+        "kind": "text",
+        "note": "Depends is a wiring mechanism, not a blanket singleton or startup guarantee. Resource ownership must be explicit in lifespan, caches or dependencies. The current service/chain split lets evaluation replay the same logic. Source lesson: https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production.",
+        "source": "",
+        "lesson": 13,
+        "lesson_title": "Hosting, Serving, and Scaling LLMs in Production",
+        "lesson_url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production"
+      },
+      {
+        "title": "Health and readiness answer different questions",
+        "body": [
+          "/health: this process can respond.",
+          "/ready: the configured database ping succeeds.",
+          "Neither endpoint proves retrieval or answer quality."
+        ],
+        "kind": "split",
+        "note": "The readiness endpoint is intentionally narrower than a live RAG test. A healthy database can still have a missing or stale vector index. Source lesson: https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production.",
+        "source": "",
+        "lesson": 13,
+        "lesson_title": "Hosting, Serving, and Scaling LLMs in Production",
+        "lesson_url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production"
+      },
+      {
+        "title": "New / put a deadline on the driver ping",
+        "body": [
+          "The two-second driver deadline applies to readiness, not ordinary retrieval."
+        ],
+        "kind": "code",
+        "code": "def ping_database(settings: Settings) -> None:\n    \"\"\"Bound the readiness probe without shortening normal query deadlines.\"\"\"\n    with timeout(2):\n        _database(settings).command(\"ping\")\n",
+        "source": "app/database/mongo.py",
+        "note": "Open app/database/mongo.py and locate def ping_database. Read the displayed excerpt in context; it is taken directly from the application. The two-second driver deadline applies to readiness, not ordinary retrieval. Source lesson: https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production.",
+        "lesson": 13,
+        "lesson_title": "Hosting, Serving, and Scaling LLMs in Production",
+        "lesson_url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production"
+      },
+      {
+        "title": "Package the existing application",
+        "body": [
+          "Read app/Dockerfile and Dockerfile.dockerignore.",
+          "Inspect locked dependencies, non-root user and probe.",
+          "Keep API secrets outside the image build context."
+        ],
+        "kind": "text",
+        "note": "This delivery does not claim a fresh container build. The handoff describes an earlier dummy-settings smoke test; learners should rerun their deployment checks in their environment. Source lesson: https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production.",
+        "source": "",
+        "lesson": 13,
+        "lesson_title": "Hosting, Serving, and Scaling LLMs in Production",
+        "lesson_url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production"
+      },
+      {
+        "title": "Practical 3 / inspect operational tests",
+        "body": [
+          "Run tests/test_slo.py and tests/test_telemetry.py.",
+          "Map a request through FastAPI and workflow spans.",
+          "Explain why transport-only API tests omit lifespan."
+        ],
+        "kind": "lab",
+        "note": "The standalone serving lab does not execute startup. Separate tests cover telemetry initialization, and a live Datadog demo remains optional. Source lesson: https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production.",
+        "source": "",
+        "lesson": 13,
+        "lesson_title": "Hosting, Serving, and Scaling LLMs in Production",
+        "lesson_url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production"
+      },
+      {
+        "title": "A reproducible image still needs safe deployment",
+        "body": [
+          "Freeze dependencies and build with an excluded-secret context.",
+          "Inject secrets at runtime; do not COPY .env into images.",
+          "Review networking, readiness and rollout in the target platform."
+        ],
+        "kind": "text",
+        "note": "The source Docker example includes COPY .env while later advising runtime secrets. The revised training follows the runtime-secret practice and existing dockerignore. No cloud provider deployment is assumed or performed. Source lesson: https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production.",
+        "source": "",
+        "lesson": 13,
+        "lesson_title": "Hosting, Serving, and Scaling LLMs in Production",
+        "lesson_url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production"
+      },
+      {
+        "title": "Cost follows measured tokens",
+        "body": [
+          "Cost = (input tokens × input price + output tokens × output price) / 1M.",
+          "Monthly estimate = priced query cost × expected query volume.",
+          "Verify current provider prices before the live exercise."
+        ],
+        "kind": "text",
+        "note": "Use approved prices and a representative request mix. No current model availability or price is asserted by these slides; historical saved prices may be stale. Source lesson: https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production.",
+        "source": "",
+        "lesson": 13,
+        "lesson_title": "Hosting, Serving, and Scaling LLMs in Production",
+        "lesson_url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production"
+      },
+      {
+        "title": "Exit gate / can we serve it responsibly?",
+        "body": [
+          "Submit API failure matrix and limitation note.",
+          "Define representative staging traffic and approved budgets.",
+          "Hold a live release when required SLOs are unmeasured."
+        ],
+        "kind": "gate",
+        "note": "A fake returning 503 proves error handling. It does not prove readiness recovery, production capacity or model quality under load.",
+        "source": ""
+      },
+      {
+        "title": "Next / detect, investigate and recover",
+        "body": [
+          "Carry the quality and operational evidence forward.",
+          "Bring one regression and one misleading feedback item.",
+          "Session 5 rehearses the operating loop."
+        ],
+        "kind": "ending",
+        "note": "The operating loop connects traces, reviewed feedback, golden cases and reversible configuration. It begins after deployment rather than ending there.",
+        "source": ""
+      }
+    ]
+  },
+  {
+    "number": 5,
+    "title": "Deliver",
+    "subtitle": "Operate, learn and rehearse rollback",
+    "accent": "#AF476A",
+    "lessons": "14, 15, 16",
+    "slides": [
+      {
+        "title": "Deliver",
+        "body": [
+          "Observability, human review and rollback",
+          "Session 5 of 5 · 3 hours · source-aligned workshop"
+        ],
+        "kind": "cover",
+        "note": "The final session uses synthetic incidents and actual checkers. Learners must distinguish an exercise decision from a production deployment action. This revised deck follows the course lesson sequence; exact lesson URLs appear in section notes and the coverage map.",
+        "source": ""
+      },
+      {
+        "title": "What the final release file must explain",
+        "body": [
+          "What changed and which artifacts produced the answer.",
+          "Which measured gates passed, failed or remain unknown.",
+          "Who can approve release and who can restore service."
+        ],
+        "kind": "text",
+        "note": "A release file is evidence for a decision, not a decorative checklist. Any missing identifier or unmeasured target stays visible.",
+        "source": ""
+      },
+      {
+        "title": "The last three-hour workshop",
+        "body": [
+          "25 min operating loop + 20 min trace walkthrough",
+          "90 min labs, including a 10 min break",
+          "25 min incident review + 20 min final debrief"
+        ],
+        "kind": "text",
+        "note": "The practicals cover incident metrics, reviewed feedback and a rollback tabletop. Keep time for each pair to defend its release hold or approval recommendation.",
+        "source": ""
+      },
+      {
+        "title": "Showcase / a complaint becomes a test",
+        "body": [
+          "A staff member flags an unhelpful answer.",
+          "A reviewer checks sources and accepts the signal.",
+          "A separate curated answer becomes a golden case."
+        ],
+        "kind": "text",
+        "note": "Acceptance does not authenticate the client response or certify the correction. Export requires the same input, explicit expected status/output and source references for an answered target. Detected PII is blocked.",
+        "source": ""
+      },
+      {
+        "title": "Run the reviewed-feedback demonstration",
+        "body": [
+          "python -m training.showcase --session 5",
+          "No token: 401; pending: 409; curated export: 200.",
+          "Validate JSONL, keep the review, rehearse recovery."
+        ],
+        "kind": "lab",
+        "note": "Allow 25 minutes. Actual API/services and institution-scoped database logic run with a Mongo fake. Validate the exported case via load_golden, inspect the audit bundle, then run the incident check. Nothing is deployed.\n\nCode walkthrough: app/services/feedback.py\n    record = await asyncio.to_thread(database.get_feedback, feedback_id, settings)\n    if record is None:\n        raise LookupError(\"Feedback not found\")\n    if record.status != \"accepted\" or not record.reviewer or not record.review_note.strip():\n        raise ValueError(\"Accepted feedback with a reviewer and review note is required\")\n    if case.input != record.request:\n        raise ValueError(\"Golden input must match the reviewed feedback request\")\n    if case.expected_status == \"answered\" and not case.context:\n        raise ValueError(\"An answered golden case requires source references\")\n    if redact(case.model_dump_json())[1]:\n\nSignal → reviewed case → failing replay → fix. Keep the case and audit bundle under review. Release after quality and operational checks agree. The workflow does not automate dataset promotion, training or deployment. An SME verifies policy meaning. Blue/green, memory and existing category mapping decisions remain outside this change.",
+        "source": ""
+      },
+      {
+        "title": "Orchestration and Application Logic",
+        "body": [
+          "Educative lesson 14",
+          "Concept → worked example → NexaAssist application"
+        ],
+        "kind": "section",
+        "note": "This section follows the lesson Orchestration and Application Logic. Teach the concept first, then distinguish the existing NexaAssist implementation from proposed extensions. The slides paraphrase the source rather than reproduce its text. Source lesson: https://www.educative.io/courses/llmops/orchestration-and-application-logic.",
+        "source": "",
+        "lesson": 14,
+        "lesson_title": "Orchestration and Application Logic",
+        "lesson_url": "https://www.educative.io/courses/llmops/orchestration-and-application-logic"
+      },
+      {
+        "title": "Follow-up questions change retrieval requirements",
+        "body": [
+          "A query such as “Does that fee apply earlier?” lacks scope alone.",
+          "Conversation history can resolve the subject and date.",
+          "Memory adds privacy, latency and correctness obligations."
+        ],
+        "kind": "text",
+        "note": "NexaAssist currently asks a standalone policy question per request. Teach the source’s orchestration design without claiming that persistence, rewriting or session authentication exists in production. Source lesson: https://www.educative.io/courses/llmops/orchestration-and-application-logic.",
+        "source": "",
+        "lesson": 14,
+        "lesson_title": "Orchestration and Application Logic",
+        "lesson_url": "https://www.educative.io/courses/llmops/orchestration-and-application-logic"
+      },
+      {
+        "title": "Keep API workers stateless; store conversation state",
+        "body": [
+          "Request: Session + user scope",
+          "Load history: Authorized durable turns",
+          "Rewrite: Standalone search query",
+          "Retrieve / answer: Generate, validate, persist"
+        ],
+        "kind": "diagram",
+        "note": "This is the course reference design, not an implemented NexaAssist workflow. A real implementation must authorize session access and isolate users. A worker-local list loses context across replicas and restarts. Source lesson: https://www.educative.io/courses/llmops/orchestration-and-application-logic.",
+        "source": "",
+        "nodes": [
+          [
+            "Request",
+            "Session + user scope"
+          ],
+          [
+            "Load history",
+            "Authorized durable turns"
+          ],
+          [
+            "Rewrite",
+            "Standalone search query"
+          ],
+          [
+            "Retrieve / answer",
+            "Generate, validate, persist"
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1,
+            "hydrate"
+          ],
+          [
+            1,
+            2,
+            "disambiguate"
+          ],
+          [
+            2,
+            3,
+            "search"
+          ]
+        ],
+        "lesson": 14,
+        "lesson_title": "Orchestration and Application Logic",
+        "lesson_url": "https://www.educative.io/courses/llmops/orchestration-and-application-logic"
+      },
+      {
+        "title": "A sliding window is a budget approximation",
+        "body": [
+          "Load a bounded recent history instead of all turns.",
+          "Message count is simple but ignores varying token length.",
+          "Reserve tokens for instructions, evidence and output."
+        ],
+        "kind": "text",
+        "note": "The source illustrates six recent messages. That is a heuristic, not a recommended universal setting. Production history requires deterministic ordering, retention, deletion and a token-aware budget appropriate to the selected model. Source lesson: https://www.educative.io/courses/llmops/orchestration-and-application-logic.",
+        "source": "",
+        "lesson": 14,
+        "lesson_title": "Orchestration and Application Logic",
+        "lesson_url": "https://www.educative.io/courses/llmops/orchestration-and-application-logic"
+      },
+      {
+        "title": "Rewriting must preserve the user’s meaning",
+        "body": [
+          "Resolve references using only authorized recent history.",
+          "Keep original question and rewritten search query separate.",
+          "Validate output; time out or fall back when rewriting fails."
+        ],
+        "kind": "text",
+        "note": "A cheap rewriter is another model call and failure surface. It can change a fee date or invent a product. A fallback to the original question preserves availability but may retrieve poorly; asking for clarification can be safer depending on the contract. Source lesson: https://www.educative.io/courses/llmops/orchestration-and-application-logic.",
+        "source": "",
+        "lesson": 14,
+        "lesson_title": "Orchestration and Application Logic",
+        "lesson_url": "https://www.educative.io/courses/llmops/orchestration-and-application-logic"
+      },
+      {
+        "title": "New state needs multi-turn evaluation",
+        "body": [
+          "Capture history, current input and expected source.",
+          "Test incorrect rewrites, missing history and cross-user access.",
+          "Recheck retrieval and answer quality before rollout."
+        ],
+        "kind": "text",
+        "note": "The source expands its single-turn golden set when adding memory. Existing single-turn success does not demonstrate conversational quality. Use explicit reference identities rather than evaluating fluency alone. Source lesson: https://www.educative.io/courses/llmops/orchestration-and-application-logic.",
+        "source": "",
+        "lesson": 14,
+        "lesson_title": "Orchestration and Application Logic",
+        "lesson_url": "https://www.educative.io/courses/llmops/orchestration-and-application-logic"
+      },
+      {
+        "title": "Practical / model the memory contract offline",
+        "body": [
+          "Run: python -m training.session5.memory_design",
+          "Inspect a bounded fixture and a failed-rewrite fallback.",
+          "Explain why the simulation is not a durable session service."
+        ],
+        "kind": "lab",
+        "note": "This educational simulation uses no LLM or database and does not add conversation memory to the API. Learners submit an implementation plan naming storage, authorization, token budgeting and multi-turn tests. Source lesson: https://www.educative.io/courses/llmops/orchestration-and-application-logic.",
+        "source": "",
+        "lesson": 14,
+        "lesson_title": "Orchestration and Application Logic",
+        "lesson_url": "https://www.educative.io/courses/llmops/orchestration-and-application-logic"
+      },
+      {
+        "title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "body": [
+          "Educative lesson 15",
+          "Concept → worked example → NexaAssist application"
+        ],
+        "kind": "section",
+        "note": "This section follows the lesson Quality, Human-in-the-Loop, and Governance Systems. Teach the concept first, then distinguish the existing NexaAssist implementation from proposed extensions. The slides paraphrase the source rather than reproduce its text. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Use two kinds of observation",
+        "body": [
+          "System health: latency, failures, tokens and priced cost.",
+          "Answer quality: grounding, relevance and correct scope.",
+          "A healthy system can still produce a harmful answer."
+        ],
+        "kind": "split",
+        "note": "APM spans diagnose infrastructure; semantic evaluation and human review diagnose meaning. Neither substitutes for the other. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Trace one answer to its artifacts",
+        "body": [
+          "Prompt ID, version and content fingerprint.",
+          "Chat/embedding model and retrieval configuration.",
+          "Evidence references and optional Datadog span ID."
+        ],
+        "kind": "text",
+        "note": "The response carries provenance, and feedback preserves the submitted response. Client-supplied provenance is useful context but is not tamper-proof attestation. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "app/models/answer.py",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Sampled judging is an explicit choice",
+        "body": [
+          "The sample rate is configurable; zero disables sampled judging."
+        ],
+        "kind": "code",
+        "code": "def should_sample(answer: AnswerResponse, settings: Settings) -> bool:\n    \"\"\"Only answered responses carry claims to check; abstentions are skipped.\"\"\"\n    return answer.status == \"answered\" and random.random() < settings.live_eval_sample_rate\n\n\nasync def score_sampled_answer(\n    request: RetrieveRequest, answer: AnswerResponse, settings: Settings\n) -> None:\n    \"\"\"Background reference-free judging of live traffic; failures are logged, never raised.\n",
+        "source": "app/services/evaluation.py",
+        "note": "Open app/services/evaluation.py and locate def should_sample. Read the displayed excerpt in context; it is taken directly from the application. The sample rate is configurable; zero disables sampled judging. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Know what sampled faithfulness measures",
+        "body": [
+          "Sampling answered requests adds model cost.",
+          "The current judge uses cited quotes as its context.",
+          "This is a grounding proxy with limited observation."
+        ],
+        "kind": "text",
+        "note": "A low sample count can miss failures. A quoted passage may omit other retrieved context, so do not call the proxy an exhaustive hallucination detector. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "app/services/evaluation.py",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Quality is maintained in three layers",
+        "body": [
+          "Automated gates catch known regressions.",
+          "Human review assesses context and newly observed failures.",
+          "Governance controls changes to meaning and risk."
+        ],
+        "kind": "text",
+        "note": "The layers complement each other. LLM-based evaluations can vary even in an offline run; do not call them deterministic simply because the dataset is fixed. Preserve judge versions and compare a sample to reviewed human assessments. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "The review queue needs the exact interaction",
+        "body": [
+          "Link the input, evidence references, output and versions.",
+          "Prioritize explicit complaints and representative samples.",
+          "Review the source before accepting the correction."
+        ],
+        "kind": "text",
+        "note": "The stored response is client supplied and does not prove server execution. The authenticated export reads the accepted institution-scoped review and requires a separately curated GoldenAnswer. It returns an audit bundle without changing the shipped dataset or establishing semantic truth. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Human feedback is a signal",
+        "body": [
+          "A thumbs-down may mean wrong scope or poor wording.",
+          "Review source, context and answer before accepting it.",
+          "Never turn raw feedback directly into a golden answer."
+        ],
+        "kind": "text",
+        "note": "The feedback queue has pending, accepted and rejected states. Reviewer authentication and idempotent submission support workflow, while domain verification supplies truth. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "app/models/feedback.py; app/services/feedback.py",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "The human review loop has owners",
+        "body": [
+          "Signal → triage → source-supported correction",
+          "Review → proposed golden case → regression replay",
+          "Approved fix → measured release → observation"
+        ],
+        "kind": "flow",
+        "note": "This is our workshop interpretation of the course feedback loop. Each transition needs evidence and an owner, especially where policy meaning changes. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Practical 2 / inspect feedback behavior",
+        "body": [
+          "Run feedback, sampling and comparison tests.",
+          "Follow reviewer authentication and review transitions.",
+          "Explain why accepted feedback still needs a verified reference."
+        ],
+        "kind": "lab",
+        "note": "The existing API stores client-submitted response data. The class should not treat a submitted provenance object as a trusted replay of server execution. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "training/session5/handout.md",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Export a reviewed regression case",
+        "body": [
+          "Run: python -m training.session5.feedback_loop",
+          "Accepted review + curated answer → golden case.",
+          "Keep the review bundle beside the validated JSONL."
+        ],
+        "kind": "lab",
+        "note": "POST /feedback/{feedback_id}/golden requires reviewer authentication, an accepted server-side review and a separate GoldenAnswer for the same input. Submitted answers/corrections are never copied automatically. The API returns the case and audit data without editing datasets. The SME verifies source accuracy; existing category mappings remain unchanged. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Governance follows the change’s meaning",
+        "body": [
+          "Engineering reviews code and operational behavior.",
+          "A domain expert reviews policy meaning and golden answers.",
+          "The designated owner approves real data use and risk."
+        ],
+        "kind": "text",
+        "note": "These are proposed workshop responsibilities. Record actual names and approval dates for a real release instead of inventing an organization-specific approval matrix. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Watch both semantic and operational drift",
+        "body": [
+          "Topic shifts can expose gaps in the golden set.",
+          "Policy updates can invalidate otherwise stable answers.",
+          "Judge changes can move scores without application changes."
+        ],
+        "kind": "text",
+        "note": "NexaAssist has comparison functions and sampled judging, not a complete semantic drift detector. Treat changing scores as evidence to investigate, aligning datasets and judge configuration before assigning cause. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Practical 1 / run an incident safely",
+        "body": [
+          "Run: python -m training.session5.incident",
+          "No traffic → every required SLO is not_measured.",
+          "Scenario failures: p95 latency and hallucination proxy."
+        ],
+        "kind": "lab",
+        "note": "The scenario sets p95 to 2500 ms and the proxy to 0.15 under the shipped placeholder gates. Nothing is deployed and no database is changed. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "A regression needs a comparable baseline",
+        "body": [
+          "Scenario faithfulness changes from 0.95 to 0.70.",
+          "Delta −0.25 exceeds the placeholder tolerance.",
+          "Investigate cases and configuration before interpreting it."
+        ],
+        "kind": "text",
+        "note": "These are scenario scores. Comparison now requires matching dataset fingerprints, unique case IDs, judge model/version and Ragas version, with identical finite metric sets. Regenerate legacy reports. Per-case flips can block a release even when averages hide them. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "app/evaluation/compare.py",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Exercise / remove an observation",
+        "body": [
+          "Set sampled_count=0 and the proxy to None.",
+          "Predict not_measured rather than pass.",
+          "Explain what evidence is needed before clearing an incident."
+        ],
+        "kind": "lab",
+        "note": "Learners should preserve the incident until relevant observations support recovery. Operational latency recovery alone does not prove restored semantic quality. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Practical 3 / rehearse rollback",
+        "body": [
+          "Hold candidate → preserve evidence → restore known-good set",
+          "Replay failing and golden cases → measure representative traffic",
+          "Document owner decision and follow-up regression case"
+        ],
+        "kind": "flow",
+        "note": "This is a tabletop, not a deployment script. Restore compatible code, prompts, models and retrieval stores; rehearse the exact operational switch before any real release. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "A new index name is not a data snapshot",
+        "body": [
+          "Ingestion mutates the configured chunk collection.",
+          "Parent sections must also match the candidate corpus.",
+          "Blue/green requires isolated compatible stores and a tested switch."
+        ],
+        "kind": "split",
+        "note": "Do not imply that changing VECTOR_INDEX_NAME alone performs safe rollback. Separate parent data matters because generation uses those sections after retrieval. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "app/database/mongo.py; app/chains/ingestion.py",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "What belongs in the release file",
+        "body": [
+          "Prompt/model/retrieval identities and dataset hash.",
+          "Offline quality report and representative SLO evidence.",
+          "Approver, rollback owner, known limits and incident links."
+        ],
+        "kind": "text",
+        "note": "This workspace copy has no Git metadata. Do not invent a commit or release tag; use actual identifiers from the environment where the release is built. Source lesson: https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems.",
+        "source": "training/session5/handout.md",
+        "lesson": 15,
+        "lesson_title": "Quality, Human-in-the-Loop, and Governance Systems",
+        "lesson_url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems"
+      },
+      {
+        "title": "Future Directions in LLMOps",
+        "body": [
+          "Educative lesson 16",
+          "Concept → worked example → NexaAssist application"
+        ],
+        "kind": "section",
+        "note": "This section follows the lesson Future Directions in LLMOps. Teach the concept first, then distinguish the existing NexaAssist implementation from proposed extensions. The slides paraphrase the source rather than reproduce its text. Source lesson: https://www.educative.io/courses/llmops/future-directions-in-llmops.",
+        "source": "",
+        "lesson": 16,
+        "lesson_title": "Future Directions in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/future-directions-in-llmops"
+      },
+      {
+        "title": "Agents add actions and new failure modes",
+        "body": [
+          "Tool access needs permissions and an allowlist.",
+          "Loops need iteration, time and cost bounds.",
+          "Side effects need isolation, audit and recovery."
+        ],
+        "kind": "text",
+        "note": "Agents are future scope here. The existing read-only RAG assistant does not become an agent merely because the course discusses tool loops. Source lesson: https://www.educative.io/courses/llmops/future-directions-in-llmops.",
+        "source": "Educative: Future Directions in LLMOps",
+        "lesson": 16,
+        "lesson_title": "Future Directions in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/future-directions-in-llmops"
+      },
+      {
+        "title": "Bound an agent before granting actions",
+        "body": [
+          "Limit steps, time, token spend and tool permissions.",
+          "Isolate side effects and preserve an audit trail.",
+          "Evaluate tool choice, arguments and recovery behavior."
+        ],
+        "kind": "text",
+        "note": "A read-only assistant becomes materially different when it can modify a record. The source names iteration caps, allowlists and sandboxed execution. These are design requirements for a future layer, not controls implemented by the current chain. Source lesson: https://www.educative.io/courses/llmops/future-directions-in-llmops.",
+        "source": "",
+        "lesson": 16,
+        "lesson_title": "Future Directions in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/future-directions-in-llmops"
+      },
+      {
+        "title": "Multimodal inputs expand the ingestion boundary",
+        "body": [
+          "OCR or vision extraction introduces interpretation errors.",
+          "Images and audio can carry identifiers or instructions.",
+          "Queue expensive processing and evaluate the extracted evidence."
+        ],
+        "kind": "text",
+        "note": "A text-first index can simplify downstream retrieval but still needs modality-specific validation and privacy review. Adding image input is not merely changing an embedding model. Source lesson: https://www.educative.io/courses/llmops/future-directions-in-llmops.",
+        "source": "",
+        "lesson": 16,
+        "lesson_title": "Future Directions in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/future-directions-in-llmops"
+      },
+      {
+        "title": "Model distillation introduces a training lifecycle",
+        "body": [
+          "Curate teacher traces into reviewed training data.",
+          "Evaluate a smaller student on quality and safety cases.",
+          "Version the dataset, model and rollback decision."
+        ],
+        "kind": "text",
+        "note": "The 4D phase named Distill is broader than knowledge distillation. Keep those two meanings distinct. A smaller model can reduce resource use, but improvement must be measured for the task. Source lesson: https://www.educative.io/courses/llmops/future-directions-in-llmops.",
+        "source": "",
+        "lesson": 16,
+        "lesson_title": "Future Directions in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/future-directions-in-llmops"
+      },
+      {
+        "title": "Edge execution shifts the operational trade-off",
+        "body": [
+          "Local inference can reduce network disclosure and round trips.",
+          "Device differences affect performance and version consistency.",
+          "Telemetry, updates and recovery need a new design."
+        ],
+        "kind": "text",
+        "note": "Avoid the source’s absolute “near-zero latency” phrasing. On-device models can be slow or constrained, and local processing does not guarantee that every feature avoids external calls. Source lesson: https://www.educative.io/courses/llmops/future-directions-in-llmops.",
+        "source": "",
+        "lesson": 16,
+        "lesson_title": "Future Directions in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/future-directions-in-llmops"
+      },
+      {
+        "title": "The lifecycle survives a change in capabilities",
+        "body": [
+          "Define the new permission and data boundaries.",
+          "Evaluate before deployment and version the artifacts.",
+          "Observe failures and close the reviewed feedback loop."
+        ],
+        "kind": "text",
+        "note": "Agents, multimodality, distillation and edge execution introduce different engineering work. The operating principles continue to apply; capability should follow a concrete use case and a measurable acceptance plan. Source lesson: https://www.educative.io/courses/llmops/future-directions-in-llmops.",
+        "source": "",
+        "lesson": 16,
+        "lesson_title": "Future Directions in LLMOps",
+        "lesson_url": "https://www.educative.io/courses/llmops/future-directions-in-llmops"
+      },
+      {
+        "title": "Final gate / defend the decision",
+        "body": [
+          "Submit manifest, retrieval experiment and golden review.",
+          "Attach quality/SLO reports and an incident write-up.",
+          "State release, hold or unmeasured with supporting evidence."
+        ],
+        "kind": "gate",
+        "note": "A successful class demonstrates engineering judgment and reproducible exercises. It does not certify a real production environment that has not been tested.",
+        "source": ""
+      },
+      {
+        "title": "Operate the loop, not just the endpoint",
+        "body": [
+          "Version the artifacts that change answers.",
+          "Measure evidence, meaning and operations separately.",
+          "Turn reviewed failures into durable regression cases."
+        ],
+        "kind": "ending",
+        "note": "Close by asking each pair what they would investigate first after an incorrect fee answer. Point learners to the source course and local handouts for continued practice.",
+        "source": ""
+      }
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "source_count": 10,
+  "draft": {
+    "status": "answered",
+    "answer": "The maximum loan amount for a NexaHome Loan is ₹7,50,00,000 (₹75 million), per policy clause 4.1 of POL-HL-V3.",
+    "evidence": [
+      {
+        "evidence_id": 2,
+        "quote": "Maximum loan amount is ₹7,50,00,000."
+      }
+    ]
+  },
+  "raw_content": "{\n  \"status\": \"answered\",\n  \"answer\": \"The maximum loan amount for a NexaHome Loan is ₹7,50,00,000 (₹75 million), per policy clause 4.1 of POL-HL-V3.\",\n  \"evidence\": [\n    {\n      \"evidence_id\": 2,\n      \"quote\": \"Maximum loan amount is ₹7,50,00,000.\"\n    }\n  ]\n}",
+  "parsing_error": null
+}

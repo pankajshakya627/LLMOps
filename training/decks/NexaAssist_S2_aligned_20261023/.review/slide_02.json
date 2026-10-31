@@ -1,0 +1,29 @@
+{
+  "page": "slide_02.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_02.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Explain structural boundaries, extraction risks and inspection before embedding.",
+    "render_delivers": true,
+    "note": "All three statements are present in aligned, separated blocks. Text and chrome fit the canvas and containers, with no hard or clearly bad soft hits."
+  }
+}

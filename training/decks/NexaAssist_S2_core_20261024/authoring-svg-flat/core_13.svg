@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><defs><marker id="marrow1" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="2.5" markerHeight="2.5" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2463A6" /></marker><marker id="core-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#2463A6" /></marker></defs><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 1050 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 1050 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 1113.36 31 L 1113.36 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 02 / GATEWAYS AND ROUTING</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 84.33 1152 61.6" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 84.33 1152 61.6" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 84.33 L 1214.4 84.33 L 1214.4 145.93 L 62.4 145.93 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Gateway / Ollama and OpenAI behind stable aliases</text>
+</g>
+</g>
+<g id="shape-55" data-pptx-object="group" data-pptx-frame="63.36 665 1151 25.6" data-pptx-source-ref="slide:55">
+<g id="shape-53" data-pptx-object="shape" data-pptx-frame="63.36 665 1050 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:53" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 1113.36 665 L 1113.36 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">Syllabus 07, 08, 09, 12, 14 / Fixtures and live exercises labeled / sources and lab steps in notes</text>
+</g>
+<g id="shape-54" data-pptx-object="shape" data-pptx-frame="1149.36 665 65 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:54" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1214.36 665 L 1214.36 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">13/19</text>
+</g>
+</g><g id="gateway-path" data-pptx-bounds="64 210 1152 370"><line x1="319" y1="331" x2="410" y2="331" stroke="#2463A6" stroke-width="3" marker-end="url(#core-arrow)" /><line x1="700" y1="310" x2="820" y2="273" stroke="#2463A6" stroke-width="3" marker-end="url(#core-arrow)" /><line x1="700" y1="356" x2="820" y2="438" stroke="#2463A6" stroke-width="3" marker-end="url(#core-arrow)" /><text x="718" y="275" font-size="18" font-family="Arial" fill="#526375" font-weight="normal">route</text><text x="714" y="407" font-size="18" font-family="Arial" fill="#526375" font-weight="normal">on failure</text><text x="64" y="558" font-size="24" font-family="Arial" fill="#132C42" font-weight="normal">Embeddings: qwen3-embedding:0.6b  |  OpenAI text-embedding-3-small</text><g id="gateway-node-1"><rect x="64" y="275" width="255" height="112" fill="#E6EDF3" /><text x="82" y="311" font-size="28" font-family="Arial" fill="#132C42" font-weight="bold">Lab caller</text><text x="82" y="349" font-size="23" font-family="Arial" fill="#132C42" font-weight="normal">Stable chat alias</text></g><g id="gateway-node-2"><rect x="410" y="275" width="290" height="112" fill="#132C42" /><text x="430" y="311" font-size="28" font-family="Arial" fill="#FFFFFF" font-weight="bold">LiteLLM gateway</text><text x="430" y="349" font-size="23" font-family="Arial" fill="#FFFFFF" font-weight="normal">nexa-chat</text></g><g id="gateway-node-3"><rect x="820" y="218" width="396" height="110" fill="#E6EDF3" /><text x="838" y="252" font-size="26" font-family="Arial" fill="#132C42" font-weight="bold">Ollama / local chat</text><text x="838" y="291" font-size="24" font-family="Arial" fill="#132C42" font-weight="normal">qwen3.5:9b-mlx</text></g><g id="gateway-node-4"><rect x="820" y="388" width="396" height="110" fill="#E6EDF3" /><text x="838" y="425" font-size="26" font-family="Arial" fill="#132C42" font-weight="bold">OpenAI / chat fallback</text><text x="838" y="465" font-size="23" font-family="Arial" fill="#132C42" font-weight="normal">Approved model ID from env</text></g></g><g id="diagram-legend" data-pptx-bounds="64 594 1152 50"><text x="64" y="625" font-size="20" font-family="Arial" fill="#526375" font-weight="normal">Chat can fail over; embedding families need separate compatible corpora and indexes.</text></g></svg>

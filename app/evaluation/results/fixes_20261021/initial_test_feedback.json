@@ -1,0 +1,65 @@
+{
+  "request": {
+    "query": "What is the current processing fee for a NexaHome Loan?",
+    "as_of": "2026-10-01",
+    "top_k": 5,
+    "product_id": "NEXA-HL",
+    "jurisdiction": null
+  },
+  "response": {
+    "as_of": "2026-10-01",
+    "status": "answered",
+    "answer": "For NexaHome Loans sanctioned on or after 2026-07-01, the processing fee is 0.30% of the sanctioned loan amount, with a minimum of ₹5,000 and maximum of ₹10,000, plus 18% GST [1][2]. Loans sanctioned before that date retain the processing fee that applied at sanction [1].",
+    "citations": [
+      {
+        "evidence_id": 1,
+        "quote": "3.1 Revised clause 6.2. Processing fee is 0.30% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹10,000, plus GST.",
+        "matched_child": {
+          "doc_id": "CIR-2026-07",
+          "title": "Circular CIR-2026-07",
+          "policy_version": "1.0",
+          "clause": null,
+          "effective_date": "2026-07-01"
+        }
+      },
+      {
+        "evidence_id": 1,
+        "quote": "5.1 Loans covered. The revised processing fee applies only to loans sanctioned on or after 2026-07-01. Loans sanctioned before that date keep the processing fee that applied at sanction, and no refund or adjustment is made.",
+        "matched_child": {
+          "doc_id": "CIR-2026-07",
+          "title": "Circular CIR-2026-07",
+          "policy_version": "1.0",
+          "clause": null,
+          "effective_date": "2026-07-01"
+        }
+      },
+      {
+        "evidence_id": 2,
+        "quote": "6.1 General. All fees are exclusive of GST at 18%, which is charged additionally.",
+        "matched_child": {
+          "doc_id": "POL-HL-V3",
+          "title": "NexaHome Loan Policy",
+          "policy_version": "3.0",
+          "clause": "6.2",
+          "effective_date": "2025-10-01"
+        }
+      }
+    ],
+    "retrieval_timings": {
+      "search_ms": 2783.43,
+      "parent_ms": 41.26,
+      "total_ms": 2878.25
+    },
+    "generation_ms": 6026.0,
+    "datadog_span_id": "2859142202818851037"
+  },
+  "helpful": true,
+  "submitter_id": "d10c62e1-3f40-424c-bbca-b2a1e50ee852",
+  "submission_id": "02d50a0d-f203-4eea-b97e-251eba40e8f3",
+  "correction": "FIX-VALIDATION-20261021 Synthetic retry and authorization check; not a customer correction.",
+  "feedback_id": "828db764-0f1e-5cdc-b0f4-5e7af7fa8932",
+  "created_at": "2026-10-21T09:38:17.081363Z",
+  "status": "pending",
+  "reviewer": null,
+  "review_note": ""
+}

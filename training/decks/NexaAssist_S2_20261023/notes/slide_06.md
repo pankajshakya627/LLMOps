@@ -1,0 +1,1 @@
+Inspect how the clause-aware splitter handles oversized sections. Open app/chains/chunking.py and locate def chunk_by_clause. Read the displayed excerpt in context; it is taken directly from the application. Inspect how the clause-aware splitter handles oversized sections. The implementation or concept reference is app/chains/chunking.py.

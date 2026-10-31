@@ -1,0 +1,16 @@
+{
+  "page": "slide_08.svg",
+  "page_role": "content",
+  "canvas": {"view_box": [0, 0, 1280, 720], "width": 1280, "height": 720, "png_width": 1280, "png_height": 720},
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [".preview/slide_08.png"],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Explain model/dimension agreement, the documented vector/filter index, and why parent sections need no vector index.",
+    "render_delivers": true,
+    "note": "Rendered PNG is nonblank at the supplied 1280 × 720 canvas. The three statements form a consistent aligned sequence with ample separation; the title, source caption, and page number remain clear. No Hard or clearly bad Soft rule hits."
+  }
+}

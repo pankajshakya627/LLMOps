@@ -1,0 +1,1 @@
+Provider failure → private details stay private. Repeated calls → the configured quota applies. Database failure → readiness reports unavailable. Use actual FastAPI routing, dependency injection, limiter and schemas with fake dependencies. Readiness tests a database ping, not vector-index availability.

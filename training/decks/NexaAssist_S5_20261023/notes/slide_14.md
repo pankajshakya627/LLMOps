@@ -1,0 +1,1 @@
+Copy a golden case and verify the policy clause. Write expected status and answer; validate load_golden. Keep reviewer, feedback reference and rationale in a memo. The practical is a manual promotion exercise. An automatic feedback export service is not implemented by this delivery, and no category mapping is silently chosen.

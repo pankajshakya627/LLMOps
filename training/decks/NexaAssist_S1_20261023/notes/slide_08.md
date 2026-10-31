@@ -1,0 +1,1 @@
+Register → parse → chunk → redact → Atlas Question → scoped retrieval → context → generation Answer → validation → API → staff interface The offline path maintains knowledge assets; the online path consumes them. Explain why a document parsing failure should not become request-time work. The implementation or concept reference is app/chains/ingestion.py; app/chains/answer.py.

@@ -1,0 +1,311 @@
+{
+  "schema": "ppt-master.pptx-postflight-report.v1",
+  "status": "passed",
+  "output": {
+    "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/exports/NexaAssist_Gateways_and_Guardrails.pptx",
+    "bytes": 106349
+  },
+  "source": {
+    "svg_slide_count": 22,
+    "layout_definition_count": 0,
+    "fingerprint": {
+      "algorithm": "sha256",
+      "digest": "d7382380b9cd3863138c9ead61f21afa6d3e1643bee9c9d5e111c7016a44039b",
+      "file_count": 22,
+      "files": [
+        {
+          "file": "01_cover.svg",
+          "sha256": "47ddf449e1dd6ffe6a455e1e6f48b4fce6d6e3eb0ef916344906870b43c5d72c"
+        },
+        {
+          "file": "02_decision.svg",
+          "sha256": "b17df7c5a08192e5eb5d2acc63b7b363f1536a5aee2919ff067dc78e8640b569"
+        },
+        {
+          "file": "03_architecture.svg",
+          "sha256": "aa42d781f59ea3652d439bef210d81c43e58807ac16cfcacfaaac160c8e0af9d"
+        },
+        {
+          "file": "04_requestflow.svg",
+          "sha256": "ae4398e4c706b3f08ff6cd14419a4d00acb5addcf1ac89500458e83c96cc5779"
+        },
+        {
+          "file": "05_codemap.svg",
+          "sha256": "a3920212e58aa250d47d9fa27692d98a83c3bd617e37aeeb23f53dbdd6c3d027"
+        },
+        {
+          "file": "06_routes.svg",
+          "sha256": "15964f798af7c373720e297bdfcd9413f930e7380f65120ad8d3a17e76daf162"
+        },
+        {
+          "file": "07_fallback.svg",
+          "sha256": "f2f0ad2426a73411b863ef6abc94a9485c6c069aba1098aba08510a097c2378f"
+        },
+        {
+          "file": "08_code.svg",
+          "sha256": "9d65fa5d4fb4a09401f3d75a66e9ad6d189976230461de17c528ee8b22cb6aad"
+        },
+        {
+          "file": "09_balance.svg",
+          "sha256": "e60f6d62d00d84ad0a05b485daad4aeadeeaa5ba2ee98494337ce78c1c5a9db9"
+        },
+        {
+          "file": "10_cache.svg",
+          "sha256": "509e3e63523529349a29cdcb671ffa279e2906ed32a20b398a4d4f701d4f10b3"
+        },
+        {
+          "file": "11_embeddings.svg",
+          "sha256": "ee7993b3000a282565ef811164d3681713b8c6688c09ebd66dbc252f2f405275"
+        },
+        {
+          "file": "12_securitycover.svg",
+          "sha256": "fd2bde02f010357c29f472475ac4ddb76814368f2f986890bb88ba6528bfcc87"
+        },
+        {
+          "file": "13_pii.svg",
+          "sha256": "7ab0aaeb1a3f7d6f37b00f22e84680ccf2650047106976042fa4b50fe620e18d"
+        },
+        {
+          "file": "14_injection.svg",
+          "sha256": "4eba8340907c19f7928f65463d77a559870d9c7ba93659bcfe0e91fa991ce881"
+        },
+        {
+          "file": "15_code.svg",
+          "sha256": "2864b9b7433e1a527a64d846317df9876f2b3a2d3b90699c37a9d2d7d43d8c47"
+        },
+        {
+          "file": "16_validator.svg",
+          "sha256": "23ce536b14feba9ffac5640a080cc6f248e0adcf294e13424c6a4f5624a0de51"
+        },
+        {
+          "file": "17_citation.svg",
+          "sha256": "93b665671659cc8cf2d0a40dd030a6e715cc0b8466b509185fe6c2726bf741a1"
+        },
+        {
+          "file": "18_outage.svg",
+          "sha256": "13fda2c87ee6283f9ac4e49ce960bfc6dac7d7233c2f125a0721444ae17ec79a"
+        },
+        {
+          "file": "19_codemap.svg",
+          "sha256": "cb04f5c28e341bd6f2247cd845a87a2754b680730950bd4aaac17376881d3685"
+        },
+        {
+          "file": "20_lab.svg",
+          "sha256": "2ca1ec41b77c4f1aa70760ca903c09584f2e0ba2ea148013eb06358bb1b4ef4f"
+        },
+        {
+          "file": "21_results.svg",
+          "sha256": "54dd4ffa075a1e7363048f936cfbf9f1b670137a03ca8ca53fa4be6db3a5a20f"
+        },
+        {
+          "file": "22_ending.svg",
+          "sha256": "725899dead1b5fd3428cda9cd9c42dd125aa33c1be729b41378390da3dbe7c73"
+        }
+      ]
+    },
+    "authoring_roundtrip": null
+  },
+  "package": {
+    "zip_integrity": "passed",
+    "corrupt_member": null,
+    "slides": 22,
+    "notes": 22,
+    "masters": 1,
+    "layouts": 1
+  },
+  "checks": {
+    "zip_integrity": "passed",
+    "slide_count": "passed",
+    "internal_relationships": "enforced-at-build",
+    "structured_package": "not-applicable",
+    "transitions": "enforced-at-build",
+    "animations": "enforced-at-build",
+    "project_svg_contract": "enforced-at-build",
+    "compatibility_normalization": "not-applicable",
+    "authoring_roundtrip": "not-applicable",
+    "quality_gate": "passed",
+    "quality_warnings": "passed",
+    "template_tokens": "passed",
+    "external_images": "passed",
+    "font_portability": "passed"
+  },
+  "quality": {
+    "status": "loaded",
+    "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/app/presentations/NexaAssist_Gateways_Guardrails_20261025/validation/svg_quality_report.json",
+    "schema": "ppt-master.svg-quality-report.v1",
+    "stage": "final",
+    "source_match": "passed",
+    "source_fingerprint": {
+      "algorithm": "sha256",
+      "digest": "d7382380b9cd3863138c9ead61f21afa6d3e1643bee9c9d5e111c7016a44039b",
+      "file_count": 22,
+      "files": [
+        {
+          "file": "01_cover.svg",
+          "sha256": "47ddf449e1dd6ffe6a455e1e6f48b4fce6d6e3eb0ef916344906870b43c5d72c"
+        },
+        {
+          "file": "02_decision.svg",
+          "sha256": "b17df7c5a08192e5eb5d2acc63b7b363f1536a5aee2919ff067dc78e8640b569"
+        },
+        {
+          "file": "03_architecture.svg",
+          "sha256": "aa42d781f59ea3652d439bef210d81c43e58807ac16cfcacfaaac160c8e0af9d"
+        },
+        {
+          "file": "04_requestflow.svg",
+          "sha256": "ae4398e4c706b3f08ff6cd14419a4d00acb5addcf1ac89500458e83c96cc5779"
+        },
+        {
+          "file": "05_codemap.svg",
+          "sha256": "a3920212e58aa250d47d9fa27692d98a83c3bd617e37aeeb23f53dbdd6c3d027"
+        },
+        {
+          "file": "06_routes.svg",
+          "sha256": "15964f798af7c373720e297bdfcd9413f930e7380f65120ad8d3a17e76daf162"
+        },
+        {
+          "file": "07_fallback.svg",
+          "sha256": "f2f0ad2426a73411b863ef6abc94a9485c6c069aba1098aba08510a097c2378f"
+        },
+        {
+          "file": "08_code.svg",
+          "sha256": "9d65fa5d4fb4a09401f3d75a66e9ad6d189976230461de17c528ee8b22cb6aad"
+        },
+        {
+          "file": "09_balance.svg",
+          "sha256": "e60f6d62d00d84ad0a05b485daad4aeadeeaa5ba2ee98494337ce78c1c5a9db9"
+        },
+        {
+          "file": "10_cache.svg",
+          "sha256": "509e3e63523529349a29cdcb671ffa279e2906ed32a20b398a4d4f701d4f10b3"
+        },
+        {
+          "file": "11_embeddings.svg",
+          "sha256": "ee7993b3000a282565ef811164d3681713b8c6688c09ebd66dbc252f2f405275"
+        },
+        {
+          "file": "12_securitycover.svg",
+          "sha256": "fd2bde02f010357c29f472475ac4ddb76814368f2f986890bb88ba6528bfcc87"
+        },
+        {
+          "file": "13_pii.svg",
+          "sha256": "7ab0aaeb1a3f7d6f37b00f22e84680ccf2650047106976042fa4b50fe620e18d"
+        },
+        {
+          "file": "14_injection.svg",
+          "sha256": "4eba8340907c19f7928f65463d77a559870d9c7ba93659bcfe0e91fa991ce881"
+        },
+        {
+          "file": "15_code.svg",
+          "sha256": "2864b9b7433e1a527a64d846317df9876f2b3a2d3b90699c37a9d2d7d43d8c47"
+        },
+        {
+          "file": "16_validator.svg",
+          "sha256": "23ce536b14feba9ffac5640a080cc6f248e0adcf294e13424c6a4f5624a0de51"
+        },
+        {
+          "file": "17_citation.svg",
+          "sha256": "93b665671659cc8cf2d0a40dd030a6e715cc0b8466b509185fe6c2726bf741a1"
+        },
+        {
+          "file": "18_outage.svg",
+          "sha256": "13fda2c87ee6283f9ac4e49ce960bfc6dac7d7233c2f125a0721444ae17ec79a"
+        },
+        {
+          "file": "19_codemap.svg",
+          "sha256": "cb04f5c28e341bd6f2247cd845a87a2754b680730950bd4aaac17376881d3685"
+        },
+        {
+          "file": "20_lab.svg",
+          "sha256": "2ca1ec41b77c4f1aa70760ca903c09584f2e0ba2ea148013eb06358bb1b4ef4f"
+        },
+        {
+          "file": "21_results.svg",
+          "sha256": "54dd4ffa075a1e7363048f936cfbf9f1b670137a03ca8ca53fa4be6db3a5a20f"
+        },
+        {
+          "file": "22_ending.svg",
+          "sha256": "725899dead1b5fd3428cda9cd9c42dd125aa33c1be729b41378390da3dbe7c73"
+        }
+      ]
+    },
+    "summary": {
+      "total": 22,
+      "passed": 22,
+      "warnings": 0,
+      "errors": 0
+    },
+    "categories": {
+      "blocking": {
+        "count": 0,
+        "issues": []
+      },
+      "introduced": {
+        "count": 0,
+        "issues": []
+      },
+      "inherited": {
+        "count": 0,
+        "issues": []
+      },
+      "source-import": {
+        "count": 0,
+        "summary": {
+          "warning_count": 0,
+          "by_code": {}
+        }
+      }
+    }
+  },
+  "resources": {
+    "unresolved_template_tokens": [],
+    "fonts": {
+      "stacks": [
+        "Arial",
+        "Courier New"
+      ],
+      "generic_only_stacks": [],
+      "unsafe_exported_faces": []
+    },
+    "images": {
+      "data_uri": 0,
+      "local": 0,
+      "external": 0,
+      "external_references": []
+    }
+  },
+  "export_policy": {
+    "project_svg_contract": "strict",
+    "dangerous_normalization_count": 0
+  },
+  "deck_motion": {
+    "transition": {
+      "effect": null,
+      "effect_options": {},
+      "duration": 0.4,
+      "auto_advance": null,
+      "sound": null
+    },
+    "animation": {
+      "effect": "none",
+      "effect_request": null,
+      "duration": 0.4,
+      "stagger": 0.5,
+      "trigger": "after-previous"
+    },
+    "cli_overrides": {
+      "transition": false,
+      "transition_duration": false,
+      "auto_advance": false,
+      "transition_sound": false,
+      "animation": false,
+      "animation_duration": false,
+      "animation_stagger": false,
+      "animation_trigger": false
+    },
+    "narration_timings": false
+  },
+  "backup_path": null,
+  "conversion_trace_path": null
+}

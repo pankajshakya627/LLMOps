@@ -1,0 +1,1 @@
+25 min data/retrieval concepts + 20 min walkthrough 90 min pair experiments, including a 10 min break 25 min retrieval gate review + 20 min recap Collect the chunk-count experiment, an idempotency explanation and a retrieval score sheet. Those become part of the release file.

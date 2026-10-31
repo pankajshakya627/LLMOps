@@ -1,0 +1,40 @@
+{
+  "page": "slide_04.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_04.png"
+  ],
+  "findings": [
+    {
+      "iter": 1,
+      "rule": "H9",
+      "severity": "hard",
+      "evidence": "Design spec \u00a7IX declares labelled dependencies between the stated units. The render shows four isolated comparison boxes; inline before/after arrow glyphs communicate comparisons, but no labelled dependency links are visible. The defined diagram-arrow marker is unused.",
+      "fix_applied": null,
+      "verified_in_iter": 1,
+      "backup_path": null,
+      "resolution": "Author corrected the overly broad plan default to four independent comparisons; no dependency among categories exists."
+    }
+  ],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Four independent MLOps-to-LLMOps comparisons",
+    "render_delivers": true,
+    "note": "Author resolved a plan mismatch; all before/after comparisons are visible. No missing semantic element."
+  }
+}

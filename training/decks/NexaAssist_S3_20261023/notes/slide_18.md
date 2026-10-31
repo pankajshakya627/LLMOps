@@ -1,0 +1,1 @@
+Class labs use fakes and need no credentials. A pre-release golden evaluation can call real models. Live evaluation needs approved access, cost and data. Distinguish offline evaluation as a lifecycle concept from offline execution as a network constraint. The required class exercises satisfy both; optional Ragas runs use providers.

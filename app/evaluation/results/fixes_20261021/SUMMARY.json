@@ -1,0 +1,24 @@
+{
+  "application_tests": 121,
+  "mock_api_tests": 22,
+  "ruff_lint": "passed",
+  "ruff_format": "passed",
+  "mypy": "passed (56 app files)",
+  "targeted_saved_live_cases": 12,
+  "final_fee_evaluation": "answered, four scored metrics, queued",
+  "desktop_accessibility": 100,
+  "mobile_accessibility": 100,
+  "known_gaps": [
+    "restored-open-sidebar reload CLS 0.24",
+    "model date-intent classification can abstain",
+    "framework label/id markup issues",
+    "ddtrace non-LLM prompt-template warning",
+    "cloud receipt and sustained load not verified"
+  ],
+  "synthetic_feedback_deleted": 3,
+  "reviewed_patch_sha256": "e6da4415103c38a54043107e00fccfed4d570cd1ebe1d4dde3a0dbd38ce0d5b4",
+  "final_patch_sha256": "1091f815aaf527c05a2f3cb0aaaf507b0023a6812add99a169c9c7c7f850fe9f",
+  "external_review_rerun_after_fixes": false,
+  "committed": false,
+  "pushed": false
+}

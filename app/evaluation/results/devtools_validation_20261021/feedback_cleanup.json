@@ -1,0 +1,9 @@
+{
+  "removed_ids": [
+    "a35fa6ec-db11-4107-8446-1669fc00f317",
+    "deb6f401-7e51-4ae2-9bdf-bec84f7da2bf"
+  ],
+  "count": 2,
+  "scope": "Only these two synthetic records, matching institution, reviewer, rejected status and checked test notes; backup preserved",
+  "existing_feedback_modified": false
+}

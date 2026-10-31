@@ -1,0 +1,35 @@
+{
+  "reference_sha256": "13504f6c221a42c1726460a9e865e563355539ff97d702d6c9b2267b4b261d76",
+  "reference_unchanged": true,
+  "unchanged_parts": [
+    "[Content_Types].xml",
+    "_rels/.rels",
+    "word/_rels/fontTable.xml.rels",
+    "word/fontTable.xml",
+    "word/fonts/HelveticaNeue-bold.ttf",
+    "word/fonts/HelveticaNeue-boldItalic.ttf",
+    "word/fonts/HelveticaNeue-italic.ttf",
+    "word/fonts/HelveticaNeue-regular.ttf",
+    "word/fonts/HelveticaNeueLight-bold.ttf",
+    "word/fonts/HelveticaNeueLight-boldItalic.ttf",
+    "word/fonts/HelveticaNeueLight-italic.ttf",
+    "word/fonts/HelveticaNeueLight-regular.ttf",
+    "word/footer2.xml",
+    "word/header1.xml",
+    "word/header2.xml",
+    "word/numbering.xml",
+    "word/settings.xml",
+    "word/styles.xml",
+    "word/theme/theme1.xml"
+  ],
+  "changed_parts": [
+    "word/_rels/document.xml.rels",
+    "word/document.xml",
+    "word/footer1.xml",
+    "word/footnotes.xml",
+    "word/media/image1.png"
+  ],
+  "tables_preserved": 9,
+  "rendering": "LibreOffice PDF; contact-sheet review",
+  "revision_note": "Updated open question after implementing prompt boundaries and reviewer-curated export."
+}

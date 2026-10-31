@@ -1,0 +1,9 @@
+{
+  "removed_test_ids": [
+    "d5c9c5f8-7699-4c3f-8f6c-39d082619ebf",
+    "aeae4094-e8df-4676-8172-99d0669d4c07"
+  ],
+  "deleted_count": 2,
+  "scope": "Only this UAT run's two SYSTEM-UAT feedback records; reversible backup saved",
+  "other_records_modified": false
+}

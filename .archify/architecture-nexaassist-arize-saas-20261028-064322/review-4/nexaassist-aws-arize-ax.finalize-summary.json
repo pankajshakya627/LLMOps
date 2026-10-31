@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-arize-saas-20261028-064322/candidate.json",
+    "sha256": "ffd53714aadc6d3066608666ed4cf557be18238471e23a9defd054ebe80d686a",
+    "bytes": 8349
+  },
+  "artifact": {
+    "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-arize-saas-20261028-064322/nexaassist-aws-arize-ax.html",
+    "sha256": "839bcd9b1bd16bf6751c55bad64b2cfddac7f7215004bd631e2816bf0e989434",
+    "bytes": 840281
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-arize-saas-20261028-064322/review-4/nexaassist-aws-arize-ax.finalize.json",
+    "summaryReceipt": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-arize-saas-20261028-064322/review-4/nexaassist-aws-arize-ax.finalize-summary.json",
+    "browserCheckReceipt": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/.archify/architecture-nexaassist-arize-saas-20261028-064322/review-4/nexaassist-aws-arize-ax.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-28T01:05:21.022Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2134,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  },
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "resolvedCrossovers": 1,
+      "routesOverSuggestedBends": 3
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [
+        {
+          "left": {
+            "from": "staff",
+            "to": "edge",
+            "label": "HTTPS",
+            "collectionIndex": 0,
+            "artifactIndex": 1
+          },
+          "right": {
+            "from": "api",
+            "to": "arize_ax",
+            "label": "masked OTLP",
+            "collectionIndex": 9,
+            "artifactIndex": 10
+          },
+          "point": [
+            168,
+            77
+          ]
+        }
+      ],
+      "detours": [
+        {
+          "relationship": {
+            "from": "api",
+            "to": "arize_ax",
+            "label": "masked OTLP",
+            "collectionIndex": 9,
+            "artifactIndex": 10
+          },
+          "bends": 4,
+          "stretch": 1.052
+        },
+        {
+          "relationship": {
+            "from": "s3",
+            "to": "ingest",
+            "label": "stage corpus",
+            "collectionIndex": 12,
+            "artifactIndex": 13
+          },
+          "bends": 3,
+          "stretch": 1.338
+        },
+        {
+          "relationship": {
+            "from": "gateway",
+            "to": "arize_ax",
+            "label": "model spans",
+            "collectionIndex": 14,
+            "artifactIndex": 15
+          },
+          "bends": 3,
+          "stretch": 1.036
+        }
+      ],
+      "truncated": false
+    },
+    "hints": [
+      "staff → edge crosses api → arize_ax: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "api → arize_ax needs 4 bends: move node api or arize_ax so they share a row or column with matching centers, or sit diagonally with a clear corner.",
+      "s3 → ingest needs 3 bends: move node s3 or ingest so they share a row or column with matching centers, or sit diagonally with a clear corner.",
+      "gateway → arize_ax needs 3 bends: move node gateway or arize_ax so they share a row or column with matching centers, or sit diagonally with a clear corner."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}

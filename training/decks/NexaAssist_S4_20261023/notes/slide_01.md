@@ -1,0 +1,1 @@
+Secure serving, reliability and cost Session 4 of 5 · 3 hours · real routes, fake dependencies Today exercises the existing FastAPI app without network access. Production-grade claims still require live staging traffic and a reviewed deployment environment.

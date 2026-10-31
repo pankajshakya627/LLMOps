@@ -1,0 +1,1 @@
+Discover → scope and data contract Distill → retrieval, prompts and evaluation Deploy + Deliver → secure service and operations This five-session grouping is our teaching design. It adapts the course lifecycle to the existing LangChain, MongoDB Atlas, FastAPI and Streamlit layers.

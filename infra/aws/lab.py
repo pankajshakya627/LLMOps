@@ -1,0 +1,319 @@
+"""Explicit create/deploy/evaluate/destroy operations for disposable AWS training sessions."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import re
+import shlex
+import tarfile
+import time
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
+from typing import Any
+
+import boto3
+from botocore.config import Config
+from botocore.exceptions import ClientError
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def client(service: str) -> Any:
+    return boto3.client(
+        service,
+        config=Config(retries={"total_max_attempts": 3}, connect_timeout=5, read_timeout=200),
+    )
+
+
+def output(summary: str, artifacts: list[str], next_actions: list[str]) -> None:
+    print(
+        json.dumps(
+            {
+                "status": "success",
+                "summary": summary,
+                "artifacts": artifacts,
+                "next_actions": next_actions,
+            }
+        )
+    )
+
+
+def stack_outputs(stack: str) -> dict[str, str]:
+    data = client("cloudformation").describe_stacks(StackName=stack)["Stacks"][0]
+    return {entry["OutputKey"]: entry["OutputValue"] for entry in data["Outputs"]}
+
+
+def create(args: argparse.Namespace) -> None:
+    expires = datetime.now(UTC) + timedelta(minutes=args.minutes)
+    parameters = {
+        "SessionMinutes": str(args.minutes),
+        "ExpiresAt": expires.strftime("%Y-%m-%dT%H:%M:%S"),
+        "BoundaryArn": args.boundary_arn,
+        "ModelResources": args.model_resources,
+    }
+    cf = client("cloudformation")
+    created = cf.create_stack(
+        StackName=args.stack,
+        TemplateBody=(ROOT / "infra/aws/session.yaml").read_text(),
+        RoleARN=args.cloudformation_role_arn,
+        Capabilities=["CAPABILITY_NAMED_IAM"],
+        Parameters=[{"ParameterKey": k, "ParameterValue": v} for k, v in parameters.items()],
+        Tags=[
+            {"Key": "Session", "Value": args.stack},
+            {"Key": "BudgetUSD", "Value": str(args.budget)},
+            {"Key": "ExpiresAt", "Value": parameters["ExpiresAt"]},
+        ],
+    )
+    # A failed create on an already-live name must never trigger deletion of that session.
+    Path(args.receipt).write_text(json.dumps({"stack_id": created["StackId"]}))
+    cf.get_waiter("stack_create_complete").wait(
+        StackName=args.stack, WaiterConfig={"Delay": 10, "MaxAttempts": 120}
+    )
+    data = stack_outputs(args.stack)
+    Path(args.output).write_text(json.dumps(data, indent=2))
+    output(
+        "Session infrastructure created; application deployment is next",
+        [args.output],
+        ["Build and deploy release images; session expiry is already scheduled"],
+    )
+
+
+def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Path, str]:
+    if not re.fullmatch(r"[a-zA-Z0-9_-]{1,100}", args.release_id):
+        raise ValueError("Invalid release ID")
+    images = json.loads(Path(args.images).read_text())
+    if set(images) != {"APP_IMAGE", "GATEWAY_IMAGE", "GUARDRAILS_IMAGE"}:
+        raise ValueError("Image manifest must contain exactly the three release images")
+    for key, repository in (
+        ("APP_IMAGE", "AppRepository"),
+        ("GATEWAY_IMAGE", "GatewayRepository"),
+        ("GUARDRAILS_IMAGE", "GuardrailsRepository"),
+    ):
+        if not re.fullmatch(re.escape(data[repository]) + r"@sha256:[a-f0-9]{64}", images[key]):
+            raise ValueError(f"{key} must be a digest in this session's ECR repository")
+    for route in (args.chat_route, args.judge_route):
+        if not re.fullmatch(r"bedrock/converse/[a-zA-Z0-9._:/-]+", route):
+            raise ValueError("Use an approved bedrock/converse/ model or inference-profile route")
+    config = {
+        **images,
+        "AWS_REGION": boto3.session.Session().region_name,
+        "SECRET_ARN": data["SecretArn"],
+        "BUCKET": data["Bucket"],
+        "BEDROCK_GUARDRAIL_ID": data["GuardrailId"],
+        "BEDROCK_GUARDRAIL_VERSION": data["GuardrailVersion"],
+        "BEDROCK_CHAT_ROUTE": args.chat_route,
+        "BEDROCK_JUDGE_ROUTE": args.judge_route,
+        "RELEASE_ID": args.release_id,
+    }
+    register = ROOT / "nexa_synthetic_data/document_register.json"
+    archive = Path(args.archive)
+    with tarfile.open(archive, "w:gz") as tar:
+        for source, name in (
+            (ROOT / "app/compose.aws.yaml", "compose.yaml"),
+            (ROOT / "infra/aws/host.sh", "host.sh"),
+            (register, "corpus/document_register.json"),
+        ):
+            tar.add(source, arcname=name)
+        for entry in json.loads(register.read_text()):
+            relative = Path(entry["file"])
+            if relative.is_absolute() or ".." in relative.parts:
+                raise ValueError("Corpus paths must be relative without traversal")
+            source = (register.parent / entry["file"]).resolve()
+            if not source.is_relative_to(register.parent.resolve()) or not source.is_file():
+                raise ValueError("Corpus file must be inside the synthetic-data directory")
+            if hashlib.sha256(source.read_bytes()).hexdigest() != entry["sha256"]:
+                raise ValueError("Corpus checksum mismatch")
+            tar.add(source, arcname=f"corpus/{entry['file']}")
+        # This manifest contains ARNs and image digests, never credentials.
+        import io
+
+        body = json.dumps(config).encode()
+        info = tarfile.TarInfo("release.json")
+        info.size = len(body)
+        tar.addfile(info, io.BytesIO(body))
+    return archive, hashlib.sha256(archive.read_bytes()).hexdigest()
+
+
+def run_remote(instance: str, command: str) -> None:
+    ssm = client("ssm")
+    # Account for first boot and SSM registration; do not swallow authorization failures.
+    for attempt in range(60):
+        try:
+            sent = ssm.send_command(
+                InstanceIds=[instance],
+                DocumentName="AWS-RunShellScript",
+                Parameters={"commands": [command], "executionTimeout": ["1800"]},
+                TimeoutSeconds=60,
+            )
+            break
+        except ClientError as exc:
+            if exc.response["Error"]["Code"] != "InvalidInstanceId" or attempt == 59:
+                raise
+            time.sleep(10)
+    command_id = sent["Command"]["CommandId"]
+    for _ in range(190):
+        time.sleep(10)
+        try:
+            result = ssm.get_command_invocation(CommandId=command_id, InstanceId=instance)
+        except ClientError as exc:
+            if exc.response["Error"]["Code"] == "InvocationDoesNotExist":
+                continue
+            raise
+        if result["Status"] in {"Pending", "InProgress", "Delayed"}:
+            continue
+        if result["Status"] != "Success":
+            # Host commands contain no literal secret values. Keep provider output out of CI logs.
+            raise RuntimeError(
+                f"SSM command {command_id} {result['Status']}; inspect SSM/CloudWatch"
+            )
+        return
+    ssm.cancel_command(CommandId=command_id, InstanceIds=[instance])
+    raise TimeoutError(
+        f"SSM command {command_id} timed out; stop the lab and inspect host readiness"
+    )
+
+
+def deploy(args: argparse.Namespace, data: dict[str, str]) -> None:
+    if datetime.fromisoformat(data["ExpiresAt"]).replace(tzinfo=UTC) <= datetime.now(
+        UTC
+    ) + timedelta(minutes=15):
+        raise ValueError("Less than 15 minutes remain; destroy this session and create another")
+    archive, digest = prepare_release(args, data)
+    key = f"releases/{args.release_id}.tar.gz"
+    client("s3").upload_file(str(archive), data["Bucket"], key)
+    destination = f"/opt/nexaassist/releases/{args.release_id}"
+    command = "\n".join(
+        [
+            "set -eu",
+            "for n in $(seq 1 60); do test -f /opt/nexaassist/host-ready && break; sleep 5; done",
+            "test -f /opt/nexaassist/host-ready",
+            f"install -d -m 700 {shlex.quote(destination)}",
+            f"cd {shlex.quote(destination)}",
+            (
+                f"aws s3 cp {shlex.quote('s3://' + data['Bucket'] + '/' + key)} release.tar.gz "
+                f"--region {shlex.quote(str(boto3.session.Session().region_name))} --only-show-errors"
+            ),
+            f"echo '{digest}  release.tar.gz' | sha256sum --check -",
+            "tar -xzf release.tar.gz",
+            "bash host.sh deploy",
+        ]
+    )
+    run_remote(data["InstanceId"], command)
+    output(
+        "Release deployed; live readiness and structured-answer smoke passed",
+        [f"s3://{data['Bucket']}/reports/{args.release_id}/"],
+        ["Connect through SSM port forwarding; destroy the session when finished"],
+    )
+
+
+def destroy(data: dict[str, str]) -> None:
+    result = client("lambda").invoke(
+        FunctionName=data["CleanupFunction"], Payload=json.dumps({"operation": "destroy"}).encode()
+    )
+    if result.get("FunctionError"):
+        raise RuntimeError("Cleanup Lambda failed; inspect logs, stop uploads and retry destroy")
+    output(
+        "Session deletion requested",
+        [data["CleanupFunction"]],
+        ["Wait for CloudFormation DELETE_COMPLETE; DELETE_FAILED requires remediation"],
+    )
+
+
+def destroy_stack(stack: str, receipt: str | None = None) -> None:
+    cf = client("cloudformation")
+    try:
+        current = cf.describe_stacks(StackName=stack)["Stacks"][0]
+    except ClientError as exc:
+        if exc.response["Error"]["Code"] == "ValidationError" and "does not exist" in str(exc):
+            output("Session already deleted", [stack], [])
+            return
+        raise
+    if receipt and json.loads(Path(receipt).read_text())["stack_id"] != current["StackId"]:
+        raise ValueError("Session identity changed; refusing to delete a replacement stack")
+    try:
+        destroy({"CleanupFunction": f"{stack}-cleanup"})
+    except ClientError as exc:
+        if exc.response["Error"]["Code"] != "ResourceNotFoundException":
+            raise
+        # Failed initial creation may have no cleanup function or outputs yet.
+        cf.delete_stack(StackName=stack)
+    cf.get_waiter("stack_delete_complete").wait(
+        StackName=stack, WaiterConfig={"Delay": 10, "MaxAttempts": 120}
+    )
+    output("Session stack deleted", [stack], ["No session compute or storage is retained"])
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--stack", required=True)
+    commands = parser.add_subparsers(dest="action", required=True)
+    start = commands.add_parser("create")
+    start.add_argument("--minutes", type=int, choices=[60, 120], default=120)
+    start.add_argument("--budget", type=int, choices=range(3, 9), default=5)
+    start.add_argument("--model-resources", required=True)
+    start.add_argument("--boundary-arn", required=True)
+    start.add_argument("--cloudformation-role-arn", required=True)
+    start.add_argument("--output", default="session-outputs.json")
+    start.add_argument("--receipt", default="session-created.json")
+    release = commands.add_parser("deploy")
+    release.add_argument("--images", required=True)
+    release.add_argument("--release-id", required=True)
+    release.add_argument("--chat-route", required=True)
+    release.add_argument("--judge-route", required=True)
+    release.add_argument("--archive", default="release.tar.gz")
+    commands.add_parser("evaluate")
+    stop = commands.add_parser("destroy")
+    stop.add_argument("--receipt", help="Only destroy the stack ID recorded by this create")
+    commands.add_parser("status")
+    args = parser.parse_args()
+    if not re.fullmatch(r"nexa-lab-[a-z0-9-]{1,25}", args.stack):
+        parser.error("Stack must match nexa-lab-[a-z0-9-]{1,25}")
+    try:
+        if args.action == "create":
+            create(args)
+            return
+        if args.action == "destroy":
+            destroy_stack(args.stack, args.receipt)
+            return
+        data = stack_outputs(args.stack)
+        if args.action == "deploy":
+            deploy(args, data)
+        elif args.action == "evaluate":
+            run_remote(
+                data["InstanceId"], "set -eu; cd /opt/nexaassist/current; bash host.sh evaluate"
+            )
+            output(
+                "One-case evaluation gate passed",
+                [f"s3://{data['Bucket']}/reports/"],
+                [
+                    "Inspect metric statuses and scores; example thresholds are not production approval"
+                ],
+            )
+        else:
+            print(json.dumps(data, indent=2))
+    except Exception as exc:  # noqa: BLE001 - CLI failures share one sanitized recovery contract.
+        summary = type(exc).__name__
+        if isinstance(exc, (RuntimeError, ValueError, TimeoutError)):
+            summary = str(exc)
+        elif isinstance(exc, ClientError):
+            summary += ": " + exc.response["Error"]["Code"]
+        print(
+            json.dumps(
+                {
+                    "status": "error",
+                    "summary": summary,
+                    "next_actions": [
+                        "Inspect stack events and SSM/CloudWatch logs",
+                        "Retry only after fixing the cause; destroy if the lab is not needed",
+                    ],
+                    "artifacts": [args.stack],
+                }
+            )
+        )
+        raise SystemExit(1) from None
+
+
+if __name__ == "__main__":
+    main()

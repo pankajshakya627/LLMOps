@@ -1,0 +1,1 @@
+Cost = (input tokens × input price + output tokens × output price) / 1M. Monthly estimate = priced query cost × expected query volume. Verify current provider prices before the live exercise. Use approved prices and a representative request mix. No current model availability or price is asserted by these slides; historical saved prices may be stale.

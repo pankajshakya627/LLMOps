@@ -1,0 +1,1 @@
+30 June sanction and lookup: base policy fee. 1 July sanction and lookup: linked circular fee. A different product must not reuse those sources. Use actual registered POL-HL-V3 and CIR-2026-07 PDFs. State both lookup and sanction dates. A later lookup does not change an earlier sanction's fee. All policies are synthetic.

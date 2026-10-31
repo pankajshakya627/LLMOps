@@ -1,0 +1,1 @@
+Register: doc_id, version, effective dates and hash. Authority and amendment relationships affect retrieval. A changed file must fail source verification. A hash checks integrity against the register; it does not establish legal permission, correctness or authority by itself. The implementation or concept reference is nexa_synthetic_data/document_register.json.

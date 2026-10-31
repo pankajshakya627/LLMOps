@@ -1,0 +1,29 @@
+{
+  "page": "slide_14.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_14.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Run the Session 2 showcase and inspect June/July policy outcomes plus wrong-product abstention.",
+    "render_delivers": true,
+    "note": "The command is prominent and legible. Expected fee/source cases, lookup/sanction clarification and wrong-product outcome are present in separated text blocks with no clipping or overlaps."
+  }
+}

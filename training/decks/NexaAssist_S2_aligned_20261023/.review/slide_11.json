@@ -1,0 +1,29 @@
+{
+  "page": "slide_11.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_11.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Distinguish the circular entering policy scope on 1 July 2026 from the sanction-date condition on its revised fee.",
+    "render_delivers": true,
+    "note": "The lookup condition and two sanction branches are explicit, visibly linked and readable. Fee labels, currency glyphs, source caption and explanatory legend fit without collisions."
+  }
+}

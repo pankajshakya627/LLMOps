@@ -1,0 +1,1 @@
+Run: python -m training.session3.answers Valid → answered; invented quote → abstention. Output PII → abstention with no leaked citation. Expect one call for the valid draft, two for the fixed invalid quote, and one for the PII draft. All model calls are fakes; the chain validation is real.

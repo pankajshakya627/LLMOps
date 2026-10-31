@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 1050 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 1050 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 1113.36 31 L 1113.36 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 02 / OBSERVABILITY LAB</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 84.33 1152 61.6" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 84.33 1152 61.6" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 84.33 L 1214.4 84.33 L 1214.4 145.93 L 62.4 145.93 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Practical / inspect a correlated Datadog trace</text>
+</g>
+</g>
+<g id="shape-15" data-pptx-object="group" data-pptx-frame="63.36 665 1151 25.6" data-pptx-source-ref="slide:15">
+<g id="shape-13" data-pptx-object="shape" data-pptx-frame="63.36 665 1050 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:13" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 1113.36 665 L 1113.36 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">Syllabus 04, 05, 14 / Fixtures and live exercises labeled / sources and lab steps in notes</text>
+</g>
+<g id="shape-14" data-pptx-object="shape" data-pptx-frame="1149.36 665 65 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:14" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1214.36 665 L 1214.36 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">09/19</text>
+</g>
+</g><g id="code-or-lab" data-pptx-bounds="64 202 1152 270"><rect x="64" y="202" width="1152" height="270" fill="#132C42" /><text x="88" y="240" font-size="23" font-family="Courier New" fill="#FFFFFF" font-weight="normal">uv run --no-sync pytest -q tests/test_telemetry.py</text><text x="88" y="277" font-size="23" font-family="Courier New" fill="#FFFFFF" font-weight="normal" /><text x="88" y="314" font-size="23" font-family="Courier New" fill="#FFFFFF" font-weight="normal">Offline: captured spans + fake HTTP + scoped prompt metadata</text><text x="88" y="351" font-size="23" font-family="Courier New" fill="#FFFFFF" font-weight="normal">Live: ddtrace-run + existing Datadog Agent configuration</text><text x="88" y="388" font-size="23" font-family="Courier New" fill="#FFFFFF" font-weight="normal">Locate root → child spans; explain the slow or failing stage</text></g><g id="practical-evidence" data-pptx-bounds="64 497 1152 80"><text x="64" y="537" font-size="24" font-family="Arial" fill="#132C42" font-weight="normal">Submit: trace/parent identity, durations, token fields, failure and capture-policy gaps.</text></g></svg>

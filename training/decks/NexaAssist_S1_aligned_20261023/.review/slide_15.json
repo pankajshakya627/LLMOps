@@ -1,0 +1,29 @@
+{
+  "page": "slide_15.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_15.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "The release file includes prompt, model, corpus and embedding identities, golden and operating evidence, plus visible placeholder targets and missing approvals.",
+    "render_delivers": true,
+    "note": "All three release-evidence obligations are complete, aligned and readable. Warning accent supports the pending-approval message. The footer explicitly identifies gate data as a placeholder. No visual defect observed."
+  }
+}

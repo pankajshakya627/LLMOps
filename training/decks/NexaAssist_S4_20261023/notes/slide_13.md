@@ -1,0 +1,1 @@
+/health: this process can respond. /ready: the configured database ping succeeds. Neither endpoint proves retrieval or answer quality. The readiness endpoint is intentionally narrower than a live RAG test. A healthy database can still have a missing or stale vector index.

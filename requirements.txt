@@ -1,0 +1,21 @@
+# Runtime dependencies for NexaAssist (Python >=3.14).
+# Prefer uv sync --all-extras --locked for the UI/evaluation dependencies and reproducible versions.
+arize-phoenix-otel==0.17.2
+arize-phoenix-client==3.5.0
+openinference-instrumentation-langchain==0.1.80
+opentelemetry-instrumentation-fastapi==0.66b1
+fastapi
+httpx
+langchain-core
+langchain-mongodb>=0.12.1
+langchain-openai
+langchain-text-splitters>=1.1.3
+openai
+pdfplumber
+pydantic>=2
+pydantic-settings
+pymongo>=4.9
+structlog
+tiktoken>=0.14.0
+unstructured[md]
+uvicorn

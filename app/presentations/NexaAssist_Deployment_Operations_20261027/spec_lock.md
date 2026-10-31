@@ -1,0 +1,89 @@
+<!-- ppt-master-schema: spec-lock/v1 -->
+# Execution Lock
+
+## canvas
+- viewBox: 0 0 1280 720
+- format: PPT 16:9
+
+## communication
+- primary_language: en
+- audience: Enterprise LLMOps engineers and Python developers
+- objective: Deploy services, follow requests, score results and diagnose incidents using exact evidence.
+- core_message: Deploy coherently; follow the request; diagnose each boundary with traces and evaluation.
+- consumption_mode: balanced
+
+## mode
+- mode: custom
+- mode_references: instructional
+- mode_behavior: Concept to code to controlled request to evidence, with bounded failure and recovery.
+
+## visual_style
+- visual_style: custom
+- visual_style_references: swiss-minimal, dark-tech
+- visual_style_behavior: Swiss alignment on near-white fields and navy operational regions; teal paths and monospace literals make boundary ownership legible.
+
+## colors
+- background: #F5F8FC
+- secondary_background: #EAF0F6
+- primary: #122C45
+- accent: #007F86
+- secondary_accent: #B05C17
+- body_text: #122C45
+- secondary_text: #526A7F
+- divider: #CFDAE5
+- surface: #FFFFFF
+- inverse: #F5F8FC
+- mint: #6BE3D3
+- negative: #AA3344
+
+## typography
+- font_family: Arial
+- title_family: Arial
+- body_family: Arial
+- code_family: Courier New
+- display_family: Arial
+- body: 24
+- title: 42
+- subtitle: 28
+- annotation: 20
+- footnote: 16
+- display: 68
+- code: 20
+- index: 26
+
+## icons
+- library: none
+- inventory: none
+
+## page_rhythm
+- P01: anchor
+- P02: breathing
+- P03: breathing
+- P04: breathing
+- P05: breathing
+- P06: dense
+- P07: dense
+- P08: dense
+- P09: breathing
+- P10: breathing
+- P11: dense
+- P12: breathing
+- P13: breathing
+- P14: breathing
+- P15: breathing
+- P16: dense
+- P17: breathing
+- P18: breathing
+- P19: breathing
+- P20: breathing
+- P21: breathing
+- P22: dense
+- P23: breathing
+- P24: anchor
+
+## pptx_structure
+- mode: flat
+
+## forbidden
+- `mask`, `<style>`, `class`, external CSS, `<foreignObject>`, `textPath`, `@font-face`, `<animate*>`, `<set>`, `<script>` / event attributes, `<iframe>`
+- HTML named entities in text; write typography as raw Unicode and escape XML reserved characters

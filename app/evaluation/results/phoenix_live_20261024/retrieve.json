@@ -1,0 +1,285 @@
+{
+  "as_of": "2026-10-01",
+  "results": [
+    {
+      "rank": 1,
+      "score": 0.9156718850135803,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 4. Loan amount and tenure]\n4.1 Loan amount. Minimum loan amount is ₹5,00,000. Maximum loan amount is ₹7,50,00,000.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 4. Loan amount and tenure]\n4.1 Loan amount. Minimum loan amount is ₹5,00,000. Maximum loan amount is ₹7,50,00,000.\n4.2 Tenure. Minimum tenure is 60 months (5 years). Maximum tenure is 360 months (30 years), subject to the age at maturity limits in clause 3.1.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "4.1",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 2,
+      "score": 0.8818087577819824,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 7. Security and loan to value]\n7.2 Loan to value (LTV). The maximum LTV depends on the loan amount and is applied to the lower of the agreement value and NexaBank's technical valuation.\n<table><tr><td>Loan amount</td><td>Maximum LTV</td></tr><tr><td>Up to ₹30,00,000</td><td>90%</td></tr><tr><td>Above ₹30,00,000 and up to ₹75,00,000</td><td>80%</td></tr><tr><td>Above ₹75,00,000</td><td>75%</td></tr></table>",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 7. Security and loan to value]\n7.1 Security. The loan is secured by a first mortgage on the residential property being financed. The property must have a clear and marketable title.\n7.2 Loan to value (LTV). The maximum LTV depends on the loan amount and is applied to the lower of the agreement value and NexaBank's technical valuation.\n<table><tr><td>Loan amount</td><td>Maximum LTV</td></tr><tr><td>Up to ₹30,00,000</td><td>90%</td></tr><tr><td>Above ₹30,00,000 and up to ₹75,00,000</td><td>80%</td></tr><tr><td>Above ₹75,00,000</td><td>75%</td></tr></table>\n7.3 Property insurance. The borrower must keep the property insured against fire and allied perils for the loan tenure.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "7.2",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 3,
+      "score": 0.8627489805221558,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 1. Purpose and scope]\n1.1 Purpose. This policy sets out the eligibility, pricing, fees, security and prepayment terms for NexaHome Loan, a loan for the purchase, construction, extension or improvement of a residential property, or the balance transfer of an existing home loan.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 1. Purpose and scope]\n1.1 Purpose. This policy sets out the eligibility, pricing, fees, security and prepayment terms for NexaHome Loan, a loan for the purchase, construction, extension or improvement of a residential property, or the balance transfer of an existing home loan.\n1.2 Applicability. The version of this policy in force on the sanction date of a loan governs that loan for its life, except where a later instrument expressly states otherwise. Applications received under an earlier version but sanctioned after the effective date are governed by this version.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "1.1",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 4,
+      "score": 0.8456553220748901,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 4. Loan amount and tenure]\n4.2 Tenure. Minimum tenure is 60 months (5 years). Maximum tenure is 360 months (30 years), subject to the age at maturity limits in clause 3.1.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 4. Loan amount and tenure]\n4.1 Loan amount. Minimum loan amount is ₹5,00,000. Maximum loan amount is ₹7,50,00,000.\n4.2 Tenure. Minimum tenure is 60 months (5 years). Maximum tenure is 360 months (30 years), subject to the age at maturity limits in clause 3.1.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "4.2",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 5,
+      "score": 0.8389376401901245,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | Front matter]\nNexaHome Loan Policy\nRetail Lending Policy | Home Loans | Product code NEXA-HL\n<table><tr><td>Document ID</td><td>POL-HL-V3</td></tr><tr><td>Version</td><td>3.0</td></tr><tr><td>Effective from</td><td>2025-10-01</td></tr><tr><td>Effective to (this version)</td><td>Open (see clause 10.3 for amendments)</td></tr><tr><td>Supersedes</td><td>POL-HL-V2</td></tr><tr><td>Owner</td><td>Head of Retail Credit Policy, NexaBank</td></tr></table>",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | Front matter]\nNexaHome Loan Policy\nRetail Lending Policy | Home Loans | Product code NEXA-HL\n<table><tr><td>Document ID</td><td>POL-HL-V3</td></tr><tr><td>Version</td><td>3.0</td></tr><tr><td>Effective from</td><td>2025-10-01</td></tr><tr><td>Effective to (this version)</td><td>Open (see clause 10.3 for amendments)</td></tr><tr><td>Supersedes</td><td>POL-HL-V2</td></tr><tr><td>Owner</td><td>Head of Retail Credit Policy, NexaBank</td></tr></table>",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": null,
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 6,
+      "score": 0.8164703845977783,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 6. Fees and charges]\n6.5 Other costs. Stamp duty, registration charges and insurance premiums are payable by the borrower at actuals and are not NexaBank fees.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 6. Fees and charges]\n6.1 General. All fees are exclusive of GST at 18%, which is charged additionally. Fees, once paid, are non-refundable except where this policy states otherwise.\n6.2 Processing fee. Processing fee is 0.35% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹15,000, plus GST.\n6.3 Legal and technical charges. A non-refundable charge of ₹6,000 plus GST covers legal verification and technical valuation of the property.\n6.4 Penal charges. Overdue amounts attract a penal charge of 2.00% per annum over the contractual interest rate, calculated on the overdue amount only. Penal charges are not compounded.\n6.5 Other costs. Stamp duty, registration charges and insurance premiums are payable by the borrower at actuals and are not NexaBank fees.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "6.5",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 7,
+      "score": 0.8153488636016846,
+      "text": "[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 5. Applicability and grandfathering]\n5.2 Existing borrowers and part prepayment. Borrowers whose NexaHome loans were sanctioned under POL-HL-V3 before 2026-07-01 may opt in to the revised ₹10,000 part prepayment minimum by written request to their branch or through a service request. There is no charge for opting in. Until a borrower opts in, the ₹25,000 minimum continues to apply to that loan. Opting in does not change the processing fee already paid.",
+      "parent_text": "[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 5. Applicability and grandfathering]\n5.1 Loans covered. The revised processing fee applies only to loans sanctioned on or after 2026-07-01. Loans sanctioned before that date keep the processing fee that applied at sanction, and no refund or adjustment is made.\n5.2 Existing borrowers and part prepayment. Borrowers whose NexaHome loans were sanctioned under POL-HL-V3 before 2026-07-01 may opt in to the revised ₹10,000 part prepayment minimum by written request to their branch or through a service request. There is no charge for opting in. Until a borrower opts in, the ₹25,000 minimum continues to apply to that loan. Opting in does not change the processing fee already paid.",
+      "citation": {
+        "doc_id": "CIR-2026-07",
+        "title": "Circular CIR-2026-07",
+        "policy_version": "1.0",
+        "clause": "5.2",
+        "effective_date": "2026-07-01"
+      }
+    },
+    {
+      "rank": 8,
+      "score": 0.8109670877456665,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 6. Fees and charges]\n6.2 Processing fee. Processing fee is 0.35% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹15,000, plus GST.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 6. Fees and charges]\n6.1 General. All fees are exclusive of GST at 18%, which is charged additionally. Fees, once paid, are non-refundable except where this policy states otherwise.\n6.2 Processing fee. Processing fee is 0.35% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹15,000, plus GST.\n6.3 Legal and technical charges. A non-refundable charge of ₹6,000 plus GST covers legal verification and technical valuation of the property.\n6.4 Penal charges. Overdue amounts attract a penal charge of 2.00% per annum over the contractual interest rate, calculated on the overdue amount only. Penal charges are not compounded.\n6.5 Other costs. Stamp duty, registration charges and insurance premiums are payable by the borrower at actuals and are not NexaBank fees.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "6.2",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 9,
+      "score": 0.8047642707824707,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 3. Eligibility]\n3.2 Minimum income. Salaried applicants must have net monthly income of at least ₹30,000. Self-employed applicants must have annual income of at least ₹5,00,000 as shown in the latest income tax return.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 3. Eligibility]\n3.1 Age. Minimum age at application is 21 years. Maximum age at application is 62 years for salaried applicants and 65 years for self-employed applicants. Age at loan maturity must not exceed 70 years (salaried) or 75 years (self-employed).\n3.2 Minimum income. Salaried applicants must have net monthly income of at least ₹30,000. Self-employed applicants must have annual income of at least ₹5,00,000 as shown in the latest income tax return.\n3.3 Bureau score. The minimum Bureau Score for the standard rate card is 675. For scores below 675, applications below this score are referred to manual underwriting and no standard rate is quoted.\n3.4 FOIR limit. The maximum FOIR depends on net monthly income as shown below.\n<table><tr><td>Net monthly income</td><td>Maximum FOIR</td></tr><tr><td>Below ₹1,00,000</td><td>50%</td></tr><tr><td>₹1,00,000 to ₹2,49,999</td><td>55%</td></tr><tr><td>₹2,50,000 and above</td><td>60%</td></tr></table>\n3.5 Applicant categories. The standard criteria in this policy cover salaried and self-employed applicants only. Other categories, including pensioners and those with no regular income, are outside the standard criteria and are handled by the branch on an exception basis.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "3.2",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 10,
+      "score": 0.8034272789955139,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 7. Security and loan to value]\n7.1 Security. The loan is secured by a first mortgage on the residential property being financed. The property must have a clear and marketable title.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 7. Security and loan to value]\n7.1 Security. The loan is secured by a first mortgage on the residential property being financed. The property must have a clear and marketable title.\n7.2 Loan to value (LTV). The maximum LTV depends on the loan amount and is applied to the lower of the agreement value and NexaBank's technical valuation.\n<table><tr><td>Loan amount</td><td>Maximum LTV</td></tr><tr><td>Up to ₹30,00,000</td><td>90%</td></tr><tr><td>Above ₹30,00,000 and up to ₹75,00,000</td><td>80%</td></tr><tr><td>Above ₹75,00,000</td><td>75%</td></tr></table>\n7.3 Property insurance. The borrower must keep the property insured against fire and allied perils for the loan tenure.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "7.1",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 11,
+      "score": 0.803077220916748,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 3. Eligibility]\n3.1 Age. Minimum age at application is 21 years. Maximum age at application is 62 years for salaried applicants and 65 years for self-employed applicants. Age at loan maturity must not exceed 70 years (salaried) or 75 years (self-employed).",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 3. Eligibility]\n3.1 Age. Minimum age at application is 21 years. Maximum age at application is 62 years for salaried applicants and 65 years for self-employed applicants. Age at loan maturity must not exceed 70 years (salaried) or 75 years (self-employed).\n3.2 Minimum income. Salaried applicants must have net monthly income of at least ₹30,000. Self-employed applicants must have annual income of at least ₹5,00,000 as shown in the latest income tax return.\n3.3 Bureau score. The minimum Bureau Score for the standard rate card is 675. For scores below 675, applications below this score are referred to manual underwriting and no standard rate is quoted.\n3.4 FOIR limit. The maximum FOIR depends on net monthly income as shown below.\n<table><tr><td>Net monthly income</td><td>Maximum FOIR</td></tr><tr><td>Below ₹1,00,000</td><td>50%</td></tr><tr><td>₹1,00,000 to ₹2,49,999</td><td>55%</td></tr><tr><td>₹2,50,000 and above</td><td>60%</td></tr></table>\n3.5 Applicant categories. The standard criteria in this policy cover salaried and self-employed applicants only. Other categories, including pensioners and those with no regular income, are outside the standard criteria and are handled by the branch on an exception basis.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "3.1",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 12,
+      "score": 0.8001760244369507,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 6. Fees and charges]\n6.1 General. All fees are exclusive of GST at 18%, which is charged additionally. Fees, once paid, are non-refundable except where this policy states otherwise.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 6. Fees and charges]\n6.1 General. All fees are exclusive of GST at 18%, which is charged additionally. Fees, once paid, are non-refundable except where this policy states otherwise.\n6.2 Processing fee. Processing fee is 0.35% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹15,000, plus GST.\n6.3 Legal and technical charges. A non-refundable charge of ₹6,000 plus GST covers legal verification and technical valuation of the property.\n6.4 Penal charges. Overdue amounts attract a penal charge of 2.00% per annum over the contractual interest rate, calculated on the overdue amount only. Penal charges are not compounded.\n6.5 Other costs. Stamp duty, registration charges and insurance premiums are payable by the borrower at actuals and are not NexaBank fees.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "6.1",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 13,
+      "score": 0.794295072555542,
+      "text": "[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 1. Background]\n1.1 Background. The Retail Credit Policy Committee has revised the processing fee and the minimum part prepayment amount for NexaHome Loan. This circular amends two clauses of POL-HL-V3. All other clauses of POL-HL-V3 are unchanged.",
+      "parent_text": "[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 1. Background]\n1.1 Background. The Retail Credit Policy Committee has revised the processing fee and the minimum part prepayment amount for NexaHome Loan. This circular amends two clauses of POL-HL-V3. All other clauses of POL-HL-V3 are unchanged.",
+      "citation": {
+        "doc_id": "CIR-2026-07",
+        "title": "Circular CIR-2026-07",
+        "policy_version": "1.0",
+        "clause": "1.1",
+        "effective_date": "2026-07-01"
+      }
+    },
+    {
+      "rank": 14,
+      "score": 0.7907580137252808,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 10. Document control]\n10.2 Supersession. Supersedes POL-HL-V2 (v2.0) for all loans sanctioned on or after 2025-10-01.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 10. Document control]\n10.1 Version history.\n<table><tr><td>Version</td><td>Effective from</td><td>Effective to</td><td>Note</td></tr><tr><td>1.0 (POL-HL-V1)</td><td>2023-04-01</td><td>2024-03-31</td><td>First issue</td></tr><tr><td>2.0 (POL-HL-V2)</td><td>2024-04-01</td><td>2025-09-30</td><td>Supersedes v1.0</td></tr><tr><td>3.0 (POL-HL-V3)</td><td>2025-10-01</td><td>Open</td><td>Supersedes v2.0</td></tr></table>\n10.2 Supersession. Supersedes POL-HL-V2 (v2.0) for all loans sanctioned on or after 2025-10-01.\n10.3 Amendment by circular. Individual clauses of this policy may be amended by a numbered circular. Where a later circular names a clause of this policy, the circular prevails for that clause for the sanctions it covers, and all other clauses continue unchanged.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "10.2",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 15,
+      "score": 0.7892860770225525,
+      "text": "[CIR-2026-07 | Circular CIR-2026-07 v1.0 | Front matter]\nCircular CIR-2026-07\nNexaHome Loan: Processing Fee Revision and Part-Prepayment Relaxation\n<table><tr><td>Document ID</td><td>CIR-2026-07</td></tr><tr><td>Issued on</td><td>2026-06-15</td></tr><tr><td>Effective from</td><td>2026-07-01</td></tr><tr><td>Amends</td><td>POL-HL-V3 (NexaHome Loan Policy v3.0), clauses 6.2 and 8.3 only</td></tr><tr><td>Issued by</td><td>Retail Credit Policy Committee, NexaBank</td></tr></table>",
+      "parent_text": "[CIR-2026-07 | Circular CIR-2026-07 v1.0 | Front matter]\nCircular CIR-2026-07\nNexaHome Loan: Processing Fee Revision and Part-Prepayment Relaxation\n<table><tr><td>Document ID</td><td>CIR-2026-07</td></tr><tr><td>Issued on</td><td>2026-06-15</td></tr><tr><td>Effective from</td><td>2026-07-01</td></tr><tr><td>Amends</td><td>POL-HL-V3 (NexaHome Loan Policy v3.0), clauses 6.2 and 8.3 only</td></tr><tr><td>Issued by</td><td>Retail Credit Policy Committee, NexaBank</td></tr></table>",
+      "citation": {
+        "doc_id": "CIR-2026-07",
+        "title": "Circular CIR-2026-07",
+        "policy_version": "1.0",
+        "clause": null,
+        "effective_date": "2026-07-01"
+      }
+    },
+    {
+      "rank": 16,
+      "score": 0.7887080907821655,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 8. Prepayment and foreclosure]\n8.3 Part prepayment. Part prepayment is allowed at any time. The minimum part prepayment amount is ₹25,000. No charge applies on a floating-rate loan.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 8. Prepayment and foreclosure]\n8.1 Foreclosure, floating rate. No foreclosure charge applies on a floating-rate loan, whether foreclosed from own funds or by balance transfer.\n8.2 Foreclosure of fixed-rate loans. New sanctions are floating-rate only. Loans sanctioned under an earlier version's fixed-rate option keep the foreclosure terms of that version.\n8.3 Part prepayment. Part prepayment is allowed at any time. The minimum part prepayment amount is ₹25,000. No charge applies on a floating-rate loan.\n8.4 Notice. The borrower must give 3 working days notice for foreclosure or part prepayment.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "8.3",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 17,
+      "score": 0.78534996509552,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 5. Interest rate]\n5.1 Benchmark. The floating interest rate is the NRLR on the sanction date plus the spread in clause 5.2. The NRLR history is published on the Rate Card.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 5. Interest rate]\n5.1 Benchmark. The floating interest rate is the NRLR on the sanction date plus the spread in clause 5.2. The NRLR history is published on the Rate Card.\n5.2 Spread by Bureau Score. The spread over NRLR depends on the Bureau Score at sanction.\n<table><tr><td>Bureau score band</td><td>Spread over NRLR (per annum)</td></tr><tr><td>800 to 900</td><td>1.90%</td></tr><tr><td>750 to 799</td><td>2.20%</td></tr><tr><td>700 to 749</td><td>2.70%</td></tr><tr><td>675 to 699</td><td>3.25%</td></tr></table>\n* The Bureau Score at sanction applies, not the score at application.\n5.3 Rate reset. The floating rate is reset quarterly, on the first day of January, April, July and October following any change in NRLR. The EMI is held constant and the tenure adjusts, unless the borrower asks for an EMI revision.\n5.4 Fixed-rate option. The fixed-rate option has been discontinued for sanctions on or after the effective date of this version. Loans sanctioned earlier under the fixed-rate option continue on the terms of the version in force on their sanction date.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "5.1",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 18,
+      "score": 0.7725804448127747,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 6. Fees and charges]\n6.3 Legal and technical charges. A non-refundable charge of ₹6,000 plus GST covers legal verification and technical valuation of the property.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 6. Fees and charges]\n6.1 General. All fees are exclusive of GST at 18%, which is charged additionally. Fees, once paid, are non-refundable except where this policy states otherwise.\n6.2 Processing fee. Processing fee is 0.35% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹15,000, plus GST.\n6.3 Legal and technical charges. A non-refundable charge of ₹6,000 plus GST covers legal verification and technical valuation of the property.\n6.4 Penal charges. Overdue amounts attract a penal charge of 2.00% per annum over the contractual interest rate, calculated on the overdue amount only. Penal charges are not compounded.\n6.5 Other costs. Stamp duty, registration charges and insurance premiums are payable by the borrower at actuals and are not NexaBank fees.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "6.3",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 19,
+      "score": 0.7709738612174988,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 3. Eligibility]\n3.4 FOIR limit. The maximum FOIR depends on net monthly income as shown below.\n<table><tr><td>Net monthly income</td><td>Maximum FOIR</td></tr><tr><td>Below ₹1,00,000</td><td>50%</td></tr><tr><td>₹1,00,000 to ₹2,49,999</td><td>55%</td></tr><tr><td>₹2,50,000 and above</td><td>60%</td></tr></table>",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 3. Eligibility]\n3.1 Age. Minimum age at application is 21 years. Maximum age at application is 62 years for salaried applicants and 65 years for self-employed applicants. Age at loan maturity must not exceed 70 years (salaried) or 75 years (self-employed).\n3.2 Minimum income. Salaried applicants must have net monthly income of at least ₹30,000. Self-employed applicants must have annual income of at least ₹5,00,000 as shown in the latest income tax return.\n3.3 Bureau score. The minimum Bureau Score for the standard rate card is 675. For scores below 675, applications below this score are referred to manual underwriting and no standard rate is quoted.\n3.4 FOIR limit. The maximum FOIR depends on net monthly income as shown below.\n<table><tr><td>Net monthly income</td><td>Maximum FOIR</td></tr><tr><td>Below ₹1,00,000</td><td>50%</td></tr><tr><td>₹1,00,000 to ₹2,49,999</td><td>55%</td></tr><tr><td>₹2,50,000 and above</td><td>60%</td></tr></table>\n3.5 Applicant categories. The standard criteria in this policy cover salaried and self-employed applicants only. Other categories, including pensioners and those with no regular income, are outside the standard criteria and are handled by the branch on an exception basis.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "3.4",
+        "effective_date": "2025-10-01"
+      }
+    },
+    {
+      "rank": 20,
+      "score": 0.7689257860183716,
+      "text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 8. Prepayment and foreclosure]\n8.1 Foreclosure, floating rate. No foreclosure charge applies on a floating-rate loan, whether foreclosed from own funds or by balance transfer.",
+      "parent_text": "[POL-HL-V3 | NexaHome Loan Policy v3.0 | 8. Prepayment and foreclosure]\n8.1 Foreclosure, floating rate. No foreclosure charge applies on a floating-rate loan, whether foreclosed from own funds or by balance transfer.\n8.2 Foreclosure of fixed-rate loans. New sanctions are floating-rate only. Loans sanctioned under an earlier version's fixed-rate option keep the foreclosure terms of that version.\n8.3 Part prepayment. Part prepayment is allowed at any time. The minimum part prepayment amount is ₹25,000. No charge applies on a floating-rate loan.\n8.4 Notice. The borrower must give 3 working days notice for foreclosure or part prepayment.",
+      "citation": {
+        "doc_id": "POL-HL-V3",
+        "title": "NexaHome Loan Policy",
+        "policy_version": "3.0",
+        "clause": "8.1",
+        "effective_date": "2025-10-01"
+      }
+    }
+  ],
+  "timings": {
+    "search_ms": 1495.08,
+    "parent_ms": 145.72,
+    "total_ms": 1641.15
+  },
+  "amendments": [
+    {
+      "rank": 1,
+      "score": 0.0,
+      "text": "[CIR-2026-07 | Circular CIR-2026-07 v1.0 | Front matter]\nCircular CIR-2026-07\nNexaHome Loan: Processing Fee Revision and Part-Prepayment Relaxation\n<table><tr><td>Document ID</td><td>CIR-2026-07</td></tr><tr><td>Issued on</td><td>2026-06-15</td></tr><tr><td>Effective from</td><td>2026-07-01</td></tr><tr><td>Amends</td><td>POL-HL-V3 (NexaHome Loan Policy v3.0), clauses 6.2 and 8.3 only</td></tr><tr><td>Issued by</td><td>Retail Credit Policy Committee, NexaBank</td></tr></table>\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 1. Background]\n1.1 Background. The Retail Credit Policy Committee has revised the processing fee and the minimum part prepayment amount for NexaHome Loan. This circular amends two clauses of POL-HL-V3. All other clauses of POL-HL-V3 are unchanged.\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 2. Instrument and precedence]\n2.1 Precedence. For the clauses named in this circular, this circular prevails over POL-HL-V3 from the effective date for the loans covered by clause 5.1 of this circular.\n<table><tr><td>Clause of POL-HL-V3</td><td>Subject</td><td>Status from 2026-07-01</td></tr><tr><td>6.2</td><td>Processing fee</td><td>Replaced by clause 3.1 of this circular</td></tr><tr><td>8.3</td><td>Part prepayment minimum</td><td>Replaced by clause 4.1 of this circular</td></tr></table>\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 3. Revised processing fee]\n3.1 Revised clause 6.2. Processing fee is 0.30% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹10,000, plus GST. The earlier terms were 0.35%, minimum ₹5,000 and maximum ₹15,000.\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 4. Revised part prepayment minimum]\n4.1 Revised clause 8.3. The minimum part prepayment amount is ₹10,000. The earlier minimum was ₹25,000. No charge applies on a floating-rate loan.\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 5. Applicability and grandfathering]\n5.1 Loans covered. The revised processing fee applies only to loans sanctioned on or after 2026-07-01. Loans sanctioned before that date keep the processing fee that applied at sanction, and no refund or adjustment is made.\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 5. Applicability and grandfathering]\n5.2 Existing borrowers and part prepayment. Borrowers whose NexaHome loans were sanctioned under POL-HL-V3 before 2026-07-01 may opt in to the revised ₹10,000 part prepayment minimum by written request to their branch or through a service request. There is no charge for opting in. Until a borrower opts in, the ₹25,000 minimum continues to apply to that loan. Opting in does not change the processing fee already paid.\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 6. Unchanged terms]\n6.1 Terms not affected. Eligibility, interest rate spreads, FOIR limits, LTV, legal and technical charges, penal charges and foreclosure terms in POL-HL-V3 are not affected by this circular.",
+      "parent_text": "[CIR-2026-07 | Circular CIR-2026-07 v1.0 | Front matter]\nCircular CIR-2026-07\nNexaHome Loan: Processing Fee Revision and Part-Prepayment Relaxation\n<table><tr><td>Document ID</td><td>CIR-2026-07</td></tr><tr><td>Issued on</td><td>2026-06-15</td></tr><tr><td>Effective from</td><td>2026-07-01</td></tr><tr><td>Amends</td><td>POL-HL-V3 (NexaHome Loan Policy v3.0), clauses 6.2 and 8.3 only</td></tr><tr><td>Issued by</td><td>Retail Credit Policy Committee, NexaBank</td></tr></table>\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 1. Background]\n1.1 Background. The Retail Credit Policy Committee has revised the processing fee and the minimum part prepayment amount for NexaHome Loan. This circular amends two clauses of POL-HL-V3. All other clauses of POL-HL-V3 are unchanged.\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 2. Instrument and precedence]\n2.1 Precedence. For the clauses named in this circular, this circular prevails over POL-HL-V3 from the effective date for the loans covered by clause 5.1 of this circular.\n<table><tr><td>Clause of POL-HL-V3</td><td>Subject</td><td>Status from 2026-07-01</td></tr><tr><td>6.2</td><td>Processing fee</td><td>Replaced by clause 3.1 of this circular</td></tr><tr><td>8.3</td><td>Part prepayment minimum</td><td>Replaced by clause 4.1 of this circular</td></tr></table>\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 3. Revised processing fee]\n3.1 Revised clause 6.2. Processing fee is 0.30% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹10,000, plus GST. The earlier terms were 0.35%, minimum ₹5,000 and maximum ₹15,000.\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 4. Revised part prepayment minimum]\n4.1 Revised clause 8.3. The minimum part prepayment amount is ₹10,000. The earlier minimum was ₹25,000. No charge applies on a floating-rate loan.\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 5. Applicability and grandfathering]\n5.1 Loans covered. The revised processing fee applies only to loans sanctioned on or after 2026-07-01. Loans sanctioned before that date keep the processing fee that applied at sanction, and no refund or adjustment is made.\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 5. Applicability and grandfathering]\n5.2 Existing borrowers and part prepayment. Borrowers whose NexaHome loans were sanctioned under POL-HL-V3 before 2026-07-01 may opt in to the revised ₹10,000 part prepayment minimum by written request to their branch or through a service request. There is no charge for opting in. Until a borrower opts in, the ₹25,000 minimum continues to apply to that loan. Opting in does not change the processing fee already paid.\n[CIR-2026-07 | Circular CIR-2026-07 v1.0 | 6. Unchanged terms]\n6.1 Terms not affected. Eligibility, interest rate spreads, FOIR limits, LTV, legal and technical charges, penal charges and foreclosure terms in POL-HL-V3 are not affected by this circular.",
+      "citation": {
+        "doc_id": "CIR-2026-07",
+        "title": "Circular CIR-2026-07",
+        "policy_version": "1.0",
+        "clause": null,
+        "effective_date": "2026-07-01"
+      }
+    }
+  ]
+}

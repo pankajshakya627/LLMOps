@@ -1,0 +1,16 @@
+{
+  "page": "slide_09.svg",
+  "page_role": "content",
+  "canvas": {"view_box": [0, 0, 1280, 720], "width": 1280, "height": 720, "png_width": 1280, "png_height": 720},
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [".preview/slide_09.png"],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Show policy filtering before candidate ranking, followed by parent expansion and complete linked amendments.",
+    "render_delivers": true,
+    "note": "Rendered PNG is nonblank at the supplied 1280 × 720 canvas. Six numbered nodes and labeled arrows form a readable continuous path. Node copy fits, the context handoff is emphasized, and diagram, legend, title, and footer remain separated. No Hard or clearly bad Soft rule hits."
+  }
+}

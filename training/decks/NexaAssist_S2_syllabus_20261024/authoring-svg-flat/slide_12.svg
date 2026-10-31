@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><defs><marker id="marrow1" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="2.5" markerHeight="2.5" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2463A6" /></marker></defs><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 409.59 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 409.59 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 472.95 31 L 472.95 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 02 / LINKED EVIDENCE</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 84.33 814.07 61.6" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 84.33 814.07 61.6" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 84.33 L 876.47 84.33 L 876.47 145.93 L 62.4 145.93 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Load the amendment's complete condition</text>
+</g>
+</g>
+<g id="shape-44" data-pptx-object="group" data-pptx-frame="63.2 215 1151.8 427.8" data-pptx-source-ref="slide:44">
+<g id="shape-10" data-pptx-object="group" data-pptx-frame="64 280 330 125" data-pptx-source-ref="slide:10">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 280 330 125" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 280 L 394 280 L 394 405 L 64 405 Z" fill="#E8EDF0" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="82.96 293.67 152.59 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 82.96 293.67 L 235.55 293.67 L 235.55 333.71 L 82.96 333.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="82.96" y="319" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">POL-HL-V3</text>
+</g>
+<g id="shape-8" data-pptx-object="shape" data-pptx-frame="83.2 336 233.41 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:8" data-pptx-semantic-object="shape">
+<path d="M 83.2 336 L 316.61 336 L 316.61 366.8 L 83.2 366.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="83.2" y="356" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">Matched clause 6.2 / fee</text>
+</g>
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="83.2 366 138.89 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 83.2 366 L 222.09 366 L 222.09 396.8 L 83.2 396.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="83.2" y="386" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">Base policy hit</text>
+</g>
+</g>
+<g id="shape-15" data-pptx-object="group" data-pptx-frame="475 280 339.64 125" data-pptx-source-ref="slide:15">
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="475 280 330 125" data-pptx-prst="rect" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 475 280 L 805 280 L 805 405 L 475 405 Z" fill="#132C42" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="493.96 293.67 168.8 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 493.96 293.67 L 662.76 293.67 L 662.76 333.71 L 493.96 333.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="493.96" y="319" text-anchor="start" xml:space="preserve" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">CIR-2026-07</text>
+</g>
+<g id="shape-13" data-pptx-object="shape" data-pptx-frame="494.2 336 237.46 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:13" data-pptx-semantic-object="shape">
+<path d="M 494.2 336 L 731.66 336 L 731.66 366.8 L 494.2 366.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="494.2" y="356" text-anchor="start" xml:space="preserve" font-size="20" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">supersedes: POL-HL-V3</text>
+</g>
+<g id="shape-14" data-pptx-object="shape" data-pptx-frame="494.2 366 320.44 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:14" data-pptx-semantic-object="shape">
+<path d="M 494.2 366 L 814.64 366 L 814.64 396.8 L 494.2 396.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="494.2" y="386" text-anchor="start" xml:space="preserve" font-size="20" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Load complete scoped instrument</text>
+</g>
+</g>
+<g id="shape-19" data-pptx-object="group" data-pptx-frame="915 215 300 100" data-pptx-source-ref="slide:19">
+<g id="shape-16" data-pptx-object="shape" data-pptx-frame="915 215 300 100" data-pptx-prst="rect" data-pptx-source-ref="slide:16" data-pptx-semantic-object="shape">
+<path d="M 915 215 L 1215 215 L 1215 315 L 915 315 Z" fill="#E8EDF0" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-17" data-pptx-object="shape" data-pptx-frame="933.96 226.67 211.64 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:17" data-pptx-semantic-object="shape">
+<path d="M 933.96 226.67 L 1145.6 226.67 L 1145.6 266.71 L 933.96 266.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="933.96" y="252" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">2.1 / Precedence</text>
+</g>
+<g id="shape-18" data-pptx-object="shape" data-pptx-frame="934.2 268 274.49 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:18" data-pptx-semantic-object="shape">
+<path d="M 934.2 268 L 1208.69 268 L 1208.69 298.8 L 934.2 298.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="934.2" y="288" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">Which clauses are replaced?</text>
+</g>
+</g>
+<g id="shape-23" data-pptx-object="group" data-pptx-frame="915 365 300 100" data-pptx-source-ref="slide:23">
+<g id="shape-20" data-pptx-object="shape" data-pptx-frame="915 365 300 100" data-pptx-prst="rect" data-pptx-source-ref="slide:20" data-pptx-semantic-object="shape">
+<path d="M 915 365 L 1215 365 L 1215 465 L 915 465 Z" fill="#E8EDF0" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-21" data-pptx-object="shape" data-pptx-frame="933.96 376.67 210.08 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:21" data-pptx-semantic-object="shape">
+<path d="M 933.96 376.67 L 1144.04 376.67 L 1144.04 416.71 L 933.96 416.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="933.96" y="402" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">3.1 / Revised fee</text>
+</g>
+<g id="shape-22" data-pptx-object="shape" data-pptx-frame="934.2 418 273.41 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:22" data-pptx-semantic-object="shape">
+<path d="M 934.2 418 L 1207.61 418 L 1207.61 448.8 L 934.2 448.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="934.2" y="438" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">Rate + minimum + maximum</text>
+</g>
+</g>
+<g id="shape-27" data-pptx-object="group" data-pptx-frame="915 515 300 100" data-pptx-source-ref="slide:27">
+<g id="shape-24" data-pptx-object="shape" data-pptx-frame="915 515 300 100" data-pptx-prst="rect" data-pptx-source-ref="slide:24" data-pptx-semantic-object="shape">
+<path d="M 915 515 L 1215 515 L 1215 615 L 915 615 Z" fill="#E8EDF0" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-25" data-pptx-object="shape" data-pptx-frame="933.96 526.67 245.31 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:25" data-pptx-semantic-object="shape">
+<path d="M 933.96 526.67 L 1179.27 526.67 L 1179.27 566.71 L 933.96 566.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="933.96" y="552" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">5.1 / Loans covered</text>
+</g>
+<g id="shape-26" data-pptx-object="shape" data-pptx-frame="934.2 568 248.48 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:26" data-pptx-semantic-object="shape">
+<path d="M 934.2 568 L 1182.68 568 L 1182.68 598.8 L 934.2 598.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="934.2" y="588" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">Sanction-date applicability</text>
+</g>
+</g>
+<g id="shape-30" data-pptx-object="group" data-pptx-frame="394 302 81 40" data-pptx-source-ref="slide:30">
+<g id="shape-28" data-pptx-object="shape" data-pptx-frame="394 342 81 0" data-pptx-prst="line" data-pptx-source-ref="slide:28" data-pptx-semantic-object="shape">
+<path d="M 394 342 L 475 342" fill="none" stroke-width="2" stroke="#2463A6" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-29" data-pptx-object="shape" data-pptx-frame="408.2 302 41.68 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:29" data-pptx-semantic-object="shape">
+<path d="M 408.2 302 L 449.88 302 L 449.88 332.8 L 408.2 332.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="408.2" y="322" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">load</text>
+</g>
+</g>
+<g id="shape-33" data-pptx-object="group" data-pptx-frame="805 230 110 75" data-pptx-source-ref="slide:33">
+<g id="shape-31" data-pptx-object="shape" data-pptx-frame="805 265 110 40" data-pptx-prst="line" transform="translate(860 285) scale(1 -1) translate(-860 -285)" data-pptx-source-ref="slide:31" data-pptx-semantic-object="shape">
+<path d="M 805 265 L 915 305" fill="none" stroke-width="2" stroke="#2463A6" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-32" data-pptx-object="shape" data-pptx-frame="818.2 230 65.21 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:32" data-pptx-semantic-object="shape">
+<path d="M 818.2 230 L 883.41 230 L 883.41 260.8 L 818.2 260.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="818.2" y="250" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">priority</text>
+</g>
+</g>
+<g id="shape-36" data-pptx-object="group" data-pptx-frame="805 325 110 90" data-pptx-source-ref="slide:36">
+<g id="shape-34" data-pptx-object="shape" data-pptx-frame="805 342 110 73" data-pptx-prst="line" data-pptx-source-ref="slide:34" data-pptx-semantic-object="shape">
+<path d="M 805 342 L 915 415" fill="none" stroke-width="2" stroke="#2463A6" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-35" data-pptx-object="shape" data-pptx-frame="836.2 325 31.07 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:35" data-pptx-semantic-object="shape">
+<path d="M 836.2 325 L 867.27 325 L 867.27 355.8 L 836.2 355.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="836.2" y="345" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">fee</text>
+</g>
+</g>
+<g id="shape-39" data-pptx-object="group" data-pptx-frame="805 385 110 180" data-pptx-source-ref="slide:39">
+<g id="shape-37" data-pptx-object="shape" data-pptx-frame="805 385 110 180" data-pptx-prst="line" data-pptx-source-ref="slide:37" data-pptx-semantic-object="shape">
+<path d="M 805 385 L 915 565" fill="none" stroke-width="2" stroke="#2463A6" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-38" data-pptx-object="shape" data-pptx-frame="815.2 497 58.17 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:38" data-pptx-semantic-object="shape">
+<path d="M 815.2 497 L 873.37 497 L 873.37 527.8 L 815.2 527.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="815.2" y="517" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">scope</text>
+</g>
+</g>
+<g id="shape-43" data-pptx-object="group" data-pptx-frame="63.2 535 640.99 107.8" data-pptx-source-ref="slide:43">
+<g id="shape-40" data-pptx-object="shape" data-pptx-frame="63.2 535 424.12 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:40" data-pptx-semantic-object="shape">
+<path d="M 63.2 535 L 487.32 535 L 487.32 565.8 L 63.2 565.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.2" y="555" text-anchor="start" xml:space="preserve" font-size="20" fill="#132C42" data-pptx-text-baseline="metrics-v1">A fee quote without applicability can mislead.</text>
+</g>
+<g id="shape-41" data-pptx-object="shape" data-pptx-frame="63.2 579 640.99 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:41" data-pptx-semantic-object="shape">
+<path d="M 63.2 579 L 704.19 579 L 704.19 609.8 L 63.2 609.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.2" y="599" text-anchor="start" xml:space="preserve" font-size="20" fill="#526375" data-pptx-text-baseline="metrics-v1">Selected clauses are shown; production loads the whole instrument.</text>
+</g>
+<g id="shape-42" data-pptx-object="shape" data-pptx-frame="63.2 612 518.32 30.8" data-pptx-prst="rect" data-pptx-source-ref="slide:42" data-pptx-semantic-object="shape">
+<path d="M 63.2 612 L 581.52 612 L 581.52 642.8 L 63.2 642.8 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.2" y="632" text-anchor="start" xml:space="preserve" font-size="20" fill="#526375" data-pptx-text-baseline="metrics-v1">The link query follows metadata, not the similarity rank.</text>
+</g>
+</g>
+</g>
+<g id="shape-47" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:47">
+<g id="shape-45" data-pptx-object="shape" data-pptx-frame="63.36 665 810.855 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:45" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 874.215 665 L 874.215 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 03, 05, 12 / Concept + inspected local implementation; sources in notes</text>
+</g>
+<g id="shape-46" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:46" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">12/16</text>
+</g>
+</g></svg>

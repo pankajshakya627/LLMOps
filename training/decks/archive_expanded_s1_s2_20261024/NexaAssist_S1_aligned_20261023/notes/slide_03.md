@@ -1,0 +1,1 @@
+25 min concepts + 20 min code walkthrough 90 min pair labs, including a 10 min break 25 min gate review + 20 min recap Pairs alternate driver and reviewer roles. Use the handout to capture predictions, observed results and evidence for each gate.

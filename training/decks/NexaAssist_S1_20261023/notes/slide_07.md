@@ -1,0 +1,1 @@
+Discover → permitted data and defined problem Distill → measured evidence and answer quality Deploy → measured SLOs; Deliver → rollback decisions Paraphrase the lifecycle as a sequence of engineering decisions. Our local gate numbers are teaching placeholders rather than approved production targets. The implementation or concept reference is Educative: 4D framework.

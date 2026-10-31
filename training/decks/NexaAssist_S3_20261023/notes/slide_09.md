@@ -1,0 +1,1 @@
+Retrieve and budget evidence → generate draft Check output PII → check IDs, markers and exact quotes Return supported response, repair once or abstain A clarification uses a fixed safe scope question. Citation failure allows one repair, while detected PII returns the existing safe abstention immediately. The implementation or concept reference is app/chains/answer.py.

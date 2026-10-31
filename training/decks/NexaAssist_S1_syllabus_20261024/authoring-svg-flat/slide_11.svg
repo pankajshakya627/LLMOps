@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 528.919 25.6" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 528.919 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 592.279 31 L 592.279 56.6 L 63.36 56.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 01 / EVALUATION OPERATIONS</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 83 847.335 64" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 83 847.335 64" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 83 L 909.735 83 L 909.735 147 L 62.4 147 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">EvalOps / freeze a trustworthy baseline</text>
+</g>
+</g>
+<g id="shape-10" data-pptx-object="group" data-pptx-frame="64 215 1152 250" data-pptx-source-ref="slide:10">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 215 1152 250" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 215 L 1216 215 L 1216 465 L 64 465 Z" fill="#132C42" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="87.2 254 1050 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 87.2 254 L 1137.2 254 L 1137.2 295.6 L 87.2 295.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.2" y="280" text-anchor="start" xml:space="preserve" font-family="Arial, sans-serif" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Dataset: input + expected_output + context + expected_status</text>
+</g>
+<g id="shape-8" data-pptx-object="shape" data-pptx-frame="87.2 297 700.525 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:8" data-pptx-semantic-object="shape">
+<path d="M 87.2 297 L 787.725 297 L 787.725 338.6 L 87.2 338.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.2" y="323" text-anchor="start" xml:space="preserve" font-family="Arial, sans-serif" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Cases: normal, refusal, date boundary, adversarial</text>
+</g>
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="87.2 340 731.91 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 87.2 340 L 819.11 340 L 819.11 381.6 L 87.2 381.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.2" y="366" text-anchor="start" xml:space="preserve" font-family="Arial, sans-serif" font-size="26" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">Compare: same dataset, rubric and release identities</text>
+</g>
+</g>
+<g id="shape-13" data-pptx-object="group" data-pptx-frame="62.96 511 948.51 84.6" data-pptx-source-ref="slide:13">
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="62.96 511 768.079 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 62.96 511 L 831.039 511 L 831.039 552.6 L 62.96 552.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="537" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Reference checks + a calibrated judge + human review.</text>
+</g>
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="62.96 554 948.51 41.6" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 62.96 554 L 1011.47 554 L 1011.47 595.6 L 62.96 595.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="580" text-anchor="start" xml:space="preserve" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">Record disagreements; keep candidate tuning apart from the holdout.</text>
+</g>
+</g>
+<g id="shape-16" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:16">
+<g id="shape-14" data-pptx-object="shape" data-pptx-frame="63.36 665 810.832 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:14" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 874.192 665 L 874.192 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 03, 05, 11 / Concept + inspected local implementation; sources in notes</text>
+</g>
+<g id="shape-15" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:15" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">11/16</text>
+</g>
+</g></svg>

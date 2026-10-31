@@ -1,0 +1,30 @@
+{
+  "findings": [
+    {
+      "finding": "Later circular can supersede another circular",
+      "classification": "valid and actionable",
+      "fix": "Traverse new circular IDs until none remain, tracking visited IDs",
+      "test": "test_amendments_follow_links_until_no_new_instrument_remains"
+    },
+    {
+      "finding": "Per-chunk date filtering can hide a condition and return a partial instrument",
+      "classification": "valid and actionable",
+      "fix": "Load all stored parts by institution/document/version and reject inconsistent source metadata before returning text",
+      "test": "test_inconsistent_circular_fails_closed_instead_of_returning_a_partial_instrument"
+    },
+    {
+      "finding": "Same document/version with mixed products can be joined when product is not selected",
+      "classification": "valid and actionable",
+      "fix": "Reject inconsistent product metadata across instrument parts instead of combining them",
+      "test": "test_inconsistent_circular_fails_closed_instead_of_returning_a_partial_instrument[product_id-NEXA-PL]"
+    },
+    {
+      "finding": "Model-written clarification can contain an unsupported policy claim in words",
+      "classification": "valid and actionable",
+      "fix": "Return a fixed scope question instead of forwarding model clarification text",
+      "test": "test_clarification_uses_a_fixed_scope_question_without_model_policy_claims"
+    }
+  ],
+  "red_result": "8 failures before fixes",
+  "green_result": "119 application tests passed; no CLI rerun after fixes"
+}

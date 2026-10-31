@@ -1,0 +1,1 @@
+Submit chunk experiment and checksum explanation. Report recall/MRR and categorize every missing reference. Live scores remain unmeasured until the live lab runs. Use the owner-approved threshold for a real release. For the offline class, pass by explaining the measurements and their limitations rather than claiming live recall.

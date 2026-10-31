@@ -1,0 +1,67 @@
+{
+  "marker": "SYSTEM-UAT-1792571663350",
+  "results": [
+    {
+      "name": "blank_question_no_turn",
+      "result": "pass"
+    },
+    {
+      "name": "browser_live_answer",
+      "result": "pass",
+      "detail": {
+        "wall_ms": 3821
+      }
+    },
+    {
+      "name": "browser_citations_visible",
+      "result": "pass"
+    },
+    {
+      "name": "quality_cards_stay_hidden",
+      "result": "pass"
+    },
+    {
+      "name": "one_submit_one_retrieval",
+      "result": "pass",
+      "detail": {
+        "before": 19,
+        "after": 20
+      }
+    },
+    {
+      "name": "browser_feedback_persisted",
+      "result": "pass",
+      "detail": {
+        "feedback_id": "aeae4094-e8df-4676-8172-99d0669d4c07",
+        "span_id": "9786084634429961595"
+      }
+    },
+    {
+      "name": "new_chat_is_empty",
+      "result": "pass"
+    },
+    {
+      "name": "second_browser_has_no_first_users_chat",
+      "result": "pass"
+    },
+    {
+      "name": "second_browser_has_independent_filters",
+      "result": "pass"
+    },
+    {
+      "name": "reopened_chat_keeps_saved_feedback",
+      "result": "pass"
+    },
+    {
+      "name": "reopen_does_not_regenerate",
+      "result": "pass"
+    },
+    {
+      "name": "browser_journey_completion",
+      "result": "fail",
+      "detail": {
+        "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('option', { name: 'rejected', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <div data-rac=\"\" data-key=\"1\" role=\"option\" aria-selected=\"false\" data-selection-mode=\"single\" data-react-aria-pressable=\"true\" id=\"react-aria7372424598-:r70:-option-1\" class=\"st-emotion-cache-1e9hxme e1oobldh7\" data-collection=\"react-aria7372424598-:rc6:\">…</div>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is not stable\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m  - element was detached from the DOM, retrying\u001b[22m\n"
+      }
+    }
+  ]
+}

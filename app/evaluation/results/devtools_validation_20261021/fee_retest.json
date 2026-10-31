@@ -1,0 +1,47 @@
+{
+  "started_at": "2026-10-21T08:48:44.053306+00:00",
+  "request": {
+    "query": "What is the current processing fee for a NexaHome Loan?",
+    "as_of": "2026-10-01",
+    "product_id": "NEXA-HL",
+    "top_k": 5
+  },
+  "http_status": 200,
+  "wall_ms": 7066.1,
+  "response": {
+    "as_of": "2026-10-01",
+    "status": "answered",
+    "answer": "The processing fee is 0.35% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹15,000, plus GST [1]. GST is 18% and is charged additionally [1].",
+    "citations": [
+      {
+        "evidence_id": 1,
+        "quote": "6.2 Processing fee. Processing fee is 0.35% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹15,000, plus GST.",
+        "matched_child": {
+          "doc_id": "POL-HL-V3",
+          "title": "NexaHome Loan Policy",
+          "policy_version": "3.0",
+          "clause": "6.2",
+          "effective_date": "2025-10-01"
+        }
+      },
+      {
+        "evidence_id": 1,
+        "quote": "6.1 General. All fees are exclusive of GST at 18%, which is charged additionally.",
+        "matched_child": {
+          "doc_id": "POL-HL-V3",
+          "title": "NexaHome Loan Policy",
+          "policy_version": "3.0",
+          "clause": "6.2",
+          "effective_date": "2025-10-01"
+        }
+      }
+    ],
+    "retrieval_timings": {
+      "search_ms": 1412.61,
+      "parent_ms": 36.92,
+      "total_ms": 1449.78
+    },
+    "generation_ms": 5606.93,
+    "datadog_span_id": "4752631142160564679"
+  }
+}

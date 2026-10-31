@@ -1,0 +1,1 @@
+What changed and which artifacts produced the answer. Which measured gates passed, failed or remain unknown. Who can approve release and who can restore service. A release file is evidence for a decision, not a decorative checklist. Any missing identifier or unmeasured target stays visible.

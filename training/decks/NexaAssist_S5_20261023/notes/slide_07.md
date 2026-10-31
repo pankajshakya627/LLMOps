@@ -1,0 +1,1 @@
+Sampling answered requests adds model cost. The current judge uses cited quotes as its context. This is a grounding proxy with limited observation. A low sample count can miss failures. A quoted passage may omit other retrieved context, so do not call the proxy an exhaustive hallucination detector. The implementation or concept reference is app/services/evaluation.py.

@@ -1,0 +1,29 @@
+{
+  "page": "slide_13.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "ok",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_13.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "Separate single-source hit rate, multi-reference recall and the rank information MRR adds.",
+    "render_delivers": true,
+    "note": "The three metric distinctions are present in aligned text blocks with ample separation. Title, body and chrome are readable and inside the canvas."
+  }
+}

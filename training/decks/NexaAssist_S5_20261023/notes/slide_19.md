@@ -1,0 +1,1 @@
+Tool access needs permissions and an allowlist. Loops need iteration, time and cost bounds. Side effects need isolation, audit and recovery. Agents are future scope here. The existing read-only RAG assistant does not become an agent merely because the course discusses tool loops. The implementation or concept reference is Educative: Future Directions in LLMOps.

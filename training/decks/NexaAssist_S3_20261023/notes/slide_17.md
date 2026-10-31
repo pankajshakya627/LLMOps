@@ -1,0 +1,1 @@
+Copy the JSONL dataset into /tmp. Add answer, abstention and clarification examples. Validate with load_golden; review the actual source clauses. Do not automatically translate refusal or prompt-injection categories. The correct expected status depends on the meaning of each input and must be reviewed. The implementation or concept reference is training/session3/handout.md.

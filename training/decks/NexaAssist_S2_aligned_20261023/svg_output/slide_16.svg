@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="ending" font-family="Arial">
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#132C42"/>
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#BBCBD7">NEXAASSIST / SESSION 02 / EXIT GATE</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#FFFFFF">Session 2 / evidence exit gate</text></g>
+<g id="storage" data-pptx-bounds="64 210 1152 105"><rect x="64" y="215" width="5" height="64" fill="#2463A6"/><text x="92" y="247" font-size="26" fill="#FFFFFF">Show a stable child ID and a compatible parent scope.</text></g>
+<g id="evidence" data-pptx-bounds="64 350 1152 105"><rect x="64" y="355" width="5" height="64" fill="#2463A6"/><text x="92" y="387" font-size="26" fill="#FFFFFF">Find fee plus applicability; report missing references.</text></g>
+<g id="submit" data-pptx-bounds="64 490 1152 105"><rect x="64" y="495" width="5" height="64" fill="#2463A6"/><text x="92" y="527" font-size="26" fill="#FFFFFF">Submit recall/MRR evidence and unresolved live checks.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#BBCBD7"><text x="64" y="681">Next / Control what generation may claim</text><text x="1150" y="681">16/16</text></g>
+</svg>

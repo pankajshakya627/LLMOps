@@ -1,0 +1,245 @@
+[
+  {
+    "lesson": 1,
+    "title": "What Is LLMOps, and Why Does It Exist?",
+    "url": "https://www.educative.io/courses/llmops/what-is-llmops-and-why-does-it-exist",
+    "session": 1,
+    "slides": [
+      2
+    ]
+  },
+  {
+    "lesson": 2,
+    "title": "How We Reached LLMOps",
+    "url": "https://www.educative.io/courses/llmops/how-we-reached-llmops",
+    "session": 1,
+    "slides": [
+      3
+    ]
+  },
+  {
+    "lesson": 3,
+    "title": "MLOps to LLMOps: What Changes and What Stays",
+    "url": "https://www.educative.io/courses/llmops/mlops-to-llmops-what-changes-and-what-stays",
+    "session": 1,
+    "slides": [
+      4
+    ]
+  },
+  {
+    "lesson": 4,
+    "title": "The 4D Framework (Discover, Distill, Deploy, Deliver)",
+    "url": "https://www.educative.io/courses/llmops/the-4d-framework-discover-distill-deploy-deliver",
+    "session": 1,
+    "slides": [
+      5
+    ]
+  },
+  {
+    "lesson": 5,
+    "title": "Architecture of a Retrieval-Augmented Generation Application",
+    "url": "https://www.educative.io/courses/llmops/architecture-of-a-retrieval-augmented-generation-application",
+    "session": 1,
+    "slides": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "lesson": 6,
+    "title": "Scoping and Planning a Production RAG Application",
+    "url": "https://www.educative.io/courses/llmops/scoping-and-planning-a-production-rag-application",
+    "session": 1,
+    "slides": [
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "lesson": 7,
+    "title": "Data Foundations for LLMOps",
+    "url": "https://www.educative.io/courses/llmops/data-foundations-for-llmops",
+    "session": 2,
+    "slides": [
+      3,
+      4
+    ]
+  },
+  {
+    "lesson": 8,
+    "title": "Embeddings, Vector Storage, and Evaluation",
+    "url": "https://www.educative.io/courses/llmops/embeddings-vector-storage-and-evaluation",
+    "session": 2,
+    "slides": [
+      5,
+      6,
+      13
+    ]
+  },
+  {
+    "lesson": 9,
+    "title": "Prompt Engineering and Prompt Life Cycle Management",
+    "url": "https://www.educative.io/courses/llmops/prompt-engineering-and-prompt-life-cycle-management",
+    "session": 3,
+    "slides": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ]
+  },
+  {
+    "lesson": 10,
+    "title": "Evaluation of LLM Outputs: Metrics, Tests, and Human Feedback",
+    "url": "https://www.educative.io/courses/llmops/evaluation-of-llm-outputs-metrics-tests-and-human-feedback",
+    "session": 3,
+    "slides": [
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34
+    ]
+  },
+  {
+    "lesson": 11,
+    "title": "Security, Compliance, and Responsible Operation in LLMOps",
+    "url": "https://www.educative.io/courses/llmops/security-compliance-and-responsible-operation-in-llmops",
+    "session": 4,
+    "slides": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ]
+  },
+  {
+    "lesson": 12,
+    "title": "Inference Infrastructure: Hardware, Economics, and Latency",
+    "url": "https://www.educative.io/courses/llmops/inference-infrastructure-hardware-economics-and-latency",
+    "session": 4,
+    "slides": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
+    ]
+  },
+  {
+    "lesson": 13,
+    "title": "Hosting, Serving, and Scaling LLMs in Production",
+    "url": "https://www.educative.io/courses/llmops/hosting-serving-and-scaling-llms-in-production",
+    "session": 4,
+    "slides": [
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ]
+  },
+  {
+    "lesson": 14,
+    "title": "Orchestration and Application Logic",
+    "url": "https://www.educative.io/courses/llmops/orchestration-and-application-logic",
+    "session": 5,
+    "slides": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  {
+    "lesson": 15,
+    "title": "Quality, Human-in-the-Loop, and Governance Systems",
+    "url": "https://www.educative.io/courses/llmops/quality-human-in-the-loop-and-governance-systems",
+    "session": 5,
+    "slides": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ]
+  },
+  {
+    "lesson": 16,
+    "title": "Future Directions in LLMOps",
+    "url": "https://www.educative.io/courses/llmops/future-directions-in-llmops",
+    "session": 5,
+    "slides": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38
+    ]
+  }
+]

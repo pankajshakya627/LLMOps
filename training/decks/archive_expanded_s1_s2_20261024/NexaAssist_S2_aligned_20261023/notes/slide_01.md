@@ -1,0 +1,1 @@
+Data foundations, embeddings and retrieval Session 2 of 5 · 3 hours · source-aligned workshop Start from the Session 1 contract. Today each pair explains chunk boundaries, demonstrates incremental ingestion and separates retrieval misses from generation problems. This revised deck follows the course lesson sequence; exact lesson URLs appear in section notes and the coverage map.

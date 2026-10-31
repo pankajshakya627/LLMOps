@@ -1,0 +1,371 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Disposable NexaAssist lab. No inbound ports; connect using SSM. All session data is deleted at expiry.
+Parameters:
+  Ami:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64
+  InstanceType:
+    Type: String
+    Default: t3.xlarge
+    AllowedValues: [t3.large, t3.xlarge]
+  SessionMinutes:
+    Type: Number
+    Default: 120
+    AllowedValues: [60, 120]
+  ExpiresAt:
+    Type: String
+    Description: UTC YYYY-MM-DDTHH:mm:ss; set once at session creation, never extend during updates.
+    AllowedPattern: '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}'
+  BoundaryArn:
+    Type: String
+  ModelResources:
+    Type: CommaDelimitedList
+    Description: Exact approved Bedrock model/profile ARNs, including Titan and any cross-Region destination models.
+    AllowedPattern: 'arn:aws:bedrock:[a-z0-9-]+:[0-9]{0,12}:(foundation-model|inference-profile|application-inference-profile)/[A-Za-z0-9._:/-]+'
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.83.0.0/24
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags: [{Key: Session, Value: !Ref 'AWS::StackName'}]
+  Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.83.0.0/26
+      MapPublicIpOnLaunch: true
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+  GatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref InternetGateway
+  RouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+  Route:
+    Type: AWS::EC2::Route
+    DependsOn: GatewayAttachment
+    Properties:
+      RouteTableId: !Ref RouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+  RouteAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref Subnet
+      RouteTableId: !Ref RouteTable
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Outbound only; no SSH or public application ports
+      VpcId: !Ref Vpc
+      SecurityGroupEgress:
+        - IpProtocol: '-1'
+          CidrIp: 0.0.0.0/0
+  Artifacts:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub '${AWS::StackName}-${AWS::AccountId}-${AWS::Region}'
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+      VersioningConfiguration: {Status: Enabled}
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: AbandonedUploads
+            Status: Enabled
+            AbortIncompleteMultipartUpload: {DaysAfterInitiation: 1}
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref Artifacts
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Deny
+            Principal: '*'
+            Action: s3:*
+            Resource: [!GetAtt Artifacts.Arn, !Sub '${Artifacts.Arn}/*']
+            Condition: {Bool: {'aws:SecureTransport': false}}
+  AppRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Sub '${AWS::StackName}/app'
+      ImageTagMutability: IMMUTABLE
+      EmptyOnDelete: true
+      ImageScanningConfiguration: {ScanOnPush: true}
+  GatewayRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Sub '${AWS::StackName}/gateway'
+      ImageTagMutability: IMMUTABLE
+      EmptyOnDelete: true
+      ImageScanningConfiguration: {ScanOnPush: true}
+  GuardrailsRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Sub '${AWS::StackName}/guardrails'
+      ImageTagMutability: IMMUTABLE
+      EmptyOnDelete: true
+      ImageScanningConfiguration: {ScanOnPush: true}
+  SessionSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: !Sub '${AWS::StackName}/runtime'
+      GenerateSecretString:
+        PasswordLength: 96
+        ExcludePunctuation: true
+  Guardrail:
+    Type: AWS::Bedrock::Guardrail
+    Properties:
+      Name: !Sub '${AWS::StackName}-content'
+      BlockedInputMessaging: Input blocked by lab policy.
+      BlockedOutputsMessaging: Output blocked by lab policy.
+      ContentPolicyConfig:
+        FiltersConfig:
+          - {Type: HATE, InputStrength: HIGH, OutputStrength: HIGH}
+          - {Type: SEXUAL, InputStrength: HIGH, OutputStrength: HIGH}
+          - {Type: VIOLENCE, InputStrength: HIGH, OutputStrength: HIGH}
+          - {Type: PROMPT_ATTACK, InputStrength: HIGH, OutputStrength: NONE}
+      SensitiveInformationPolicyConfig:
+        PiiEntitiesConfig:
+          - {Type: EMAIL, Action: BLOCK}
+          - {Type: PHONE, Action: BLOCK}
+  GuardrailVersion:
+    Type: AWS::Bedrock::GuardrailVersion
+    Properties:
+      GuardrailIdentifier: !GetAtt Guardrail.GuardrailId
+      Description: Fixed session policy
+  Logs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/nexaassist/${AWS::StackName}'
+      RetentionInDays: 1
+  HostRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${AWS::StackName}-host'
+      PermissionsBoundary: !Ref BoundaryArn
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: {Service: ec2.amazonaws.com}
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: session
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: [ssm:UpdateInstanceInformation, ssmmessages:CreateControlChannel, ssmmessages:CreateDataChannel, ssmmessages:OpenControlChannel, ssmmessages:OpenDataChannel, ec2messages:AcknowledgeMessage, ec2messages:DeleteMessage, ec2messages:FailMessage, ec2messages:GetEndpoint, ec2messages:GetMessages, ec2messages:SendReply, ecr:GetAuthorizationToken]
+                Resource: '*'
+              - Effect: Allow
+                Action: [ecr:BatchCheckLayerAvailability, ecr:GetDownloadUrlForLayer, ecr:BatchGetImage]
+                Resource: [!GetAtt AppRepository.Arn, !GetAtt GatewayRepository.Arn, !GetAtt GuardrailsRepository.Arn]
+              - Effect: Allow
+                Action: s3:ListBucket
+                Resource: !GetAtt Artifacts.Arn
+              - Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub '${Artifacts.Arn}/releases/*'
+              - Effect: Allow
+                Action: s3:PutObject
+                Resource: !Sub '${Artifacts.Arn}/reports/*'
+              - Effect: Allow
+                Action: secretsmanager:GetSecretValue
+                Resource: !Ref SessionSecret
+              - Effect: Allow
+                Action: [bedrock:InvokeModel, bedrock:InvokeModelWithResponseStream]
+                Resource: !Ref ModelResources
+              - Effect: Allow
+                Action: bedrock:ApplyGuardrail
+                Resource: !GetAtt Guardrail.GuardrailArn
+              - Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !Sub '${Logs.Arn}'
+  HostProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      InstanceProfileName: !Sub '${AWS::StackName}-host'
+      Roles: [!Ref HostRole]
+  Host:
+    Type: AWS::EC2::Instance
+    DependsOn: [Route, RouteAssociation]
+    Properties:
+      ImageId: !Ref Ami
+      InstanceType: !Ref InstanceType
+      IamInstanceProfile: !Ref HostProfile
+      SubnetId: !Ref Subnet
+      SecurityGroupIds: [!Ref SecurityGroup]
+      InstanceInitiatedShutdownBehavior: terminate
+      MetadataOptions: {HttpTokens: required, HttpPutResponseHopLimit: 2}
+      CreditSpecification: {CPUCredits: standard}
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs: {VolumeSize: 40, VolumeType: gp3, Encrypted: true, DeleteOnTermination: true}
+      Tags:
+        - {Key: Name, Value: !Ref 'AWS::StackName'}
+        - {Key: Session, Value: !Ref 'AWS::StackName'}
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          set -euo pipefail
+          # Independent compute stop if the scheduled stack cleanup fails.
+          shutdown -h +${SessionMinutes}
+          dnf install -y docker awscli-2
+          systemctl enable --now docker amazon-ssm-agent
+          mkdir -p /opt/nexaassist /usr/local/lib/docker/cli-plugins
+          cd /tmp
+          curl --fail --location --retry 3 -o docker-compose-linux-x86_64 https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64
+          curl --fail --location --retry 3 -o compose.sha256 https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64.sha256
+          sha256sum --check compose.sha256
+          install -m 755 docker-compose-linux-x86_64 /usr/local/lib/docker/cli-plugins/docker-compose
+          # Bounded container logs and CloudWatch collection using the EC2 role.
+          cat > /etc/docker/daemon.json <<'JSON'
+          {"log-driver":"awslogs","log-opts":{"awslogs-region":"${AWS::Region}","awslogs-group":"/nexaassist/${AWS::StackName}","awslogs-create-group":"false","mode":"non-blocking","max-buffer-size":"1m"}}
+          JSON
+          systemctl restart docker
+          touch /opt/nexaassist/host-ready
+  CleanupRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${AWS::StackName}-cleanup'
+      PermissionsBoundary: !Ref BoundaryArn
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: {Service: lambda.amazonaws.com}
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: cleanup
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: [s3:ListBucketVersions, s3:ListBucketMultipartUploads, s3:ListBucket]
+                Resource: !GetAtt Artifacts.Arn
+              - Effect: Allow
+                Action: [s3:DeleteObjectVersion, s3:DeleteObject, s3:AbortMultipartUpload]
+                Resource: !Sub '${Artifacts.Arn}/*'
+              - Effect: Allow
+                Action: cloudformation:DeleteStack
+                Resource: !Ref 'AWS::StackId'
+              - Effect: Allow
+                Action: ec2:TerminateInstances
+                Resource: !Sub 'arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/${Host}'
+              - Effect: Allow
+                Action: ec2:DescribeInstances
+                Resource: '*'
+              - Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !Sub '${CleanupLogs.Arn}'
+  CleanupLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${AWS::StackName}-cleanup'
+      RetentionInDays: 1
+  Cleanup:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-cleanup'
+      Runtime: python3.13
+      Handler: index.handler
+      Timeout: 180
+      Role: !GetAtt CleanupRole.Arn
+      Environment:
+        Variables:
+          BUCKET: !Ref Artifacts
+          STACK: !Ref 'AWS::StackId'
+          INSTANCE: !Ref Host
+      Code:
+        ZipFile: |
+          import os
+          import boto3
+          from botocore.exceptions import ClientError, WaiterError
+
+          def handler(event, context):
+              if event.get('operation') != 'destroy':
+                  raise ValueError('Explicit destroy operation required')
+              ec2 = boto3.client('ec2')
+              try:
+                  ec2.terminate_instances(InstanceIds=[os.environ['INSTANCE']])
+                  ec2.get_waiter('instance_terminated').wait(
+                      InstanceIds=[os.environ['INSTANCE']],
+                      WaiterConfig={'Delay': 5, 'MaxAttempts': 24})
+              except (ClientError, WaiterError) as error:
+                  response = error.response if isinstance(error, ClientError) else error.last_response
+                  if response.get('Error', {}).get('Code') != 'InvalidInstanceID.NotFound':
+                      raise
+              # This function can only empty its own lab bucket and delete its own stack.
+              s3 = boto3.client('s3')
+              bucket = os.environ['BUCKET']
+              for page in s3.get_paginator('list_object_versions').paginate(Bucket=bucket):
+                  objects = [{'Key': x['Key'], 'VersionId': x['VersionId']}
+                             for x in page.get('Versions', []) + page.get('DeleteMarkers', [])]
+                  for start in range(0, len(objects), 1000):
+                      result = s3.delete_objects(Bucket=bucket, Delete={'Objects': objects[start:start+1000]})
+                      if result.get('Errors'):
+                          raise RuntimeError('Bucket cleanup incomplete; retry after stopping uploads')
+              for page in s3.get_paginator('list_multipart_uploads').paginate(Bucket=bucket):
+                  for upload in page.get('Uploads', []):
+                      s3.abort_multipart_upload(Bucket=bucket, Key=upload['Key'], UploadId=upload['UploadId'])
+              boto3.client('cloudformation').delete_stack(StackName=os.environ['STACK'])
+              return {'status': 'success', 'summary': 'Session deletion requested',
+                      'next_actions': ['Wait for DELETE_COMPLETE; inspect DELETE_FAILED events'],
+                      'artifacts': [os.environ['STACK']]}
+  SchedulerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${AWS::StackName}-expiry'
+      PermissionsBoundary: !Ref BoundaryArn
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: {Service: scheduler.amazonaws.com}
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals: {'aws:SourceAccount': !Ref 'AWS::AccountId'}
+      Policies:
+        - PolicyName: expiry
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: lambda:InvokeFunction
+                Resource: !GetAtt Cleanup.Arn
+  Expiry:
+    Type: AWS::Scheduler::Schedule
+    Properties:
+      Name: !Sub '${AWS::StackName}-expiry'
+      ScheduleExpression: !Sub 'at(${ExpiresAt})'
+      ScheduleExpressionTimezone: UTC
+      FlexibleTimeWindow: {Mode: 'OFF'}
+      Target:
+        Arn: !GetAtt Cleanup.Arn
+        RoleArn: !GetAtt SchedulerRole.Arn
+        Input: '{"operation":"destroy"}'
+        RetryPolicy: {MaximumEventAgeInSeconds: 3600, MaximumRetryAttempts: 3}
+Outputs:
+  InstanceId: {Value: !Ref Host}
+  Bucket: {Value: !Ref Artifacts}
+  AppRepository: {Value: !GetAtt AppRepository.RepositoryUri}
+  GatewayRepository: {Value: !GetAtt GatewayRepository.RepositoryUri}
+  GuardrailsRepository: {Value: !GetAtt GuardrailsRepository.RepositoryUri}
+  SecretArn: {Value: !Ref SessionSecret}
+  GuardrailId: {Value: !GetAtt Guardrail.GuardrailId}
+  GuardrailVersion: {Value: !GetAtt GuardrailVersion.Version}
+  CleanupFunction: {Value: !Ref Cleanup}
+  ExpiresAt: {Value: !Ref ExpiresAt}

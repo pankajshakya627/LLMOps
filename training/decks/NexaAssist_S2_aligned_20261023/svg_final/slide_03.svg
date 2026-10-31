@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#2463A6" /></marker></defs>
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text x="64" y="47" font-size="16" fill="#526375">NEXAASSIST / SESSION 02 / INGESTION ARCHITECTURE</text></g>
+<g id="page-title" fill="#132C42" data-pptx-bounds="64 76 1152 120"><text x="64" y="123" font-family="Trebuchet MS" font-size="40">Ingestion / prepare evidence before embedding</text></g>
+<g id="diagram-root" data-pptx-bounds="64 205 1152 440" fill="#132C42">
+<g id="node-verify"><rect x="64" y="235" width="330" height="110" fill="#E8EDF0" /><text x="84" y="272" font-size="26">1 / Verify register</text><text x="84" y="307" font-size="20">Authority + source SHA-256</text></g>
+<g id="node-parse"><rect x="475" y="235" width="330" height="110" fill="#E8EDF0" /><text x="495" y="272" font-size="26">2 / Parse layout</text><text x="495" y="307" font-size="20">Headings, text and tables</text></g>
+<g id="node-chunk"><rect x="886" y="235" width="330" height="110" fill="#E8EDF0" /><text x="906" y="272" font-size="26">3 / Chunk clauses</text><text x="906" y="307" font-size="20">Stable IDs + parent links</text></g>
+<g id="node-redact"><rect x="886" y="460" width="330" height="110" fill="#E8EDF0" /><text x="906" y="497" font-size="26">4 / Redact + hash</text><text x="906" y="532" font-size="20">Before embedding disclosure</text></g>
+<g id="node-compare"><rect x="475" y="460" width="330" height="110" fill="#E8EDF0" /><text x="495" y="497" font-size="26">5 / Compare + embed</text><text x="495" y="532" font-size="20">Changed children only</text></g>
+<g id="node-upsert"><rect x="64" y="460" width="330" height="110" /><text x="84" y="497" font-size="26" fill="#FFFFFF">6 / Upsert stores</text><text x="84" y="532" font-size="20" fill="#FFFFFF">Child vectors + parent text</text></g>
+<g id="edge-verify-parse"><line x1="394" y1="290" x2="475" y2="290" stroke="#2463A6" stroke-width="2" marker-end="url(#arrow)" /><text x="408" y="273" font-size="20">load</text></g>
+<g id="edge-parse-chunk"><line x1="805" y1="290" x2="886" y2="290" stroke="#2463A6" stroke-width="2" marker-end="url(#arrow)" /><text x="818" y="273" font-size="20">split</text></g>
+<g id="edge-chunk-redact"><line x1="1051" y1="345" x2="1051" y2="460" stroke="#2463A6" stroke-width="2" marker-end="url(#arrow)" /><text x="1067" y="405" font-size="20">protect</text></g>
+<g id="edge-redact-compare"><line x1="886" y1="515" x2="805" y2="515" stroke="#2463A6" stroke-width="2" marker-end="url(#arrow)" /><text x="814" y="445" font-size="20">check</text></g>
+<g id="edge-compare-upsert"><line x1="475" y1="515" x2="394" y2="515" stroke="#2463A6" stroke-width="2" marker-end="url(#arrow)" /><text x="408" y="445" font-size="20">write</text></g>
+<g id="diagram-legend"><text x="64" y="625" font-size="20" fill="#526375">Numbers show execution order. Parent sections are stored without embeddings.</text></g>
+</g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" font-size="16" fill="#526375"><text x="64" y="681">Educative L07 / app/chains/ingestion.py + app/services/ingestion.py</text><text x="1150" y="681">03/16</text></g>
+</svg>

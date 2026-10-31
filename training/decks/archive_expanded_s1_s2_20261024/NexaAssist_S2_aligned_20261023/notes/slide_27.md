@@ -1,0 +1,1 @@
+Run: python -m training.session2.recall Compare k=1, k=3 and k=5. Explain the two-clause fee case and linked amendment. These hand-authored hits exercise the real scoring function. They are scenario data, not reference scores from a live Atlas run. Source lesson: https://www.educative.io/courses/llmops/embeddings-vector-storage-and-evaluation.

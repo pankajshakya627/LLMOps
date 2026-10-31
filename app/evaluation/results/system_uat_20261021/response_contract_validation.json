@@ -1,0 +1,122 @@
+[
+  {
+    "id": "U01",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "answered",
+    "http_status": 200,
+    "wall_ms": 7557.25
+  },
+  {
+    "id": "U02",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "answered",
+    "http_status": 200,
+    "wall_ms": 9132.38
+  },
+  {
+    "id": "U03",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "answered",
+    "http_status": 200,
+    "wall_ms": 4838.69
+  },
+  {
+    "id": "U04",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "answered",
+    "http_status": 200,
+    "wall_ms": 5051.32
+  },
+  {
+    "id": "U05",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "answered",
+    "http_status": 200,
+    "wall_ms": 2633.97
+  },
+  {
+    "id": "U06",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "answered",
+    "http_status": 200,
+    "wall_ms": 3534.9
+  },
+  {
+    "id": "U07",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "answered",
+    "http_status": 200,
+    "wall_ms": 5565.29
+  },
+  {
+    "id": "U08",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "insufficient_evidence",
+    "http_status": 200,
+    "wall_ms": 2385.1
+  },
+  {
+    "id": "U09",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "insufficient_evidence",
+    "http_status": 200,
+    "wall_ms": 2628.81
+  },
+  {
+    "id": "U10",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "answered",
+    "http_status": 200,
+    "wall_ms": 3076.97
+  },
+  {
+    "id": "U11",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "insufficient_evidence",
+    "http_status": 200,
+    "wall_ms": 2714.52
+  },
+  {
+    "id": "U12",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "insufficient_evidence",
+    "http_status": 200,
+    "wall_ms": 2848.13
+  },
+  {
+    "id": "U13",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "answered",
+    "http_status": 200,
+    "wall_ms": 5345.37
+  },
+  {
+    "id": "U14",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "insufficient_evidence",
+    "http_status": 200,
+    "wall_ms": 4662.55
+  },
+  {
+    "id": "U15",
+    "pydantic_schema": "pass",
+    "date_agreement": "pass",
+    "status": "insufficient_evidence",
+    "http_status": 200,
+    "wall_ms": 2803.47
+  }
+]

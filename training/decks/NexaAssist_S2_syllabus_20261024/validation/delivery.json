@@ -1,0 +1,163 @@
+{
+  "schema": "ppt-master.pptx-delivery-check.v1",
+  "status": "passed",
+  "file": {
+    "path": "/Volumes/CrucialX9_MAC/Enterprise_training/RAG_LLMOps/training/decks/NexaAssist_S2_syllabus_20261024/exports/NexaAssist_S2_syllabus_20261024_20261024_073224.pptx",
+    "bytes": 73827
+  },
+  "package": {
+    "zip_integrity": "passed",
+    "corrupt_member": null,
+    "duplicate_parts": [],
+    "canonical_part_collisions": [],
+    "parts": {
+      "entries": 83,
+      "unique": 83,
+      "slides": 16,
+      "notes": 16,
+      "masters": 1,
+      "layouts": 1,
+      "media": 0
+    },
+    "relationships": {
+      "problems": []
+    }
+  },
+  "slides": {
+    "count": 16,
+    "hidden_count": 0,
+    "hidden": []
+  },
+  "fonts": {
+    "theme": {
+      "title": {
+        "latin": "Trebuchet MS",
+        "ea": "Microsoft YaHei",
+        "cs": "Trebuchet MS",
+        "scripts": {
+          "Jpan": "Microsoft YaHei",
+          "Hang": "Microsoft YaHei",
+          "Hans": "Microsoft YaHei",
+          "Hant": "Microsoft YaHei"
+        }
+      },
+      "body": {
+        "latin": "Arial",
+        "ea": "Microsoft YaHei",
+        "cs": "Arial",
+        "scripts": {
+          "Jpan": "Microsoft YaHei",
+          "Hang": "Microsoft YaHei",
+          "Hans": "Microsoft YaHei",
+          "Hant": "Microsoft YaHei"
+        }
+      }
+    },
+    "declared": {
+      "latin": [
+        {
+          "value": "+mn-lt",
+          "count": 151
+        },
+        {
+          "value": "Arial",
+          "count": 40
+        },
+        {
+          "value": "Courier New",
+          "count": 23
+        },
+        {
+          "value": "+mj-lt",
+          "count": 11
+        },
+        {
+          "value": "Trebuchet MS",
+          "count": 8
+        }
+      ],
+      "ea": [
+        {
+          "value": "+mn-ea",
+          "count": 151
+        },
+        {
+          "value": "Arial",
+          "count": 38
+        },
+        {
+          "value": "Courier New",
+          "count": 23
+        },
+        {
+          "value": "+mj-ea",
+          "count": 11
+        },
+        {
+          "value": "Trebuchet MS",
+          "count": 6
+        },
+        {
+          "value": "Microsoft YaHei",
+          "count": 4
+        }
+      ],
+      "cs": [
+        {
+          "value": "+mn-cs",
+          "count": 151
+        },
+        {
+          "value": "Arial",
+          "count": 40
+        },
+        {
+          "value": "Courier New",
+          "count": 23
+        },
+        {
+          "value": "+mj-cs",
+          "count": 11
+        },
+        {
+          "value": "Trebuchet MS",
+          "count": 8
+        }
+      ]
+    },
+    "embedded_parts": [],
+    "portability_advisory_faces": []
+  },
+  "media": {
+    "embedded_count": 0,
+    "external_count": 0,
+    "embedded": [],
+    "external": [],
+    "uncompressed_bytes": 0,
+    "archive_compressed_bytes": 0,
+    "share_of_archive": 0.0,
+    "share_of_uncompressed_parts": 0.0,
+    "top_contributors": []
+  },
+  "motion": {
+    "transitions": {
+      "carrier_slide_count": 0,
+      "visual_effect_slide_count": 0,
+      "timed_advance_slide_count": 0,
+      "carrier_slides": [],
+      "visual_effect_slides": [],
+      "timed_advance_slides": [],
+      "effects": {}
+    },
+    "object_animations": {
+      "timing_slide_count": 0,
+      "object_animation_slide_count": 0,
+      "audio_timing_slide_count": 0,
+      "timing_slides": [],
+      "object_animation_slides": [],
+      "audio_timing_slides": []
+    }
+  },
+  "errors": [],
+  "advisories": []
+}

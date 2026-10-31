@@ -1,0 +1,504 @@
+[
+  {
+    "source": 1,
+    "title": "LLMOps Core",
+    "section": "SESSION OUTCOMES",
+    "topics": [
+      3,
+      4,
+      5,
+      7,
+      9,
+      12
+    ],
+    "layout": "cover",
+    "note": "This Session 2 extends the earlier RAGOps material with observability, evaluation, gateways and security, as requested. Nineteen slides support a three-hour class with a 90-minute practical block; optional live services are prepared before class. Required offline exercises reuse the existing project controls, while the live guide adds Datadog, Ragas, LiteLLM, Ollama/OpenAI and Guardrails AI work without claiming a production deployment."
+  },
+  {
+    "source": 2,
+    "title": "Four operating questions / one evidence pack",
+    "section": "TOPICS AND PRACTICALS",
+    "topics": [
+      3,
+      4,
+      7,
+      9,
+      12
+    ],
+    "layout": "rows",
+    "rows": [
+      [
+        "Observe / Datadog; Phoenix alternative",
+        "Where did latency, token usage or the chain failure originate?"
+      ],
+      [
+        "Evaluate / Ragas; DeepEval alternative",
+        "Are claims supported, required contexts present and regressions gated?"
+      ],
+      [
+        "Route / LiteLLM; Portkey alternative",
+        "Which backend ran, when did fallback occur and was the cache valid?"
+      ],
+      [
+        "Protect / Guardrails AI; NeMo alternative",
+        "Were PII, injection attempts and invalid outputs handled correctly?"
+      ]
+    ],
+    "note": "The practical block allocates 15 minutes each to RAGOps, observability and evaluation, 20 to gateway routing, 15 to security and 10 to a break. Keep the same synthetic policy cases across the four disciplines and submit traces, evaluation decisions, a routing/cache matrix and guardrail outcomes. The listed alternatives explain transferable concepts; installing every framework is not required. Datadog, Ragas, LiteLLM and Guardrails AI are the main worked tools."
+  },
+  {
+    "source": 3,
+    "title": "RAGOps recap / publish verifiable evidence",
+    "section": "EXISTING FOUNDATION",
+    "topics": [
+      4,
+      9,
+      12
+    ],
+    "layout": "retain",
+    "view": "ingestion",
+    "note": "Retain the existing verify, parse, chunk, redact, compare/embed and upsert sequence. Record source hashes, policy and embedding versions, changed/unchanged counts, parent scope and per-document failure outcomes before treating the corpus as ready. A successful ingestion log does not prove a queryable index or live retrieval quality. Complete parent sections remain unembedded, and freshness reconciliation needs a source-versus-stored manifest."
+  },
+  {
+    "source": 5,
+    "title": "Practical / chunking and repeat ingestion",
+    "section": "RAGOPS LAB / OFFLINE",
+    "topics": [
+      1,
+      3,
+      8,
+      12
+    ],
+    "layout": "code",
+    "code": [
+      "python -m training.session2.chunks",
+      "python -m training.session2.ingest_twin",
+      "",
+      "chunk candidates 300 / 1200 / 5000 → 40 / 32 / 32",
+      "embedded counts across four runs → 32 / 0 / 32 / 0"
+    ],
+    "take": "Submit: preserved table, child/checksum/parent IDs and a version-change explanation.",
+    "note": "Use the 15-minute RAGOps block for a compact chunk/ingestion comparison, then retain the longer exercises as extensions. Expect 40, 32 and 32 chunks for the three settings and embedding counts 32, zero, 32 and zero across the four-run fixture. Inspect one complete table and a scope-compatible parent rather than selecting a chunker from counts alone. The real PDF and chain are used with fake embeddings and memory stores; model-name invalidation is not a live embedding migration."
+  },
+  {
+    "source": 9,
+    "title": "Retrieve scoped and complete evidence",
+    "section": "EXISTING FOUNDATION",
+    "topics": [
+      3,
+      4,
+      9,
+      12
+    ],
+    "layout": "retain",
+    "view": "retrieval",
+    "note": "Keep date, institution, product and access filters ahead of evidence use, with optional ranking followed by parent and complete-amendment expansion. Lookup date and sanction applicability are different; a fee quote without the circular applicability can mislead. The project scorer includes complete linked amendments alongside the requested top-k child hits, so document its reference-coverage convention. Preserve original child/parent, embedding compatibility and rollback-bundle lessons in the handout; configured corpus filtering does not establish authenticated per-user authorization."
+  },
+  {
+    "source": 14,
+    "title": "Practical / keep the policy regression baseline",
+    "section": "RAGOPS LAB / OFFLINE",
+    "topics": [
+      3,
+      5,
+      9,
+      12
+    ],
+    "layout": "code",
+    "code": [
+      "python -m training.showcase --session 2",
+      "python -m training.session2.recall",
+      "",
+      "June 0.35% → July 0.30%; wrong product abstains",
+      "one of two references → recall 0.5; rank 4 → RR 0.25"
+    ],
+    "take": "Retain dates, product, complete conditions and citation IDs as regression evidence.",
+    "note": "Use the existing July-amendment showcase and recall script as pre-reading or as part of the RAGOps recap. Record lookup and sanction dates, product, status and citations; retain the synthetic fee minima, maxima and GST caveat from the complete evidence. A wrong-product case must abstain, one of two required references gives recall 0.5 and a first included hit at rank four gives reciprocal rank 0.25. These are controlled fixture observations; NDCG and migration/freshness incident worksheets remain supporting exercises in the handout."
+  },
+  {
+    "source": 4,
+    "title": "Observability / follow one request across stages",
+    "section": "OBSERVABILITY AND TRACING",
+    "topics": [
+      4,
+      12,
+      14
+    ],
+    "layout": "flow",
+    "view": "trace-map",
+    "nodes": [
+      [
+        "Request / workflow",
+        "Request ID + parent links",
+        "Prompt/model/corpus versions"
+      ],
+      [
+        "Validate + retrieve",
+        "Scope + embedding/search",
+        "Parents + amendments"
+      ],
+      [
+        "Build prompt",
+        "Version + context budget",
+        "Redact captured fields"
+      ],
+      [
+        "Return / score",
+        "Status + evidence + eval ID",
+        "Correlate errors and feedback"
+      ],
+      [
+        "Validate output",
+        "Schema + citations + PII",
+        "Bound repair attempts"
+      ],
+      [
+        "Model / gateway",
+        "Backend + attempts + tokens",
+        "Latency + failure metadata"
+      ]
+    ],
+    "legend": "Reference trace map: arrows show request order; inspect which spans actually exist.",
+    "note": "A trace joins the request workflow to retrieval, model and validation work; use IDs and parent links to distinguish a slow model from a retrieval or output failure. Datadog is the existing project telemetry implementation, while Phoenix provides an OpenTelemetry/OpenInference alternative in a separate lab. The gateway node is a classroom extension, not a claim that the current application factories already call LiteLLM. Sources: app/core/observability.py, tests/test_telemetry.py, https://docs.datadoghq.com/llm_observability/quickstart/ and https://arize.com/docs/phoenix/learn/tracing/how-tracing-works."
+  },
+  {
+    "source": 13,
+    "title": "Measure latency, usage and failure signals",
+    "section": "OBSERVABILITY SIGNALS",
+    "topics": [
+      4,
+      5,
+      8,
+      14
+    ],
+    "layout": "rows",
+    "rows": [
+      [
+        "Latency",
+        "Stage duration + request p50/p95/p99; TTFT/TPOT need token timestamps."
+      ],
+      [
+        "Usage and cost",
+        "Input/output/cached tokens, actual model/backend and measured unit cost."
+      ],
+      [
+        "Failure taxonomy",
+        "Timeout / rate limit / retrieval miss / schema error / invalid citation."
+      ],
+      [
+        "Capture policy",
+        "Redact before export; define sampling, retention and review ownership."
+      ]
+    ],
+    "note": "Measure request and stage durations, and compute percentiles over repeated observations rather than a single trace. Track input, output and cached-token fields when the provider reports them, plus the selected model and retry/fallback attempts; local inference still consumes hardware resources. The current answer endpoint is buffered JSON, so TTFT and TPOT remain unmeasured without streaming instrumentation. Model errors, missing evidence and unsafe/invalid output have different operational owners, and query redaction alone does not prove all automatically captured trace fields are sanitized."
+  },
+  {
+    "source": 7,
+    "title": "Practical / inspect a correlated Datadog trace",
+    "section": "OBSERVABILITY LAB",
+    "topics": [
+      4,
+      5,
+      14
+    ],
+    "layout": "code",
+    "code": [
+      "uv run --no-sync pytest -q tests/test_telemetry.py",
+      "",
+      "Offline: captured spans + fake HTTP + scoped prompt metadata",
+      "Live: ddtrace-run + existing Datadog Agent configuration",
+      "Locate root → child spans; explain the slow or failing stage"
+    ],
+    "take": "Submit: trace/parent identity, durations, token fields, failure and capture-policy gaps.",
+    "note": "Allow 15 minutes to run and inspect the existing telemetry tests, which capture spans locally and mock external responses without exporting to Datadog. Identify the HTTP 422 failure, root/parent relationships, prompt version and model token usage in the test assertions. The live guide starts the existing Agent configuration and instrumented API for an instructor-prepared synthetic request; capture an observed trace only when those services are available. Mark missing spans and token-stream timings as gaps rather than reporting success; the Phoenix alternative is documented separately in training/session2/live_practicals.md."
+  },
+  {
+    "source": 12,
+    "title": "EvalOps / build the evaluation harness",
+    "section": "EVALUATION OPERATIONS",
+    "topics": [
+      2,
+      3,
+      5,
+      11
+    ],
+    "layout": "flow",
+    "view": "evaluation-harness",
+    "nodes": [
+      [
+        "Freeze cases",
+        "Input + expected output",
+        "Context + expected status"
+      ],
+      [
+        "Run candidate",
+        "Version prompt and model",
+        "Retain actual backend ID"
+      ],
+      [
+        "Capture evidence",
+        "Response + retrieved text",
+        "Case/run identifiers"
+      ],
+      [
+        "Human decision",
+        "Review disagreements",
+        "Promote / hold / rollback"
+      ],
+      [
+        "Apply gates",
+        "Per-case + aggregate checks",
+        "Regressions stay visible"
+      ],
+      [
+        "Score / judge",
+        "Ragas or DeepEval",
+        "Rubric + judge version"
+      ]
+    ],
+    "legend": "Evaluation flow: keep the dataset, reference, judge and experimental scope comparable.",
+    "note": "The harness freezes cases, runs a versioned candidate, captures contexts and answers, scores them, applies gates and records a human decision. Reuse app/evaluation/run.py and its RagasScorer adapter rather than inventing a second production evaluator. Include normal, refusal, date-boundary, adversarial and missing-evidence cases; preserve the holdout and case identities across comparisons. Judges are stochastic and require human-label calibration, bias review and an explicit rubric before automatic scores justify release decisions."
+  },
+  {
+    "source": 13,
+    "title": "Evals / separate coverage from supported claims",
+    "section": "LLM-AS-A-JUDGE METRICS",
+    "topics": [
+      3,
+      5,
+      12
+    ],
+    "layout": "rows",
+    "rows": [
+      [
+        "Faithfulness",
+        "Are the answer claims supported by the supplied retrieved context?"
+      ],
+      [
+        "Context recall",
+        "Does retrieved evidence cover the claims required by the reference?"
+      ],
+      [
+        "Correctness / relevance",
+        "Is the answer right for the task, and does it answer the question?"
+      ],
+      [
+        "Calibration and release",
+        "Compare human labels; inspect bias, disagreement and failing cases."
+      ]
+    ],
+    "note": "Ragas faithfulness assesses support for response claims, while context recall uses reference information to assess missing evidence; neither is the same as the repository reference-ID recall at k. Correctness, relevance and safety require separate criteria, and high faithfulness does not prove that the supplied source is true. Treat one minus faithfulness only as an unsupported-claim proxy, not a calibrated probability that an entire response hallucinated. Sources: https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/ and https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_recall/; DeepEval is an alternative framework rather than another installed scoring pipeline."
+  },
+  {
+    "source": 15,
+    "title": "Practical / score candidates and enforce gates",
+    "section": "EVALS LAB",
+    "topics": [
+      3,
+      5,
+      11,
+      12
+    ],
+    "layout": "code",
+    "code": [
+      "python -m training.session3.gates",
+      "",
+      "Fixture: healthy PASS; retrieval / generation faults FAIL",
+      "Live Ragas: compare Qwen chat with the OpenAI chat alias",
+      "Freeze contexts + reference + judge + metric embeddings"
+    ],
+    "take": "Submit: per-case scores, judge/rubric identity, failure class and HOLD/PASS rationale.",
+    "note": "Allow 15 minutes for the existing offline gate scenarios: healthy passes, retrieval miss fails as retrieval_error and generation fault fails as generation_error. Those scores are explicitly synthetic and do not call an LLM judge. The live guide supplies a small Ragas harness comparing local Qwen and OpenAI generation under the same contexts, reference and OpenAI judge, with OpenAI metric embeddings held fixed. Record the backend actually selected, disable fallback for a pure local benchmark and separate generation comparison from a Qwen/OpenAI embedding-index experiment."
+  },
+  {
+    "source": 9,
+    "title": "Gateway / Ollama and OpenAI behind stable aliases",
+    "section": "GATEWAYS AND ROUTING",
+    "topics": [
+      7,
+      8,
+      9,
+      12,
+      14
+    ],
+    "layout": "gateway",
+    "view": "gateway-routing",
+    "note": "Use LiteLLM as the worked gateway and Portkey as a conceptual alternative. The four aliases are nexa-chat for Ollama qwen3.5:9b-mlx, nexa-chat-openai for an instructor-selected OpenAI model, nexa-embed-local for qwen3-embedding:0.6b and nexa-embed-openai for text-embedding-3-small. Chat fallback is conditional on compatible output contracts and permitted disclosure; different embedding spaces require separately embedded corpora and compatible query/index settings, even if vector lengths match. Sources: training/session2/litellm.yaml, https://ollama.com/library/qwen3.5:9b-mlx, https://ollama.com/library/qwen3-embedding and https://docs.ollama.com/api/openai-compatibility."
+  },
+  {
+    "source": 6,
+    "title": "LiteLLM / explicit routing and bounded failure",
+    "section": "GATEWAY CONFIGURATION",
+    "topics": [
+      7,
+      8,
+      9,
+      14
+    ],
+    "layout": "code",
+    "code": [
+      "local chat: ollama_chat/qwen3.5:9b-mlx",
+      "local embed: openai/qwen3-embedding:0.6b  [local /v1]",
+      "router_settings:",
+      "  num_retries: 1",
+      "  timeout: 30",
+      "  fallbacks: [{nexa-chat: [nexa-chat-openai]}]",
+      "  routing_strategy: simple-shuffle"
+    ],
+    "take": "Full four-alias YAML in training/session2/litellm.yaml; OpenAI ID/key come from env.",
+    "note": "Read the supplied classroom YAML: one retry, a timeout, an explicit chat fallback and the routing strategy are visible configuration. OpenAI chat model identity is selected through OPENAI_LITELLM_CHAT_MODEL with its provider prefix, and keys remain in environment variables rather than the presentation or YAML. The Ollama embedding alias uses the documented local OpenAI-compatible endpoint, with no fallback to a different embedding family. Sources: https://docs.litellm.ai/docs/proxy/configs and https://docs.litellm.ai/docs/proxy/reliability; a timeout setting alone does not establish measured end-to-end recovery time."
+  },
+  {
+    "source": 7,
+    "title": "Practical / fail over, balance and cache",
+    "section": "GATEWAY LAB",
+    "topics": [
+      7,
+      8,
+      9,
+      14
+    ],
+    "layout": "rows",
+    "rows": [
+      [
+        "Fail over",
+        "In a temp config, break one chat URL; record attempts and actual fallback."
+      ],
+      [
+        "Balance",
+        "Use two healthy deployments under one alias; count uncached requests."
+      ],
+      [
+        "Cache",
+        "Repeat identical synthetic input; confirm a hit from upstream-call evidence."
+      ],
+      [
+        "Invalidate",
+        "Change prompt/corpus/scope version; require a fresh result or disable caching."
+      ]
+    ],
+    "note": "Allow 20 minutes to audit the route/failure matrix offline or run it on instructor-prepared services using training/session2/live_practicals.md. Inject failure only in a temporary gateway config by pointing a backend at an unreachable localhost port; test local-to-OpenAI, the reverse map in a separate config, and exhaustion without circular fallbacks. Demonstrate balancing only with two independent healthy endpoints, and verify cache hits with gateway/upstream evidence rather than latency alone. The lab cache is in memory for one worker, cache isolation must include relevant scope/version semantics before sensitive use, and the deprecated proxy mock_testing_fallbacks flag is not used; sources are the LiteLLM fallback, load-balancing and caching documentation linked in the live guide."
+  },
+  {
+    "source": 3,
+    "title": "Guardrails / validate at each trust boundary",
+    "section": "SECURITY AND GUARDRAILS",
+    "topics": [
+      7,
+      9,
+      10,
+      12
+    ],
+    "layout": "flow",
+    "view": "guardrail-boundaries",
+    "nodes": [
+      [
+        "Input / redaction",
+        "Mask recognized PII",
+        "Validate scope and limits"
+      ],
+      [
+        "Prompt boundary",
+        "Separate trusted instructions",
+        "Treat retrieved text as data"
+      ],
+      [
+        "Evidence access",
+        "Date/product/access filters",
+        "Least-privilege tools"
+      ],
+      [
+        "Return / audit",
+        "Safe answer or abstention",
+        "Redacted failure evidence"
+      ],
+      [
+        "Output checks",
+        "Strict schema + PII scan",
+        "Exact evidence/citation checks"
+      ],
+      [
+        "Model / gateway",
+        "Authorized route + budgets",
+        "Bound retries and repairs"
+      ]
+    ],
+    "legend": "Defense in depth: each check has a distinct purpose; a schema alone cannot prove truth.",
+    "note": "Keep PII redaction before embedding, model disclosure and trace export, with access checks before evidence use and strict output validation afterwards. Prompt boundaries help preserve instruction/data separation, but malicious instructions inside legitimate prose still need adversarial behavioral tests and constrained tools. Guardrails AI can wrap the existing Pydantic contract, while a NeMo Guardrails policy is an alternative integration with its own evaluation and operational cost. No framework name establishes complete injection defense or authentication; the slide describes control responsibilities and the handout identifies implemented versus additional integrations."
+  },
+  {
+    "source": 15,
+    "title": "Practical / PII and prompt injection defenses",
+    "section": "SECURITY LAB / OFFLINE",
+    "topics": [
+      3,
+      9,
+      10,
+      12
+    ],
+    "layout": "code",
+    "code": [
+      "python -m training.session2.redact",
+      "python -m training.session3.prompt_boundaries",
+      "",
+      "Recognized PII → typed placeholders before disclosure",
+      "Injected XML tags remain data; trusted system role retained"
+    ],
+    "take": "Submit: benign/adversarial cases, expected vs observed behavior and coverage gaps.",
+    "note": "Use part of the 15-minute security block for the existing redaction and prompt-boundary exercises. Recognized email, phone, PAN and Aadhaar patterns are masked, while policy amounts remain unchanged; learners should identify both missed identifiers and false positives. The actual rendered production prompt escapes injected XML and retains the system role, proving a syntax boundary rather than semantic injection immunity. Add direct and retrieved-document injection cases to the behavioral evaluation matrix and retain least-privilege, authorization and data-disclosure decisions as separate controls."
+  },
+  {
+    "source": 15,
+    "title": "Practical / strict output with Guardrails AI",
+    "section": "OUTPUT VALIDATION LAB",
+    "topics": [
+      3,
+      9,
+      11
+    ],
+    "layout": "code",
+    "code": [
+      "from guardrails import Guard",
+      "from app.models.answer import AnswerDraft",
+      "guard = Guard.for_pydantic(output_class=AnswerDraft)",
+      "outcome = guard.parse(llm_output=raw_json, num_reasks=0)",
+      "assert outcome.validation_passed",
+      "",
+      "python -m training.session3.answers   # offline app rails"
+    ],
+    "take": "Reject bad status/schema; separately reject output PII and invented source quotes.",
+    "note": "Complete the security block with the existing offline answer-control lab: a valid answer is accepted, an invented quotation receives one repair then abstention, and output PII causes abstention. The optional Guardrails AI extension parses known JSON against the existing AnswerDraft model without a model call and checks a valid status against an invalid approve_loan status. Guardrails AI is not installed in the application environment, and the framework snippet is a documented exercise rather than a measured integration; schema acceptance does not replace citation, PII or semantic checks. Source: https://github.com/guardrails-ai/guardrails/blob/main/guardrails/guard.py; NeMo Guardrails remains a named alternative, not an implemented application dependency."
+  },
+  {
+    "source": 16,
+    "title": "Session 2 / operating-readiness exit gate",
+    "section": "EVIDENCE AND NEXT STEPS",
+    "topics": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      11,
+      12,
+      14
+    ],
+    "layout": "rows",
+    "rows": [
+      [
+        "RAGOps + trace pack",
+        "Versioned evidence, policy regressions, parent IDs and observed stage signals."
+      ],
+      [
+        "Evaluation pack",
+        "Fixed cases, metric/judge IDs, failures and a defended release decision."
+      ],
+      [
+        "Routing + security pack",
+        "Actual backends, fallback/cache matrix, negative cases and remaining gaps."
+      ]
+    ],
+    "note": "Use the exit review to inspect the RAGOps baseline and the trace, evaluation, gateway and guardrail evidence packs. Record which observations came from offline fixtures, which were actually measured live and which remain not_measured. Passing the class exercise does not approve placeholder production thresholds or prove a deployed gateway/guardrail integration. Continue in Session 3 with deeper prompt lifecycle, judge calibration, answer-quality regression and human review."
+  }
+]

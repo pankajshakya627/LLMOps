@@ -1,0 +1,1 @@
+Run: python -m training.session1.tamper Predict which document hash will fail. Expected: 8 originals verify; changed PDF is refused. Prefix Python with uv run --no-sync. The lab works in a temporary directory and protects the original corpus. Explain why failure occurs before embeddings are created. The implementation or concept reference is training/session1/tamper.py.

@@ -1,0 +1,1 @@
+Code + dependency lock + container Prompt ID/version/hash + model configuration Corpus register + embedding schema + golden dataset A prompt or policy update can change answers without a code change. The release file needs enough identity to reproduce and restore behavior.

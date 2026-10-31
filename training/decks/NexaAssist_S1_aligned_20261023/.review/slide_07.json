@@ -1,0 +1,29 @@
+{
+  "page": "slide_07.svg",
+  "page_role": "content",
+  "canvas": {
+    "view_box": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "width": 1280,
+    "height": 720,
+    "png_width": 1280,
+    "png_height": 720
+  },
+  "status": "fixed",
+  "iterations_run": 1,
+  "screenshot_paths": [
+    ".preview/slide_07.png"
+  ],
+  "findings": [],
+  "untouched_concerns": [],
+  "needs_human_items": [],
+  "design_intent_check": {
+    "spec_says": "C4 containers and ownership: Streamlit renders, FastAPI coordinates the answer path, and the ingestion CLI maintains Atlas knowledge collections.",
+    "render_delivers": true,
+    "note": "Author reviewed the final browser render: no path through the API, no label collisions; CLI and API have separate Atlas/model edges."
+  }
+}

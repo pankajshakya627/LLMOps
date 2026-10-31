@@ -1,0 +1,1 @@
+Per-metric means and failed cases make the decision actionable. Open app/evaluation/gates.py and locate def gate_failures. Read the displayed excerpt in context; it is taken directly from the application. Per-metric means and failed cases make the decision actionable. The implementation or concept reference is app/evaluation/gates.py.

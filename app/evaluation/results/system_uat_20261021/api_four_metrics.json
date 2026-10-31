@@ -1,0 +1,70 @@
+{
+  "id": "U19",
+  "scenario": "live_four_metrics",
+  "request": {
+    "query": "What is the maximum loan amount for a NexaHome Loan?",
+    "as_of": "2026-10-01",
+    "product_id": "NEXA-HL",
+    "top_k": 5
+  },
+  "started_at": "2026-10-21T08:37:24.165567+00:00",
+  "http_status": 200,
+  "response": {
+    "answer": {
+      "as_of": "2026-10-01",
+      "status": "answered",
+      "answer": "The maximum NexaHome Loan amount is ₹7,50,00,000 (₹7.5 crore). [1]",
+      "citations": [
+        {
+          "evidence_id": 1,
+          "quote": "Maximum loan amount is ₹7,50,00,000.",
+          "matched_child": {
+            "doc_id": "POL-HL-V3",
+            "title": "NexaHome Loan Policy",
+            "policy_version": "3.0",
+            "clause": "4.1",
+            "effective_date": "2025-10-01"
+          }
+        }
+      ],
+      "retrieval_timings": {
+        "search_ms": 705.72,
+        "parent_ms": 36.77,
+        "total_ms": 742.66
+      },
+      "generation_ms": 3424.6,
+      "datadog_span_id": "10681659334530958991"
+    },
+    "quality": {
+      "metrics": {
+        "faithfulness": {
+          "status": "scored",
+          "value": 1.0,
+          "reason": null
+        },
+        "answer_relevancy": {
+          "status": "scored",
+          "value": 0.9583786965235982,
+          "reason": null
+        },
+        "context_precision": {
+          "status": "scored",
+          "value": 0.9999999999,
+          "reason": null
+        },
+        "context_recall": {
+          "status": "scored",
+          "value": 1.0,
+          "reason": null
+        }
+      },
+      "reference_source": "golden_dataset",
+      "reference_answer": "The maximum NexaHome Loan amount is ₹7,50,00,000 (₹7.5 crore). The minimum is ₹5,00,000. This is the limit under POL-HL-V3, clause 4.1.",
+      "evaluated_at": "2026-10-21T08:37:44.429991Z",
+      "datadog_status": "queued",
+      "datadog_url": "https://app.datadoghq.com/llm/traces?query=service%3Anexaassist-api+%40name%3Apolicy_answer_live_evaluation&start=1792571784185&end=1792571924429&paused=true"
+    }
+  },
+  "wall_ms": 20267.81,
+  "contract": "pass"
+}

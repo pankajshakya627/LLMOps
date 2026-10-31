@@ -1,0 +1,184 @@
+[
+  {
+    "id": "U01",
+    "markers_match_citations": true,
+    "citations": [
+      {
+        "evidence_id": 1,
+        "doc_id": "POL-HL-V3",
+        "matched_child_clause": "4.1",
+        "quote_clause": null,
+        "exact_quote_in_scoped_parent": true
+      }
+    ]
+  },
+  {
+    "id": "U02",
+    "markers_match_citations": true,
+    "citations": [
+      {
+        "evidence_id": 1,
+        "doc_id": "POL-HL-V3",
+        "matched_child_clause": "4.1",
+        "quote_clause": null,
+        "exact_quote_in_scoped_parent": true
+      },
+      {
+        "evidence_id": 3,
+        "doc_id": "POL-HL-V3",
+        "matched_child_clause": "7.2",
+        "quote_clause": null,
+        "exact_quote_in_scoped_parent": true
+      }
+    ]
+  },
+  {
+    "id": "U03",
+    "markers_match_citations": true,
+    "citations": [
+      {
+        "evidence_id": 1,
+        "doc_id": "POL-HL-V3",
+        "matched_child_clause": "6.2",
+        "quote_clause": "6.2",
+        "exact_quote_in_scoped_parent": true
+      },
+      {
+        "evidence_id": 1,
+        "doc_id": "POL-HL-V3",
+        "matched_child_clause": "6.2",
+        "quote_clause": "6.1",
+        "exact_quote_in_scoped_parent": true
+      }
+    ]
+  },
+  {
+    "id": "U04",
+    "markers_match_citations": true,
+    "citations": [
+      {
+        "evidence_id": 1,
+        "doc_id": "POL-HL-V1",
+        "matched_child_clause": "8.3",
+        "quote_clause": "8.3",
+        "exact_quote_in_scoped_parent": true
+      },
+      {
+        "evidence_id": 3,
+        "doc_id": "POL-HL-V1",
+        "matched_child_clause": "1.1",
+        "quote_clause": "1.2",
+        "exact_quote_in_scoped_parent": true
+      }
+    ]
+  },
+  {
+    "id": "U05",
+    "markers_match_citations": true,
+    "citations": [
+      {
+        "evidence_id": 1,
+        "doc_id": "POL-HL-V2",
+        "matched_child_clause": "8.3",
+        "quote_clause": null,
+        "exact_quote_in_scoped_parent": true
+      }
+    ]
+  },
+  {
+    "id": "U06",
+    "markers_match_citations": true,
+    "citations": [
+      {
+        "evidence_id": 1,
+        "doc_id": "POL-PL-V1",
+        "matched_child_clause": "7.2",
+        "quote_clause": "7.1",
+        "exact_quote_in_scoped_parent": true
+      },
+      {
+        "evidence_id": 1,
+        "doc_id": "POL-PL-V1",
+        "matched_child_clause": "7.2",
+        "quote_clause": "7.2",
+        "exact_quote_in_scoped_parent": true
+      }
+    ]
+  },
+  {
+    "id": "U07",
+    "markers_match_citations": true,
+    "citations": [
+      {
+        "evidence_id": 1,
+        "doc_id": "POL-AL-V1",
+        "matched_child_clause": "6.2",
+        "quote_clause": null,
+        "exact_quote_in_scoped_parent": true
+      }
+    ]
+  },
+  {
+    "id": "U08",
+    "markers_match_citations": true,
+    "citations": []
+  },
+  {
+    "id": "U09",
+    "markers_match_citations": true,
+    "citations": []
+  },
+  {
+    "id": "U10",
+    "markers_match_citations": true,
+    "citations": [
+      {
+        "evidence_id": 1,
+        "doc_id": "POL-HL-V3",
+        "matched_child_clause": "4.1",
+        "quote_clause": null,
+        "exact_quote_in_scoped_parent": true
+      }
+    ]
+  },
+  {
+    "id": "U11",
+    "markers_match_citations": true,
+    "citations": []
+  },
+  {
+    "id": "U12",
+    "markers_match_citations": true,
+    "citations": []
+  },
+  {
+    "id": "U13",
+    "markers_match_citations": true,
+    "citations": [
+      {
+        "evidence_id": 1,
+        "doc_id": "POL-HL-V3",
+        "matched_child_clause": "4.1",
+        "quote_clause": null,
+        "exact_quote_in_scoped_parent": true
+      },
+      {
+        "evidence_id": 3,
+        "doc_id": "POL-HL-V3",
+        "matched_child_clause": "1.1",
+        "quote_clause": null,
+        "exact_quote_in_scoped_parent": true
+      }
+    ]
+  },
+  {
+    "id": "U14",
+    "markers_match_citations": true,
+    "citations": []
+  },
+  {
+    "id": "U15",
+    "markers_match_citations": true,
+    "citations": []
+  }
+]

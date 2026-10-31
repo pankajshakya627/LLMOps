@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="&quot;Courier New&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="shape-3" data-pptx-object="group" data-pptx-frame="63.36 31 425.49 24.64" data-pptx-source-ref="slide:3">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 31 425.49 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 31 L 488.85 31 L 488.85 55.64 L 63.36 55.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="47" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">NEXAASSIST / SESSION 01 / SOURCE INTEGRITY</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="group" data-pptx-frame="62.4 84.33 684.57 61.6" data-pptx-source-ref="slide:5">
+<g id="shape-4" data-pptx-object="shape" data-pptx-frame="62.4 84.33 684.57 61.6" data-pptx-prst="rect" data-pptx-source-ref="slide:4" data-pptx-semantic-object="shape">
+<path d="M 62.4 84.33 L 746.97 84.33 L 746.97 145.93 L 62.4 145.93 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.4" y="123" text-anchor="start" xml:space="preserve" font-family="&quot;Trebuchet MS&quot;, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#132C42" data-pptx-text-baseline="metrics-v1">Code / reject changed source bytes</text>
+</g>
+</g>
+<g id="shape-13" data-pptx-object="group" data-pptx-frame="64 215 1152 285" data-pptx-source-ref="slide:13">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="64 215 1152 285" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 64 215 L 1216 215 L 1216 500 L 64 500 Z" fill="#132C42" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="87.28 238.67 701.7 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 87.28 238.67 L 788.98 238.67 L 788.98 266.39 L 87.28 266.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="256" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">def _verify_source(path: Path, entry: dict[str, Any]) -&gt; str:</text>
+</g>
+<g id="shape-8" data-pptx-object="shape" data-pptx-frame="87.28 276.67 906.78 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:8" data-pptx-semantic-object="shape">
+<path d="M 87.28 276.67 L 994.06 276.67 L 994.06 304.39 L 87.28 304.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="294" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">    """Refuse a file whose bytes differ from the register's recorded sha256."""</text>
+</g>
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="87.28 314.67 665.42 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 87.28 314.67 L 752.7 314.67 L 752.7 342.39 L 87.28 342.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="332" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">    digest = hashlib.sha256(path.read_bytes()).hexdigest()</text>
+</g>
+<g id="shape-10" data-pptx-object="shape" data-pptx-frame="87.28 352.67 379.22 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:10" data-pptx-semantic-object="shape">
+<path d="M 87.28 352.67 L 466.5 352.67 L 466.5 380.39 L 87.28 380.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="370" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">    if digest != entry["sha256"]:</text>
+</g>
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="87.28 390.67 1102.39 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 87.28 390.67 L 1189.67 390.67 L 1189.67 418.39 L 87.28 418.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="408" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">        raise ValueError(f"{entry['doc_id']}: file sha256 does not match the document register")</text>
+</g>
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="87.28 428.67 230.4 27.72" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 87.28 428.67 L 317.68 428.67 L 317.68 456.39 L 87.28 456.39 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="87.28" y="446" text-anchor="start" xml:space="preserve" font-size="18" fill="#FFFFFF" data-pptx-text-baseline="metrics-v1">    return str(path)</text>
+</g>
+</g>
+<g id="shape-15" data-pptx-object="group" data-pptx-frame="62.96 550.67 775.03 40.04" data-pptx-source-ref="slide:15">
+<g id="shape-14" data-pptx-object="shape" data-pptx-frame="62.96 550.67 775.03 40.04" data-pptx-prst="rect" data-pptx-source-ref="slide:14" data-pptx-semantic-object="shape">
+<path d="M 62.96 550.67 L 837.99 550.67 L 837.99 590.71 L 62.96 590.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.96" y="576" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="26" fill="#132C42" data-pptx-text-baseline="metrics-v1">A source must match the register before parsing or embedding.</text>
+</g>
+</g>
+<g id="shape-18" data-pptx-object="group" data-pptx-frame="63.36 665 1129.72 25.6" data-pptx-source-ref="slide:18">
+<g id="shape-16" data-pptx-object="shape" data-pptx-frame="63.36 665 810.855 25.6" data-pptx-prst="rect" data-pptx-source-ref="slide:16" data-pptx-semantic-object="shape">
+<path d="M 63.36 665 L 874.215 665 L 874.215 690.6 L 63.36 690.6 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">LLMOps_Syllabus.md / 09, 10, 12 / Concept + inspected local implementation; sources in notes</text>
+</g>
+<g id="shape-17" data-pptx-object="shape" data-pptx-frame="1149.36 665 43.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:17" data-pptx-semantic-object="shape">
+<path d="M 1149.36 665 L 1193.08 665 L 1193.08 689.64 L 1149.36 689.64 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1149.36" y="681" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#526375" data-pptx-text-baseline="metrics-v1">13/16</text>
+</g>
+</g></svg>

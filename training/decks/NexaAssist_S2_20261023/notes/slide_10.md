@@ -1,0 +1,1 @@
+Run: python -m training.session2.ingest_twin Predict embedded counts before each run. Expected: 32 → 0 → 32 → 0. The embedding and stores are test doubles. This proves the incremental control flow, not Atlas writes or model-vector compatibility in a live index.

@@ -1,0 +1,411 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "NexaAssist | proposed AWS + Claude deployment",
+    "locale": "en",
+    "output": ".archify/architecture-nexaassist-full-20261028-062755/nexaassist-aws-claude.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "aws_answer",
+        "label": "AWS answer request",
+        "focus": [
+          "staff",
+          "edge",
+          "ui",
+          "api",
+          "policy",
+          "rag",
+          "rds",
+          "gateway",
+          "bedrock",
+          "bedrock_guardrails"
+        ],
+        "note": "Target path: authenticated HTTPS, private tasks, Bedrock Claude/Titan and input/output guardrails."
+      },
+      {
+        "id": "aws_eval",
+        "label": "Quality and tracing",
+        "focus": [
+          "api",
+          "ragas",
+          "phoenix",
+          "phoenix_db",
+          "gateway"
+        ],
+        "note": "Ragas runs in the app; Phoenix receives traces and result annotations."
+      },
+      {
+        "id": "aws_ingest",
+        "label": "Corpus migration",
+        "focus": [
+          "s3",
+          "ingest",
+          "gateway",
+          "bedrock",
+          "rds"
+        ],
+        "note": "Stage a versioned corpus into a one-off task and re-embed with Titan."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "staff",
+      "type": "external",
+      "label": "Staff browser",
+      "sublabel": "authenticated policy user",
+      "pos": [
+        40,
+        45
+      ],
+      "size": [
+        125,
+        64
+      ]
+    },
+    {
+      "id": "edge",
+      "type": "security",
+      "label": "HTTPS entry",
+      "sublabel": "ALB + enterprise auth",
+      "pos": [
+        235,
+        45
+      ],
+      "size": [
+        150,
+        68
+      ]
+    },
+    {
+      "id": "ui",
+      "type": "frontend",
+      "label": "Streamlit on ECS",
+      "sublabel": "Fargate service",
+      "pos": [
+        435,
+        45
+      ],
+      "size": [
+        155,
+        68
+      ]
+    },
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "FastAPI on ECS",
+      "sublabel": "Fargate service",
+      "pos": [
+        635,
+        45
+      ],
+      "size": [
+        160,
+        68
+      ]
+    },
+    {
+      "id": "bedrock",
+      "type": "cloud",
+      "label": "Bedrock Claude + Titan",
+      "sublabel": "chat + 1024D embeddings",
+      "pos": [
+        1040,
+        45
+      ],
+      "size": [
+        175,
+        68
+      ]
+    },
+    {
+      "id": "phoenix",
+      "type": "cloud",
+      "label": "Phoenix on ECS",
+      "sublabel": "trace and eval UI",
+      "pos": [
+        435,
+        235
+      ],
+      "size": [
+        155,
+        72
+      ]
+    },
+    {
+      "id": "policy",
+      "type": "security",
+      "label": "App safety controls",
+      "sublabel": "PII, injection, output checks",
+      "pos": [
+        635,
+        235
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "rag",
+      "type": "backend",
+      "label": "RAG answer chain",
+      "sublabel": "scoped evidence + citations",
+      "pos": [
+        835,
+        235
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "gateway",
+      "type": "backend",
+      "label": "LiteLLM on ECS",
+      "sublabel": "planned Bedrock aliases",
+      "pos": [
+        1040,
+        235
+      ],
+      "size": [
+        175,
+        72
+      ]
+    },
+    {
+      "id": "phoenix_db",
+      "type": "database",
+      "label": "Phoenix PostgreSQL",
+      "sublabel": "separate trace database",
+      "pos": [
+        435,
+        445
+      ],
+      "size": [
+        155,
+        72
+      ]
+    },
+    {
+      "id": "bedrock_guardrails",
+      "type": "security",
+      "label": "Bedrock Guardrails",
+      "sublabel": "planned INPUT + OUTPUT calls",
+      "pos": [
+        635,
+        445
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "rds",
+      "type": "database",
+      "label": "RDS PostgreSQL",
+      "sublabel": "pgvector + feedback",
+      "pos": [
+        835,
+        445
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "ragas",
+      "type": "backend",
+      "label": "Ragas in FastAPI",
+      "sublabel": "judge, metrics, annotations",
+      "pos": [
+        435,
+        635
+      ],
+      "size": [
+        155,
+        72
+      ]
+    },
+    {
+      "id": "s3",
+      "type": "database",
+      "label": "Versioned S3 corpus",
+      "sublabel": "staged policy files",
+      "pos": [
+        635,
+        635
+      ],
+      "size": [
+        160,
+        72
+      ]
+    },
+    {
+      "id": "ingest",
+      "type": "backend",
+      "label": "One-off ECS ingest",
+      "sublabel": "re-embed into new profile",
+      "pos": [
+        835,
+        635
+      ],
+      "size": [
+        160,
+        72
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "AWS target Region \u2014 design only",
+      "wraps": [
+        "edge",
+        "ui",
+        "api",
+        "bedrock",
+        "phoenix",
+        "policy",
+        "rag",
+        "gateway",
+        "phoenix_db",
+        "bedrock_guardrails",
+        "rds",
+        "ragas",
+        "s3",
+        "ingest"
+      ],
+      "pad": 12
+    }
+  ],
+  "connections": [
+    {
+      "from": "staff",
+      "to": "edge",
+      "label": "HTTPS"
+    },
+    {
+      "from": "edge",
+      "to": "ui",
+      "label": "authenticated",
+      "variant": "security"
+    },
+    {
+      "from": "ui",
+      "to": "api",
+      "label": "private HTTP"
+    },
+    {
+      "from": "api",
+      "to": "policy",
+      "label": "check input",
+      "variant": "security"
+    },
+    {
+      "from": "policy",
+      "to": "rag",
+      "label": "safe query"
+    },
+    {
+      "from": "rag",
+      "to": "rds",
+      "label": "retrieve"
+    },
+    {
+      "from": "rag",
+      "to": "gateway",
+      "label": "chat + embed"
+    },
+    {
+      "from": "gateway",
+      "to": "bedrock",
+      "label": "IAM / VPCE"
+    },
+    {
+      "from": "policy",
+      "to": "bedrock_guardrails",
+      "label": "INPUT + OUTPUT",
+      "variant": "security"
+    },
+    {
+      "from": "api",
+      "to": "phoenix",
+      "label": "OTLP traces",
+      "variant": "dashed"
+    },
+    {
+      "from": "phoenix",
+      "to": "phoenix_db",
+      "label": "store traces"
+    },
+    {
+      "from": "api",
+      "to": "ragas",
+      "label": "score answer"
+    },
+    {
+      "from": "ragas",
+      "to": "phoenix",
+      "label": "annotations",
+      "variant": "dashed"
+    },
+    {
+      "from": "s3",
+      "to": "ingest",
+      "label": "stage corpus",
+      "variant": "dashed"
+    },
+    {
+      "from": "ingest",
+      "to": "rds",
+      "label": "new vectors"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "Planned, not running",
+      "items": [
+        "The repository currently configures Ollama/OpenAI; Claude, Titan and Bedrock Guardrails require new LiteLLM routes and app guardrail calls.",
+        "Select a Claude model or inference profile available in the target Region and verify strict JSON schema output.",
+        "Use task IAM roles and scoped Bedrock Runtime VPC endpoints; no static AWS access key in the app."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Deployable service split",
+      "items": [
+        "Run UI, API, LiteLLM and Phoenix on ECS Fargate behind an authenticated HTTPS entry.",
+        "Use separate application RDS pgvector and Phoenix PostgreSQL databases; store policy source files and reports in versioned S3.",
+        "Stage S3 files into a one-off ingestion task; the current CLI reads a local path, not s3://."
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Operational result",
+      "items": [
+        "Phoenix receives API and gateway traces; Ragas annotations appear on the evaluated answer span.",
+        "Bedrock Guardrails enforce configured input and output policies; the application still checks PII, schema, citations and abstention.",
+        "Re-ingest all policies when switching Qwen embeddings to Titan; equal vector lengths do not make embedding spaces compatible."
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Code map",
+      "items": [
+        "AWS placement: app/operations/AWS_DEPLOYMENT.md:55-71",
+        "Claude + Titan choice: app/operations/AWS_DEPLOYMENT.md:5,73-83",
+        "Guardrail migration: app/operations/AWS_DEPLOYMENT.md:53,115",
+        "Ingest + deployment order: app/operations/AWS_DEPLOYMENT.md:103-126",
+        "App hooks: app/phoenix_main.py:29; app/evaluation/live.py:18"
+      ]
+    }
+  ]
+}

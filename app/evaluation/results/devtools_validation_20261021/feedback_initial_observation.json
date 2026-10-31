@@ -1,0 +1,7 @@
+{
+  "feedback_id": "a35fa6ec-db11-4107-8446-1669fc00f317",
+  "ownership_evidence": "Span ID matches the live UI workflow event at 2026-10-21T08:50:24.648903Z",
+  "expected_correction_marker": "DEVTOOLS-UAT-20261021-01",
+  "actual_correction": "",
+  "outcome": "Text supplied with DevTools fill did not persist; tool/input-event versus application cause unresolved"
+}

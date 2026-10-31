@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text xml:space="preserve" x="64" y="47" font-size="16" fill="#526375"><tspan x="64" y="47">NEXAASSIST  /  SESSION 03  /  DISTILL II</tspan></text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text xml:space="preserve" x="64" y="123" font-family="Trebuchet MS" font-size="40" fill="#132C42"><tspan x="64" y="123">A judge needs a rubric and calibration</tspan></text></g>
+<g id="point-1" data-pptx-bounds="64 207 1152 105"><rect x="64" y="213" width="5" height="42" fill="#7954A3" /><text xml:space="preserve" x="92" y="235" font-size="26" fill="#132C42"><tspan x="92" y="235">Provide query, context, response and explicit criteria.</tspan></text></g>
+<g id="point-2" data-pptx-bounds="64 327 1152 105"><rect x="64" y="333" width="5" height="42" fill="#7954A3" /><text xml:space="preserve" x="92" y="355" font-size="26" fill="#132C42"><tspan x="92" y="355">Score claims against evidence and record reasons.</tspan></text></g>
+<g id="point-3" data-pptx-bounds="64 447 1152 105"><rect x="64" y="453" width="5" height="42" fill="#7954A3" /><text xml:space="preserve" x="92" y="475" font-size="26" fill="#132C42"><tspan x="92" y="475">Compare a sample against human judgments.</tspan></text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" fill="#526375" font-size="16"><text xml:space="preserve" x="64" y="681"><tspan x="64" y="681">Educative L10 / Course concept + NexaAssist adaptation; URL in notes</tspan></text><text xml:space="preserve" x="1150" y="681"><tspan x="1150" y="681">27/36</tspan></text></g>
+</svg>

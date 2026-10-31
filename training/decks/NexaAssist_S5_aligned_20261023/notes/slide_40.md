@@ -1,0 +1,1 @@
+Version the artifacts that change answers. Measure evidence, meaning and operations separately. Turn reviewed failures into durable regression cases. Close by asking each pair what they would investigate first after an incorrect fee answer. Point learners to the source course and local handouts for continued practice.

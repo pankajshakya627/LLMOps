@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#F5F3EC" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text font-size="16" fill="#526375" xml:space="preserve" x="64" y="47">NEXAASSIST  /  SESSION 04  /  DEPLOY</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text font-size="40" font-family="Trebuchet MS" fill="#132C42" xml:space="preserve" x="64" y="123">New / block detected PII before returning</text></g>
+<g id="source-code" data-pptx-bounds="64 205 1152 335"><rect x="64" y="205" width="1152" height="335" fill="#132C42" /><text font-size="20" font-family="Courier New" fill="#F5F3EC" xml:space="preserve" x="88" y="237">if any(redact(text)[1] for text in (draft.answer, *(e.quote for e in draft.evidence))):</text><text font-size="20" font-family="Courier New" fill="#F5F3EC" xml:space="preserve" x="88" y="262">    logger.warning("answer_output_pii_blocked")</text><text font-size="20" font-family="Courier New" fill="#F5F3EC" xml:space="preserve" x="88" y="287">    return response</text></g>
+<g id="interpretation" data-pptx-bounds="64 565 1135 75"><text font-size="26" fill="#132C42" xml:space="preserve" x="64" y="592">Check answer text and evidence quotes; return the existing safe abstention.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" fill="#526375" font-size="16"><text xml:space="preserve" x="64" y="681">Educative L11 / app/chains/answer.py</text><text xml:space="preserve" x="1150" y="681">12/41</text></g>
+</svg>

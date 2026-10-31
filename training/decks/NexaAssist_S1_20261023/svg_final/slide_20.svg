@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Arial">
+<rect id="background" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#132C42" />
+<g id="session-label" data-pptx-bounds="64 27 1152 26"><text fill="#BBCBD7" font-size="16" xml:space="preserve" x="64" y="47">NEXAASSIST  /  SESSION 01  /  DISCOVER</text></g>
+<g id="page-title" data-pptx-bounds="64 76 1152 120"><text fill="#FFFFFF" font-family="Trebuchet MS" font-size="40" xml:space="preserve" x="64" y="123">Exit gate / are we ready to experiment?</text></g>
+<g id="point-1" data-pptx-bounds="64 207 1152 105"><rect x="64" y="213" width="5" height="42" fill="#087E8B" /><text fill="#FFFFFF" font-size="26" xml:space="preserve" x="92" y="235">Hand in the manifest and data-access decision.</text></g>
+<g id="point-2" data-pptx-bounds="64 327 1152 105"><rect x="64" y="333" width="5" height="42" fill="#087E8B" /><text fill="#FFFFFF" font-size="26" xml:space="preserve" x="92" y="355">Name source owner, restrictions and must-abstain cases.</text></g>
+<g id="point-3" data-pptx-bounds="64 447 1152 105"><rect x="64" y="453" width="5" height="42" fill="#087E8B" /><text fill="#FFFFFF" font-size="26" xml:space="preserve" x="92" y="475">Keep unresolved approvals visible in the release file.</text></g>
+<g id="footer" data-pptx-bounds="64 655 1152 50" fill="#BBCBD7" font-size="16"><text xml:space="preserve" x="64" y="681">Original workshop adaptation · Educative LLMOps + local NexaAssist code</text><text xml:space="preserve" x="1150" y="681">20/22</text></g>
+</svg>

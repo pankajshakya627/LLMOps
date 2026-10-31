@@ -1,0 +1,162 @@
+{
+  "revision": "session-2-core-19-pages-20261024",
+  "source_visits": 17,
+  "lessons": 16,
+  "wait_seconds": 7,
+  "decks": [
+    {
+      "session": 1,
+      "slides": 16,
+      "notes": 16,
+      "bytes": 75090,
+      "sha256": "74f203afbfd9770d7e25741697c3aedeaea7435d66112cff34539f7c6f26fa30",
+      "changed_in_this_revision": false,
+      "pdf_pages": 16,
+      "svg_quality": {
+        "total": 16,
+        "passed": 16,
+        "warnings": 0,
+        "errors": 0
+      },
+      "delivery_check": "passed",
+      "postflight": "passed; zero warning categories"
+    },
+    {
+      "session": 2,
+      "slides": 19,
+      "notes": 19,
+      "bytes": 87169,
+      "sha256": "e226fe3d7f09d5acab6269dd9524a36d5afc5cab09cbff4ae2c9e48102d1b398",
+      "changed_in_this_revision": true,
+      "pdf_pages": 19,
+      "svg_quality": {
+        "total": 19,
+        "passed": 19,
+        "warnings": 0,
+        "errors": 0
+      },
+      "delivery_check": "passed",
+      "postflight": "passed; zero warning categories",
+      "source_workspace": "NexaAssist_S2_core_20261024"
+    },
+    {
+      "session": 3,
+      "slides": 36,
+      "notes": 36,
+      "bytes": 130722,
+      "sha256": "e766c3c54aea0a05f626510fa98f0a4f222e80fbd42e5ab2cf21b9c2c8579437",
+      "changed_in_this_revision": false
+    },
+    {
+      "session": 4,
+      "slides": 41,
+      "notes": 41,
+      "bytes": 145006,
+      "sha256": "4bc3793095dc67652fa73ba3e33a9f39dffb3ba8a8e8eab95cf3da41d2e42d24",
+      "changed_in_this_revision": false
+    },
+    {
+      "session": 5,
+      "slides": 40,
+      "notes": 40,
+      "bytes": 142963,
+      "sha256": "d8ab1cdecad409a691465b0d44415107985d08f954c3e03d445cc649ddc61785",
+      "changed_in_this_revision": false
+    }
+  ],
+  "slide_total": 152,
+  "slide_export": "Session 2 core: 19-page native export and delivery checks passed; zero warnings. Other sessions retain previous export status.",
+  "interactive_architecture": "artifact and real-browser checks passed",
+  "docx": "retained template cloned; styles/numbering retained; reference unchanged; PDF rendered",
+  "offline_tests": {
+    "passed": 214,
+    "failed": 1,
+    "seconds": 32.47,
+    "known_failure": "tests/test_architecture_document.py::test_architecture_paths_and_walkthroughs_resolve: missing C4-Documentation/nexaassist-architecture.html",
+    "course_delivery": "3 passed",
+    "junit": "offline_test_results.xml"
+  },
+  "ruff": "pass",
+  "mypy": "pass: 122 source files",
+  "live_provider_calls": "not run; all required practicals offline",
+  "rendering": "Session 2: all 19 SVG previews and exported PDF pages rendered and reviewed in four-page panels; no unresolved layout issues. Other sessions retain prior review.",
+  "additional_safari_reads": 3,
+  "ui_tests": "10 passed with headless Streamlit AppTest and actual API plus fakes; real-browser UI not checked",
+  "implementation": [
+    "prompt 1.1.0 with escaped fields",
+    "case and dataset identity in evaluation reports",
+    "compatible-run comparison and per-case release blocks",
+    "authenticated reviewer-curated export and Streamlit downloads"
+  ],
+  "sessions_1_2": {
+    "visual_pages_reviewed": 35,
+    "unresolved_visual_findings": 0,
+    "editable_architecture_diagrams": {
+      "session1": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "session2": [
+        3,
+        5,
+        7,
+        10,
+        13,
+        16
+      ]
+    },
+    "verification_report": "session_1_2_verification.md",
+    "source_workspaces": [
+      "NexaAssist_S1_syllabus_20261024",
+      "NexaAssist_S2_core_20261024"
+    ],
+    "primary_alignment": "SYLLABUS_ALIGNMENT.md",
+    "machine_alignment": "syllabus_alignment.json",
+    "visual_review_method": "Rendered four-page views plus selected full-size checks",
+    "practical_minutes_each": 90,
+    "originals_preserved": "Each native workspace sources/source.pptx",
+    "scope_limit": "Session 2 retains RAGOps and adds core topic sections; alternative frameworks and live exercises are labeled.",
+    "slides": {
+      "session1": 16,
+      "session2": 19
+    },
+    "notes": {
+      "session1": 16,
+      "session2": 19
+    },
+    "pdf_pages": {
+      "session1": 16,
+      "session2": 19
+    }
+  },
+  "primary_syllabus": "LLMOps_Syllabus.md + user Session 2 core brief",
+  "source_visit_scope": "Historical Educative edition; local syllabus is primary for revised Sessions 1–2",
+  "scope": [
+    2
+  ],
+  "application_code_changed": false,
+  "implementation_scope": "Implementation list records prior application work; this revision changes teaching artifacts only",
+  "test_contract_update": "Session 2 has an explicit 19-page limit; current native authoring sources and note relationships are validated, with requested tool/model coverage checked.",
+  "session2_core": {
+    "topics": [
+      "RAGOps",
+      "observability and tracing",
+      "LLM-as-a-judge evals",
+      "gateways, fallback, load balancing and caching",
+      "security and guardrails"
+    ],
+    "models": [
+      "qwen3.5:9b-mlx",
+      "qwen3-embedding:0.6b",
+      "OpenAI chat selected through environment",
+      "text-embedding-3-small"
+    ],
+    "live_practical_guide": "../session2/live_practicals.md",
+    "gateway_config": "../session2/litellm.yaml",
+    "yaml_check": "parsed; four aliases, chat-only fallback, env secrets, cache off initially",
+    "snippet_checks": "both Python examples compile; installed Ragas signatures inspected",
+    "services": "Ollama 11434 unreachable; LiteLLM and Guardrails AI absent from app environment; no models pulled or live provider/Atlas/Datadog calls made"
+  }
+}

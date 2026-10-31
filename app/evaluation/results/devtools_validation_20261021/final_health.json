@@ -1,0 +1,34 @@
+[
+  {
+    "path": "/health",
+    "http_status": 200,
+    "response": {
+      "status": "ok"
+    }
+  },
+  {
+    "path": "/metrics",
+    "http_status": 200,
+    "response": {
+      "retrieval_requests_total": 29,
+      "retrieval_errors_total": 0,
+      "retrieval_empty_total": 0,
+      "retrieval_latency_ms_total": 27631.94
+    }
+  },
+  {
+    "path": "/metrics/latency",
+    "http_status": 200,
+    "response": {
+      "sample_count": 29,
+      "p50_ms": 665.62,
+      "p95_ms": 3537.72,
+      "p99_ms": 3755.16
+    }
+  },
+  {
+    "path": "Streamlit /_stcore/health",
+    "http_status": 200,
+    "response": "ok"
+  }
+]

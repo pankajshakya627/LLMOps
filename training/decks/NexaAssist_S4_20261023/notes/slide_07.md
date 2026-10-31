@@ -1,0 +1,1 @@
+422 → repair the request. 429 + Retry-After → respect the quota. 503 → dependency unavailable; preserve private details. Ask learners what the UI should show for each status. The existing interface already handles rate-limit feedback separately from unavailable service errors.

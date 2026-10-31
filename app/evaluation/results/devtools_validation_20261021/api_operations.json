@@ -1,0 +1,38 @@
+[
+  {
+    "method": "GET",
+    "path": "/health"
+  },
+  {
+    "method": "GET",
+    "path": "/metrics"
+  },
+  {
+    "method": "GET",
+    "path": "/metrics/latency"
+  },
+  {
+    "method": "POST",
+    "path": "/retrieve"
+  },
+  {
+    "method": "POST",
+    "path": "/answer/evaluated"
+  },
+  {
+    "method": "POST",
+    "path": "/answer"
+  },
+  {
+    "method": "POST",
+    "path": "/feedback"
+  },
+  {
+    "method": "GET",
+    "path": "/feedback"
+  },
+  {
+    "method": "POST",
+    "path": "/feedback/{feedback_id}/review"
+  }
+]

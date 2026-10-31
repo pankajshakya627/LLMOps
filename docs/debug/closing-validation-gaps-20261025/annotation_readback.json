@@ -1,0 +1,83 @@
+{
+  "span_id": "e3de90c16f6b867e",
+  "annotations": [
+    {
+      "id": "U3BhbkFubm90YXRpb246NA==",
+      "created_at": "2026-10-25T08:37:47+00:00",
+      "updated_at": "2026-10-25T08:37:47+00:00",
+      "source": "API",
+      "user_id": null,
+      "name": "ragas_context_recall",
+      "annotator_kind": "LLM",
+      "result": {
+        "label": "scored",
+        "score": 1.0,
+        "explanation": null
+      },
+      "metadata": {
+        "reference_source": "provided"
+      },
+      "identifier": "",
+      "span_id": "e3de90c16f6b867e"
+    },
+    {
+      "id": "U3BhbkFubm90YXRpb246Mw==",
+      "created_at": "2026-10-25T08:37:47+00:00",
+      "updated_at": "2026-10-25T08:37:47+00:00",
+      "source": "API",
+      "user_id": null,
+      "name": "ragas_context_precision",
+      "annotator_kind": "LLM",
+      "result": {
+        "label": "scored",
+        "score": 0.09999999999,
+        "explanation": null
+      },
+      "metadata": {
+        "reference_source": "provided"
+      },
+      "identifier": "",
+      "span_id": "e3de90c16f6b867e"
+    },
+    {
+      "id": "U3BhbkFubm90YXRpb246Mg==",
+      "created_at": "2026-10-25T08:37:47+00:00",
+      "updated_at": "2026-10-25T08:37:47+00:00",
+      "source": "API",
+      "user_id": null,
+      "name": "ragas_answer_relevancy",
+      "annotator_kind": "LLM",
+      "result": {
+        "label": "scored",
+        "score": 0.6727544976571432,
+        "explanation": null
+      },
+      "metadata": {
+        "reference_source": "provided"
+      },
+      "identifier": "",
+      "span_id": "e3de90c16f6b867e"
+    },
+    {
+      "id": "U3BhbkFubm90YXRpb246MQ==",
+      "created_at": "2026-10-25T08:37:47+00:00",
+      "updated_at": "2026-10-25T08:37:47+00:00",
+      "source": "API",
+      "user_id": null,
+      "name": "ragas_faithfulness",
+      "annotator_kind": "LLM",
+      "result": {
+        "label": "scored",
+        "score": 1.0,
+        "explanation": null
+      },
+      "metadata": {
+        "reference_source": "provided"
+      },
+      "identifier": "",
+      "span_id": "e3de90c16f6b867e"
+    }
+  ],
+  "trace_id": "6eeeb344e22fa903cca68dc56ec708e3",
+  "project_identifier": "nexaassist-gap-validation"
+}

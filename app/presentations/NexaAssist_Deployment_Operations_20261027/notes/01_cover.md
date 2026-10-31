@@ -1,0 +1,3 @@
+This workshop uses NexaAssist, a fictional banking policy assistant with synthetic data. The learning goal is to deploy the current repository, follow a real request through its boundaries and choose an evidence-based response to an incident. The deck is a code/configuration snapshot dated 27 October 2026. Historical observations are explicitly dated 25 October; scenario outcomes are acceptance criteria to verify during the class, not new measurements. Allow 60–90 minutes with the companion LAB_GUIDE.md open for full commands. The app explains policies; it does not approve loans. We use the approved enterprise training format with editable diagrams and notes.
+
+Run the NexaAssist services and investigate real LLMOps incidents.

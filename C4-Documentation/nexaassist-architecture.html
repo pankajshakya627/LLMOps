@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NexaAssist architecture explorer</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; background: #101925; color: #e5edf7; }
+    body { max-width: 1200px; margin: auto; padding: 24px; }
+    h1 { margin-bottom: 8px; } p { line-height: 1.6; }
+    a { color: #90ceff; } button, select { font: inherit; padding: 9px 14px; border: 1px solid #8ca3bb; border-radius: 6px; background: #172b40; color: inherit; }
+    button { cursor: pointer; } button:disabled { opacity: .45; cursor: default; }
+    :focus-visible { outline: 3px solid #ffd27a; outline-offset: 4px; }
+    nav { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 24px 0; }
+    .canvas { overflow-x: auto; border: 1px solid #668099; border-radius: 12px; background: #132336; }
+    svg { display: block; width: 100%; min-width: 700px; }
+    .node { cursor: pointer; } .node rect { fill: #203a54; stroke: #7896b4; stroke-width: 2; }
+    .node.selected rect { stroke: #ffd27a; stroke-width: 4; }
+    .node text { fill: #edf5ff; font-size: 18px; pointer-events: none; }
+    .node .kind { fill: #b6cee5; font-size: 13px; }
+    .edge { fill: none; stroke: #7393b1; stroke-width: 2; }
+    .edge.active { stroke: #ffd27a; stroke-width: 4; stroke-dasharray: 8 5; animation: flow 1s linear infinite; }
+    marker path { fill: #bdd4ea; }
+    aside { border-left: 4px solid #ffd27a; padding: 0 20px; margin-top: 24px; }
+    li { margin: 8px 0; } #step { min-height: 3em; } footer { margin-top: 30px; color: #b6cee5; }
+    @keyframes flow { to { stroke-dashoffset: -26; } }
+    @media (prefers-reduced-motion: reduce) { .edge.active { animation: none; } }
+    @media print { nav { display: none; } body { color: black; background: white; } }
+  </style>
+</head>
+<body>
+  <header>
+    <p>NEXAASSIST · REPOSITORY ARCHITECTURE</p>
+    <h1>From policy documents to cited answers</h1>
+    <p>Choose a view, select a component, or follow its narrated steps. This offline map describes the code;
+      it does not establish that models, Atlas or Phoenix are running.</p>
+  </header>
+  <nav aria-label="Architecture walkthrough">
+    <label for="view">View</label><select id="view"></select>
+    <button id="previous" type="button">Previous step</button>
+    <button id="next" type="button">Next step</button>
+    <span id="progress"></span>
+  </nav>
+  <h2 id="view-title"></h2>
+  <p id="description"></p>
+  <div class="canvas">
+    <svg id="diagram" viewBox="0 0 1000 420" role="group" aria-label="Selectable architecture components"></svg>
+  </div>
+  <p id="step" aria-live="polite"></p>
+  <aside aria-labelledby="component-title">
+    <h2 id="component-title"></h2><p id="component-description"></p>
+    <ul id="code-links" aria-label="Component source files"></ul>
+  </aside>
+  <footer>
+    <p>Arrows illustrate the labelled dependencies or data flow, rather than every Python call.
+      Code links are relative to the repository; keep this file inside <code>C4-Documentation/</code>.</p>
+    <p><a href="architecture-explorer.md">Reading guide</a> ·
+      <a href="../app/operations/README.md">Runtime operations guide</a> · <a href="../README.md">README</a></p>
+  </footer>
+  <noscript><p>Enable JavaScript to explore the diagram, or read the linked README and architecture reading guide.</p></noscript>
+<script id="architecture-data" type="application/json">
+{
+  "catalog": {
+    "ui": {"title":"Streamlit UI","kind":"Process · presentation","description":"Renders chat, evidence and feedback. Calls HTTP endpoints; does not define chains or access Atlas directly.","code":[["app/ui/app.py","main"],["app/streamlit_app.py","entry point"]]},
+    "api": {"title":"FastAPI API","kind":"Process · serving","description":"Validates HTTP requests and delegates to services. Exposes answer, retrieval, feedback, health and metric routes.","code":[["app/main.py","create_app"],["app/api/answer.py","answer"],["app/api/operations.py","health / ready / metrics"]]},
+    "providers": {"title":"Configured models","kind":"External · model endpoints","description":"Explicit chat and embedding clients support OpenAI or compatible endpoints. Optional LiteLLM routing applies to chat; embedding families require compatible, separate corpora.","code":[["app/chains/llm.py","get_chat_model"],["app/chains/embeddings.py","get_embeddings"],["app/gateway/litellm.yaml","gateway configuration"]]},
+    "ingestion": {"title":"Ingestion CLI","kind":"Process · write path","description":"Loads the synthetic document register and invokes ingestion independently of API requests. Atlas capacity is shared with retrieval.","code":[["app/services/ingestion.py","requests_from_register / ingest / main"]]},
+    "mongo": {"title":"MongoDB Atlas","kind":"External · data stores","description":"Stores clause vectors and metadata, parent sections and feedback. Profile checks reject incompatible declared chunk/parent embedding identities. Index creation is manual.","code":[["app/database/mongo.py","ensure_embedding_profile / get_vector_store"],["app/database/retrieval.py","build_amendment_search"],["app/database/feedback.py","feedback persistence"],["app/database/indexes.md","vector index definitions"]]},
+    "telemetry": {"title":"Phoenix observability","kind":"External · optional observability","description":"OpenInference captures API/runnable/model spans; Ragas computes quality scores that are explicitly exported as Phoenix span annotations. This diagram does not verify collector receipt.","code":[["app/phoenix_main.py","create_app"],["app/core/observability.py","track_answer_usage"],["app/services/evaluation.py","answer_with_quality / score_sampled_answer"]]},
+    "service": {"title":"Answer service","kind":"Component · orchestration","description":"Scrubs input, wires the answer runnable and tracks request tokens, latency and failures. The answer chain invokes retrieval and assembles budgeted evidence before generation.","code":[["app/services/answer.py","answer_policy"],["app/chains/answer.py","build_answer_chain"],["app/chains/context.py","context assembly"]]},
+    "retrieval": {"title":"Scoped retrieval","kind":"Component · evidence","description":"Checks the corpus profile, embeds the scrubbed query, searches with access/date/product filters, expands valid parents and loads linked circulars. Hybrid search and reranking are optional.","code":[["app/services/retrieval.py","retrieve_policy / scrub_request"],["app/chains/retrieval.py","build_retrieval_chain"],["app/database/retrieval.py","build_hybrid_search / build_amendment_search"]]},
+    "generation": {"title":"Structured generation","kind":"Component · LangChain","description":"Generates an AnswerDraft from budgeted retrieved evidence. Requested and provider-reported models remain distinct provenance fields. Empty or unusable evidence can abstain before a model call.","code":[["app/chains/answer.py","build_answer_chain"],["app/chains/prompts/answer.py","answer prompt"],["app/models/answer.py","AnswerDraft / AnswerResponse"]]},
+    "validation": {"title":"Output validation","kind":"Component · answer rails","description":"Checks output PII, structured shape, cited evidence quotes and citation markers, with one citation repair attempt. Configured Guardrails AI validation runs over HTTP in a separate Python 3.13 process and fails closed.","code":[["app/chains/answer.py","build_answer_chain"],["app/chains/guardrails.py","validate_draft"],["app/security/guardrails_service.py","validate"],["app/chains/redaction.py","redact"]]},
+    "parsing": {"title":"Parse documents","kind":"Stage · source text","description":"Reads registered policy PDFs into text/table elements using the existing parser.","code":[["app/chains/parsing.py","parse_document"],["nexa_synthetic_data/document_register.json","source register"]]},
+    "chunking": {"title":"Chunk by clause","kind":"Stage · structure and size","description":"Splits parsed elements into clause-oriented chunks, retaining associated tables and applying configured size limits.","code":[["app/chains/chunking.py","chunk_by_clause"]]},
+    "enrichment": {"title":"Enrich and compare","kind":"Stage · identity and changes","description":"Adds policy headers, stable IDs, checksums and parent links. Custom embedding profile metadata is shared by chunks and parents. Compares stored checksums before embedding changed content.","code":[["app/chains/ingestion.py","build_ingestion_chain / chunk_checksum"]]},
+    "publication": {"title":"Embed and publish","kind":"Stage · incremental writes","description":"Embeds new/changed chunks, upserts them, then publishes parent sections and retires stale data after success. Writes across collections are non-transactional; concurrent profile migration is unsupported.","code":[["app/chains/ingestion.py","build_ingestion_chain"],["app/database/mongo.py","delete_stale_chunks"],["app/services/ingestion.py","ingest"]]}
+  },
+  "views": {
+    "containers": {
+      "title":"Runtime containers and external systems",
+      "description":"The API and ingestion CLI run separately. They share compatible Atlas stores and configured model endpoints. Telemetry is optional.",
+      "default":"api",
+      "nodes":[["ui",40,40],["api",370,40],["providers",700,40],["ingestion",40,290],["mongo",370,290],["telemetry",700,290]],
+      "edges":[{"id":"ui-api","from":"ui","to":"api","label":"HTTP requests"},{"id":"api-model","from":"api","to":"providers","label":"Chat and query embeddings"},{"id":"api-store","from":"api","to":"mongo","label":"Scoped reads and feedback"},{"id":"ingest-store","from":"ingestion","to":"mongo","label":"Chunk and parent writes"},{"id":"api-trace","from":"api","to":"telemetry","label":"Optional telemetry"}],
+      "steps":[{"focus":"ui","edges":["ui-api"],"text":"The UI sends HTTP requests. Direct API clients can use the same endpoints."},{"focus":"api","edges":["api-model","api-store"],"text":"The API delegates to services, which wire model clients, LangChain runnables and database adapters."},{"focus":"ingestion","edges":["ingest-store"],"text":"The independent ingestion job publishes a compatible corpus; serving does not invoke an ingestion job."},{"focus":"telemetry","edges":["api-trace"],"text":"Phoenix/OpenInference instrumentation records operations. Evaluations use separate judge and metric-embedding profiles; see the runtime guide."}]
+    },
+    "answer": {
+      "title":"Answer request walkthrough",
+      "description":"Read the top row left to right, then the lower row right to left. Retrieval and generation are separate responsibilities; validation may return abstention rather than an answer.",
+      "default":"api",
+      "nodes":[["api",40,40],["service",370,40],["retrieval",700,40],["validation",40,290],["generation",370,290],["mongo",700,290]],
+      "edges":[{"id":"request","from":"api","to":"service","label":"Validated request"},{"id":"retrieve","from":"service","to":"retrieval","label":"Retrieve evidence"},{"id":"search","from":"retrieval","to":"mongo","label":"Scoped search and expansion"},{"id":"evidence","from":"mongo","to":"generation","label":"Retrieved evidence via chain"},{"id":"validate","from":"generation","to":"validation","label":"Structured draft"}],
+      "steps":[{"focus":"api","edges":["request"],"text":"POST /answer validates the request. Provider and database failures receive a sanitized service error."},{"focus":"service","edges":["retrieve"],"text":"answer_policy redacts query PII and builds the chain with a retrieval runnable and configured chat model."},{"focus":"retrieval","edges":["search"],"text":"Retrieval validates declared embedding compatibility, performs scoped search and expands parent sections and effective linked circulars."},{"focus":"generation","edges":["evidence"],"text":"The answer chain budgets the exact retrieved evidence and generates a structured draft. Insufficient evidence can cause abstention."},{"focus":"validation","edges":["validate"],"text":"Output rails validate the draft and evidence quotations. The returned response includes citations, timings and model provenance."}]
+    },
+    "ingestion": {
+      "title":"Document ingestion walkthrough",
+      "description":"Read the top row left to right, then the lower row right to left. Embeddings and Atlas indexes must match the selected corpus profile.",
+      "default":"ingestion",
+      "nodes":[["ingestion",40,40],["parsing",370,40],["chunking",700,40],["mongo",40,290],["publication",370,290],["enrichment",700,290]],
+      "edges":[{"id":"source","from":"ingestion","to":"parsing","label":"Registered document"},{"id":"elements","from":"parsing","to":"chunking","label":"Text and tables"},{"id":"chunks","from":"chunking","to":"enrichment","label":"Clause chunks"},{"id":"changed","from":"enrichment","to":"publication","label":"New or changed chunks"},{"id":"publish","from":"publication","to":"mongo","label":"Chunks, parents, stale cleanup"}],
+      "steps":[{"focus":"ingestion","edges":["source"],"text":"The CLI validates the document register and prepares explicit ingestion requests and compatible stores."},{"focus":"parsing","edges":["elements"],"text":"The parser extracts document text and tables for clause-oriented chunking."},{"focus":"enrichment","edges":["chunks","changed"],"text":"Enrichment assigns identity, parent links and checksums; comparison selects content requiring embedding."},{"focus":"publication","edges":["publish"],"text":"After changed chunks succeed, the pipeline publishes parent sections and removes stale content. Cross-collection writes are not atomic."}]
+    }
+  }
+}
+</script>
+<script>
+  'use strict';
+  const data = JSON.parse(document.getElementById('architecture-data').textContent);
+  const viewSelect = document.getElementById('view');
+  const diagram = document.getElementById('diagram');
+  const svgNS = 'http://www.w3.org/2000/svg';
+  let stepIndex = 0;
+  for (const [id, view] of Object.entries(data.views)) {
+    const option = document.createElement('option'); option.value = id; option.textContent = view.title; viewSelect.append(option);
+  }
+  function svgElement(tag, attrs, parent, text) {
+    const element = document.createElementNS(svgNS, tag);
+    for (const [key, value] of Object.entries(attrs)) element.setAttribute(key, value);
+    if (text !== undefined) element.textContent = text;
+    parent.append(element); return element;
+  }
+  function selectComponent(id) {
+    const component = data.catalog[id];
+    for (const node of diagram.querySelectorAll('.node')) node.classList.toggle('selected', node.dataset.id === id);
+    document.getElementById('component-title').textContent = component.title;
+    document.getElementById('component-description').textContent = component.description;
+    const links = document.getElementById('code-links'); links.replaceChildren();
+    for (const [path, symbol] of component.code) {
+      const item = document.createElement('li'); const link = document.createElement('a');
+      link.href = '../' + path; link.textContent = path + ' · ' + symbol; item.append(link); links.append(item);
+    }
+  }
+  function showStep() {
+    const view = data.views[viewSelect.value]; const step = view.steps[stepIndex];
+    document.getElementById('step').textContent = step.text;
+    document.getElementById('progress').textContent = (stepIndex + 1) + ' / ' + view.steps.length;
+    document.getElementById('previous').disabled = stepIndex === 0;
+    document.getElementById('next').disabled = stepIndex === view.steps.length - 1;
+    for (const edge of diagram.querySelectorAll('.edge')) edge.classList.toggle('active', step.edges.includes(edge.dataset.id));
+    selectComponent(step.focus);
+  }
+  function renderView() {
+    const view = data.views[viewSelect.value]; stepIndex = 0; diagram.replaceChildren();
+    document.getElementById('view-title').textContent = view.title;
+    document.getElementById('description').textContent = view.description;
+    const defs = svgElement('defs', {}, diagram);
+    const marker = svgElement('marker', {id:'arrow', viewBox:'0 0 10 10', refX:9, refY:5, markerWidth:7, markerHeight:7, orient:'auto-start-reverse'}, defs);
+    svgElement('path', {d:'M 0 0 L 10 5 L 0 10 z'}, marker);
+    const positions = Object.fromEntries(view.nodes.map(([id,x,y]) => [id,[x,y]]));
+    for (const edge of view.edges) {
+      const [x1,y1] = positions[edge.from]; const [x2,y2] = positions[edge.to];
+      const vertical = y1 !== y2;
+      const startX = vertical ? x1 + 130 : x1 + (x2 > x1 ? 260 : 0);
+      const endX = vertical ? x2 + 130 : x2 + (x2 > x1 ? 0 : 260);
+      const startY = y1 + (vertical ? 90 : 45); const endY = y2 + (vertical ? 0 : 45);
+      const path = svgElement('path', {d:`M ${startX} ${startY} L ${endX} ${endY}`, class:'edge', 'data-id':edge.id, 'marker-end':'url(#arrow)'}, diagram);
+      svgElement('title', {}, path, edge.label);
+    }
+    for (const [id,x,y] of view.nodes) {
+      const component = data.catalog[id];
+      const node = svgElement('g', {class:'node', 'data-id':id, tabindex:0, role:'button', 'aria-label':component.title, transform:`translate(${x},${y})`}, diagram);
+      svgElement('rect', {width:260,height:90,rx:10}, node);
+      svgElement('text', {x:18,y:35}, node, component.title);
+      svgElement('text', {x:18,y:63,class:'kind'}, node, component.kind);
+      node.addEventListener('click', () => selectComponent(id));
+      node.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectComponent(id); } });
+    }
+    showStep();
+  }
+  viewSelect.addEventListener('change', renderView);
+  document.getElementById('previous').addEventListener('click', () => { stepIndex--; showStep(); });
+  document.getElementById('next').addEventListener('click', () => { stepIndex++; showStep(); });
+  renderView();
+</script>
+</body>
+</html>

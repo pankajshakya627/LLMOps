@@ -1,0 +1,83 @@
+{
+  "exit_code": 0,
+  "elapsed_seconds": 2.29,
+  "span_id": "4f8c9b534ef134b5",
+  "annotations": [
+    {
+      "id": "U3BhbkFubm90YXRpb246OA==",
+      "created_at": "2026-10-25T08:47:07+00:00",
+      "updated_at": "2026-10-25T08:47:07+00:00",
+      "source": "API",
+      "user_id": null,
+      "name": "ragas_context_recall",
+      "annotator_kind": "CODE",
+      "result": {
+        "label": "unavailable",
+        "score": null,
+        "explanation": "Provide a reference answer, or use an exactly matching golden case."
+      },
+      "metadata": {
+        "reference_source": "none"
+      },
+      "identifier": "",
+      "span_id": "4f8c9b534ef134b5"
+    },
+    {
+      "id": "U3BhbkFubm90YXRpb246Nw==",
+      "created_at": "2026-10-25T08:47:07+00:00",
+      "updated_at": "2026-10-25T08:47:07+00:00",
+      "source": "API",
+      "user_id": null,
+      "name": "ragas_context_precision",
+      "annotator_kind": "CODE",
+      "result": {
+        "label": "unavailable",
+        "score": null,
+        "explanation": "Provide a reference answer, or use an exactly matching golden case."
+      },
+      "metadata": {
+        "reference_source": "none"
+      },
+      "identifier": "",
+      "span_id": "4f8c9b534ef134b5"
+    },
+    {
+      "id": "U3BhbkFubm90YXRpb246Ng==",
+      "created_at": "2026-10-25T08:47:07+00:00",
+      "updated_at": "2026-10-25T08:47:07+00:00",
+      "source": "API",
+      "user_id": null,
+      "name": "ragas_answer_relevancy",
+      "annotator_kind": "CODE",
+      "result": {
+        "label": "unavailable",
+        "score": null,
+        "explanation": "The answer abstained; this metric is not applicable."
+      },
+      "metadata": {
+        "reference_source": "none"
+      },
+      "identifier": "",
+      "span_id": "4f8c9b534ef134b5"
+    },
+    {
+      "id": "U3BhbkFubm90YXRpb246NQ==",
+      "created_at": "2026-10-25T08:47:07+00:00",
+      "updated_at": "2026-10-25T08:47:07+00:00",
+      "source": "API",
+      "user_id": null,
+      "name": "ragas_faithfulness",
+      "annotator_kind": "CODE",
+      "result": {
+        "label": "unavailable",
+        "score": null,
+        "explanation": "The answer abstained; this metric is not applicable."
+      },
+      "metadata": {
+        "reference_source": "none"
+      },
+      "identifier": "",
+      "span_id": "4f8c9b534ef134b5"
+    }
+  ]
+}
