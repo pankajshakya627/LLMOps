@@ -401,11 +401,25 @@ The reusable `nexa-lab-openai` credential secret remains outside session teardow
 To remove its paid storage too, after all OpenAI sessions are gone:
 
 ```bash
-aws secretsmanager delete-secret --secret-id nexa-lab-openai --force-delete-without-recovery
+aws secretsmanager delete-secret --profile nexa-lab --region ap-south-1 \
+  --secret-id nexa-lab-openai --recovery-window-in-days 7
 ```
 
-This permanently deletes the stored secret; it does not revoke the underlying
-OpenAI key. Revoke that key in OpenAI separately if it is no longer used.
+Secrets marked for deletion are inaccessible and not charged during the recovery
+window. On 31 October 2026 the full cost cleanup marked this secret for deletion
+and removed the unused CloudFormation template-upload bucket. Before starting
+another session during the recovery window, restore the secret:
+
+```bash
+aws secretsmanager restore-secret --profile nexa-lab --region ap-south-1 \
+  --secret-id nexa-lab-openai
+```
+
+Restoring resumes normal secret storage billing. After permanent deletion,
+recreate the plaintext secret and update its ARN in GitHub instead. Deleting the
+AWS secret does not revoke the underlying OpenAI key; revoke it in OpenAI
+separately if no longer used.
+[AWS secret deletion and recovery](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_delete-secret.html).
 
 ## Validation and decision evidence
 

@@ -1,5 +1,40 @@
 # AWS lab verification — 31 October 2026
 
+## Final chargeable-resource cleanup — 23:30 IST
+
+The latest session from run `41211732355` reached `DELETE_COMPLETE` at
+21:20:38 IST. A subsequent private audit ran 840 inventory checks across all
+17 enabled Regions and global services. No nonterminated EC2 instances, EBS
+volumes, owned snapshots, Elastic IPs, NAT gateways, VPC endpoints, network
+interfaces, load balancers, ECR repositories, Lambda functions, log groups,
+alarms or schedules were found. Accessible database, container, search, cache,
+file-storage, API, notebook/job, WAF, domain-zone and commitment checks returned
+no active resources. Customer-managed KMS key checks found none.
+
+Two chargeable leftovers were addressed: the reusable OpenAI secret was marked
+for deletion with a seven-day recovery window, and the sole remaining S3 object
+and bucket were deleted. The object was verified byte-for-byte against the
+repository's bootstrap template before removal. A fresh global S3 listing was
+empty; the secret's deletion marker was confirmed. Restore the secret before
+the next lab start if still within its recovery window.
+
+Only the IAM/OIDC bootstrap stack remains active; it contains no running
+compute/storage. The tagging API retained a historical instance entry, but the
+live EC2 inventory had no nonterminated instance. No GitHub jobs were active
+at the audit check. Audit reports are private local files, not published account
+inventory.
+
+Limitations: 86 checks could not enumerate Kinesis, FSx, Redshift or registered
+domains because the account was unsubscribed or its Free plan disallowed the
+service. No service subscriptions or plan upgrades were enabled. Other audit
+checks returned without unexpected failures. This is a broad inventory of
+common billable services, not an exhaustive guarantee covering every AWS SKU.
+Cost Explorer returned an estimated USD 0 with no service groups for the day;
+the final bill and separate OpenAI usage are not reconciled. Billing can update
+after cleanup. [AWS billing refresh](https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html).
+
+The earlier sections are historical deployment and validation receipts.
+
 ## Successful live application deployment
 
 [Run 41204777838](https://github.com/pankajshakya627/LLMOps/actions/runs/41204777838)
