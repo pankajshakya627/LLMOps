@@ -72,6 +72,7 @@ jobs:
       - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
         with:
           version: '0.13.5'
+          python-version: '3.14'
       - uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708 # v5
         with:
           role-to-assume: ${{ vars.AWS_GITHUB_ROLE_ARN }}
