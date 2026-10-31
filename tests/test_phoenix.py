@@ -293,6 +293,7 @@ def test_evaluated_api_schedules_annotations_for_its_own_span(
     monkeypatch.setattr(api, "publish_annotations_safely", publisher)
     app = create_app()
     app.dependency_overrides[get_settings] = lambda: settings
+    monkeypatch.setattr("app.main.get_settings", lambda: settings)
     with TestClient(app) as client:
         response = client.post(
             "/answer/evaluated", json={"query": "Maximum loan?", "as_of": "2026-10-01"}
