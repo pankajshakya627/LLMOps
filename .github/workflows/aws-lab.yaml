@@ -11,6 +11,11 @@ on:
         type: string
         default: nexa-lab-training
         description: Session stack name (nexa-lab- prefix, lowercase; never reuse a live name with start)
+      model_provider:
+        type: choice
+        options: [openai, bedrock]
+        default: openai
+        description: OpenAI is the default. Bedrock requires explicit bootstrap opt-in and a new session.
       minutes:
         type: choice
         options: ['60', '120']
@@ -46,11 +51,15 @@ jobs:
       LAB_OPERATION: ${{ inputs.operation }}
       LAB_MINUTES: ${{ inputs.minutes }}
       LAB_BUDGET: ${{ inputs.budget }}
+      LAB_PROVIDER: ${{ inputs.model_provider }}
       CF_ROLE: ${{ vars.AWS_CLOUDFORMATION_ROLE_ARN }}
       BOUNDARY: ${{ vars.AWS_SESSION_BOUNDARY_ARN }}
       MODELS: ${{ vars.BEDROCK_MODEL_ARNS }}
-      CHAT_ROUTE: ${{ vars.BEDROCK_CHAT_ROUTE }}
-      JUDGE_ROUTE: ${{ vars.BEDROCK_JUDGE_ROUTE }}
+      OPENAI_SECRET: ${{ vars.OPENAI_API_KEY_SECRET_ARN }}
+      OPENAI_CHAT_ROUTE: ${{ vars.OPENAI_LITELLM_CHAT_MODEL || 'openai/gpt-6-luna' }}
+      OPENAI_JUDGE_ROUTE: ${{ vars.OPENAI_LITELLM_JUDGE_MODEL || 'openai/gpt-6-luna' }}
+      BEDROCK_CHAT_ROUTE: ${{ vars.BEDROCK_CHAT_ROUTE }}
+      BEDROCK_JUDGE_ROUTE: ${{ vars.BEDROCK_JUDGE_ROUTE }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Require the default branch and configured AWS settings
@@ -62,11 +71,17 @@ jobs:
           if [ "$LAB_OPERATION" = start ]; then
             test -n "$CF_ROLE"
             test -n "$BOUNDARY"
-            test -n "$MODELS"
+            if [ "$LAB_PROVIDER" = openai ]; then
+              test -n "$OPENAI_SECRET"
+            else
+              test -n "$MODELS"
+            fi
           fi
           if [ "$LAB_OPERATION" = start ] || [ "$LAB_OPERATION" = deploy ]; then
-            test -n "$CHAT_ROUTE"
-            test -n "$JUDGE_ROUTE"
+            if [ "$LAB_PROVIDER" = bedrock ]; then
+              test -n "$BEDROCK_CHAT_ROUTE"
+              test -n "$BEDROCK_JUDGE_ROUTE"
+            fi
           fi
           [[ "$LAB_STACK" =~ ^nexa-lab-[a-z0-9-]{1,25}$ ]]
       - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
@@ -86,10 +101,10 @@ jobs:
           uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" create \
             --minutes "$LAB_MINUTES" --budget "$LAB_BUDGET" \
             --cloudformation-role-arn "$CF_ROLE" --boundary-arn "$BOUNDARY" \
-            --model-resources "$MODELS"
+            --provider "$LAB_PROVIDER" --openai-secret-arn "$OPENAI_SECRET" --model-resources "$MODELS"
       - name: Read session outputs
         if: inputs.operation == 'start' || inputs.operation == 'deploy'
-        run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" status > session-outputs.json
+        run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" status --provider "$LAB_PROVIDER" > session-outputs.json
       - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
         if: inputs.operation == 'start' || inputs.operation == 'deploy'
       - name: Build three images and resolve immutable digests
@@ -120,12 +135,19 @@ jobs:
       - name: Deploy, ingest synthetic corpus, and smoke test
         if: inputs.operation == 'start' || inputs.operation == 'deploy'
         run: |
+          if [ "$LAB_PROVIDER" = bedrock ]; then
+            CHAT_ROUTE="$BEDROCK_CHAT_ROUTE"
+            JUDGE_ROUTE="$BEDROCK_JUDGE_ROUTE"
+          else
+            CHAT_ROUTE="$OPENAI_CHAT_ROUTE"
+            JUDGE_ROUTE="$OPENAI_JUDGE_ROUTE"
+          fi
           uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" deploy \
             --images images.json --release-id "$GITHUB_SHA-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" \
-            --chat-route "$CHAT_ROUTE" --judge-route "$JUDGE_ROUTE"
+            --provider "$LAB_PROVIDER" --chat-route "$CHAT_ROUTE" --judge-route "$JUDGE_ROUTE"
       - name: Run one explicitly requested paid evaluation
         if: inputs.operation == 'evaluate'
-        run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" evaluate
+        run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" evaluate --provider "$LAB_PROVIDER"
       - name: Destroy session and verify deletion
         if: inputs.operation == 'destroy'
         run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" destroy

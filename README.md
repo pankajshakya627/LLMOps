@@ -5,7 +5,9 @@ bank. The corpus and examples are synthetic.
 
 For disposable **1–2 hour AWS sessions** and GitHub Actions CI/CD, follow the
 [AWS lab runbook](infra/aws/README.md). The $3–$8 allowance is a planning target;
-the deployment includes scheduled teardown.
+the deployment includes scheduled teardown. The AWS profile uses **OpenAI for
+chat, evaluation and embeddings** by default, with no Bedrock calls or resources.
+Bedrock is available only through the [explicit opt-in instructions](infra/aws/README.md#optional-bedrock-mode--disabled-by-default).
 
 The application uses **LiteLLM** for chat routing/fallback, load balancing and
 optional exact response caching; **Guardrails AI** plus application checks for

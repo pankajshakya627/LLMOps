@@ -46,12 +46,24 @@ def stack_outputs(stack: str) -> dict[str, str]:
 
 
 def create(args: argparse.Namespace) -> None:
+    if args.provider == "openai":
+        if not re.fullmatch(
+            r"arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:nexa-lab-openai-[A-Za-z0-9]{6}",
+            args.openai_secret_arn,
+        ):
+            raise ValueError("OpenAI requires the ARN of a plaintext secret named nexa-lab-openai")
+        if args.openai_secret_arn.split(":")[3] != boto3.session.Session().region_name:
+            raise ValueError("Store the OpenAI secret in the same AWS Region as the session")
+    elif not args.model_resources:
+        raise ValueError("Bedrock requires explicit approved model/profile ARNs")
     expires = datetime.now(UTC) + timedelta(minutes=args.minutes)
     parameters = {
         "SessionMinutes": str(args.minutes),
         "ExpiresAt": expires.strftime("%Y-%m-%dT%H:%M:%S"),
         "BoundaryArn": args.boundary_arn,
-        "ModelResources": args.model_resources,
+        "ModelProvider": args.provider,
+        "OpenAIKeySecretArn": args.openai_secret_arn if args.provider == "openai" else "",
+        "ModelResources": args.model_resources if args.provider == "bedrock" else "",
     }
     cf = client("cloudformation")
     created = cf.create_stack(
@@ -80,7 +92,15 @@ def create(args: argparse.Namespace) -> None:
     )
 
 
+def require_provider(data: dict[str, str], provider: str) -> None:
+    if provider != data.get("ModelProvider", "bedrock"):
+        raise ValueError(
+            "Cannot change providers within a session; destroy it and create a new one"
+        )
+
+
 def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Path, str]:
+    require_provider(data, args.provider)
     if not re.fullmatch(r"[a-zA-Z0-9_-]{1,100}", args.release_id):
         raise ValueError("Invalid release ID")
     images = json.loads(Path(args.images).read_text())
@@ -93,20 +113,33 @@ def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Pat
     ):
         if not re.fullmatch(re.escape(data[repository]) + r"@sha256:[a-f0-9]{64}", images[key]):
             raise ValueError(f"{key} must be a digest in this session's ECR repository")
+    prefix = "openai/" if args.provider == "openai" else "bedrock/converse/"
     for route in (args.chat_route, args.judge_route):
-        if not re.fullmatch(r"bedrock/converse/[a-zA-Z0-9._:/-]+", route):
-            raise ValueError("Use an approved bedrock/converse/ model or inference-profile route")
+        if not re.fullmatch(re.escape(prefix) + r"[a-zA-Z0-9._:/-]+", route):
+            raise ValueError(f"Use an approved {prefix} route for this session")
     config = {
         **images,
+        "MODEL_PROVIDER": args.provider,
+        "COMPOSE_FILE": "compose.yaml",
         "AWS_REGION": boto3.session.Session().region_name,
         "SECRET_ARN": data["SecretArn"],
         "BUCKET": data["Bucket"],
-        "BEDROCK_GUARDRAIL_ID": data["GuardrailId"],
-        "BEDROCK_GUARDRAIL_VERSION": data["GuardrailVersion"],
-        "BEDROCK_CHAT_ROUTE": args.chat_route,
-        "BEDROCK_JUDGE_ROUTE": args.judge_route,
         "RELEASE_ID": args.release_id,
     }
+    if args.provider == "openai":
+        config.update(
+            OPENAI_API_KEY_SECRET_ARN=data["OpenAIKeySecretArn"],
+            OPENAI_LITELLM_CHAT_MODEL=args.chat_route,
+            OPENAI_LITELLM_JUDGE_MODEL=args.judge_route,
+        )
+    else:
+        config.update(
+            COMPOSE_FILE="compose.yaml:compose.bedrock.yaml",
+            BEDROCK_GUARDRAIL_ID=data["GuardrailId"],
+            BEDROCK_GUARDRAIL_VERSION=data["GuardrailVersion"],
+            BEDROCK_CHAT_ROUTE=args.chat_route,
+            BEDROCK_JUDGE_ROUTE=args.judge_route,
+        )
     register = ROOT / "nexa_synthetic_data/document_register.json"
     archive = Path(args.archive)
     with tarfile.open(archive, "w:gz") as tar:
@@ -116,6 +149,8 @@ def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Pat
             (register, "corpus/document_register.json"),
         ):
             tar.add(source, arcname=name)
+        if args.provider == "bedrock":
+            tar.add(ROOT / "app/compose.aws.bedrock.yaml", arcname="compose.bedrock.yaml")
         for entry in json.loads(register.read_text()):
             relative = Path(entry["file"])
             if relative.is_absolute() or ".." in relative.parts:
@@ -252,7 +287,9 @@ def main() -> None:
     start = commands.add_parser("create")
     start.add_argument("--minutes", type=int, choices=[60, 120], default=120)
     start.add_argument("--budget", type=int, choices=range(3, 9), default=5)
-    start.add_argument("--model-resources", required=True)
+    start.add_argument("--provider", choices=["openai", "bedrock"], default="openai")
+    start.add_argument("--openai-secret-arn", default="")
+    start.add_argument("--model-resources", default="")
     start.add_argument("--boundary-arn", required=True)
     start.add_argument("--cloudformation-role-arn", required=True)
     start.add_argument("--output", default="session-outputs.json")
@@ -260,13 +297,16 @@ def main() -> None:
     release = commands.add_parser("deploy")
     release.add_argument("--images", required=True)
     release.add_argument("--release-id", required=True)
-    release.add_argument("--chat-route", required=True)
-    release.add_argument("--judge-route", required=True)
+    release.add_argument("--provider", choices=["openai", "bedrock"], default="openai")
+    release.add_argument("--chat-route", default="openai/gpt-6-luna")
+    release.add_argument("--judge-route", default="openai/gpt-6-luna")
     release.add_argument("--archive", default="release.tar.gz")
-    commands.add_parser("evaluate")
+    evaluate = commands.add_parser("evaluate")
+    evaluate.add_argument("--provider", choices=["openai", "bedrock"], default="openai")
     stop = commands.add_parser("destroy")
     stop.add_argument("--receipt", help="Only destroy the stack ID recorded by this create")
-    commands.add_parser("status")
+    status = commands.add_parser("status")
+    status.add_argument("--provider", choices=["openai", "bedrock"])
     args = parser.parse_args()
     if not re.fullmatch(r"nexa-lab-[a-z0-9-]{1,25}", args.stack):
         parser.error("Stack must match nexa-lab-[a-z0-9-]{1,25}")
@@ -281,6 +321,7 @@ def main() -> None:
         if args.action == "deploy":
             deploy(args, data)
         elif args.action == "evaluate":
+            require_provider(data, args.provider)
             run_remote(
                 data["InstanceId"], "set -eu; cd /opt/nexaassist/current; bash host.sh evaluate"
             )
@@ -292,6 +333,8 @@ def main() -> None:
                 ],
             )
         else:
+            if args.provider:
+                require_provider(data, args.provider)
             print(json.dumps(data, indent=2))
     except Exception as exc:  # noqa: BLE001 - CLI failures share one sanitized recovery contract.
         summary = type(exc).__name__

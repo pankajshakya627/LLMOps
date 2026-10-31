@@ -9,8 +9,14 @@ Parameters:
     Type: String
     Default: ''
     Description: Supply the account's existing token.actions.githubusercontent.com provider ARN, or leave empty to create it.
+  EnableBedrock:
+    Type: String
+    Default: 'false'
+    AllowedValues: ['false', 'true']
+    Description: Explicitly grant optional Bedrock provisioning and runtime capabilities.
 Conditions:
   CreateProvider: !Equals [!Ref ExistingOidcProviderArn, '']
+  UseBedrock: !Equals [!Ref EnableBedrock, 'true']
 Resources:
   Provider:
     Type: AWS::IAM::OIDCProvider
@@ -37,12 +43,18 @@ Resources:
           - Effect: Allow
             Action: secretsmanager:GetSecretValue
             Resource: !Sub 'arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:nexa-lab-*'
-          - Effect: Allow
-            Action: [bedrock:InvokeModel, bedrock:InvokeModelWithResponseStream]
-            Resource: !Sub 'arn:${AWS::Partition}:bedrock:*:*:*'
-          - Effect: Allow
-            Action: bedrock:ApplyGuardrail
-            Resource: !Sub 'arn:${AWS::Partition}:bedrock:${AWS::Region}:${AWS::AccountId}:guardrail/*'
+          - !If
+            - UseBedrock
+            - Effect: Allow
+              Action: [bedrock:InvokeModel, bedrock:InvokeModelWithResponseStream]
+              Resource: !Sub 'arn:${AWS::Partition}:bedrock:*:*:*'
+            - !Ref AWS::NoValue
+          - !If
+            - UseBedrock
+            - Effect: Allow
+              Action: bedrock:ApplyGuardrail
+              Resource: !Sub 'arn:${AWS::Partition}:bedrock:${AWS::Region}:${AWS::AccountId}:guardrail/*'
+            - !Ref AWS::NoValue
           - Effect: Allow
             Action: [logs:CreateLogStream, logs:PutLogEvents]
             Resource: [!Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/nexaassist/nexa-lab-*:*', !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/nexa-lab-*:*']
@@ -99,9 +111,12 @@ Resources:
               - Effect: Allow
                 Action: secretsmanager:GetRandomPassword
                 Resource: '*'
-              - Effect: Allow
-                Action: [bedrock:CreateGuardrail, bedrock:GetGuardrail, bedrock:CreateGuardrailVersion, bedrock:DeleteGuardrail, bedrock:ListTagsForResource, bedrock:TagResource, bedrock:UntagResource]
-                Resource: '*'
+              - !If
+                - UseBedrock
+                - Effect: Allow
+                  Action: [bedrock:CreateGuardrail, bedrock:GetGuardrail, bedrock:CreateGuardrailVersion, bedrock:DeleteGuardrail, bedrock:ListTagsForResource, bedrock:TagResource, bedrock:UntagResource]
+                  Resource: '*'
+                - !Ref AWS::NoValue
               - Effect: Allow
                 Action: [logs:CreateLogGroup, logs:DeleteLogGroup, logs:PutRetentionPolicy, logs:DeleteRetentionPolicy, logs:TagResource, logs:UntagResource, logs:ListTagsForResource]
                 Resource: [!Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/nexaassist/nexa-lab-*', !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/nexa-lab-*', !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/nexaassist/nexa-lab-*:*', !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/nexa-lab-*:*']

@@ -1,0 +1,25 @@
+# Optional override: use only with an explicitly provisioned Bedrock session.
+services:
+  gateway:
+    command: ["litellm", "--config", "/opt/gateway/litellm_bedrock.yaml", "--host", "0.0.0.0", "--port", "4000", "--num_workers", "1"]
+    environment:
+      OPENAI_API_KEY: ""
+      BEDROCK_CHAT_ROUTE: ${BEDROCK_CHAT_ROUTE:?required}
+      BEDROCK_JUDGE_ROUTE: ${BEDROCK_JUDGE_ROUTE:?required}
+      AWS_REGION_NAME: ${AWS_REGION:?required}
+  api:
+    environment:
+      CHAT_MODEL: nexa-chat-bedrock
+      CHAT_TIMEOUT_SECONDS: "120"
+      EMBEDDING_MODEL: nexa-embed-bedrock
+      EMBEDDING_DIMENSIONS: "1024"
+      EMBEDDING_PROFILE: titan-v2-1024-v1
+      MONGODB_COLLECTION: lab_chunks_titan_v2
+      MONGODB_PARENT_COLLECTION: lab_parents_titan_v2
+      EVAL_JUDGE_MODEL: nexa-judge-bedrock
+      EVAL_EMBEDDING_MODEL: nexa-embed-bedrock
+      EVAL_EMBEDDING_DIMENSIONS: "1024"
+      EVAL_EMBEDDING_PROFILE: titan-v2-1024-v1
+      BEDROCK_REGION: ${AWS_REGION:?required}
+      BEDROCK_GUARDRAIL_ID: ${BEDROCK_GUARDRAIL_ID:?required}
+      BEDROCK_GUARDRAIL_VERSION: ${BEDROCK_GUARDRAIL_VERSION:?required}

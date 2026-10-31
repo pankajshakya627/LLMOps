@@ -10,44 +10,60 @@ export AWS_DEFAULT_REGION="$region"
 
 if [ "$action" = deploy ]; then
   umask 077
+  trap 'rm -f /run/nexaassist-secret /run/nexaassist-openai-key' EXIT
   secret_arn="$(python3 -c 'import json; print(json.load(open("release.json"))["SECRET_ARN"])')"
   aws secretsmanager get-secret-value --region "$region" --secret-id "$secret_arn" \
     --query SecretString --output text > /run/nexaassist-secret
-  python3 - <<'PY'
+  provider="$(python3 -c 'import json; print(json.load(open("release.json"))["MODEL_PROVIDER"])')"
+  if [ "$provider" = openai ]; then
+    openai_arn="$(python3 -c 'import json; print(json.load(open("release.json"))["OPENAI_API_KEY_SECRET_ARN"])')"
+    aws secretsmanager get-secret-value --region "$region" --secret-id "$openai_arn" \
+      --query SecretString --output text > /run/nexaassist-openai-key
+  fi
+  python3 - /run/nexaassist-secret /run/nexaassist-openai-key <<'PY'
 import json
+import re
+import sys
 from pathlib import Path
 
 config = json.loads(Path('release.json').read_text())
-material = Path('/run/nexaassist-secret').read_text().strip()
+material_path, key_path = map(Path, sys.argv[1:])
+material = material_path.read_text().strip()
 if len(material) != 96 or not material.isalnum():
     raise ValueError('Unexpected session secret format')
 config.update(POSTGRES_PASSWORD=material[:32], LITELLM_MASTER_KEY='sk-'+material[32:64],
               FEEDBACK_REVIEWER_TOKEN=material[64:])
+if config['MODEL_PROVIDER'] == 'openai':
+    key = key_path.read_text().strip()
+    if not re.fullmatch(r'sk-[A-Za-z0-9_-]+', key):
+        raise ValueError('OpenAI secret must contain only the API key in plaintext')
+    config['OPENAI_API_KEY'] = key
 Path('.env').write_text(''.join(f'{k}={json.dumps(v)}\n' for k, v in config.items()))
-Path('/run/nexaassist-secret').unlink()
+material_path.unlink()
+key_path.unlink(missing_ok=True)
 PY
   chmod 600 .env
   registry="$(python3 -c 'import json; print(json.load(open("release.json"))["APP_IMAGE"].split("/")[0])')"
   aws ecr get-login-password --region "$region" | docker login --username AWS --password-stdin "$registry"
   install -d -o 10001 -g 10001 -m 700 reports
-  docker compose -f compose.yaml pull
+  docker compose pull
   previous=""
   if [ -L /opt/nexaassist/current ] && [ -d /opt/nexaassist/current ]; then
     previous="$(readlink -f /opt/nexaassist/current)"
   fi
   rollback() {
     if [ -n "$previous" ] && [ "$previous" != "$PWD" ]; then
-      (cd "$previous" && docker compose -f compose.yaml up -d --wait --wait-timeout 300)
+      (cd "$previous" && docker compose up -d --wait --wait-timeout 300)
     else
-      docker compose -f compose.yaml stop api ui || true
+      docker compose stop api ui || true
     fi
   }
   trap rollback ERR
-  docker compose -f compose.yaml up -d --wait --wait-timeout 300 postgres phoenix gateway guardrails
-  docker compose -f compose.yaml run --rm --no-deps api python -m app.database.postgres init
-  docker compose -f compose.yaml run --rm --no-deps api \
+  docker compose up -d --wait --wait-timeout 300 postgres phoenix gateway guardrails
+  docker compose run --rm --no-deps api python -m app.database.postgres init
+  docker compose run --rm --no-deps api \
     python -m app.services.ingestion /data/document_register.json
-  docker compose -f compose.yaml up -d --wait --wait-timeout 300
+  docker compose up -d --wait --wait-timeout 300
   curl --fail --silent http://127.0.0.1:8000/ready > reports/ready.json
   curl --fail --silent --max-time 180 -H 'Content-Type: application/json' \
     -d '{"query":"What is the maximum loan amount for a NexaHome Loan?","as_of":"2026-10-01","product_id":"NEXA-HL","top_k":5}' \
@@ -64,7 +80,7 @@ PY
 else
   # One golden case per explicit evaluation; no automatic paid judge loop.
   set +e
-  docker compose -f compose.yaml run --rm --no-deps api python -m app.evaluation.run \
+  docker compose run --rm --no-deps api python -m app.evaluation.run \
     --limit 1 --output /reports/evaluation.json
   result=$?
   set -e

@@ -1,5 +1,40 @@
 # AWS lab verification — 31 October 2026
 
+## OpenAI default update
+
+The active AWS profile now defaults to OpenAI chat/judging and
+`text-embedding-3-small` embeddings at 1536 dimensions. Optional Bedrock uses a
+separate Compose overlay and requires both `EnableBedrock=true` in the bootstrap
+and `model_provider=bedrock` in the workflow. Default template conditions omit
+Bedrock resources, invocation rights and guardrail rights. The API's default
+settings do not construct a Bedrock client.
+
+Verification completed without live AWS, OpenAI or Bedrock calls:
+
+- **401 tests passed**, including default routing, conditional resources and
+  permissions, provider-change refusal, legacy-session evaluation refusal,
+  missing credentials, private secret loading and malformed-key rejection.
+- Repository Ruff checks and the existing CI Mypy scope (`app infra/aws/lab.py`)
+  passed. No quality thresholds, tests or constraint rules were removed or weakened.
+- Both CloudFormation templates passed `cfn-lint`; both workflows passed
+  `actionlint`; the host script passed Bash syntax validation.
+- Actual Docker Compose rendering passed for OpenAI and explicit Bedrock,
+  including `.env`-based `COMPOSE_FILE` selection. No containers were started.
+- Diff-scoped, redacted Gitleaks scanning found no secrets.
+
+The broader `mypy .` command stops at a **pre-existing module-discovery issue**:
+`infra/aws/lab.py` is found as both `lab` and `infra.aws.lab`. The identical error
+was reproduced on unchanged commit `e32f2c3`; it is not suppressed by this change.
+The CI-scoped type check passes. The constraints and evaluation datasets/gates
+remain unchanged.
+
+Live deployment and provider compatibility remain unverified. Before starting,
+create the documented plaintext OpenAI credential secret, set its ARN in GitHub,
+and apply the bootstrap with `EnableBedrock=false`. The reusable OpenAI secret is
+outside session deletion; remove it separately when no longer needed.
+
+## Initial implementation snapshot
+
 Status: **implementation prepared and verified offline; no AWS session launched**.
 Selected Region: **ap-south-1**. No AWS profile, credential file or environment
 credential configuration was available. The checkout has no Git metadata, so no

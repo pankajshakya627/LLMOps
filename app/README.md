@@ -70,7 +70,9 @@ Reuse an existing collector when port 6006 is already occupied.
 
 ## Operational runbooks
 
-- [Proposed AWS Bedrock deployment](operations/AWS_DEPLOYMENT.md):
+- [Disposable AWS deployment](../infra/aws/README.md): OpenAI chat, judging and
+  embeddings by default, with optional Bedrock instructions and automatic teardown.
+- [Optional AWS Bedrock deployment](operations/AWS_DEPLOYMENT.md):
   managed chat/embeddings, Bedrock Guardrails, Phoenix/Ragas roles, service placement
   and the migration checks required before replacing the local Ollama stack.
 - [AWS Bedrock deployment presentation](presentations/NexaAssist_AWS_Bedrock_20261027/README.md):

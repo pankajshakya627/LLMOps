@@ -1,4 +1,10 @@
-# NexaAssist on AWS — Bedrock deployment design
+# NexaAssist on AWS — optional Bedrock deployment design
+
+The active disposable AWS profile uses **OpenAI** for chat, judging and
+embeddings. It neither provisions nor invokes Bedrock by default. Follow the
+[optional Bedrock setup](../../infra/aws/README.md#optional-bedrock-mode--disabled-by-default)
+only when you explicitly choose to change providers in a new session. The
+existing Guardrails AI service and application validations remain active with OpenAI.
 
 For the requested **short-lived training sessions**, the implemented path is
 [the disposable AWS lab](../../infra/aws/README.md). It uses one Docker host and

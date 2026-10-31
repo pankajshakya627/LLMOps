@@ -2,6 +2,8 @@
 
 For the **1–2 hour, $3–$8 disposable AWS lab**, use the implemented
 [AWS session deployment and GitHub Actions runbook](../../infra/aws/README.md).
+It defaults to OpenAI chat/judging and `text-embedding-3-small` embeddings;
+Bedrock inference and Guardrails are disabled unless explicitly enabled.
 
 This runbook describes the current local routes. The proposed managed-model
 deployment is in [AWS Bedrock deployment design](AWS_DEPLOYMENT.md); it uses

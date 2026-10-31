@@ -18,10 +18,31 @@ Parameters:
     AllowedPattern: '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}'
   BoundaryArn:
     Type: String
+  ModelProvider:
+    Type: String
+    Default: openai
+    AllowedValues: [openai, bedrock]
+  OpenAIKeySecretArn:
+    Type: String
+    Default: ''
+    Description: Existing same-Region plaintext OpenAI API key secret named nexa-lab-openai; required for OpenAI.
+    AllowedPattern: '(^$|arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:nexa-lab-openai-[A-Za-z0-9]{6})'
   ModelResources:
     Type: CommaDelimitedList
+    Default: ''
     Description: Exact approved Bedrock model/profile ARNs, including Titan and any cross-Region destination models.
-    AllowedPattern: 'arn:aws:bedrock:[a-z0-9-]+:[0-9]{0,12}:(foundation-model|inference-profile|application-inference-profile)/[A-Za-z0-9._:/-]+'
+    AllowedPattern: '(^$|arn:aws:bedrock:[a-z0-9-]+:[0-9]{0,12}:(foundation-model|inference-profile|application-inference-profile)/[A-Za-z0-9._:/-]+)'
+Rules:
+  OpenAISecretRequired:
+    RuleCondition: !Equals [!Ref ModelProvider, openai]
+    Assertions:
+      - Assert: !Not [!Equals [!Ref OpenAIKeySecretArn, '']]
+        AssertDescription: OpenAI requires an existing OpenAIKeySecretArn.
+Conditions:
+  UseOpenAI: !Equals [!Ref ModelProvider, openai]
+  UseBedrock: !Equals [!Ref ModelProvider, bedrock]
+  UseOpenAIKey: !And [!Condition UseOpenAI, !Not [!Equals [!Ref OpenAIKeySecretArn, '']]]
+  UseBedrockModels: !And [!Condition UseBedrock, !Not [!Equals [!Join [',', !Ref ModelResources], '']]]
 Resources:
   Vpc:
     Type: AWS::EC2::VPC
@@ -127,6 +148,7 @@ Resources:
         ExcludePunctuation: true
   Guardrail:
     Type: AWS::Bedrock::Guardrail
+    Condition: UseBedrock
     Properties:
       Name: !Sub '${AWS::StackName}-content'
       BlockedInputMessaging: Input blocked by lab policy.
@@ -143,6 +165,7 @@ Resources:
           - {Type: PHONE, Action: BLOCK}
   GuardrailVersion:
     Type: AWS::Bedrock::GuardrailVersion
+    Condition: UseBedrock
     Properties:
       GuardrailIdentifier: !GetAtt Guardrail.GuardrailId
       Description: Fixed session policy
@@ -185,12 +208,24 @@ Resources:
               - Effect: Allow
                 Action: secretsmanager:GetSecretValue
                 Resource: !Ref SessionSecret
-              - Effect: Allow
-                Action: [bedrock:InvokeModel, bedrock:InvokeModelWithResponseStream]
-                Resource: !Ref ModelResources
-              - Effect: Allow
-                Action: bedrock:ApplyGuardrail
-                Resource: !GetAtt Guardrail.GuardrailArn
+              - !If
+                - UseOpenAIKey
+                - Effect: Allow
+                  Action: secretsmanager:GetSecretValue
+                  Resource: !Ref OpenAIKeySecretArn
+                - !Ref AWS::NoValue
+              - !If
+                - UseBedrockModels
+                - Effect: Allow
+                  Action: [bedrock:InvokeModel, bedrock:InvokeModelWithResponseStream]
+                  Resource: !Ref ModelResources
+                - !Ref AWS::NoValue
+              - !If
+                - UseBedrock
+                - Effect: Allow
+                  Action: bedrock:ApplyGuardrail
+                  Resource: !GetAtt Guardrail.GuardrailArn
+                - !Ref AWS::NoValue
               - Effect: Allow
                 Action: [logs:CreateLogStream, logs:PutLogEvents]
                 Resource: !Sub '${Logs.Arn}'
@@ -365,7 +400,9 @@ Outputs:
   GatewayRepository: {Value: !GetAtt GatewayRepository.RepositoryUri}
   GuardrailsRepository: {Value: !GetAtt GuardrailsRepository.RepositoryUri}
   SecretArn: {Value: !Ref SessionSecret}
-  GuardrailId: {Value: !GetAtt Guardrail.GuardrailId}
-  GuardrailVersion: {Value: !GetAtt GuardrailVersion.Version}
+  ModelProvider: {Value: !Ref ModelProvider}
+  OpenAIKeySecretArn: {Condition: UseOpenAI, Value: !Ref OpenAIKeySecretArn}
+  GuardrailId: {Condition: UseBedrock, Value: !GetAtt Guardrail.GuardrailId}
+  GuardrailVersion: {Condition: UseBedrock, Value: !GetAtt GuardrailVersion.Version}
   CleanupFunction: {Value: !Ref Cleanup}
   ExpiresAt: {Value: !Ref ExpiresAt}

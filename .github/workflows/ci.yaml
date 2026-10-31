@@ -35,6 +35,7 @@ jobs:
           POSTGRES_PASSWORD: offline
           LITELLM_MASTER_KEY: sk-offline
           AWS_REGION: ap-south-1
+          OPENAI_API_KEY: sk-offline
           BEDROCK_CHAT_ROUTE: bedrock/converse/offline
           BEDROCK_JUDGE_ROUTE: bedrock/converse/offline
           BEDROCK_GUARDRAIL_ID: offline
@@ -42,4 +43,5 @@ jobs:
         run: |
           touch app/.env
           docker compose -f app/compose.aws.yaml config --quiet
+          docker compose -f app/compose.aws.yaml -f app/compose.aws.bedrock.yaml config --quiet
           rm app/.env
