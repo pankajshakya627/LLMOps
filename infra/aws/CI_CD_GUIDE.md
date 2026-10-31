@@ -17,7 +17,7 @@ code push does not start a paid AWS session.
 | Workflow | Trigger | What happens | Needs your AWS credentials? |
 | --- | --- | --- | --- |
 | [Application checks](../../.github/workflows/ci.yaml) | Pull request, push to `main`, or called by deployment | Install locked dependencies; lint; check types; run offline tests; validate CloudFormation, shell and both Compose profiles | No |
-| [Disposable AWS lab](../../.github/workflows/aws-lab.yaml) | Manual `start`, `deploy`, `evaluate` or `destroy` | Run the selected operation using temporary AWS credentials | AWS role access through OIDC; no stored AWS access keys |
+| [Disposable AWS lab](../../.github/workflows/aws-lab.yaml) | Manual `start`, `deploy`, `evaluate`, `capacity` or `destroy` | Run the selected operation using temporary AWS credentials | AWS role access through OIDC; no stored AWS access keys |
 
 For example, fixing a Python file and pushing it runs CI. It does not change a
 running lab. To release the change, run `deploy` against an existing session, or
@@ -196,7 +196,11 @@ gh workflow run aws-lab.yaml \
   -f operation=destroy -f session=nexa-lab-training
 ```
 
-Watch the destroy run to completion too. All four operations can also be run
+To inspect current host and container memory without creating resources or
+calling models, run the workflow with `operation=capacity` and the same session
+name, then read that run's output. The snapshot does not establish peak-load capacity.
+
+Watch the destroy run to completion too. All five operations can also be run
 through GitHub **Actions → Disposable AWS lab → Run workflow**. Destroy deletes
 the session's database, traces, reports and other session data.
 

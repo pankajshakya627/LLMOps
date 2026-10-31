@@ -1,4 +1,4 @@
-"""Explicit create/deploy/evaluate/destroy operations for disposable AWS training sessions."""
+"""Explicit deployment, capacity inspection and deletion of disposable AWS training sessions."""
 
 from __future__ import annotations
 
@@ -171,7 +171,7 @@ def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Pat
     return archive, hashlib.sha256(archive.read_bytes()).hexdigest()
 
 
-def run_remote(instance: str, command: str) -> None:
+def run_remote(instance: str, command: str) -> dict[str, Any]:
     ssm = client("ssm")
     # Account for first boot and SSM registration; do not swallow authorization failures.
     for attempt in range(60):
@@ -203,7 +203,7 @@ def run_remote(instance: str, command: str) -> None:
             raise RuntimeError(
                 f"SSM command {command_id} {result['Status']}; inspect SSM/CloudWatch"
             )
-        return
+        return result
     ssm.cancel_command(CommandId=command_id, InstanceIds=[instance])
     raise TimeoutError(
         f"SSM command {command_id} timed out; stop the lab and inspect host readiness"
@@ -307,6 +307,7 @@ def main() -> None:
     stop.add_argument("--receipt", help="Only destroy the stack ID recorded by this create")
     status = commands.add_parser("status")
     status.add_argument("--provider", choices=["openai", "bedrock"])
+    commands.add_parser("capacity")
     args = parser.parse_args()
     if not re.fullmatch(r"nexa-lab-[a-z0-9-]{1,25}", args.stack):
         parser.error("Stack must match nexa-lab-[a-z0-9-]{1,25}")
@@ -332,6 +333,12 @@ def main() -> None:
                     "Inspect metric statuses and scores; example thresholds are not production approval"
                 ],
             )
+        elif args.action == "capacity":
+            result = run_remote(
+                data["InstanceId"],
+                "set -eu; free -b; docker stats --no-stream --format '{{json .}}'",
+            )
+            print(result["StandardOutputContent"])
         else:
             if args.provider:
                 require_provider(data, args.provider)

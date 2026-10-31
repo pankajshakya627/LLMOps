@@ -4,7 +4,7 @@ on:
     inputs:
       operation:
         type: choice
-        options: [start, deploy, evaluate, destroy]
+        options: [start, deploy, evaluate, capacity, destroy]
         default: start
         description: Start creates a NEW session. Deploy replaces images in an existing session. Destroy deletes all session data.
       session:
@@ -148,6 +148,9 @@ jobs:
       - name: Run one explicitly requested paid evaluation
         if: inputs.operation == 'evaluate'
         run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" evaluate --provider "$LAB_PROVIDER"
+      - name: Inspect host and container memory without model calls
+        if: inputs.operation == 'capacity'
+        run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" capacity
       - name: Destroy session and verify deletion
         if: inputs.operation == 'destroy'
         run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" destroy

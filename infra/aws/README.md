@@ -113,6 +113,9 @@ container health, ingests the corpus and tests one cited answer. It saves memory
 snapshots before ingestion and after the smoke, plus per-container memory usage,
 in the session's S3 report prefix. These measurements do not establish peak-load
 capacity. Do not substitute a micro instance for the full stack without testing.
+After deployment, run the workflow with `operation=capacity` to print a fresh
+host/container memory snapshot. This operation performs no deployment or model
+calls and uses the same authenticated SSM path.
 
 1. Install AWS CLI v2 and the Session Manager plugin on the trainer's laptop.
    For the IAM admin user, use the browser login below; Identity Center users can

@@ -45,6 +45,26 @@ def test_host_uses_free_tier_eligible_x86_instance_without_t3_credit_options() -
     assert host["InstanceType"] == {"Ref": "InstanceType"}
 
 
+def test_capacity_reads_memory_without_deployment_or_model_calls(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    ssm = Mock()
+    ssm.send_command.return_value = {"Command": {"CommandId": "memory-check"}}
+    ssm.get_command_invocation.return_value = {
+        "Status": "Success",
+        "StandardOutputContent": "Mem: total available\ncontainer memory snapshot",
+    }
+    monkeypatch.setattr(lab, "client", lambda service: ssm if service == "ssm" else None)
+    monkeypatch.setattr(lab, "stack_outputs", lambda stack: {"InstanceId": "i-lab"})
+    monkeypatch.setattr(lab.time, "sleep", lambda seconds: None)
+    monkeypatch.setattr(sys, "argv", ["lab", "--stack", "nexa-lab-training", "capacity"])
+    lab.main()
+    assert ssm.send_command.call_args.kwargs["Parameters"]["commands"] == [
+        "set -eu; free -b; docker stats --no-stream --format '{{json .}}'"
+    ]
+    assert "container memory snapshot" in capsys.readouterr().out
+
+
 @pytest.mark.parametrize("provider", ["openai", "bedrock"])
 def test_release_contains_only_synthetic_corpus_and_digest_manifest(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, provider: str
