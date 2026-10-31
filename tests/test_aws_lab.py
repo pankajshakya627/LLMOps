@@ -130,7 +130,12 @@ def test_cleanup_stops_compute_then_empties_versions_then_deletes_only_its_stack
         return Mock(paginate=Mock(return_value=pages))
 
     s3.get_paginator.side_effect = paginator
-    s3.delete_objects.side_effect = lambda **_: calls.append("empty") or {}
+
+    def delete_objects(**_: Any) -> dict[str, Any]:
+        calls.append("empty")
+        return {}
+
+    s3.delete_objects.side_effect = delete_objects
     cf.delete_stack.side_effect = lambda **_: calls.append("delete_stack")
     monkeypatch.setattr(
         boto3, "client", lambda name: {"ec2": ec2, "s3": s3, "cloudformation": cf}[name]
@@ -339,7 +344,7 @@ def test_bedrock_resources_and_all_permissions_require_explicit_opt_in(enabled: 
             return separator.join(resolve(items))
 
         conditions = {name: resolve(expr) for name, expr in config["Conditions"].items()}
-        bedrock_actions = []
+        bedrock_actions: list[str] = []
         bedrock_resources = []
         for name, resource in config["Resources"].items():
             if resource.get("Condition") and not conditions[resource["Condition"]]:

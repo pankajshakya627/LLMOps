@@ -14,8 +14,9 @@ Verification completed without live AWS, OpenAI or Bedrock calls:
 - **401 tests passed**, including default routing, conditional resources and
   permissions, provider-change refusal, legacy-session evaluation refusal,
   missing credentials, private secret loading and malformed-key rejection.
-- Repository Ruff checks and the existing CI Mypy scope (`app infra/aws/lab.py`)
-  passed. No quality thresholds, tests or constraint rules were removed or weakened.
+- Repository Ruff checks and the expanded CI Mypy scope
+  (`--explicit-package-bases app infra/aws/lab.py tests/test_aws_lab.py`) passed,
+  checking 77 files. No quality thresholds, tests or constraint rules were removed or weakened.
 - Both CloudFormation templates passed `cfn-lint`; both workflows passed
   `actionlint`; the host script passed Bash syntax validation.
 - Actual Docker Compose rendering passed for OpenAI and explicit Bedrock,

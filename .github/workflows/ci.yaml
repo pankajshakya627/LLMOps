@@ -21,7 +21,7 @@ jobs:
           enable-cache: true
       - run: uv sync --locked --extra aws --extra ui --extra evaluation
       - run: uv run --no-sync ruff check app tests infra/aws
-      - run: uv run --no-sync mypy app infra/aws/lab.py
+      - run: uv run --no-sync mypy --explicit-package-bases app infra/aws/lab.py tests/test_aws_lab.py
       - run: uv run --no-sync pytest -q tests
       - name: Validate CloudFormation and shell
         run: |
