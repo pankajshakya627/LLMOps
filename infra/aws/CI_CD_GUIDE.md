@@ -209,6 +209,11 @@ plugin with your human AWS identity. Follow the [SSM tunnel steps](README.md#sta
 to open Streamlit on `http://127.0.0.1:18501`. Workflow authentication through
 GitHub does not sign your laptop into AWS for interactive access.
 
+For an explicitly approved one-IP demo, see the [temporary direct-access
+exception](README.md#temporary-direct-access-from-one-ip). It changes only the
+running session's UI binding and a single-IP ingress rule; new deployments
+remain private by default.
+
 ## 7. Cost, deletion and what success means
 
 The session timer starts at infrastructure creation, so builds and deployment

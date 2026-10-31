@@ -27,6 +27,16 @@ requires the local Session Manager plugin. Earlier failed-session cleanup
 succeeded, but timed expiry of this successful session remains unverified.
 Its scheduled expiry is 31 October 2026 at 19:48 IST; deletion can take longer.
 
+The user subsequently selected direct public-IP access limited to their own IP.
+A temporary UI-only Compose override and TCP 8501 `/32` security-group rule were
+applied to the live session. Rendered configuration assertions verified that
+the API/Phoenix stayed on loopback and other backend ports were not published.
+The live security group was checked to contain only this single inbound rule.
+Both the public UI page and `/_stcore/health` returned HTTP 200 from the allowed
+IP. This manual runtime exception leaves the repository's private deployment
+defaults and the original expiry unchanged. No TLS, public authentication or
+internet-wide ingress was added.
+
 The historical attempts and offline snapshots below describe their state at
 the time, before this successful deployment.
 

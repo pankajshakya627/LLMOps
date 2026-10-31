@@ -300,6 +300,26 @@ error and create a new session, then copy its new `InstanceId`. Also install the
 local Session Manager plugin before opening a tunnel; AWS CLI login alone does
 not install that plugin.
 
+### Temporary direct access from one IP
+
+The default deployment remains private through SSM. For the live session on
+31 October 2026, the user explicitly selected direct access restricted to their
+current public IPv4 address. A host-only `compose.public-ui.yaml` override
+replaces the UI mapping with `0.0.0.0:8501:8501`; one security-group rule allows
+TCP 8501 from that address as a `/32`. The URL is `http://PUBLIC_IP:8501`, including
+the port. API and Phoenix bindings remain on loopback; database, gateway and
+validator ports are not published.
+
+This is a temporary plain-HTTP synthetic training demo, not authenticated HTTPS
+hosting. An IP change can make the URL stop working; update the single-IP rule
+rather than allowing the entire internet. The runtime override and ingress rule
+are an explicit manual exception, not changes to the CloudFormation default.
+A new session uses private access; redeploy restores the default UI mapping.
+Destroy removes the current host and security group, including the temporary
+rule. To close direct access earlier, revoke that rule and run
+`docker compose -f compose.yaml up -d --no-deps --wait ui` from the current release
+on the host. This exception does not extend session expiry.
+
 Use only synthetic material. Phoenix and the API have no public listener, and
 SSM access is an administrative boundary. All containers share one EC2 IAM role;
 this is not suitable for untrusted users or private bank documents. OpenAI's
