@@ -20,6 +20,15 @@ inheriting the shared image's FastAPI probe on port 8000.
 Offline correction checks passed: 402 tests, the 18 affected AWS cases after
 the UI-probe change, Ruff, scoped Mypy, cfn-lint, actionlint and Bash syntax.
 
+[Corrected run 41201695589](https://github.com/pankajshakya627/LLMOps/actions/runs/41201695589)
+successfully created the `m7i-flex.large` session and built/pushed all three
+images. The host deployment failed in SSM command
+`0d10d3ed-e737-4555-9a33-4e91286490b6`; its error output is needed to diagnose
+startup. Cleanup reported `Session stack deleted`. The application, ingestion,
+model compatibility and memory capacity remain unverified. A subsequent tested
+`capacity` workflow operation reads only host/container memory through SSM,
+without deployment or model calls. Both correction commits passed GitHub CI.
+
 ## OpenAI default update
 
 The active AWS profile now defaults to OpenAI chat/judging and
