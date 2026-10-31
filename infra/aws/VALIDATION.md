@@ -24,8 +24,14 @@ bytes usable RAM (about 1.8 GiB used and 5.5 GiB available).
 This verifies a small synthetic session, not peak concurrency or load capacity.
 No separate Ragas evaluation was requested. Interactive browser tunneling still
 requires the local Session Manager plugin. Earlier failed-session cleanup
-succeeded, but timed expiry of this successful session remains unverified.
-Its scheduled expiry is 31 October 2026 at 19:48 IST; deletion can take longer.
+succeeded. Timed expiry of the successful session was subsequently verified:
+the exact CloudFormation stack reported `DELETE_COMPLETE` with deletion time
+31 October 2026 at 19:49:23 IST (14:19:23 UTC), following its 19:48 IST scheduled
+expiry. EC2 reported its host `terminated`, and lookup by the active stack name
+reported that the stack no longer exists. All three lab workflow runs were
+confirmed `completed`; their GitHub history is not active compute.
+The reusable bootstrap and OpenAI credential secret remain outside session
+teardown. No final bill or account-wide resource inventory was checked.
 
 The user subsequently selected direct public-IP access limited to their own IP.
 A temporary UI-only Compose override and TCP 8501 `/32` security-group rule were
