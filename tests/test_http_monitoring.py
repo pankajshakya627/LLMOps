@@ -12,14 +12,21 @@ from opentelemetry.sdk.trace.export import SimpleSpanProcessor
 from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
 from starlette.responses import StreamingResponse
 
+from app.core.config import Settings, get_settings
 from app.core.http_monitoring import CAPTURE_LIMIT
 from app.core.phoenix import capture_request, correlate_response
 from app.main import create_app
 
 
 @pytest.mark.parametrize("capture", [False, True])
-def test_all_route_monitoring_and_capture_do_not_change_responses(capture: bool) -> None:
+def test_all_route_monitoring_and_capture_do_not_change_responses(
+    capture: bool,
+    settings: Settings,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     app = create_app()
+    monkeypatch.setattr("app.main.get_settings", lambda: settings)
+    app.dependency_overrides[get_settings] = lambda: settings
     app.state.phoenix_capture_content = capture
 
     @app.post("/probe/{item_id}")
@@ -119,8 +126,13 @@ def test_all_route_monitoring_and_capture_do_not_change_responses(capture: bool)
         provider.shutdown()
 
 
-def test_streaming_large_payloads_and_unhandled_errors_are_bounded() -> None:
+def test_streaming_large_payloads_and_unhandled_errors_are_bounded(
+    settings: Settings,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     app = create_app()
+    monkeypatch.setattr("app.main.get_settings", lambda: settings)
+    app.dependency_overrides[get_settings] = lambda: settings
     app.state.phoenix_capture_content = True
 
     @app.get("/large")
