@@ -22,6 +22,8 @@ API has HTTP monitoring. Payload capture is limited to 64 KiB per direction;
 oversized/incomplete JSON is marked omitted without changing the API response.
 Supported personal identifiers and common credential fields are masked in captured
 JSON and application span text. This is not a comprehensive secret/PII detector.
+Exception events retain type/escaped flags, with message/stacktrace and status
+descriptions omitted before export in both capture modes.
 Gateway model/provider evidence (`litellm.provider.model`, `llm.provider`) is
 exported to **nexaassist-gateway**, with raw
 messages disabled; policy results and Ragas annotations use **nexaassist-training**.

@@ -14,6 +14,33 @@ from app.evaluation.phoenix_export import build_annotations, load_span_id
 from app.models.evaluation import EvaluatedAnswerResponse
 
 
+@pytest.mark.parametrize("capture", [False, True])
+def test_exception_export_keeps_type_without_message_or_stacktrace(capture: bool) -> None:
+    from openinference.instrumentation import TraceConfig, TracerProvider
+    from opentelemetry import trace
+    from opentelemetry.sdk.trace.export import SimpleSpanProcessor
+    from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
+
+    from app.core.phoenix import PrivateSpanExporter
+
+    memory = InMemorySpanExporter()
+    provider = TracerProvider(config=TraceConfig(hide_inputs=not capture, hide_outputs=not capture))
+    provider.add_span_processor(SimpleSpanProcessor(PrivateSpanExporter(memory)))
+    with provider.get_tracer("test").start_as_current_span("failed") as span:
+        error = ValueError("Contact learner@example.com Bearer SYNTHETIC_SECRET")
+        span.record_exception(error)
+        span.set_status(trace.Status(trace.StatusCode.ERROR, str(error)))
+    exported = memory.get_finished_spans()[0]
+    assert exported.status.status_code == trace.StatusCode.ERROR
+    assert exported.status.description is None
+    event = exported.events[0]
+    assert event.attributes["exception.type"] == "ValueError"
+    assert "exception.message" not in event.attributes
+    assert "exception.stacktrace" not in event.attributes
+    assert "learner@example.com" not in str(exported.events)
+    provider.shutdown()
+
+
 def test_phoenix_headers_identify_the_server_span_not_the_send_span() -> None:
     server = Mock()
     server.get_span_context.return_value = SimpleNamespace(is_valid=True, trace_id=123, span_id=456)

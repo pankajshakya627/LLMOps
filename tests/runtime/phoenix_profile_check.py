@@ -13,10 +13,8 @@ import pytest
 from fastapi.testclient import TestClient
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
-from openinference.instrumentation import TracerProvider
 from openinference.instrumentation.langchain import LangChainInstrumentor
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
-from opentelemetry.sdk.trace.export import SimpleSpanProcessor
 from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
 from phoenix.client import Client
 
@@ -40,12 +38,9 @@ def test_real_instrumentors_correlate_server_model_tokens_and_content_policy(
     settings = settings.model_copy(update={"phoenix_capture_content": capture})
     exporter = InMemorySpanExporter()
 
-    def register(**kwargs: Any) -> TracerProvider:
+    def make_exporter(**kwargs: Any) -> InMemorySpanExporter:
         assert kwargs["endpoint"] == f"{settings.phoenix_base_url}/v1/traces"
-        assert kwargs["set_global_tracer_provider"] is False
-        provider = TracerProvider(config=kwargs["config"])
-        provider.add_span_processor(SimpleSpanProcessor(exporter))
-        return provider
+        return exporter
 
     def respond(request: httpx2.Request) -> httpx2.Response:
         return httpx2.Response(
@@ -93,7 +88,7 @@ def test_real_instrumentors_correlate_server_model_tokens_and_content_policy(
         return answer
 
     monkeypatch.setattr(config, "get_settings", lambda: settings)
-    monkeypatch.setattr("phoenix.otel.register", register)
+    monkeypatch.setattr("phoenix.otel.HTTPSpanExporter", make_exporter)
     monkeypatch.setattr(answer_api, "answer_policy", generate)
     profile = importlib.import_module("app.phoenix_main")
     visible_mask = profile.PrivateTraceConfig(hide_inputs=False, hide_outputs=False)

@@ -333,7 +333,9 @@ Content capture covers JSON bodies up to 64 KiB per direction. Larger, incomplet
 or invalid JSON is omitted with a reason. Headers are not captured, and request
 URL query strings are excluded from application span URLs. Supported personal
 identifiers and common credential fields are masked; this does not detect all
-secrets or PII. Raw model drafts may appear before application output validation.
+secrets or PII. Exception events retain the exception type but omit message,
+stacktrace and status-description text. Raw model drafts may appear before
+application output validation.
 Set `PHOENIX_CAPTURE_CONTENT` to `"false"` in `app/compose.aws.yaml` and redeploy
 before using real/confidential content. Authentication and security checks still
 run normally; non-JSON/binary payload bodies are not captured.

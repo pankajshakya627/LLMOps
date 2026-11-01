@@ -2,15 +2,63 @@
 
 from __future__ import annotations
 
-from collections.abc import MutableMapping
+from collections.abc import MutableMapping, Sequence
 from typing import TYPE_CHECKING, Any
 
 from opentelemetry import trace
+from opentelemetry.sdk.trace import Event, ReadableSpan
+from opentelemetry.sdk.trace.export import SpanExporter, SpanExportResult
 from pydantic import BaseModel
 from starlette.datastructures import URL
 
 if TYPE_CHECKING:
     from app.models.answer import AnswerResponse
+
+
+class PrivateSpanExporter(SpanExporter):
+    """Exception events bypass OpenInference masking; export their type only."""
+
+    def __init__(self, exporter: SpanExporter) -> None:
+        self.exporter = exporter
+
+    def export(self, spans: Sequence[ReadableSpan]) -> SpanExportResult:
+        safe_spans = [
+            ReadableSpan(
+                name=span.name,
+                context=span.context,
+                parent=span.parent,
+                resource=span.resource,
+                attributes=span.attributes,
+                links=span.links,
+                kind=span.kind,
+                instrumentation_scope=span.instrumentation_scope,
+                start_time=span.start_time,
+                end_time=span.end_time,
+                status=trace.Status(span.status.status_code),
+                events=[
+                    Event(
+                        event.name,
+                        timestamp=event.timestamp,
+                        attributes={
+                            key: value
+                            for key, value in (event.attributes or {}).items()
+                            if key in {"exception.type", "exception.escaped"}
+                        },
+                    )
+                    if event.name == "exception"
+                    else event
+                    for event in span.events
+                ],
+            )
+            for span in spans
+        ]
+        return self.exporter.export(safe_spans)
+
+    def shutdown(self) -> None:
+        self.exporter.shutdown()
+
+    def force_flush(self, timeout_millis: int = 30_000) -> bool:
+        return self.exporter.force_flush(timeout_millis)
 
 
 def correlate_answer(answer: AnswerResponse) -> None:

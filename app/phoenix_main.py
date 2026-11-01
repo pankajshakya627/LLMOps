@@ -9,14 +9,16 @@ from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import FastAPI
-from openinference.instrumentation import TraceConfig
+from openinference.instrumentation import TraceConfig, TracerProvider
 from openinference.instrumentation.langchain import LangChainInstrumentor
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
-from phoenix.otel import register
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from phoenix.otel import HTTPSpanExporter
 
 from app.core.config import get_settings
 from app.core.http_monitoring import CAPTURE_LIMIT, safe_content
-from app.core.phoenix import capture_request, correlate_response
+from app.core.phoenix import PrivateSpanExporter, capture_request, correlate_response
 from app.main import create_app as create_base_app
 
 
@@ -33,7 +35,7 @@ class PrivateTraceConfig(TraceConfig):
                 parsed = json.loads(value)
                 if isinstance(parsed, (dict, list)):
                     return json.dumps(safe_content(parsed), ensure_ascii=False)
-            except (ValueError, RecursionError):
+            except ValueError, RecursionError:
                 pass
             return safe_content(value)
         return value
@@ -52,16 +54,24 @@ def create_app() -> FastAPI:
         hide_embedding_vectors=True,
         hide_llm_invocation_parameters=True,
     )
-    provider = register(
-        endpoint=f"{settings.phoenix_base_url}/v1/traces",
-        project_name=settings.phoenix_project_name,
-        api_key=settings.phoenix_api_key.get_secret_value() if settings.phoenix_api_key else None,
-        protocol="http/protobuf",
-        batch=True,
-        verbose=False,
-        auto_instrument=False,
-        set_global_tracer_provider=False,
+    provider = TracerProvider(
         config=masking,
+        resource=Resource.create({"openinference.project.name": settings.phoenix_project_name}),
+    )
+    headers = (
+        {"authorization": f"Bearer {settings.phoenix_api_key.get_secret_value()}"}
+        if settings.phoenix_api_key
+        else None
+    )
+    provider.add_span_processor(
+        BatchSpanProcessor(
+            PrivateSpanExporter(
+                HTTPSpanExporter(
+                    endpoint=f"{settings.phoenix_base_url}/v1/traces",
+                    headers=headers,
+                )
+            )
+        )
     )
     LangChainInstrumentor().instrument(tracer_provider=provider, config=masking)
     application = create_base_app()
