@@ -1,5 +1,7 @@
 # Disposable AWS LLMOps lab
 
+For a step-by-step session, use the [start, browser and delete guide](START_USE_DELETE_GUIDE.md).
+
 This deployment is designed for **one or two hours**, followed by deletion, with a
 **$3–$8 planning allowance per session**. It deploys the actual application and its
 supporting containers. The first successful live deployment completed on

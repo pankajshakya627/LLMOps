@@ -3,6 +3,8 @@
 An enterprise policy intelligence reference application for NexaBank, a fictional
 bank. The corpus and examples are synthetic.
 
+For daily use, follow the [AWS start, browser and delete guide](infra/aws/START_USE_DELETE_GUIDE.md).
+
 For disposable **1–2 hour AWS sessions** and GitHub Actions CI/CD, follow the
 [AWS lab runbook](infra/aws/README.md). The $3–$8 allowance is a planning target;
 the deployment includes scheduled teardown. The AWS profile uses **OpenAI for

@@ -1,5 +1,7 @@
 # How GitHub CI/CD connects to your AWS lab
 
+For copyable operating steps, see the [start, browser and delete guide](START_USE_DELETE_GUIDE.md).
+
 GitHub checks and packages your code. AWS runs the application. OpenAI supplies
 the LLM and embeddings. Your laptop sends commands and opens the application's
 UI through an authenticated tunnel.
