@@ -3,10 +3,11 @@ from __future__ import annotations
 from typing import Annotated
 
 import structlog
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pymongo.errors import PyMongoError
 
 from app.core.config import OPENAI_BASE_URL, Settings, get_settings
+from app.core.http_monitoring import RouteMetrics
 from app.core.observability import (
     answer_latencies,
     answer_metrics,
@@ -48,6 +49,27 @@ async def metrics() -> dict[str, int | float]:
 async def latency_metrics() -> dict[str, int | float]:
     """Nearest-rank percentiles of the last 1000 successful requests in this process."""
     return latency_summary()
+
+
+@router.get("/metrics/http")
+async def http_metrics(request: Request) -> dict[str, object]:
+    """Per-route counters and bounded latency windows, including routes not called yet."""
+    recorded = request.app.state.http_metrics
+    keys = set(recorded)
+    # FastAPI may keep included routers lazy; OpenAPI resolves their public routes.
+    for path, operations in request.app.openapi()["paths"].items():
+        keys.update(
+            (method.upper(), path)
+            for method in operations
+            if method in {"get", "head", "post", "put", "patch", "delete", "options", "trace"}
+        )
+    for route in request.app.routes:
+        for method in getattr(route, "methods", ()):
+            keys.add((method, route.path))
+    return {
+        "scope": "current API process; resets on restart; last 1000 latencies per route",
+        "routes": [recorded.get(key, RouteMetrics()).snapshot(*key) for key in sorted(keys)],
+    }
 
 
 @router.get("/metrics/answers")

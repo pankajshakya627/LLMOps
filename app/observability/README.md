@@ -16,8 +16,12 @@ logged without replacing the completed API response. The manual exporter remains
 available for recovery. `POST /answer` does not compute Ragas scores by default.
 
 With synthetic content capture enabled, the HTTP request span's Output now
-contains the final API response. With capture disabled, response content remains
-hidden. New `/health` and `/ready` traces are excluded to reduce probe noise.
+contains the final API response for every JSON API route. With capture disabled,
+response content remains hidden. `/health` and `/ready` are also traced so every
+API has HTTP monitoring. Payload capture is limited to 64 KiB per direction;
+oversized/incomplete JSON is marked omitted without changing the API response.
+Supported personal identifiers and common credential fields are masked in captured
+JSON and application span text. This is not a comprehensive secret/PII detector.
 Gateway model/provider evidence (`litellm.provider.model`, `llm.provider`) is
 exported to **nexaassist-gateway**, with raw
 messages disabled; policy results and Ragas annotations use **nexaassist-training**.
@@ -92,6 +96,21 @@ PHOENIX_BASE_URL=http://127.0.0.1:6006
 PHOENIX_PROJECT_NAME=nexaassist-training
 PHOENIX_CAPTURE_CONTENT=false
 ```
+
+The disposable AWS synthetic lab explicitly enables content capture in
+`app/compose.aws.yaml`; other environments retain the settings default of false.
+Only new requests get newly enabled content. Old redacted traces cannot be restored.
+See the [AWS viewing and monitoring steps](../../infra/aws/START_USE_DELETE_GUIDE.md#7-view-complete-synthetic-traces-and-api-monitoring).
+
+`GET /metrics/http` inventories every registered route/method, including routes
+with zero traffic. It records counts, HTTP statuses, client/server errors and
+latency percentiles, with a bounded last-1000 latency window per route. Unknown
+paths share one bucket. Metrics reset per API process/restart. Each completed
+request also writes a `http_request_completed` JSON log with route, method,
+status, duration and trace/span IDs when tracing is active; bodies and headers
+are not written to these access logs. Existing answer/retrieval metrics retain
+their narrower meanings. Output validation is a named `validate_output` child
+span in the answer chain; a rejected/outage validation remains an error.
 
 Default tracing masks inputs, outputs, retrieval content, embedding text and
 prompt variables. Embedding vectors and model invocation parameters stay hidden.

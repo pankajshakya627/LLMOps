@@ -66,7 +66,9 @@ PY
     python -m app.services.ingestion /data/document_register.json
   docker compose up -d --wait --wait-timeout 300
   curl --fail --silent http://127.0.0.1:8000/ready > reports/ready.json
+  curl --fail --silent http://127.0.0.1:8000/metrics/http > reports/http-metrics.json
   curl --fail --silent --max-time 180 -H 'Content-Type: application/json' \
+    -D reports/answer.headers \
     -d '{"query":"What is the maximum loan amount for a NexaHome Loan?","as_of":"2026-10-01","product_id":"NEXA-HL","top_k":5}' \
     http://127.0.0.1:8000/answer > reports/answer.json
   python3 - <<'PY'
@@ -75,6 +77,9 @@ from pathlib import Path
 r = json.loads(Path('reports/answer.json').read_text())
 assert r['status'] == 'answered' and r['citations'], 'Live structured answer/citation smoke failed'
 assert json.loads(Path('reports/ready.json').read_text())['status'] == 'ready'
+routes = json.loads(Path('reports/http-metrics.json').read_text())['routes']
+assert any(r['route'] == '/answer/evaluated' for r in routes), 'Missing all-route monitoring'
+assert 'x-phoenix-span-id:' in Path('reports/answer.headers').read_text().lower()
 PY
   free -b > reports/host-memory.txt
   docker stats --no-stream --format '{{json .}}' > reports/container-stats.jsonl

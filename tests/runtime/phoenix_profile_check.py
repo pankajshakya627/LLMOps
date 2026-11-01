@@ -96,6 +96,10 @@ def test_real_instrumentors_correlate_server_model_tokens_and_content_policy(
     monkeypatch.setattr("phoenix.otel.register", register)
     monkeypatch.setattr(answer_api, "answer_policy", generate)
     profile = importlib.import_module("app.phoenix_main")
+    visible_mask = profile.PrivateTraceConfig(hide_inputs=False, hide_outputs=False)
+    for content in ("9876543210", "123412341234", "Contact learner@example.com"):
+        masked = visible_mask.mask("llm.output_messages.0.message.content", content)
+        assert masked != content and "REDACTED" in masked
     import app.main as main_module
 
     monkeypatch.setattr(main_module, "get_settings", lambda: settings)
@@ -107,7 +111,7 @@ def test_real_instrumentors_correlate_server_model_tokens_and_content_policy(
             response = client.post("/answer", json={"query": PRIVATE, "as_of": "2026-10-01"})
             assert response.status_code == 200
         spans = exporter.get_finished_spans()
-        assert not any(span.name.startswith("GET /health") for span in spans)
+        assert any(span.name == "GET /health" for span in spans)
         root = next(
             span
             for span in spans

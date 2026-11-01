@@ -1,9 +1,12 @@
 # Phoenix result and provider visibility — 25 October 2026
 
-The API now records its completed `/answer` or `/answer/evaluated` payload in
-the HTTP request span's Output when `PHOENIX_CAPTURE_CONTENT=true`. With content
-capture disabled it records no payload; OpenInference may display a redaction
-sentinel. `/health` and `/ready` probes are excluded from new application traces.
+The API records completed JSON responses on every route in the HTTP request
+span's Output when `PHOENIX_CAPTURE_CONTENT=true`. The shared HTTP monitor also
+records consumed JSON request bodies in Input, bounded to 64 KiB and masked for
+supported identifiers/common credential fields. With capture disabled it records
+no payload; OpenInference may display a redaction sentinel. `/health` and `/ready`
+are now traced. The verification receipts below describe the earlier 25 October
+implementation; they do not verify the current AWS monitoring extension.
 
 `/answer/evaluated` computes metrics and publishes their four annotations in a
 background task. The publisher retries span-not-yet-ingested 404 responses within

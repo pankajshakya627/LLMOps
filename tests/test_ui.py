@@ -235,6 +235,7 @@ def test_existing_ui_endpoint_coverage(client: httpx.Client, decision: str) -> N
         ("GET", "/health"),
         ("GET", "/metrics"),
         ("GET", "/metrics/answers"),
+        ("GET", "/metrics/http"),
         ("GET", "/metrics/latency"),
         ("GET", "/ready"),
     }

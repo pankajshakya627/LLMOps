@@ -351,8 +351,14 @@ or a same-model judge, is not production quality approval. Before production,
 confirm/calibrate thresholds, freeze a larger dataset and judge, add regression
 comparison and enforce release gates before accepting traffic.
 
-After a successful deploy, inspect `/metrics/answers`, `/metrics/latency`, masked
-Phoenix traces and Ragas annotations. Gateway mixed-route dollar cost remains
+After a successful deploy, inspect `/metrics/http`, `/metrics/answers`,
+`/metrics/latency`, Phoenix traces and Ragas annotations. The AWS synthetic lab
+enables `PHOENIX_CAPTURE_CONTENT=true`: new API/chain/model spans show bounded
+inputs and results while supported PII/common credential fields remain masked.
+Set this back to false before using real/confidential data. Gateway raw message
+capture remains disabled; application model spans show messages in the training
+project. See the [viewing guide](START_USE_DELETE_GUIDE.md#7-view-complete-synthetic-traces-and-api-monitoring).
+Gateway mixed-route dollar cost remains
 null in the application's metrics; use OpenAI usage/billing for model cost and
 AWS billing for infrastructure (Bedrock usage applies only in that optional mode).
 CloudWatch logs live at `/nexaassist/SESSION`. SSM command history and GitHub run

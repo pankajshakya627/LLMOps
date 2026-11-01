@@ -13,6 +13,7 @@ from app.api.operations import router as operations_router
 from app.api.retrieval import router as retrieval_router
 from app.chains.context import token_encoder
 from app.core.config import get_settings
+from app.core.http_monitoring import HTTPMonitoringMiddleware
 from app.core.logging import configure_logging
 from app.security.input_policy import UnsafeQueryError
 
@@ -27,6 +28,8 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
 
 def create_app() -> FastAPI:
     app = FastAPI(title="NexaAssist", lifespan=lifespan)
+    app.state.http_metrics = {}
+    app.add_middleware(HTTPMonitoringMiddleware, metrics=app.state.http_metrics)
 
     @app.exception_handler(UnsafeQueryError)
     async def unsafe_query(_request: Request, _exc: UnsafeQueryError) -> JSONResponse:

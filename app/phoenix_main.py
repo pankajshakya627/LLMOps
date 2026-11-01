@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from typing import Any
@@ -14,6 +15,7 @@ from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from phoenix.otel import register
 
 from app.core.config import get_settings
+from app.core.http_monitoring import CAPTURE_LIMIT, safe_content
 from app.core.phoenix import capture_request, correlate_response
 from app.main import create_app as create_base_app
 
@@ -23,7 +25,18 @@ class PrivateTraceConfig(TraceConfig):
         # OpenInference's input masking leaves template variables and metadata visible.
         if self.hide_inputs and key in {"llm.prompt_template.variables", "metadata"}:
             return None
-        return super().mask(key, value, externalize=externalize)
+        value = super().mask(key, value, externalize=externalize)
+        if isinstance(value, str):
+            if len(value.encode("utf-8")) > CAPTURE_LIMIT:
+                return "[OMITTED: exceeds 64 KiB]"
+            try:
+                parsed = json.loads(value)
+                if isinstance(parsed, (dict, list)):
+                    return json.dumps(safe_content(parsed), ensure_ascii=False)
+            except (ValueError, RecursionError):
+                pass
+            return safe_content(value)
+        return value
 
 
 def create_app() -> FastAPI:
@@ -52,6 +65,7 @@ def create_app() -> FastAPI:
     )
     LangChainInstrumentor().instrument(tracer_provider=provider, config=masking)
     application = create_base_app()
+    application.state.phoenix_capture_content = capture
     base_lifespan = application.router.lifespan_context
 
     @asynccontextmanager
@@ -68,7 +82,7 @@ def create_app() -> FastAPI:
         tracer_provider=provider,
         server_request_hook=capture_request,
         client_response_hook=correlate_response,
-        excluded_urls=r"/(?:health|ready)(?:\?.*)?$",
+        excluded_urls="",
         http_capture_headers_server_request=[],
         http_capture_headers_server_response=[],
     )

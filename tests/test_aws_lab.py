@@ -320,6 +320,7 @@ def test_default_runtime_uses_openai_without_constructing_a_bedrock_client(
     env = compose["services"]["api"]["environment"]
     assert not any(key.startswith("BEDROCK_") for key in env)
     config = Settings(_env_file=None, **{key.lower(): value for key, value in env.items()})
+    assert config.phoenix_capture_content is True  # AWS bundles only the synthetic course corpus.
     assert config.chat_model == "nexa-chat-openai"
     assert judge_settings(config).chat_model == "nexa-judge-openai"
     assert config.embedding_model == metric_settings(config).embedding_model == "nexa-embed-openai"

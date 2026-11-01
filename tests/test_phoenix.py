@@ -17,7 +17,7 @@ from app.models.evaluation import EvaluatedAnswerResponse
 def test_phoenix_headers_identify_the_server_span_not_the_send_span() -> None:
     server = Mock()
     server.get_span_context.return_value = SimpleNamespace(is_valid=True, trace_id=123, span_id=456)
-    scope: dict = {}
+    scope: dict = {"path": "/answer", "headers": []}
     capture_request(server, scope)
     message: dict = {
         "type": "http.response.start",
@@ -134,7 +134,7 @@ def test_non_recording_requests_do_not_get_phoenix_headers(span: object) -> None
 def test_phoenix_identity_is_request_scoped_and_never_added_to_response_body() -> None:
     server = Mock()
     server.get_span_context.return_value = SimpleNamespace(is_valid=True, trace_id=1, span_id=2)
-    traced: dict = {}
+    traced: dict = {"path": "/answer", "headers": []}
     capture_request(server, traced)
     body: dict = {"type": "http.response.body", "body": b"answer"}
     correlate_response(None, traced, body)

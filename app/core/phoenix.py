@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Any
 
 from opentelemetry import trace
 from pydantic import BaseModel
+from starlette.datastructures import URL
 
 if TYPE_CHECKING:
     from app.models.answer import AnswerResponse
@@ -42,7 +43,13 @@ def capture_request(span: Any, scope: dict[str, Any]) -> None:
     context = span.get_span_context()
     if context.is_valid:
         scope["nexa.phoenix"] = (f"{context.trace_id:032x}", f"{context.span_id:016x}")
+        scope["nexa.phoenix.span"] = span
         span.set_attribute("openinference.span.kind", "CHAIN")
+        # Queries can contain credentials; request bodies have their own masked capture.
+        url = str(URL(scope={**scope, "query_string": b""}))
+        span.set_attribute("http.url", url)
+        span.set_attribute("url.full", url)
+        span.set_attribute("url.query", "")
 
 
 def correlate_response(span: Any, scope: dict[str, Any], message: dict[str, Any]) -> None:

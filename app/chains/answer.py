@@ -98,6 +98,12 @@ def build_answer_chain(
         AnswerDraft, method="json_schema", strict=True, include_raw=True
     )
 
+    async def validate_output(draft: AnswerDraft) -> dict[str, bool]:
+        await validate_draft(draft, settings)
+        return {"validation_passed": True}
+
+    validator = RunnableLambda(validate_output).with_config(run_name="validate_output")
+
     async def answer(request: RetrieveRequest) -> AnswerResponse:
         retrieved = await retriever.ainvoke(request)
         sources = assemble_context(
@@ -170,7 +176,7 @@ def build_answer_chain(
             if any(redact(text)[1] for text in (draft.answer, *(e.quote for e in draft.evidence))):
                 logger.warning("answer_output_pii_blocked")
                 return response
-            await validate_draft(draft, settings)
+            await validator.ainvoke(draft)
             if draft.status == "insufficient_evidence":
                 return response
             if draft.status == "needs_clarification":

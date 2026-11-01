@@ -12,7 +12,6 @@ from pymongo.errors import PyMongoError
 
 from app.api.limits import limit_requests
 from app.core.config import Settings, get_settings
-from app.core.phoenix import record_result
 from app.evaluation.phoenix_export import publish_annotations_safely
 from app.models.answer import AnswerResponse
 from app.models.evaluation import EvaluatedAnswerRequest, EvaluatedAnswerResponse
@@ -32,7 +31,6 @@ async def evaluated_answer(
 ) -> EvaluatedAnswerResponse:
     try:
         response = await answer_with_quality(request, settings)
-        record_result(response, capture_content=settings.phoenix_capture_content)
         if response.answer.phoenix_span_id:
             background.add_task(
                 publish_annotations_safely, response, response.answer.phoenix_span_id, settings
@@ -59,7 +57,6 @@ async def answer(
 ) -> AnswerResponse:
     try:
         response = await answer_policy(request, settings)
-        record_result(response, capture_content=settings.phoenix_capture_content)
         if should_sample(response, settings):
             background.add_task(score_sampled_answer, request, response, settings)
         return response

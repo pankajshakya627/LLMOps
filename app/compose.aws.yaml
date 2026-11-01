@@ -87,7 +87,8 @@ services:
       LIVE_EVAL_SAMPLE_RATE: "0"
       RATE_LIMIT_PER_MINUTE: "3"
       PHOENIX_BASE_URL: http://phoenix:6006
-      PHOENIX_CAPTURE_CONTENT: "false"
+      # Synthetic course corpus only; set false before sending real/confidential data.
+      PHOENIX_CAPTURE_CONTENT: "true"
       GUARDRAILS_BASE_URL: http://guardrails:8101
       RAGAS_DO_NOT_TRACK: "true"
     ports: ["127.0.0.1:8000:8000"]

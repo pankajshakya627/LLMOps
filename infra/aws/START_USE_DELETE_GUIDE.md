@@ -255,7 +255,88 @@ Keep that terminal open and visit **http://localhost:18501**. The application
 runs on AWS; your laptop forwards browser traffic to it. Closing the terminal
 closes this access path, not the AWS session.
 
-## 7. Ports and using the app
+## 7. View complete synthetic traces and API monitoring
+
+The current AWS Compose profile enables content capture for the synthetic course
+corpus. Deploy the updated code with the existing workflow's `operation=deploy`
+and the current session name. This replaces the release without extending expiry.
+Previously redacted traces cannot be recovered: send a new request after deployment.
+
+After fetching `LAB_INSTANCE_ID` in step 5, open Phoenix from your Mac:
+
+```bash
+aws ssm start-session \
+  --profile nexa-lab --region ap-south-1 --target "$LAB_INSTANCE_ID" \
+  --document-name AWS-StartPortForwardingSession \
+  --parameters '{"portNumber":["6006"],"localPortNumber":["16006"]}'
+```
+
+Keep that terminal open and visit <http://localhost:16006>. In project
+`nexaassist-training`, open a NEW HTTP request, then inspect Input, Output, and
+its child spans: retrieval, prompt/model generation and `validate_output` where
+those steps ran. The root Output is the final API response, including citations
+and quality fields when available. Early refusals/empty retrieval do not invoke
+every downstream step. In project `nexaassist-gateway`, inspect actual provider,
+model, latency and reported tokens. Gateway raw messages stay disabled;
+application model spans contain the captured messages. The two projects do not
+guarantee a shared trace ID. Embedding vectors remain hidden.
+
+In another Mac terminal, fetch the instance ID again if necessary and forward
+remote port `8000` to local `18000` using the same command pattern. Then open:
+
+| View | Browser URL |
+| --- | --- |
+| Try all API routes | <http://localhost:18000/docs> |
+| All API route counts, statuses, errors and p50/p95/p99 latency | <http://localhost:18000/metrics/http> |
+| Answer usage, token totals, error rate and sampled quality | <http://localhost:18000/metrics/answers> |
+| Retrieval counts, errors and empty results | <http://localhost:18000/metrics> |
+| Readiness of the selected database | <http://localhost:18000/ready> |
+
+Use Swagger `POST /answer/evaluated` for quality scores and Phoenix annotations;
+this makes paid judge/embedding calls. A synthetic example request is:
+
+```json
+{"query":"What is the maximum loan amount for a NexaHome Loan?","as_of":"2026-10-01","product_id":"NEXA-HL","top_k":5}
+```
+
+Regular `/answer` does not run Ragas by default. Scores can be unavailable or
+error rather than zero. Cost through the gateway remains null in app metrics;
+inspect provider billing separately. HTTP route counters reset on restart and
+latency percentiles use the last 1000 requests per route in that process.
+
+For AWS monitoring, open **CloudWatch → Logs Insights**, select
+`/nexaassist/nexa-lab-training` (substitute your session stack name), choose the
+session time range and run:
+
+```text
+filter event = "http_request_completed"
+| stats count(*) as requests, sum(server_error) as server_errors,
+        pct(duration_ms, 95) as p95_ms by route, method
+| sort requests desc
+```
+
+To find a particular API trace's logs, use:
+
+```text
+fields @timestamp, route, method, status_code, duration_ms, trace_id, span_id
+| filter event = "http_request_completed" and trace_id = "PASTE_PHOENIX_TRACE_ID"
+| sort @timestamp desc
+```
+
+[CloudWatch documents these aggregation/visualization functions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax-Stats.html).
+EC2's Monitoring tab provides basic instance metrics; `operation=capacity` prints
+host/container memory. No new custom metrics, alarms or polling judge loop is
+provisioned by this change. Log queries and retained telemetry can incur charges.
+Session teardown deletes the logs and Phoenix volume as before.
+
+Content capture covers JSON bodies up to 64 KiB per direction. Larger, incomplete
+or invalid JSON is omitted with a reason. Headers are not captured, and request
+URL query strings are excluded from application span URLs. Supported personal
+identifiers and common credential fields are masked; this does not detect all
+secrets or PII. Raw model drafts may appear before application output validation.
+Set `PHOENIX_CAPTURE_CONTENT` to `"false"` in `app/compose.aws.yaml` and redeploy
+before using real/confidential content. Authentication and security checks still
+run normally; non-JSON/binary payload bodies are not captured.
 
 | Component | AWS port | Browser address |
 | --- | --- | --- |
