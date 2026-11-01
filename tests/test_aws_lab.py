@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import runpy
 import sys
 import tarfile
@@ -79,6 +80,8 @@ def test_release_contains_only_synthetic_corpus_and_digest_manifest(
         "GuardrailId": "guardrail",
         "GuardrailVersion": "1",
         "ModelProvider": provider,
+        "UiAllowedCidr": "8.8.8.8/32",
+        "ApplicationUrl": "http://1.1.1.1:8501",
         "OpenAIKeySecretArn": "arn:aws:secretsmanager:ap-south-1:123456789012:secret:nexa-lab-openai-ABC123",
     }
     images = tmp_path / "images.json"
@@ -201,9 +204,35 @@ def test_cleanup_stops_compute_then_empties_versions_then_deletes_only_its_stack
     cf.delete_stack.assert_called_once_with(StackName="own-stack")
 
 
-def test_session_has_no_inbound_ports_and_no_retained_paid_resources() -> None:
-    resources = template("infra/aws/session.yaml")["Resources"]
+def test_session_exposes_only_restricted_ui_and_retains_no_paid_resources() -> None:
+    config = template("infra/aws/session.yaml")
+    resources = config["Resources"]
     assert not resources["SecurityGroup"]["Properties"].get("SecurityGroupIngress")
+    assert resources["SecurityGroup"]["Properties"]["Tags"] == [
+        {"Key": "Session", "Value": {"Ref": "AWS::StackName"}}
+    ]
+    ingress = [r for r in resources.values() if r["Type"] == "AWS::EC2::SecurityGroupIngress"]
+    assert ingress == [
+        {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {"Ref": "SecurityGroup"},
+                "IpProtocol": "tcp",
+                "FromPort": 8501,
+                "ToPort": 8501,
+                "CidrIp": {"Ref": "UiAllowedCidr"},
+            },
+        }
+    ]
+    parameter = config["Parameters"]["UiAllowedCidr"]
+    assert "Default" not in parameter
+    assert re.fullmatch(parameter["AllowedPattern"], "8.8.8.8/32")
+    for invalid in ("0.0.0.0/0", "8.8.8.0/24", "::/32", "999.1.1.1/32", "8.8.8.8"):
+        assert not re.fullmatch(parameter["AllowedPattern"], invalid)
+    assert config["Outputs"]["UiAllowedCidr"] == {"Value": {"Ref": "UiAllowedCidr"}}
+    assert config["Outputs"]["ApplicationUrl"] == {
+        "Value": {"Fn::Sub": "http://${Host.PublicIp}:8501"}
+    }
     assert resources["Host"]["Properties"]["InstanceInitiatedShutdownBehavior"] == "terminate"
     assert "CreditSpecification" not in resources["Host"]["Properties"]
     assert all(resource.get("DeletionPolicy") != "Retain" for resource in resources.values())
@@ -211,8 +240,11 @@ def test_session_has_no_inbound_ports_and_no_retained_paid_resources() -> None:
         if resource["Type"] == "AWS::ECR::Repository":
             assert resource["Properties"]["EmptyOnDelete"] is True
     compose = yaml.safe_load(Path("app/compose.aws.yaml").read_text())
-    for service in compose["services"].values():
-        assert all(port.startswith("127.0.0.1:") for port in service.get("ports", []))
+    assert compose["services"]["ui"]["ports"] == ["0.0.0.0:8501:8501"]
+    assert compose["services"]["api"]["ports"] == ["127.0.0.1:8000:8000"]
+    assert compose["services"]["phoenix"]["ports"] == ["127.0.0.1:6006:6006"]
+    for name in ("postgres", "gateway", "guardrails"):
+        assert not compose["services"][name].get("ports")
 
 
 def test_duplicate_start_never_creates_a_cleanup_receipt(
@@ -235,6 +267,7 @@ def test_duplicate_start_never_creates_a_cleanup_receipt(
         boundary_arn="boundary",
         model_resources="model",
         provider="openai",
+        ui_allowed_cidr="8.8.8.8/32",
         openai_secret_arn="arn:aws:secretsmanager:ap-south-1:123456789012:secret:nexa-lab-openai-ABC123",
         cloudformation_role_arn="role",
         receipt=str(receipt),
@@ -281,6 +314,31 @@ def test_default_evaluation_refuses_an_existing_bedrock_session(
     remote.assert_not_called()
 
 
+@pytest.mark.parametrize("action", ["evaluate", "destroy"])
+def test_legacy_sessions_keep_evaluation_and_cleanup_available(
+    monkeypatch: pytest.MonkeyPatch, action: str
+) -> None:
+    remote = Mock()
+    cleanup = Mock()
+    monkeypatch.setattr(lab, "run_remote", remote)
+    monkeypatch.setattr(lab, "destroy_stack", cleanup)
+    monkeypatch.setattr(
+        lab,
+        "stack_outputs",
+        lambda _: {"ModelProvider": "openai", "InstanceId": "i-legacy", "Bucket": "legacy"},
+    )
+    monkeypatch.setattr(sys, "argv", ["lab", "--stack", "nexa-lab-training", action])
+    lab.main()
+    if action == "destroy":
+        cleanup.assert_called_once_with("nexa-lab-training", None)
+        remote.assert_not_called()
+    else:
+        remote.assert_called_once_with(
+            "i-legacy", "set -eu; cd /opt/nexaassist/current; bash host.sh evaluate"
+        )
+        cleanup.assert_not_called()
+
+
 @pytest.mark.parametrize(
     "provider,secret,models",
     [
@@ -299,9 +357,213 @@ def test_missing_provider_credentials_fail_before_provisioning(
     monkeypatch.setattr(lab, "client", aws)
     with pytest.raises(ValueError):
         lab.create(
-            argparse.Namespace(provider=provider, openai_secret_arn=secret, model_resources=models)
+            argparse.Namespace(
+                provider=provider,
+                openai_secret_arn=secret,
+                model_resources=models,
+                ui_allowed_cidr="8.8.8.8/32",
+            )
         )
     aws.assert_not_called()
+
+
+@pytest.mark.parametrize(
+    "cidr",
+    [
+        "",
+        "invalid",
+        "8.8.8.8",
+        "8.8.8.0/24",
+        "0.0.0.0/0",
+        "10.0.0.1/32",
+        "172.16.0.1/32",
+        "192.168.1.1/32",
+        "127.0.0.1/32",
+        "169.254.1.1/32",
+        "100.64.0.1/32",
+        "192.0.2.1/32",
+        "224.0.0.1/32",
+        "255.255.255.255/32",
+        "::1/128",
+        "2606:4700:4700::1111/128",
+        "8.8.8.8/255.255.255.255",
+    ],
+)
+def test_invalid_ui_cidr_fails_before_any_aws_client(
+    monkeypatch: pytest.MonkeyPatch,
+    cidr: str,
+) -> None:
+    aws = Mock(side_effect=AssertionError("Invalid CIDR must not reach AWS"))
+    monkeypatch.setattr(lab, "client", aws)
+    monkeypatch.setattr(lab.boto3.session, "Session", aws)
+    with pytest.raises(ValueError, match="global IPv4 /32") as error:
+        lab.create(
+            argparse.Namespace(
+                ui_allowed_cidr=cidr,
+                provider="bedrock",
+                model_resources="model",
+                minutes=120,
+                boundary_arn="boundary",
+            )
+        )
+    if cidr:
+        assert cidr not in str(error.value)
+    aws.assert_not_called()
+
+
+def test_create_requires_ui_cidr_and_passes_it_to_cloudformation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    cf = Mock()
+    cf.create_stack.return_value = {"StackId": "new-stack-id"}
+    monkeypatch.setattr(lab, "client", lambda _: cf)
+    monkeypatch.setattr(lab, "stack_outputs", lambda _: {"UiAllowedCidr": "8.8.8.8/32"})
+    argv = [
+        "lab",
+        "--stack",
+        "nexa-lab-training",
+        "create",
+        "--provider",
+        "bedrock",
+        "--model-resources",
+        "model",
+        "--boundary-arn",
+        "boundary",
+        "--cloudformation-role-arn",
+        "role",
+        "--receipt",
+        str(tmp_path / "receipt"),
+        "--output",
+        str(tmp_path / "outputs"),
+    ]
+    monkeypatch.setattr(sys, "argv", argv)
+    with pytest.raises(SystemExit) as stopped:
+        lab.main()
+    assert stopped.value.code == 2
+    cf.create_stack.assert_not_called()
+    monkeypatch.setattr(sys, "argv", [*argv, "--ui-allowed-cidr", "8.8.8.8/32"])
+    lab.main()
+    parameters = {
+        p["ParameterKey"]: p["ParameterValue"]
+        for p in cf.create_stack.call_args.kwargs["Parameters"]
+    }
+    assert parameters["UiAllowedCidr"] == "8.8.8.8/32"
+    assert "8.8.8.8" not in capsys.readouterr().out
+
+
+def test_only_cloudformation_role_can_manage_tagged_session_ui_ingress() -> None:
+    config = template("infra/aws/github-oidc.yaml")
+    actions = {"ec2:AuthorizeSecurityGroupIngress", "ec2:RevokeSecurityGroupIngress"}
+    matches = []
+    for name, resource in config["Resources"].items():
+        props = resource.get("Properties", {})
+        policies = [p["PolicyDocument"] for p in props.get("Policies", [])]
+        if "PolicyDocument" in props:
+            policies.append(props["PolicyDocument"])
+        for policy in policies:
+            for statement in policy["Statement"]:
+                allowed = statement.get("Action", [])
+                allowed = [allowed] if isinstance(allowed, str) else allowed
+                assert "cloudformation:UpdateStack" not in allowed
+                if actions.intersection(allowed):
+                    matches.append((name, statement))
+    assert matches == [
+        (
+            "CloudFormationRole",
+            {
+                "Effect": "Allow",
+                "Action": ["ec2:AuthorizeSecurityGroupIngress", "ec2:RevokeSecurityGroupIngress"],
+                "Resource": {
+                    "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:security-group/*"
+                },
+                "Condition": {"StringLike": {"ec2:ResourceTag/Session": "nexa-lab-*"}},
+            },
+        )
+    ]
+    host = template("infra/aws/session.yaml")["Resources"]["HostRole"]
+    assert not actions.intersection(re.findall(r"ec2:\w+", json.dumps(host)))
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {},
+        {"UiAllowedCidr": "8.8.8.8/32"},
+        {"ApplicationUrl": "http://1.1.1.1:8501"},
+        {"UiAllowedCidr": "0.0.0.0/0", "ApplicationUrl": "http://1.1.1.1:8501"},
+        {"UiAllowedCidr": "8.8.8.8/32", "ApplicationUrl": "http://127.0.0.1:8501"},
+        {"UiAllowedCidr": "8.8.8.8/32", "ApplicationUrl": "https://1.1.1.1:8501"},
+    ],
+)
+def test_legacy_release_rejected_before_artifacts_or_aws(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    changes: dict[str, str],
+) -> None:
+    aws = Mock(side_effect=AssertionError("Legacy release must not reach AWS"))
+    monkeypatch.setattr(lab, "client", aws)
+    archive = tmp_path / "release.tar.gz"
+    with pytest.raises(ValueError, match="destroy.*create"):
+        lab.prepare_release(
+            argparse.Namespace(provider="openai", archive=str(archive)),
+            {"ModelProvider": "openai", **changes},
+        )
+    assert not archive.exists()
+    aws.assert_not_called()
+
+
+@pytest.mark.parametrize("provider", [None, "openai"])
+@pytest.mark.parametrize("fresh", [False, True])
+def test_status_checks_ui_only_for_release_and_keeps_saved_cidr_private(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    provider: str | None,
+    fresh: bool,
+) -> None:
+    data = {"ModelProvider": "openai", "InstanceId": "i-lab"}
+    if fresh:
+        data.update(UiAllowedCidr="8.8.8.8/32", ApplicationUrl="http://1.1.1.1:8501")
+    monkeypatch.setattr(lab, "stack_outputs", lambda _: data)
+    argv = ["lab", "--stack", "nexa-lab-training", "status"]
+    monkeypatch.setattr(sys, "argv", argv + (["--provider", provider] if provider else []))
+    if provider and not fresh:
+        with pytest.raises(SystemExit) as stopped:
+            lab.main()
+        assert stopped.value.code == 1
+        assert "destroy" in capsys.readouterr().out
+    else:
+        lab.main()
+        result = capsys.readouterr().out
+        assert "i-lab" in result
+        assert "8.8.8.8" not in result
+
+
+def test_successful_deploy_reports_application_url(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    archive = tmp_path / "release.tar.gz"
+    archive.write_bytes(b"fixture")
+    monkeypatch.setattr(lab, "prepare_release", lambda args, data: (archive, "digest"))
+    monkeypatch.setattr(lab, "client", lambda _: Mock())
+    monkeypatch.setattr(lab, "run_remote", lambda instance, command: {})
+    monkeypatch.setenv("AWS_DEFAULT_REGION", "ap-south-1")
+    lab.deploy(
+        argparse.Namespace(release_id="test"),
+        {
+            "ExpiresAt": "2099-01-01T00:00:00",
+            "Bucket": "lab-bucket",
+            "InstanceId": "i-lab",
+            "UiAllowedCidr": "8.8.8.8/32",
+            "ApplicationUrl": "http://1.1.1.1:8501",
+        },
+    )
+    result = json.loads(capsys.readouterr().out)
+    assert any("http://1.1.1.1:8501" in action for action in result["next_actions"])
+    assert "8.8.8.8" not in json.dumps(result)
 
 
 @pytest.mark.usefixtures("settings")

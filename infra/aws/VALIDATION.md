@@ -1,6 +1,52 @@
-# AWS lab verification — 31 October 2026
+# AWS lab verification
 
-## Final chargeable-resource cleanup — 23:30 IST
+## Automatic trainer-restricted UI access — 1 November 2026
+
+Prepared future-session access on `http://PUBLIC_IP:8501`: required global IPv4
+`/32`, CloudFormation-owned ingress, public UI Docker binding, private backend
+ports, and a browser link in the successful workflow summary. Older stacks are
+rejected before release builds/uploads; their administrative status, capacity,
+evaluation and cleanup remain available. No existing application session was
+modified and no new EC2 instance was launched for this change.
+
+| Check | Result |
+| --- | --- |
+| TDD before implementation | 30 failures, 19 passes in the expanded AWS tests |
+| Final focused AWS tests | **51 passed**, including legacy evaluation/deletion |
+| Complete offline suite | **440 passed**, zero failures, errors or skips |
+| Required training/answer/readiness subset | **53 passed** |
+| Deployment CLI line coverage | **80%** of `lab.py`; all **22/22** changed executable lines covered |
+| Repository Ruff; CI-scoped Mypy | Passed; Mypy checked 78 files |
+| CloudFormation / actionlint / host shell syntax | Passed; external ShellCheck unavailable |
+| Both AWS Compose profiles | Rendered with temporary fake credentials; only UI 8501 public, API/Phoenix loopback, other services unpublished |
+| Code and security reviews | No actionable findings; guides also reviewed |
+| Redacted secret scan | No changed-file findings; one existing tracked trace-ID false positive; ignored local credential files were not uploaded |
+| Diff whitespace | Passed |
+
+The first broad test run could not download its public tokenizer vocabulary.
+Caching that vocabulary in a temporary directory resolved the environmental
+failures; the final suite passed without test skips or changes to dependencies,
+thresholds, constraints or unrelated application code. Temporary coverage tools
+were also installed outside the repository. Plain `mypy .` still encounters the
+previously documented duplicate-module discovery issue; the CI command passes.
+
+The approved one-time configuration was applied and verified: `nexa-ci-bootstrap`
+reached **UPDATE_COMPLETE**; the only template difference was adding the two
+ingress actions to CloudFormationRole, scoped to this account/Region and
+`Session=nexa-lab-*` security groups. Its dependent GitHubRole ARN reference
+was reevaluated without a policy change or replacement. All existing parameters,
+including the stack-owned OIDC setting and `EnableBedrock=false`, were preserved.
+The trainer Mac's current IPv4 `/32` was saved as the `aws-lab` environment secret
+`AWS_UI_ALLOWED_CIDR`; only its metadata was subsequently verified.
+
+Live provisioning and browser reachability for this new template remain
+unverified until the code is published and a fresh session is started. HTTP has
+no TLS or application login; users behind the same allowed public IP can reach
+the UI. An IP change requires refreshing the saved secret before a fresh session;
+SSM forwarding remains available during the current session. The saved IP is
+masked in GitHub logs but visible to authorized AWS readers.
+
+## Final chargeable-resource cleanup — 31 October 2026, 23:30 IST
 
 The latest session from run `41211732355` reached `DELETE_COMPLETE` at
 21:20:38 IST. A subsequent private audit ran 840 inventory checks across all

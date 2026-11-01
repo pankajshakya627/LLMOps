@@ -110,13 +110,16 @@ the actual ARN. For example, `GitHubRoleArn` is an output key, while
 | `AWS_CLOUDFORMATION_ROLE_ARN` | GitHub environment variable in `aws-lab` | Value of bootstrap output `CloudFormationRoleArn` |
 | `AWS_SESSION_BOUNDARY_ARN` | GitHub environment variable in `aws-lab` | Value of bootstrap output `BoundaryArn`; this is a policy ARN |
 | `OPENAI_API_KEY_SECRET_ARN` | GitHub environment variable in `aws-lab` | Full Mumbai ARN of `nexa-lab-openai` |
+| `AWS_UI_ALLOWED_CIDR` | GitHub **environment secret** in `aws-lab` | Trainer public IPv4 `/32`; saved once for automatic UI access |
 | Actual OpenAI API key | AWS Secrets Manager, secret named `nexa-lab-openai` | Only the API key in plaintext, without an environment-variable prefix or JSON wrapper |
 | Database password, gateway key, reviewer token | Generated session secret in Secrets Manager | Random session-specific credential material |
 | AWS access key / secret access key | Not required in GitHub for this pipeline | OIDC supplies temporary credentials instead |
 
 The variables in GitHub tell the workflow **where to go and which roles to use**.
 They are configuration, not secret values. Do not put an OpenAI API key into a
-GitHub variable ending in `_ARN`.
+GitHub variable ending in `_ARN`. The saved IP is a network allowlist, not a
+credential. GitHub masks it in logs, but authorized AWS readers can see it in
+CloudFormation and the EC2 security-group rule.
 
 During deployment, [host.sh](host.sh) fetches the OpenAI key with the EC2 role.
 It writes a root-private runtime `.env` with mode `0600`, deletes temporary
@@ -140,7 +143,8 @@ already-running containers; redeploy the session to load the new value.
 | ECR | Stores the three built container images |
 | S3 | Stores versioned release archives, the synthetic corpus and reports |
 | Secrets Manager | Holds the OpenAI key and generated session credentials |
-| Systems Manager (SSM) | Runs deployment commands and provides authenticated port forwarding without public inbound security-group rules |
+| Systems Manager (SSM) | Runs deployment commands and provides authenticated forwarding for backend ports and optional UI access |
+| EC2 security group | Allows only UI TCP 8501 from the saved trainer `/32`; the template configures it for every fresh session |
 | CloudWatch Logs | Collects container logs for troubleshooting |
 | EventBridge Scheduler and Lambda | Runs expiry cleanup and requests deletion of the session stack |
 | IAM and STS | Control permissions and issue temporary AWS credentials |
@@ -206,15 +210,21 @@ Watch the destroy run to completion too. All five operations can also be run
 through GitHub **Actions → Disposable AWS lab → Run workflow**. Destroy deletes
 the session's database, traces, reports and other session data.
 
-To open the application after deployment, use the AWS CLI and Session Manager
-plugin with your human AWS identity. Follow the [SSM tunnel steps](README.md#start-and-use-a-session)
-to open Streamlit on `http://127.0.0.1:18501`. Workflow authentication through
-GitHub does not sign your laptop into AWS for interactive access.
+After successful deployment, open **Actions → your run → Summary → Open the
+application**. The URL includes `:8501`; both the UI binding and restricted
+firewall rule are created automatically on fresh sessions. Complete the
+[one-time bootstrap update and saved IP setup](README.md#enable-automatic-browser-access-once)
+first. Only CloudFormation's role receives the scoped ingress permissions;
+GitHub's role and the instance role do not.
 
-For an explicitly approved one-IP demo, see the [temporary direct-access
-exception](README.md#temporary-direct-access-from-one-ip). It changes only the
-running session's UI binding and a single-IP ingress rule; new deployments
-remain private by default.
+Use the [browser guide](START_USE_DELETE_GUIDE.md#6a-direct-aws-ip-in-your-browser-restricted-to-your-ip).
+Direct access uses HTTP and synthetic data only. A changed public IP requires
+refreshing the saved secret before the next fresh session. For the current
+session, use an SSM tunnel to `http://127.0.0.1:18501`; FastAPI and Phoenix also
+use SSM forwarding. Your laptop needs its own AWS login and Session Manager
+plugin for these tunnels. GitHub authentication does not sign your laptop in.
+Older private-template stacks must be finished/destroyed and recreated before
+using the new automatic direct-access deployment.
 
 ## 7. Cost, deletion and what success means
 
@@ -244,6 +254,7 @@ If a run fails, open its failed step and inspect the error. Common boundaries:
 
 | Failed step | Check |
 | --- | --- |
+| Preflight | Set `AWS_UI_ALLOWED_CIDR` in the `aws-lab` environment secrets for start |
 | Configure AWS credentials | Actual role ARN, exact OIDC subject and environment/branch restriction |
 | Create infrastructure | CloudFormation Events and the first resource failure reason; a Free Tier eligibility error requires an account-eligible instance, not broader IAM permissions |
 | Build/push images | Docker build log and ECR permissions |

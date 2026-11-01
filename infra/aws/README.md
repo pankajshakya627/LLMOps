@@ -26,7 +26,8 @@ including Bedrock Guardrails. Bedrock is an explicit alternative described below
 | Synthetic corpus, release manifests and reports | Private, encrypted, versioned S3 session bucket |
 | Runtime secret material and OpenAI key | Secrets Manager; fetched by the host's instance role |
 | Container logs | CloudWatch Logs; basic EC2 metrics remain available |
-| Browser/API/Phoenix access | SSM port forwarding; no security-group inbound rules |
+| Browser access | TCP 8501 restricted to the saved trainer IPv4 `/32`; URL printed after deployment |
+| API/Phoenix access | SSM port forwarding; backend ports stay private |
 | Build/test/deploy/evaluate/delete | GitHub Actions using OIDC |
 | Expiry | EventBridge Scheduler → cleanup Lambda → stack deletion |
 
@@ -36,8 +37,8 @@ flowchart LR
     G --> E[ECR image digests]
     G --> S[Versioned S3 releases]
     G --> M[SSM deployment command]
-    U[Trainer laptop] --> T[SSM TLS tunnel]
-    T --> UI[Streamlit on EC2]
+    U[Trainer laptop / saved IPv4] --> UI[Streamlit on EC2 / HTTP 8501]
+    U --> T[SSM TLS tunnel / backend access]
     UI --> API[FastAPI]
     API --> PG[pgvector container]
     API --> L[LiteLLM]
@@ -171,6 +172,64 @@ aws cloudformation describe-stacks --stack-name nexa-ci-bootstrap \
   --query 'Stacks[0].Outputs' --output table
 ```
 
+### Enable automatic browser access once
+
+For an **existing bootstrap**, apply the updated template once from the repository
+root. Preserve every parameter, including the empty `ExistingOidcProviderArn`
+when this stack owns the OIDC provider:
+
+```bash
+aws cloudformation update-stack \
+  --profile nexa-lab --region ap-south-1 \
+  --stack-name nexa-ci-bootstrap \
+  --template-body file://infra/aws/github-oidc.yaml \
+  --capabilities CAPABILITY_IAM \
+  --parameters ParameterKey=GitHubSubject,UsePreviousValue=true \
+    ParameterKey=ExistingOidcProviderArn,UsePreviousValue=true \
+    ParameterKey=EnableBedrock,UsePreviousValue=true
+aws cloudformation wait stack-update-complete \
+  --profile nexa-lab --region ap-south-1 --stack-name nexa-ci-bootstrap
+```
+
+If AWS reports “No updates are to be performed”, this update is already applied.
+The added permissions let only the CloudFormation execution role authorize and
+revoke ingress on security groups tagged `Session=nexa-lab-*` in this account
+and Region. The session template opens only TCP 8501 from the saved `/32`.
+
+Save your trainer laptop's public IPv4 once as the **environment secret**
+`AWS_UI_ALLOWED_CIDR` in GitHub → Settings → Environments → `aws-lab`. This is a
+network allowlist, not an AWS credential; a secret keeps it masked in CI logs.
+Authorized AWS readers can still see the address in stack parameters/outputs
+and the security-group rule.
+Alternatively run this on the trainer's Mac, from any directory:
+
+```bash
+python3 - <<'PY'
+import ipaddress
+import subprocess
+import urllib.request
+
+address = ipaddress.IPv4Address(
+    urllib.request.urlopen('https://checkip.amazonaws.com', timeout=10).read().decode().strip()
+)
+if not address.is_global or address.is_multicast:
+    raise SystemExit('Expected a global public IPv4 address')
+subprocess.run(
+    ['gh', 'secret', 'set', 'AWS_UI_ALLOWED_CIDR', '--env', 'aws-lab',
+     '--repo', 'pankajshakya627/LLMOps'],
+    input=f'{address}/32', text=True, check=True,
+)
+print('Saved the trainer IPv4 /32; future sessions enable UI port 8501 automatically.')
+PY
+```
+
+Run this through the same network/VPN that your browser will use. A changed
+public IP requires refreshing the saved secret **before a new session**. Each
+session keeps its original allowlist; changing the secret or redeploying code
+does not edit an existing security group. Use SSM forwarding if your IP changes
+mid-session. A shared public IP allows others behind that same network exit;
+it is not application authentication.
+
 The execution role is intentionally privileged to create/delete the lab's
 network, compute and IAM resources. Some EC2 provisioning actions need wildcard
 resource scope. IAM role creation is restricted to the `nexa-lab-` prefix and
@@ -275,7 +334,18 @@ logs. It initializes pgvector, re-ingests the eight source documents into new
 OpenAI namespaces, starts the application and checks readiness plus one cited
 structured answer. Local Docker services, databases and `.env` are untouched.
 
-Find the host ID in CloudFormation stack outputs, or run:
+After a successful deployment, open **Actions → your run → Summary → Open the
+application**. The URL is `http://CURRENT_PUBLIC_IP:8501`; the port is configured
+automatically for each fresh session. You can also fetch it directly:
+
+```bash
+aws cloudformation describe-stacks --stack-name nexa-lab-training \
+  --profile nexa-lab --region ap-south-1 \
+  --query "Stacks[0].Outputs[?OutputKey=='ApplicationUrl'].OutputValue | [0]" --output text
+```
+
+Use synthetic data only: direct browser access uses HTTP without a login or TLS.
+For an authenticated tunnel, find the host ID in CloudFormation stack outputs:
 
 ```bash
 aws cloudformation describe-stacks --stack-name nexa-lab-training \
@@ -302,25 +372,19 @@ error and create a new session, then copy its new `InstanceId`. Also install the
 local Session Manager plugin before opening a tunnel; AWS CLI login alone does
 not install that plugin.
 
-### Temporary direct access from one IP
+### Automatic direct access from one IP
 
-The default deployment remains private through SSM. For the live session on
-31 October 2026, the user explicitly selected direct access restricted to their
-current public IPv4 address. A host-only `compose.public-ui.yaml` override
-replaces the UI mapping with `0.0.0.0:8501:8501`; one security-group rule allows
-TCP 8501 from that address as a `/32`. The URL is `http://PUBLIC_IP:8501`, including
-the port. API and Phoenix bindings remain on loopback; database, gateway and
-validator ports are not published.
+The AWS Compose profile publishes only the UI on `0.0.0.0:8501:8501`.
+CloudFormation creates the matching TCP 8501 rule from `AWS_UI_ALLOWED_CIDR`.
+API and Phoenix bindings remain on loopback; database, gateway and validator
+ports are not published. No per-session port mapping or console rule is needed.
+Destroy removes the ingress rule and its security group with the session.
 
-This is a temporary plain-HTTP synthetic training demo, not authenticated HTTPS
-hosting. An IP change can make the URL stop working; update the single-IP rule
-rather than allowing the entire internet. The runtime override and ingress rule
-are an explicit manual exception, not changes to the CloudFormation default.
-A new session uses private access; redeploy restores the default UI mapping.
-Destroy removes the current host and security group, including the temporary
-rule. To close direct access earlier, revoke that rule and run
-`docker compose -f compose.yaml up -d --no-deps --wait ui` from the current release
-on the host. This exception does not extend session expiry.
+Existing stacks created with the old private template remain unchanged. A
+deployment to one of those stacks stops before image builds or release upload;
+finish the session, destroy it and start fresh with the new template. Status,
+capacity and destroy remain usable for those older stacks. This change does
+not extend any session's expiry.
 
 Use only synthetic material. Phoenix and the API have no public listener, and
 SSM access is an administrative boundary. All containers share one EC2 IAM role;

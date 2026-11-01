@@ -1,6 +1,6 @@
 name: nexaassist-aws
 
-# All published ports are loopback-only. Reach them through SSM port forwarding.
+# UI access is restricted by the session security group; backend ports use SSM forwarding.
 services:
   postgres:
     image: pgvector/pgvector:0.8.2-pg17
@@ -104,7 +104,7 @@ services:
     environment:
       API_BASE_URL: http://api:8000
       UI_TIMEZONE: Asia/Kolkata
-    ports: ["127.0.0.1:8501:8501"]
+    ports: ["0.0.0.0:8501:8501"]
     depends_on:
       api: {condition: service_healthy}
     healthcheck:

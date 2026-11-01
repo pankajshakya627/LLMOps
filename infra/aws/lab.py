@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import ipaddress
 import json
 import re
 import shlex
@@ -45,7 +46,17 @@ def stack_outputs(stack: str) -> dict[str, str]:
     return {entry["OutputKey"]: entry["OutputValue"] for entry in data["Outputs"]}
 
 
+def validate_ui_cidr(value: str) -> None:
+    try:
+        network = ipaddress.IPv4Network(value)
+        if not value.endswith("/32") or not network.is_global or network.is_multicast:
+            raise ValueError
+    except ValueError:
+        raise ValueError("UI access requires one global IPv4 /32 address") from None
+
+
 def create(args: argparse.Namespace) -> None:
+    validate_ui_cidr(args.ui_allowed_cidr)
     if args.provider == "openai":
         if not re.fullmatch(
             r"arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:nexa-lab-openai-[A-Za-z0-9]{6}",
@@ -62,6 +73,7 @@ def create(args: argparse.Namespace) -> None:
         "ExpiresAt": expires.strftime("%Y-%m-%dT%H:%M:%S"),
         "BoundaryArn": args.boundary_arn,
         "ModelProvider": args.provider,
+        "UiAllowedCidr": args.ui_allowed_cidr,
         "OpenAIKeySecretArn": args.openai_secret_arn if args.provider == "openai" else "",
         "ModelResources": args.model_resources if args.provider == "bedrock" else "",
     }
@@ -99,8 +111,22 @@ def require_provider(data: dict[str, str], provider: str) -> None:
         )
 
 
+def require_ui(data: dict[str, str]) -> None:
+    try:
+        validate_ui_cidr(data.get("UiAllowedCidr", ""))
+        address = re.fullmatch(r"http://([0-9.]+):8501", data.get("ApplicationUrl", ""))
+        if not address:
+            raise ValueError
+        validate_ui_cidr(address[1] + "/32")
+    except ValueError:
+        raise ValueError(
+            "Session lacks restricted public UI access; destroy it and create a fresh session"
+        ) from None
+
+
 def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Path, str]:
     require_provider(data, args.provider)
+    require_ui(data)
     if not re.fullmatch(r"[a-zA-Z0-9_-]{1,100}", args.release_id):
         raise ValueError("Invalid release ID")
     images = json.loads(Path(args.images).read_text())
@@ -239,7 +265,7 @@ def deploy(args: argparse.Namespace, data: dict[str, str]) -> None:
     output(
         "Release deployed; live readiness and structured-answer smoke passed",
         [f"s3://{data['Bucket']}/reports/{args.release_id}/"],
-        ["Connect through SSM port forwarding; destroy the session when finished"],
+        [f"Open {data['ApplicationUrl']}; destroy the session when finished"],
     )
 
 
@@ -290,6 +316,7 @@ def main() -> None:
     start.add_argument("--provider", choices=["openai", "bedrock"], default="openai")
     start.add_argument("--openai-secret-arn", default="")
     start.add_argument("--model-resources", default="")
+    start.add_argument("--ui-allowed-cidr", required=True)
     start.add_argument("--boundary-arn", required=True)
     start.add_argument("--cloudformation-role-arn", required=True)
     start.add_argument("--output", default="session-outputs.json")
@@ -342,7 +369,12 @@ def main() -> None:
         else:
             if args.provider:
                 require_provider(data, args.provider)
-            print(json.dumps(data, indent=2))
+                require_ui(data)
+            print(
+                json.dumps(
+                    {key: value for key, value in data.items() if key != "UiAllowedCidr"}, indent=2
+                )
+            )
     except Exception as exc:  # noqa: BLE001 - CLI failures share one sanitized recovery contract.
         summary = type(exc).__name__
         if isinstance(exc, (RuntimeError, ValueError, TimeoutError)):

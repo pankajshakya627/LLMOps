@@ -44,6 +44,12 @@ This uses the existing bootstrap and GitHub variables. If configuring a differen
 AWS account, follow the [one-time setup](README.md#one-time-aws-and-github-setup)
 first; ARNs from the old account will not configure the new account.
 
+For automatic browser access, complete the [one-time bootstrap update and saved
+trainer IP setup](README.md#enable-automatic-browser-access-once). After that,
+port 8501 is configured automatically on every fresh session. Refresh the
+`AWS_UI_ALLOWED_CIDR` environment secret only when your public IPv4 changes,
+before starting a new session.
+
 ## 2. Check or restore the OpenAI secret
 
 Full cost cleanup can leave the reusable secret marked for deletion. Check its
@@ -140,7 +146,7 @@ failed step; a failed new session is automatically cleaned up.
 ## 5. Fetch the current host details
 
 Run this only after successful deployment. It avoids copying an expired instance
-ID or yesterday's public IP:
+ID or yesterday's browser URL:
 
 ```bash
 LAB_INSTANCE_ID=$(aws cloudformation describe-stacks \
@@ -149,12 +155,13 @@ LAB_INSTANCE_ID=$(aws cloudformation describe-stacks \
   --query "Stacks[0].Outputs[?OutputKey=='InstanceId'].OutputValue | [0]" \
   --output text)
 
-LAB_PUBLIC_IP=$(aws ec2 describe-instances \
+LAB_APP_URL=$(aws cloudformation describe-stacks \
   --profile nexa-lab --region ap-south-1 \
-  --instance-ids "$LAB_INSTANCE_ID" \
-  --query 'Reservations[0].Instances[0].PublicIpAddress' --output text)
+  --stack-name nexa-lab-training \
+  --query "Stacks[0].Outputs[?OutputKey=='ApplicationUrl'].OutputValue | [0]" \
+  --output text)
 
-printf 'Current instance: %s\nCurrent public IP: %s\n' "$LAB_INSTANCE_ID" "$LAB_PUBLIC_IP"
+printf 'Current instance: %s\nBrowser URL: %s\n' "$LAB_INSTANCE_ID" "$LAB_APP_URL"
 
 aws cloudformation describe-stacks \
   --profile nexa-lab --region ap-south-1 --stack-name nexa-lab-training \
@@ -164,84 +171,41 @@ aws cloudformation describe-stacks \
 
 The final value is the expiry time in **UTC**; add 5 hours 30 minutes for IST.
 Keep using the same Mac terminal so its variables remain set. If you open a new
-terminal, repeat this step before using `$LAB_INSTANCE_ID` or `$LAB_PUBLIC_IP`.
-
-Choose one browser method below. Every new session defaults to private SSM
-access. Direct public-IP access requires the additional per-session setup in 6A.
+terminal, repeat this step before using `$LAB_INSTANCE_ID` or `$LAB_APP_URL`.
 
 ## 6A. Direct AWS IP in your browser, restricted to your IP
 
-This is the temporary demo access you selected previously. It changes only the
-current session and does not add a load balancer or change the account plan.
-Use synthetic data only: this route is HTTP and has no application login or TLS.
+Open **GitHub Actions → your successful run → Summary → Open the application**,
+or open `$LAB_APP_URL` from step 5. Every fresh session configures port **8501**
+automatically from the saved `AWS_UI_ALLOWED_CIDR` environment secret. No Docker
+override, SSH connection or manual inbound rule is needed.
 
-First open a server terminal from your **Mac terminal**:
-
-```bash
-aws ssm start-session \
-  --profile nexa-lab --region ap-south-1 \
-  --target "$LAB_INSTANCE_ID"
-```
-
-You are now inside the AWS host. Paste the following block **in that server
-terminal**, not directly into your Mac shell. It validates the Compose files,
-recreates only the UI, and restores the private mapping if that restart fails:
+From your **Mac terminal**, you can verify the UI health endpoint:
 
 ```bash
-sudo bash <<'SERVER'
-set -eu
-cd /opt/nexaassist/current
-cat > compose.public-ui.yaml <<'YAML'
-services:
-  ui:
-    ports: !override
-      - "0.0.0.0:8501:8501"
-YAML
-docker compose -f compose.yaml -f compose.public-ui.yaml config --quiet
-if ! docker compose -f compose.yaml -f compose.public-ui.yaml up -d --no-deps --wait --wait-timeout 120 ui; then
-  docker compose -f compose.yaml up -d --no-deps --wait --wait-timeout 120 ui
-  exit 1
-fi
-docker port nexaassist-aws-ui-1
-SERVER
+curl --fail --connect-timeout 10 --max-time 15 "${LAB_APP_URL}/_stcore/health"
 ```
 
-Continue only if it succeeded and displays `8501/tcp -> 0.0.0.0:8501`.
-Type `exit` to return to your Mac terminal.
+The response should be `ok`. Use **http://CURRENT_PUBLIC_IP:8501**, including
+`:8501`; ports 80 and 443 are not configured. Use synthetic data only: direct
+access has no application login or TLS. Anyone sharing your allowed public IP
+can reach the UI. API, Phoenix and database ports remain private.
 
-Then open **AWS console → EC2 → Instances → your current instance → Security →
-its security group → Edit inbound rules**. Add exactly this rule:
+If your public IP changes, use the SSM tunnel below for the current session.
+Refresh the saved secret using the one-time setup command before your next
+fresh session. Updating the secret or redeploying code does not edit a running
+session's allowlist. Never broaden the source to `0.0.0.0/0`.
 
-| Field | Value |
-| --- | --- |
-| Type | Custom TCP |
-| Port | `8501` |
-| Source | **My IP**, a single IPv4 address ending in `/32` |
-
-Save the rule. Keep SSH, API, Phoenix and database ports closed; do not use
-`0.0.0.0/0` as the inbound source. If the UI configuration failed above, stop and
-fix it before adding the rule. Changing only the firewall cannot expose a
-loopback-only Docker binding.
-
-Back on your **Mac terminal**, print and test the current URL:
-
-```bash
-printf 'Open in your browser: http://%s:8501\n' "$LAB_PUBLIC_IP"
-curl --fail "http://${LAB_PUBLIC_IP}:8501/_stcore/health"
-```
-
-The health response should be `ok`. Open the printed URL, including **`:8501`**.
-Opening the IP without its port tries port 80, which this lab does not serve.
-An IP change, VPN or different network can invalidate the single-IP rule; update
-the rule to your current IP. New sessions and redeployments restore the default
-private UI configuration. Destruction removes the temporary ingress rule with
-the session's security group.
+Older sessions without `ApplicationUrl` used a private template. Finish/destroy
+them and start a fresh session with the updated code; do not deploy the new
+public UI mapping into an old stack. The workflow rejects those redeployments
+before image builds. Existing sessions are not automatically migrated.
 
 ## 6B. Private browser access through an SSM tunnel
 
-This method works with the default deployment and needs no inbound firewall
-rule or public Docker binding. From the **Mac terminal** where you fetched the
-instance ID:
+This alternative uses authenticated SSM forwarding and works even when your
+browser network no longer matches the saved allowlist. From the **Mac terminal**
+where you fetched the instance ID:
 
 ```bash
 aws ssm start-session \
@@ -437,7 +401,7 @@ separate, and the budget tag does not enforce a spending cap.
 | Secret is scheduled for deletion | Restore it in step 2 before deployment |
 | OpenAI secret must contain only the API key | Fix the secret's plaintext format; do not print the key in logs or chat |
 | `TargetNotConnected` | Use the new instance ID and verify EC2 is running and SSM is Online; a terminated ID cannot reconnect |
-| Browser cannot reach the public IP | Complete both parts of 6A, use `http://IP:8501`, and verify the source-IP rule |
+| Browser cannot reach the public IP | Use the new session's `ApplicationUrl` with `:8501`; verify your browser network matches the saved `/32`, or use SSM in 6B |
 | Browser cannot reach localhost | Keep the 6B tunnel open and verify its target is the current instance |
 | Failed SSH connection | Use SSM for the server terminal; SSH is not needed to open the app |
 | `DELETE_FAILED` | Inspect CloudFormation Events and resolve the named resource before considering cleanup complete |
