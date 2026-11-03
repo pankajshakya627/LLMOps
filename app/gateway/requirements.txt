@@ -2,6 +2,5 @@
 litellm[proxy]==1.106.2
 # Proxy authentication error handling imports Prisma even without a configured database.
 prisma==0.15.0
-# Phoenix's OTLP/HTTP callback is optional in LiteLLM; install its runtime explicitly.
-opentelemetry-sdk==1.45.1
-opentelemetry-exporter-otlp-proto-http==1.45.1
+# Datadog LLM Observability callback runtime.
+ddtrace==4.16.1

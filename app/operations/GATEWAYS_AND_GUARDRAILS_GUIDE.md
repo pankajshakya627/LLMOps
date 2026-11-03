@@ -1,5 +1,8 @@
 # NexaAssist: LLM gateways, routing, security and guardrails
 
+> Monitoring has migrated to the [Datadog AWS guide](../observability/README.md).
+> Phoenix sections below describe the previous lab; use the linked guide for current telemetry commands.
+
 Code-grounded enterprise training guide · source snapshot: 25 October 2026.
 
 ## 1. Scope and learning outcomes
@@ -130,7 +133,7 @@ permanent API contracts; update them when the source changes.
 | [Escaped prompt variables — `app/chains/answer.py:147`](../chains/answer.py#L147) | Escape question/context values before prompt invocation | Each generation/repair attempt |
 | [Draft validation — `app/chains/answer.py:169`](../chains/answer.py#L169) | Apply schema, output PII, Guardrails and status rules | After model returns |
 | [Citation validation — `app/chains/answer.py:184`](../chains/answer.py#L184) | Match inline markers, evidence IDs and exact source quotes | Before returning an answered draft |
-| [Response correlation — `app/core/phoenix.py:15`](../core/phoenix.py#L15) | Populate response trace/span IDs | After answer-chain completion |
+| [Response correlation — `app/core/telemetry.py:15`](../core/phoenix.py#L15) | Populate response trace/span IDs | After answer-chain completion |
 
 ### Gateway and security configuration map
 
@@ -702,7 +705,7 @@ no two-replica live result has been recorded for this local setup.
 Phoenix should show execution duration, HTTP status, instrumented chain/model
 calls and reported token metadata where available. Source mapping:
 [LangChain instrumentation — `app/phoenix_main.py:53`](../phoenix_main.py#L53),
-[Trace response headers — `app/core/phoenix.py:48`](../core/phoenix.py#L48), and
+[Trace response headers — `app/core/telemetry.py:48`](../core/phoenix.py#L48), and
 [Prompt annotation context — `app/core/observability.py:36`](../core/observability.py#L36).
 
 Default content capture is disabled. If a classroom uses approved synthetic data
@@ -737,7 +740,7 @@ curl --fail --silent --show-error \
   -D /tmp/phoenix-evaluated.headers -o /tmp/phoenix-evaluated.json
 
 uv run --no-sync --env-file .env \
-  python -m app.evaluation.phoenix_export \
+  python -m app.evaluation.datadog_export \
   --response /tmp/phoenix-evaluated.json --headers /tmp/phoenix-evaluated.headers
 ```
 

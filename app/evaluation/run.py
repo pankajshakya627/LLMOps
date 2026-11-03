@@ -4,12 +4,15 @@ import argparse
 import asyncio
 import hashlib
 import json
+from contextlib import nullcontext
 from datetime import UTC, datetime
 from importlib.metadata import version
 from pathlib import Path
 from typing import Any, Literal
 
+import httpx
 import structlog
+from ddtrace.llmobs import LLMObs
 from langchain_core.runnables import RunnableLambda
 from langchain_core.tracers.run_collector import RunCollectorCallbackHandler
 from pydantic import BaseModel, ConfigDict, Field
@@ -26,10 +29,11 @@ from app.core.logging import configure_logging
 from app.core.observability import prompt_annotation_context
 from app.database.retrieval import resolve_reference_contexts
 from app.evaluation.answer_evaluation import ExpectedEvidence
+from app.evaluation.datadog_export import publish_annotations
 from app.evaluation.gates import gate_failures, load_gates
 from app.evaluation.profiles import judge_settings, metric_settings
 from app.evaluation.retrieval_eval import classify_failure, score_retrieval
-from app.models.evaluation import METRIC_NAMES, QualityScore
+from app.models.evaluation import METRIC_NAMES, AnswerQuality, QualityScore
 from app.models.retrieval import RetrieveRequest, RetrieveResponse
 from app.services.retrieval import retrieve_policy, scrub_request
 
@@ -234,10 +238,33 @@ def quality_gate(report: dict[str, Any], minimum: float | None) -> bool:
 
 
 async def run(cases: list[GoldenCase], settings: Settings) -> dict[str, Any]:
-    records = await collect_records(cases, settings)
-    ragas = await evaluate_ragas(records, settings)
+    with LLMObs.workflow(name="evaluation.batch") if LLMObs.enabled else nullcontext():
+        records = await collect_records(cases, settings)
+        ragas = await evaluate_ragas(records, settings)
+        exported = LLMObs.export_span() if LLMObs.enabled else None
+        identity = (
+            {"trace_id": exported["trace_id"].zfill(32), "span_id": exported["span_id"]}
+            if exported else None
+        )
+        if identity:
+            LLMObs.annotate(tags={"evaluation_scope": "batch_mean", "case_count": str(len(cases))})
+            quality = AnswerQuality(
+                metrics={
+                    name: QualityScore(status="scored", value=ragas["means"][name])
+                    if ragas["status"] == "completed"
+                    else QualityScore(status="unavailable")
+                    for name in METRIC_NAMES
+                },
+                reference_source="golden_dataset",
+                evaluated_at=datetime.now(UTC),
+            )
+            try:
+                publish_annotations(quality, identity, settings)
+            except (ValueError, httpx.HTTPError) as exc:
+                logger.warning("datadog_evaluation_export_failed", error_type=type(exc).__name__)
     return {
         "status": "completed",
+        "datadog_span": identity,
         "captured_at": datetime.now(UTC).isoformat(),
         "dataset_sha256": hashlib.sha256(
             "\n".join(sorted(case_fingerprint(case) for case in cases)).encode()
@@ -295,7 +322,12 @@ def main() -> None:
     configure_logging("INFO")
     try:
         cases = load_cases(args.dataset)
-        report = asyncio.run(run(cases[: args.limit], get_settings()))
+        settings = get_settings()
+        if settings.dd_llmobs_enabled:
+            from app.core.telemetry import configure_telemetry
+
+            configure_telemetry(settings)
+        report = asyncio.run(run(cases[: args.limit], settings))
         report["dataset"] = str(args.dataset)
         if args.min_score is not None:
             passed = quality_gate(report, args.min_score)
@@ -332,6 +364,9 @@ def main() -> None:
             )
         )
         raise SystemExit(1) from None
+    finally:
+        if LLMObs.enabled:
+            LLMObs.flush()
     if report["gate"]["status"] == "failed":
         raise SystemExit(1)
 

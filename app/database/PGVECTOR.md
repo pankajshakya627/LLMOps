@@ -61,7 +61,7 @@ uv run --no-sync --env-file .env --env-file app/gateway/application.env.example 
 CHAT_BASE_URL=http://127.0.0.1:4001/v1 \
 EMBEDDING_BASE_URL=http://127.0.0.1:4001/v1 OTEL_SDK_DISABLED=false \
 uv run --no-sync --env-file .env --env-file app/gateway/application.env.example \
-  python -m uvicorn app.phoenix_main:app --host 127.0.0.1 --port 8000
+  python -m uvicorn app.datadog_main:app --host 127.0.0.1 --port 8000
 ```
 
 Stop an older native API before restarting it on port 8000. A process started

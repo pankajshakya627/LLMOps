@@ -21,7 +21,8 @@ router_settings:
   timeout: 60
   max_fallbacks: 0
 litellm_settings:
-  callbacks: ["arize_phoenix"]
+  callbacks: ["datadog_callback.datadog_callback"]
+  turn_off_message_logging: true
   cache: false
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY

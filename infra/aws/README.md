@@ -1,5 +1,10 @@
 # Disposable AWS LLMOps lab
 
+> Monitoring now uses the [Datadog AWS runbook](../../app/observability/README.md).
+> The API sends traces, custom metrics and evaluations directly; CloudWatch logs use the Forwarder.
+> Start and Destroy own the application, session Forwarder and CloudWatch logs together.
+> Configure `DATADOG_API_KEY_SECRET_ARN`, `DD_SITE`, and `DD_LLMOBS_ML_APP` for GitHub AWS sessions.
+
 For a step-by-step session, use the [start, browser and delete guide](START_USE_DELETE_GUIDE.md).
 
 This deployment is designed for **one or two hours**, followed by deletion, with a
@@ -21,13 +26,14 @@ including Bedrock Guardrails. Bedrock is an explicit alternative described below
 | Embeddings | OpenAI `text-embedding-3-small`, 1536 dimensions |
 | Input/output content policy | Existing redaction, Guardrails AI, schema and citation validation |
 | Vectors, corpus metadata and feedback | Existing PostgreSQL/pgvector container, encrypted session EBS |
-| LLM spans and Ragas annotations | Existing Phoenix container, session EBS |
+| LLM spans, Ragas scores and custom metrics | Datadog SaaS, tagged by a unique lab session ID |
+| Application log delivery | Session-owned Forwarder Lambda and CloudWatch subscription |
 | Immutable app/gateway/validator images | Three session-owned ECR repositories |
 | Synthetic corpus, release manifests and reports | Private, encrypted, versioned S3 session bucket |
 | Runtime secret material and OpenAI key | Secrets Manager; fetched by the host's instance role |
 | Container logs | CloudWatch Logs; basic EC2 metrics remain available |
 | Browser access | TCP 8501 restricted to the saved trainer IPv4 `/32`; URL printed after deployment |
-| API/Phoenix access | SSM port forwarding; backend ports stay private |
+| API access | SSM port forwarding; backend ports stay private |
 | Build/test/deploy/evaluate/delete | GitHub Actions using OIDC |
 | Expiry | EventBridge Scheduler → cleanup Lambda → stack deletion |
 
@@ -44,13 +50,15 @@ flowchart LR
     API --> L[LiteLLM]
     L --> B[OpenAI chat / judge / embeddings]
     API --> V[Existing schema and citation validation]
-    API --> P[Phoenix]
-    L --> P
-    API --> CW[CloudWatch logs]
+    API -. agentless traces and scores .-> D[Datadog]
+    L -. provider traces .-> D
+    API --> CW[Session CloudWatch logs]
+    CW --> F[Session Forwarder Lambda]
+    F --> D
     X[One-time expiry] --> CL[Cleanup Lambda]
     CL --> Stop[Terminate EC2 / remove EBS]
     CL --> Empty[Empty S3 including versions]
-    CL --> Delete[Delete session stack / ECR / secrets / logs]
+    CL --> Delete[Delete session / ECR / runtime secret / collector / logs]
 ```
 
 We deliberately omit ECS/EKS, ALB, NAT Gateway, RDS/Aurora, OpenSearch, SageMaker
@@ -244,6 +252,8 @@ or run deployment workflows.
 | `AWS_CLOUDFORMATION_ROLE_ARN` | Bootstrap output `CloudFormationRoleArn` |
 | `AWS_SESSION_BOUNDARY_ARN` | Bootstrap output `BoundaryArn` |
 | `OPENAI_API_KEY_SECRET_ARN` | ARN of the existing plaintext secret `nexa-lab-openai` in this account and Region |
+| `DATADOG_API_KEY_SECRET_ARN` | Full same-Region ARN of `nexa-lab-datadog`; never the key value |
+| `DD_SITE`, `DD_LLMOBS_ML_APP` | Datadog site and application name; this setup uses `datadoghq.com`, `nexaassist` |
 | `OPENAI_LITELLM_CHAT_MODEL` | Optional; defaults to `openai/gpt-6-luna` |
 | `OPENAI_LITELLM_JUDGE_MODEL` | Optional independent judge route; defaults to `openai/gpt-6-luna` |
 
@@ -359,8 +369,8 @@ aws ssm start-session --target i-your-instance-id \
 
 Open [the forwarded UI](http://127.0.0.1:18501). The browser's loopback HTTP
 connection travels over SSM's authenticated TLS tunnel. For FastAPI docs use a
-second tunnel with remote port `8000` and local port `18000`; for Phoenix use
-remote `6006`, local `16006`. Your human AWS identity needs permission to start,
+second tunnel with remote port `8000` and local port `18000`. Datadog is opened
+directly from the workflow summary. Your human AWS identity needs permission to start,
 resume and terminate sessions against this host and use the forwarding document.
 The CI role intentionally has no interactive session access.
 [SSM forwarding requirements](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html).
@@ -376,7 +386,7 @@ not install that plugin.
 
 The AWS Compose profile publishes only the UI on `0.0.0.0:8501:8501`.
 CloudFormation creates the matching TCP 8501 rule from `AWS_UI_ALLOWED_CIDR`.
-API and Phoenix bindings remain on loopback; database, gateway and validator
+The API binding remains on loopback; database, gateway and validator
 ports are not published. No per-session port mapping or console rule is needed.
 Destroy removes the ingress rule and its security group with the session.
 
@@ -386,7 +396,7 @@ finish the session, destroy it and start fresh with the new template. Status,
 capacity and destroy remain usable for those older stacks. This change does
 not extend any session's expiry.
 
-Use only synthetic material. Phoenix and the API have no public listener, and
+Use only synthetic material. The API has no public listener, and
 SSM access is an administrative boundary. All containers share one EC2 IAM role;
 this is not suitable for untrusted users or private bank documents. OpenAI's
 processing location is independent of the EC2 Region. In optional Bedrock
@@ -415,13 +425,12 @@ or a same-model judge, is not production quality approval. Before production,
 confirm/calibrate thresholds, freeze a larger dataset and judge, add regression
 comparison and enforce release gates before accepting traffic.
 
-After a successful deploy, inspect `/metrics/http`, `/metrics/answers`,
-`/metrics/latency`, Phoenix traces and Ragas annotations. The AWS synthetic lab
-enables `PHOENIX_CAPTURE_CONTENT=true`: new API/chain/model spans show bounded
-inputs and results while supported PII/common credential fields remain masked.
-Set this back to false before using real/confidential data. Gateway raw message
-capture remains disabled; application model spans show messages in the training
-project. See the [viewing guide](START_USE_DELETE_GUIDE.md#7-view-complete-synthetic-traces-and-api-monitoring).
+After a successful deploy, use the workflow summary's Datadog links and its
+unique `lab_session_id` filter for traces, logs and Metrics Explorer. The same
+filter distinguishes a recreated lab from its retained Datadog history. Also
+inspect `/metrics/http`, `/metrics/answers` and `/metrics/latency` through the API.
+Content capture defaults to off; metadata, errors, tokens and evaluations remain
+available. See the [session viewing guide](START_USE_DELETE_GUIDE.md#2-open-the-application-and-datadog).
 Gateway mixed-route dollar cost remains
 null in the application's metrics; use OpenAI usage/billing for model cost and
 AWS billing for infrastructure (Bedrock usage applies only in that optional mode).
@@ -437,8 +446,9 @@ waits for CloudFormation deletion and fails on incomplete cleanup. Automatic
 expiry executes the same cleanup Lambda: terminate the host, empty S3 object
 versions/delete markers and unfinished uploads, then delete the stack using its
 saved CloudFormation role. ECR repositories force-delete their images. The EBS
-disk, pgvector data, feedback, Phoenix traces, reports, secret and session logs
-are disposable and are deleted. Download any synthetic report you want to keep
+disk, pgvector data, feedback, reports, runtime secret, Forwarder, subscription
+and session CloudWatch logs are disposable and are deleted. Reusable account
+integration, API-key secrets and already exported Datadog history are retained. Download any synthetic report you want to keep
 **before** destruction.
 
 The scheduler can run up to roughly a minute after its scheduled time; retries

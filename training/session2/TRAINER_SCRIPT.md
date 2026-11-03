@@ -26,7 +26,7 @@ The configured primary is Ollama `qwen3.5:9b-mlx`; retrieval uses
 |---|---|---|---|
 | 0–10 | A bank assistant needs evidence, reproducibility and measurable behavior. | Does HTTP 200 establish a correct answer? No. | `app/api/answer.py`, `app/services/answer.py` |
 | 10–25 | Retrieval must respect product, policy date and embedding compatibility. | Can OpenAI query embeddings search a Qwen corpus? No. | `app/services/retrieval.py`, `app/chains/retrieval.py`, `app/database/indexes.md` |
-| 25–40 | A trace follows a request; spans show operations; logs show events; metrics summarize traffic. | Which stage caused this delay? Inspect the trace. | `app/phoenix_main.py`, `app/core/phoenix.py`, `app/core/observability.py` |
+| 25–40 | A trace follows a request; spans show operations; logs show events; metrics summarize traffic. | Which stage caused this delay? Inspect the trace. | `app/phoenix_main.py`, `app/core/telemetry.py`, `app/core/observability.py` |
 | 40–60 | Evaluation compares question, context, answer and reference. | Can a relevant answer contain a wrong number? Yes. | `app/services/evaluation.py`, `app/evaluation/live.py`, `app/evaluation/ragas_metrics.py` |
 | 60–75 | Prompt versions identify behavior and support controlled comparisons. | Does saving a registry version deploy it? No; serving loads the local template. | `app/chains/prompts/answer.py`, `tests/test_prompts.py` |
 | 75–90 | Routing, provider fallback, application fallback, balancing and caching solve distinct problems. | Does a wrong but valid answer trigger fallback? Not in the current application. | `app/chains/answer.py`, `app/chains/llm.py`, `app/gateway/litellm.yaml` |
@@ -73,7 +73,7 @@ Use `/answer/evaluated` with the same body plus:
 
 Add that field to the complete request; this fragment alone is not a valid
 request. Save the complete response and its headers using the curl example in
-[phoenix.md](../../app/observability/README.md), then run `python -m app.evaluation.phoenix_export`
+[phoenix.md](../../app/observability/README.md), then run `python -m app.evaluation.datadog_export`
 with those files in the pinned overlay.
 
 Explain faithfulness (claim support), relevancy (addresses the question), context

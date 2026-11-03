@@ -3,12 +3,14 @@ from __future__ import annotations
 import asyncio
 import json
 import sys
+from contextlib import nullcontext
 from datetime import date
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 from unittest.mock import AsyncMock, Mock
 
+import httpx
 import pytest
 from pydantic import ValidationError
 
@@ -286,3 +288,35 @@ def test_batch_report_preserves_profiles_without_a_telemetry_vendor(
     assert len(result["dataset_sha256"]) == 64
     assert result["answer_prompt"]["version"] == ANSWER_PROMPT_VERSION
     assert result["ragas"] == {"scores": []}
+
+
+@pytest.mark.parametrize("status", ["completed", "not_applicable"])
+@pytest.mark.parametrize("export_fails", [False, True])
+def test_batch_exports_actual_means_or_unavailable_without_changing_results(
+    monkeypatch: pytest.MonkeyPatch, settings: Settings, status: str, export_fails: bool
+) -> None:
+    identity = {"trace_id": "a" * 32, "span_id": "123"}
+    telemetry = SimpleNamespace(
+        enabled=True,
+        workflow=Mock(return_value=nullcontext()),
+        export_span=Mock(return_value=identity),
+        annotate=Mock(),
+    )
+    ragas = {"status": status, "means": dict.fromkeys(evaluation.METRIC_NAMES, 0.0)}
+    publish = Mock(side_effect=httpx.ConnectError("private detail") if export_fails else None)
+    monkeypatch.setattr(evaluation, "LLMObs", telemetry)
+    monkeypatch.setattr(evaluation, "collect_records", AsyncMock(return_value=[]))
+    monkeypatch.setattr(evaluation, "evaluate_ragas", AsyncMock(return_value=ragas))
+    monkeypatch.setattr(evaluation, "publish_annotations", publish)
+    report = asyncio.run(evaluation.run([], settings))
+    assert report["ragas"] == ragas and report["datadog_span"] == identity
+    quality, joined_span, _settings = publish.call_args.args
+    assert joined_span == identity and quality.reference_source == "golden_dataset"
+    assert all(
+        metric.value == (0.0 if status == "completed" else None)
+        and metric.status == ("scored" if status == "completed" else "unavailable")
+        for metric in quality.metrics.values()
+    )
+    telemetry.annotate.assert_called_once_with(
+        tags={"evaluation_scope": "batch_mean", "case_count": "0"}
+    )

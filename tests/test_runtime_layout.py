@@ -16,7 +16,7 @@ def test_runtime_resources_are_owned_by_the_application() -> None:
         (APP / "observability/requirements-server.txt")
         .read_text()
         .strip()
-        .endswith("arize-phoenix==20.26.0")
+        .endswith("# No Python collector server is required.")
     )
     assert (APP / "observability/requirements-client.txt").is_file()
     assert (APP / "observability/README.md").is_file()

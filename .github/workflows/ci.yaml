@@ -25,7 +25,7 @@ jobs:
       - run: uv run --no-sync pytest -q tests
       - name: Validate CloudFormation and shell
         run: |
-          uvx --from 'cfn-lint==1.46.0' cfn-lint infra/aws/session.yaml infra/aws/github-oidc.yaml
+          uvx --from 'cfn-lint==1.46.0' cfn-lint infra/aws/session.yaml infra/aws/github-oidc.yaml infra/aws/datadog-forwarder.yaml
           bash -n infra/aws/host.sh
       - name: Validate AWS Compose without credentials or live AWS calls
         env:
@@ -36,6 +36,8 @@ jobs:
           LITELLM_MASTER_KEY: sk-offline
           AWS_REGION: ap-south-1
           OPENAI_API_KEY: sk-offline
+          DD_API_KEY: '00000000000000000000000000000000'
+          DD_TAGS: session:nexa-lab-offline,lab_session_id:offline
           BEDROCK_CHAT_ROUTE: bedrock/converse/offline
           BEDROCK_JUDGE_ROUTE: bedrock/converse/offline
           BEDROCK_GUARDRAIL_ID: offline

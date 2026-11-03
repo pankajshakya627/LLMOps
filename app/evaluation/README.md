@@ -46,13 +46,18 @@ A failed check exits nonzero. A missing measurement is not a safety pass. Curren
 latency, rate-limit and cost counters are process-local; mixed-model pricing is
 not inferred from one candidate's static rate.
 
-## Live scores in Phoenix
+## Live scores in Datadog
 
 Use `POST /answer/evaluated`, then publish the saved response and matching headers
-with `python -m app.evaluation.phoenix_export`. The
+with `python -m app.evaluation.datadog_export`. The
 [observability runbook](../observability/README.md) covers exact trace/span identity,
 publication retries and metric annotations. Tracing does not compute scores,
 create native online evaluators or approve a release.
+
+With `DD_LLMOBS_ENABLED=true`, the batch CLI also creates an `evaluation.batch`
+trace and publishes its actual Ragas means there, tagged `evaluation_scope:batch_mean`.
+The report stores that trace/span identity. The GitHub **Evaluate** action uses this
+path; its existing quality gates and nonzero failure exit remain unchanged.
 
 ## Test scope
 

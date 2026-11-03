@@ -249,8 +249,8 @@ def show_turn(client: httpx.Client, turn: dict[str, Any]) -> bool:
             show_answer(result)
             if result.citations:
                 st.caption(f"{len(result.citations)} cited sources · Policy date: {result.as_of}")
-            if result.phoenix_trace_id:
-                st.caption(f"Phoenix trace: {result.phoenix_trace_id}")
+            if result.datadog_trace_id:
+                st.caption(f"Datadog trace: {result.datadog_trace_id}")
             with st.expander("Give feedback", icon=":material/rate_review:"):
                 feedback_form(client, turn)
         else:

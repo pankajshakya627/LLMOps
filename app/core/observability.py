@@ -2,17 +2,17 @@ from __future__ import annotations
 
 from collections import Counter, deque
 from collections.abc import Iterable, Iterator
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from contextvars import ContextVar
 from math import ceil
 from typing import Any
 
 import structlog
+from ddtrace.llmobs import LLMObs
 from langchain_core.callbacks import AsyncCallbackHandler
 from langchain_core.messages import AIMessage
 from langchain_core.outputs import LLMResult
 from langchain_core.prompts import ChatPromptTemplate
-from openinference.instrumentation import using_attributes
 
 retrieval_latencies: deque[float] = deque(maxlen=1000)
 answer_latencies: deque[float] = deque(maxlen=1000)
@@ -39,13 +39,21 @@ def prompt_annotation_context(
     *,
     prompt_id: str,
     version: str,
-) -> using_attributes:
-    """Attach the source prompt version to scoped OpenInference model spans."""
-    return using_attributes(
-        prompt_template=prompt.pretty_repr(),
-        prompt_template_version=version,
-        prompt_template_variables=variables,
-        metadata={"prompt_id": prompt_id},
+) -> Any:
+    """Attach the source prompt version without rendering or exposing private variables."""
+    if not LLMObs.enabled:
+        return nullcontext()
+    from app.core.http_monitoring import safe_content
+    from app.core.telemetry import capture_content_enabled
+
+    return LLMObs.annotation_context(
+        prompt={
+            "id": prompt_id,
+            "version": version,
+            "template": prompt.pretty_repr(),
+            "variables": safe_content(variables) if capture_content_enabled else {},
+        },
+        tags={"prompt_id": prompt_id, "prompt_version": version},
     )
 
 

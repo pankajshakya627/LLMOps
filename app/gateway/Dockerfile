@@ -1,11 +1,12 @@
 FROM python:3.13-slim
 COPY --from=ghcr.io/astral-sh/uv:0.13.1 /uv /usr/local/bin/uv
-ENV LITELLM_LOCAL_MODEL_COST_MAP=True
+ENV LITELLM_LOCAL_MODEL_COST_MAP=True PYTHONPATH=/opt/gateway
 WORKDIR /opt/gateway
 COPY app/gateway/requirements.txt ./requirements.txt
 RUN uv pip install --system --no-cache -r requirements.txt
-RUN python -c "from litellm.integrations.otel.logger import OpenTelemetryV2"
+RUN python -c "from ddtrace.llmobs import LLMObs"
 COPY app/gateway/*.yaml ./
+COPY app/gateway/datadog_callback.py ./datadog_callback.py
 RUN useradd --system --create-home --uid 10001 gateway \
     && chown -R gateway:gateway /opt/gateway
 USER gateway

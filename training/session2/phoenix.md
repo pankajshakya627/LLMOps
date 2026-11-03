@@ -1,4 +1,5 @@
-# Phoenix operations
+# Datadog visibility
 
-Use the canonical [application observability runbook](../../app/observability/README.md).
-All collector dependencies, startup commands and annotation-export guidance are owned by `app/`.
+The active telemetry provider is Datadog. Follow the [current runbook](../../app/observability/README.md)
+for setup, trace correlation, monitoring and Ragas evaluation export. Phoenix
+reports/decks dated before this migration describe historical deployments.

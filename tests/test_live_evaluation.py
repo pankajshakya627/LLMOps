@@ -20,25 +20,25 @@ from app.services import evaluation as service
 
 
 @pytest.mark.parametrize("traced", [False, True])
-def test_plain_answers_correlate_phoenix_without_requiring_ragas(
+def test_plain_answers_correlate_datadog_without_requiring_ragas(
     monkeypatch: pytest.MonkeyPatch, settings: Settings, answer: AnswerResponse, traced: bool
 ) -> None:
-    from opentelemetry import trace
+    from ddtrace.llmobs import LLMObs
 
-    context = trace.SpanContext(1, 2, False) if traced else trace.INVALID_SPAN_CONTEXT
+    monkeypatch.setattr(LLMObs, "enabled", traced)
+    monkeypatch.setattr(LLMObs, "export_span", lambda: {"trace_id": f"{1:032x}", "span_id": "2"})
     monkeypatch.setattr(answer_service, "get_chat_model", lambda _: object())
     monkeypatch.setattr(
         answer_service, "build_answer_chain", lambda *_: RunnableLambda(lambda _: answer)
     )
-    with trace.use_span(trace.NonRecordingSpan(context)):
-        result = asyncio.run(
-            answer_service.answer_policy(
-                EvaluatedAnswerRequest(query="Loan limit?", as_of=answer.as_of), settings
-            )
+    result = asyncio.run(
+        answer_service.answer_policy(
+            EvaluatedAnswerRequest(query="Loan limit?", as_of=answer.as_of), settings
         )
+    )
     assert result is answer
-    assert result.phoenix_trace_id == (f"{1:032x}" if traced else None)
-    assert result.phoenix_span_id == (f"{2:016x}" if traced else None)
+    assert result.datadog_trace_id == (f"{1:032x}" if traced else None)
+    assert result.datadog_span_id == ("2" if traced else None)
 
 
 def test_cosine_roundoff_is_normalized_but_invalid_scores_are_rejected() -> None:
@@ -120,13 +120,13 @@ def test_live_scores_reuse_one_answer_and_its_exact_evidence(
     metrics["context_recall"] = QualityScore(status="unavailable", reason="No reference")
     score = AsyncMock(return_value=metrics)
     monkeypatch.setattr(service, "score_answer", score)
-    from opentelemetry import trace
+    from ddtrace.llmobs import LLMObs
 
-    context = trace.SpanContext(1, 2, False) if traced else trace.INVALID_SPAN_CONTEXT
-    with trace.use_span(trace.NonRecordingSpan(context)):
-        result = asyncio.run(service.answer_with_quality(request, settings))
+    monkeypatch.setattr(LLMObs, "enabled", traced)
+    monkeypatch.setattr(LLMObs, "export_span", lambda: {"trace_id": f"{1:032x}", "span_id": "2"})
+    result = asyncio.run(service.answer_with_quality(request, settings))
     assert result.answer is answer
-    assert result.answer.phoenix_span_id == (f"{2:016x}" if traced else None)
+    assert result.answer.datadog_span_id == ("2" if traced else None)
     assert result.quality.reference_source == reference_source
     assert retrieve.await_count == generated.call_count == score.await_count == 1
     assert score.await_args is not None

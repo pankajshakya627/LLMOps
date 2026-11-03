@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import hashlib
+import io
 import json
 import os
 import re
@@ -76,6 +78,11 @@ def test_release_contains_only_synthetic_corpus_and_digest_manifest(
         "GatewayRepository": "registry/gateway",
         "GuardrailsRepository": "registry/guardrails",
         "SecretArn": "secret-id",
+        "DatadogKeySecretArn": "arn:aws:secretsmanager:ap-south-1:123456789012:secret:nexa-lab-datadog-ABC123",
+        "DatadogSite": "datadoghq.com",
+        "DatadogMlApp": "nexaassist",
+        "SessionName": "nexa-lab-training",
+        "SessionId": "session-instance-id",
         "Bucket": "session-bucket",
         "GuardrailId": "guardrail",
         "GuardrailVersion": "1",
@@ -115,6 +122,7 @@ def test_release_contains_only_synthetic_corpus_and_digest_manifest(
         assert file is not None
         manifest = json.load(file)
         assert "PASSWORD" not in " ".join(manifest)
+        assert manifest["DD_TAGS"] == "session:nexa-lab-training,lab_session_id:session-instance-id"
         assert manifest["APP_IMAGE"].endswith("@sha256:" + "a" * 64)
         assert manifest["MODEL_PROVIDER"] == provider
         assert "OPENAI_API_KEY" not in manifest
@@ -242,7 +250,7 @@ def test_session_exposes_only_restricted_ui_and_retains_no_paid_resources() -> N
     compose = yaml.safe_load(Path("app/compose.aws.yaml").read_text())
     assert compose["services"]["ui"]["ports"] == ["0.0.0.0:8501:8501"]
     assert compose["services"]["api"]["ports"] == ["127.0.0.1:8000:8000"]
-    assert compose["services"]["phoenix"]["ports"] == ["127.0.0.1:6006:6006"]
+    assert "datadog-agent" not in compose["services"]
     for name in ("postgres", "gateway", "guardrails"):
         assert not compose["services"][name].get("ports")
 
@@ -269,6 +277,7 @@ def test_duplicate_start_never_creates_a_cleanup_receipt(
         provider="openai",
         ui_allowed_cidr="8.8.8.8/32",
         openai_secret_arn="arn:aws:secretsmanager:ap-south-1:123456789012:secret:nexa-lab-openai-ABC123",
+        datadog_secret_arn="arn:aws:secretsmanager:ap-south-1:123456789012:secret:nexa-lab-datadog-ABC123",
         cloudformation_role_arn="role",
         receipt=str(receipt),
     )
@@ -416,6 +425,7 @@ def test_create_requires_ui_cidr_and_passes_it_to_cloudformation(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
+    monkeypatch.setenv("AWS_DEFAULT_REGION", "ap-south-1")
     cf = Mock()
     cf.create_stack.return_value = {"StackId": "new-stack-id"}
     monkeypatch.setattr(lab, "client", lambda _: cf)
@@ -427,6 +437,8 @@ def test_create_requires_ui_cidr_and_passes_it_to_cloudformation(
         "create",
         "--provider",
         "bedrock",
+        "--datadog-secret-arn",
+        "arn:aws:secretsmanager:ap-south-1:123456789012:secret:nexa-lab-datadog-ABC123",
         "--model-resources",
         "model",
         "--boundary-arn",
@@ -581,8 +593,17 @@ def test_default_runtime_uses_openai_without_constructing_a_bedrock_client(
     assert "/opt/gateway/litellm_openai.yaml" in gateway["command"]
     env = compose["services"]["api"]["environment"]
     assert not any(key.startswith("BEDROCK_") for key in env)
+    env = {
+        **env,
+        "DD_API_KEY": "synthetic",
+        "DD_SITE": "datadoghq.com",
+        "DD_ENV": "test",
+        "DD_LLMOBS_ENABLED": "true",
+        "DD_LLMOBS_ML_APP": "nexaassist",
+        "DD_CAPTURE_CONTENT": "false",
+    }
     config = Settings(_env_file=None, **{key.lower(): value for key, value in env.items()})
-    assert config.phoenix_capture_content is True  # AWS bundles only the synthetic course corpus.
+    assert config.dd_capture_content is False
     assert config.chat_model == "nexa-chat-openai"
     assert judge_settings(config).chat_model == "nexa-judge-openai"
     assert config.embedding_model == metric_settings(config).embedding_model == "nexa-embed-openai"
@@ -694,7 +715,9 @@ def test_host_loads_openai_secret_privately_and_fails_closed(
     if key is not None:
         key_file.write_text(key)
     monkeypatch.chdir(tmp_path)
-    monkeypatch.setattr(sys, "argv", [str(script), str(material), str(key_file)])
+    datadog_file = tmp_path / "datadog-secret"
+    datadog_file.write_text("a" * 32)
+    monkeypatch.setattr(sys, "argv", [str(script), str(material), str(key_file), str(datadog_file)])
     previous_umask = os.umask(0o077)
     try:
         if provider == "openai" and key in ("wrong format", "sk-bad$key"):
@@ -715,3 +738,185 @@ def test_host_loads_openai_secret_privately_and_fails_closed(
             assert not material.exists() and not key_file.exists()
     finally:
         os.umask(previous_umask)
+
+
+def test_aws_monitoring_uses_agentless_exports_and_layer_free_forwarder():
+    compose = yaml.safe_load(Path("app/compose.aws.yaml").read_text())
+    assert "datadog-agent" not in compose["services"]
+    env = compose["services"]["api"]["environment"]
+    assert env["DD_LLMOBS_AGENTLESS_ENABLED"] == "true"
+    assert env["DD_METRICS_ENABLED"] == "true"
+    assert env["DD_TRACE_ENABLED"] == "false"
+    forwarder = template("infra/aws/datadog-forwarder.yaml")
+    nested = forwarder["Resources"]["ForwarderStack"]["Properties"]
+    assert nested["Parameters"]["InstallAsLayer"] == "false"
+    assert nested["TemplateURL"].startswith(
+        "https://datadog-cloudformation-template.s3.amazonaws.com/"
+    )
+    assert forwarder["Parameters"]["DdApiKey"]["NoEcho"] is True
+    permission = forwarder["Resources"]["ForwarderLogPermission"]["Properties"]
+    assert permission["SourceAccount"] == {"Ref": "AWS::AccountId"}
+    assert "ApplicationLogGroupName" in permission["SourceArn"]["Fn::Sub"]
+
+
+def test_application_logs_are_owned_by_the_session_and_writes_stay_scoped():
+    config = template("infra/aws/session.yaml")
+    assert "ApplicationLogGroupName" not in config["Parameters"]
+    assert "Condition" not in config["Resources"]["Logs"]
+    policies = config["Resources"]["HostRole"]["Properties"]["Policies"]
+    statements = [
+        s for p in policies for s in p["PolicyDocument"]["Statement"] if "Fn::If" not in s
+    ]
+    logs_write = next(
+        s for s in statements if s["Action"] == ["logs:CreateLogStream", "logs:PutLogEvents"]
+    )
+    assert logs_write["Resource"] == {"Fn::GetAtt": "Logs.Arn"}
+
+
+def test_session_boundary_allows_only_selected_log_group_families():
+    bootstrap = template("infra/aws/github-oidc.yaml")
+    statements = bootstrap["Resources"]["SessionBoundary"]["Properties"]["PolicyDocument"][
+        "Statement"
+    ]
+    logs_write = next(
+        s for s in statements if s.get("Action") == ["logs:CreateLogStream", "logs:PutLogEvents"]
+    )
+    resources = [s["Fn::Sub"].rsplit("log-group:", 1)[1] for s in logs_write["Resource"]]
+    for group in (
+        "/nexaassist/",
+        "/nexaassist/nexa-lab-validation",
+        "/aws/lambda/nexa-lab-validation-cleanup",
+    ):
+        assert any(fnmatch.fnmatchcase(group + ":stream", resource) for resource in resources)
+    for group in ("/nexaassist/unrelated", "/other-app/", "/aws/lambda/unrelated"):
+        assert not any(fnmatch.fnmatchcase(group + ":stream", resource) for resource in resources)
+
+
+def test_host_corpus_is_readable_by_runtime_without_exposing_secrets():
+    host = Path("infra/aws/host.sh").read_text()
+    assert "chown -R 10001:10001 corpus" in host
+    assert "chmod -R u=rwX,go= corpus" in host
+    assert host.index("chmod -R u=rwX,go= corpus") < host.index("python -m app.services.ingestion")
+    assert "chmod 600 .env" in host
+
+
+def test_session_forwarder_owns_logs_and_uses_immutable_code_with_scoped_access():
+    config = template("infra/aws/session.yaml")
+    resources = config["Resources"]
+    function = resources["DatadogForwarder"]["Properties"]
+    assert function["Code"] == {
+        "S3Bucket": {"Ref": "Artifacts"},
+        "S3Key": "datadog/forwarder.zip",
+        "S3ObjectVersion": {"Fn::GetAtt": "ForwarderCode.VersionId"},
+    }
+    assert function["Runtime"] == "python3.14" and function["Architectures"] == ["arm64"]
+    role = resources["ForwarderRole"]["Properties"]
+    assert role["PermissionsBoundary"] == {"Ref": "BoundaryArn"}
+    assert "ManagedPolicyArns" not in role
+    grants = role["Policies"][0]["PolicyDocument"]["Statement"]
+    assert {s["Action"] for s in grants if isinstance(s["Action"], str)} == {
+        "secretsmanager:GetSecretValue"
+    }
+    assert grants[0]["Resource"] == {"Ref": "DatadogKeySecretArn"}
+    assert grants[1]["Resource"] == {"Fn::GetAtt": "ForwarderLogs.Arn"}
+    assert function["Environment"]["Variables"]["DD_STORE_FAILED_EVENTS"] == "false"
+    assert "DD_S3_BUCKET_NAME" not in function["Environment"]["Variables"]
+    assert resources["LogSubscription"]["DependsOn"] == "ForwarderPermission"
+    permission = resources["ForwarderPermission"]["Properties"]
+    assert permission["SourceAccount"] == {"Ref": "AWS::AccountId"}
+    assert permission["SourceArn"] == {"Fn::GetAtt": "Logs.Arn"}
+    for name in ("ForwarderLogs", "ForwarderRole", "DatadogForwarder", "LogSubscription"):
+        assert resources[name].get("DeletionPolicy", "Delete") == "Delete"
+
+
+@pytest.mark.parametrize(
+    "request_type,valid,version",
+    [
+        ("Create", True, "immutable-version"),
+        ("Create", False, "immutable-version"),
+        ("Create", True, None),
+        ("Create", True, "null"),
+        ("Delete", True, None),
+    ],
+)
+def test_forwarder_code_preparation_signals_failure_and_never_updates_the_stack(
+    tmp_path, monkeypatch, request_type, valid, version
+):
+    import urllib.request
+
+    import boto3
+
+    package = b"verified official package"
+    code = template("infra/aws/session.yaml")["Resources"]["Cleanup"]["Properties"]["Code"][
+        "ZipFile"
+    ]
+    script = tmp_path / "lifecycle.py"
+    script.write_text(code)
+    namespace = runpy.run_path(str(script))
+    monkeypatch.setitem(
+        namespace["handler"].__globals__, "FORWARDER_SHA256", hashlib.sha256(package).hexdigest()
+    )
+    download = Mock(
+        side_effect=lambda *args, **kwargs: io.BytesIO(package if valid else b"tampered")
+    )
+    monkeypatch.setattr(urllib.request, "urlopen", download)
+    s3 = Mock()
+    s3.put_object.return_value = {"VersionId": version}
+    clients = Mock(side_effect=lambda name: s3 if name == "s3" else pytest.fail(name))
+    monkeypatch.setattr(boto3, "client", clients)
+    response = Mock(SUCCESS="SUCCESS", FAILED="FAILED")
+    monkeypatch.setitem(sys.modules, "cfnresponse", response)
+    monkeypatch.setenv("BUCKET", "owned-bucket")
+    event = {"RequestType": request_type}
+    namespace["handler"](event, None)
+    success = request_type == "Delete" or (valid and version not in (None, "null"))
+    assert response.send.call_args.args[2] == ("SUCCESS" if success else "FAILED")
+    if request_type == "Delete" or not valid:
+        clients.assert_not_called()
+    if request_type == "Delete":
+        download.assert_not_called()
+    elif valid:
+        s3.put_object.assert_called_once_with(
+            Bucket="owned-bucket", Key="datadog/forwarder.zip", Body=package
+        )
+    if success and request_type != "Delete":
+        assert response.send.call_args.args[3] == {"VersionId": "immutable-version"}
+
+
+def test_forwarder_provisioning_permissions_exclude_unrelated_functions_and_code():
+    config = template("infra/aws/github-oidc.yaml")
+    statements = config["Resources"]["CloudFormationRole"]["Properties"]["Policies"][0][
+        "PolicyDocument"
+    ]["Statement"]
+
+    def allowed(action, arn):
+        for statement in statements:
+            actions = statement.get("Action", [])
+            if isinstance(actions, str):
+                actions = [actions]
+            if not any(fnmatch.fnmatchcase(action, a) for a in actions):
+                continue
+            resources = statement["Resource"]
+            if not isinstance(resources, list):
+                resources = [resources]
+            for resource in resources:
+                pattern = resource if isinstance(resource, str) else resource["Fn::Sub"]
+                for key, value in {
+                    "Partition": "aws",
+                    "Region": "ap-south-1",
+                    "AccountId": "123456789012",
+                }.items():
+                    pattern = pattern.replace("${AWS::" + key + "}", value)
+                if fnmatch.fnmatchcase(arn, pattern):
+                    return True
+        return False
+
+    prefix = "arn:aws:lambda:ap-south-1:123456789012:function:"
+    assert allowed("lambda:CreateFunction", prefix + "nexa-lab-check-datadog-forwarder")
+    assert allowed("lambda:AddPermission", prefix + "nexa-lab-check-datadog-forwarder")
+    assert not allowed("lambda:AddPermission", prefix + "nexa-lab-check-cleanup")
+    assert allowed("lambda:InvokeFunction", prefix + "nexa-lab-check-cleanup")
+    assert not allowed("lambda:InvokeFunction", prefix + "nexa-lab-check-datadog-forwarder")
+    assert not allowed("lambda:CreateFunction", prefix + "unrelated-function")
+    assert allowed("s3:GetObjectVersion", "arn:aws:s3:::nexa-lab-check/datadog/forwarder.zip")
+    assert not allowed("s3:GetObjectVersion", "arn:aws:s3:::nexa-lab-check/reports/private.json")

@@ -55,6 +55,9 @@ jobs:
       CF_ROLE: ${{ vars.AWS_CLOUDFORMATION_ROLE_ARN }}
       BOUNDARY: ${{ vars.AWS_SESSION_BOUNDARY_ARN }}
       MODELS: ${{ vars.BEDROCK_MODEL_ARNS }}
+      DATADOG_SECRET: ${{ vars.DATADOG_API_KEY_SECRET_ARN }}
+      DD_SITE: ${{ vars.DD_SITE || 'datadoghq.com' }}
+      DD_LLMOBS_ML_APP: ${{ vars.DD_LLMOBS_ML_APP || 'nexaassist' }}
       OPENAI_SECRET: ${{ vars.OPENAI_API_KEY_SECRET_ARN }}
       UI_ALLOWED_CIDR: ${{ secrets.AWS_UI_ALLOWED_CIDR }}
       OPENAI_CHAT_ROUTE: ${{ vars.OPENAI_LITELLM_CHAT_MODEL || 'openai/gpt-6-luna' }}
@@ -72,6 +75,7 @@ jobs:
           if [ "$LAB_OPERATION" = start ]; then
             test -n "$CF_ROLE"
             test -n "$BOUNDARY"
+            test -n "$DATADOG_SECRET"
             if [ -z "$UI_ALLOWED_CIDR" ]; then
               echo '::error::Set the aws-lab environment secret AWS_UI_ALLOWED_CIDR to your public IPv4 /32.'
               exit 1
@@ -106,6 +110,7 @@ jobs:
           uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" create \
             --minutes "$LAB_MINUTES" --budget "$LAB_BUDGET" \
             --cloudformation-role-arn "$CF_ROLE" --boundary-arn "$BOUNDARY" \
+            --datadog-secret-arn "$DATADOG_SECRET" --datadog-site "$DD_SITE" --datadog-ml-app "$DD_LLMOBS_ML_APP" \
             --ui-allowed-cidr "$UI_ALLOWED_CIDR" \
             --provider "$LAB_PROVIDER" --openai-secret-arn "$OPENAI_SECRET" --model-resources "$MODELS"
       - name: Read session outputs
@@ -157,13 +162,27 @@ jobs:
           python - <<'PY'
           import json
           import os
+          from datetime import UTC, datetime
           from pathlib import Path
+          from urllib.parse import quote
+          from zoneinfo import ZoneInfo
           data = json.loads(Path('session-outputs.json').read_text())
           url = data['ApplicationUrl']
+          site = data['DatadogSite']
+          host = 'app.' + site if site in ('datadoghq.com', 'datadoghq.eu', 'ddog-gov.com') else site
+          origin = 'https://' + host
+          session_filter = 'lab_session_id:' + data['SessionId']
+          traces = origin + '/llm/traces?fromUser=true&query=' + quote('ml_app:' + data['DatadogMlApp'] + ' ' + session_filter)
+          logs = origin + '/logs?fromUser=true&query=' + quote(session_filter)
+          expiry = datetime.fromisoformat(data['ExpiresAt']).replace(tzinfo=UTC).astimezone(ZoneInfo('Asia/Kolkata'))
           with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a') as report:
               report.write(
                   f'### AWS application ready\n\n[Open the application]({url})\n\n'
-                  f"Scheduled expiry (UTC): {data['ExpiresAt']}\n\n"
+                  f'[Datadog traces and evaluations]({traces}) · [Datadog logs]({logs}) · [Metrics Explorer]({origin}/metric/explorer)\n\n'
+                  f'Session filter: `{session_filter}`\n\n'
+                  f'Scheduled expiry: {expiry:%Y-%m-%d %H:%M:%S} IST\n\n'
+                  'Destroy removes the app, Forwarder and session CloudWatch logs. '
+                  'Reusable Datadog account setup, credentials and exported history are retained.\n\n'
                   'UI port 8501 is restricted to the saved trainer IP. '
                   'Use synthetic data only; this demo uses HTTP.\n'
               )
