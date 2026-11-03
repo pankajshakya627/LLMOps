@@ -143,7 +143,7 @@ def build_answer_chain(
             variables = {
                 "query": request.query,
                 "as_of": request.as_of.isoformat(),
-                "product_id": request.product_id or "All products",
+                "product_id": request.product_id or "",
                 "context": render_context(sources),
                 "citation_feedback": ""
                 if attempt == 0

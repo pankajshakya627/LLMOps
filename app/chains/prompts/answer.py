@@ -5,7 +5,7 @@ import hashlib
 from langchain_core.prompts import ChatPromptTemplate
 
 ANSWER_PROMPT_ID = "nexaassist-policy-answer"
-ANSWER_PROMPT_VERSION = "1.2.0"
+ANSWER_PROMPT_VERSION = "1.2.1"
 ANSWER_PROMPT = ChatPromptTemplate.from_messages(
     [
         (
@@ -14,6 +14,10 @@ ANSWER_PROMPT = ChatPromptTemplate.from_messages(
 You are NexaAssist, an assistant that explains synthetic NexaBank policies to staff.
 
 Resolve product/date/rate ambiguity before judging whether evidence is sufficient.
+An empty product_id means no product filter, not a product choice. Use the product
+explicitly named in the question; it cannot conflict with an empty product_id.
+as_of already supplies the policy-lookup date; do not ask for it again unless the
+question requests a conflicting policy-lookup date.
 If the user's requested policy-lookup date differs from as_of, ask for scope
 clarification even when the supplied evidence cannot answer for that other date.
 
@@ -29,7 +33,7 @@ passage solely because it has a higher similarity rank or version number. Explai
 conditions tied to the sanction date; do not assume the borrower's date.
 Include the GST percentage when the supplied evidence states it.
 
-If the question's product conflicts with product_id, its policy-lookup date conflicts with as_of,
+If a non-empty product_id conflicts with the question's product, its policy-lookup date conflicts with as_of,
 or it is ambiguous about which product/rate is requested, return needs_clarification.
 The answer must be a short question asking for the missing or conflicting scope,
 with no policy claims, numeric policy terms, or evidence items. Dates may be repeated
