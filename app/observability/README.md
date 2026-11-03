@@ -28,6 +28,11 @@ selected for this setup. The workflow summary links directly to the app and Data
 Every creation has a unique `lab_session_id` tag, including same-name recreations;
 API/gateway traces, custom metrics, logs and tagged AWS resources carry it.
 
+For synthetic AWS query text, set the `aws-lab` GitHub environment variable
+`DD_CAPTURE_CONTENT=true` and run Deploy. The release carries that explicit choice
+to the API; an absent variable keeps capture off. The summary's **Datadog answer
+queries** link filters out health-check traces. Only new requests gain content.
+
 The application retains its serving containers. Monitoring needs no Docker Agent
 or local telemetry UI. Installing the account integration alone does not subscribe
 application logs or instrument Python.
