@@ -11,18 +11,26 @@ The AWS runtime no longer runs a Datadog Agent container. Its signals use:
 | Signal | Delivery |
 |---|---|
 | AWS infrastructure metrics | Datadog AWS integration / CloudWatch |
-| Application logs | Existing application CloudWatch log group → Datadog Forwarder Lambda |
+| Application logs | Session CloudWatch log group → session-owned Datadog Forwarder Lambda |
 | HTTP, model and chain traces | `ddtrace` agentless LLM Observability |
 | Route, answer and retrieval metrics | Datadog `ThreadStats` HTTP exporter |
 | Ragas scores | Datadog v2 evaluation intake, joined to the answer workflow |
 
-The serving deployment retains its existing application containers; monitoring has
-no dependency on a Docker Agent. `infra/aws/session.yaml` already configures the EC2
-Docker daemon to send application stdout to a configured CloudWatch group. The
-CLI/GitHub defaults now select the shared `/nexaassist/` group. An empty
-`--log-group-name` retains the previous session-owned group. The EC2 role can
-write only to the selected group, and the Forwarder subscribes to `/nexaassist/`. Installing the AWS
-integration alone does not subscribe arbitrary application logs or instrument Python.
+Use [Start → inspect → Destroy → Start](../../infra/aws/START_USE_DELETE_GUIDE.md)
+in the existing GitHub AWS workflow. Every new lab owns `/nexaassist/STACK_NAME`,
+its Forwarder Lambda, log subscription and collector role. It verifies the pinned
+official ARM64 ZIP and stores an immutable version in the session artifact bucket;
+there is no shared-layer, copier or separate collector stack to clean up.
+
+Destroy and automatic expiry remove those resources together with the application.
+Reusable account integration, API-key secrets and Datadog history are retained, as
+selected for this setup. The workflow summary links directly to the app and Datadog.
+Every creation has a unique `lab_session_id` tag, including same-name recreations;
+API/gateway traces, custom metrics, logs and tagged AWS resources carry it.
+
+The application retains its serving containers. Monitoring needs no Docker Agent
+or local telemetry UI. Installing the account integration alone does not subscribe
+application logs or instrument Python.
 
 Keep credentials in the private root `.env`:
 
@@ -45,7 +53,7 @@ the private file's explicit preference was preserved. Enable capture only for
 approved synthetic data. Supported personal identifiers and common credential
 fields are masked; the matcher is not a comprehensive sensitive-data detector.
 
-## Repairing the failed AWS integration
+## Historical AWS integration repair
 
 The existing `DatadogIntegration` stack in `ap-south-1` failed on 3 November 2026.
 The nested Forwarder failed because AWS denied `lambda:GetLayerVersion` for
@@ -71,12 +79,13 @@ its IAM role, storage and a private API-key secret when one is not supplied.
 4. Verify new application events in Datadog Logs and the integration's resource
    metrics. A completed CloudFormation stack alone does not establish delivery.
 
-The approved repair is deployed as `nexaassist-datadog-forwarder` in `ap-south-1`
-with `UPDATE_COMPLETE`. The shared `/nexaassist/` group was created with seven-day
+The approved standalone repair was deployed as `nexaassist-datadog-forwarder` in
+`ap-south-1`. The shared `/nexaassist/` group was created with seven-day
 retention and connected through the template's scoped Lambda permission/subscription.
 A synthetic event written to that group appeared in Datadog as `nexaassist-api`.
-This shared monitoring group has an independent lifecycle from disposable application
-sessions. Datadog retains exported telemetry according to its own configuration.
+Those standalone repair resources are legacy to the session-owned workflow above;
+new labs do not use the shared group or standalone collector. Datadog retains
+exported telemetry according to its own configuration.
 
 The failed `DatadogIntegration` stack is left untouched in `ROLLBACK_COMPLETE`.
 Its deleted account-integration role was restored as `DatadogIntegrationRole` by
@@ -187,13 +196,15 @@ Subsequent [live AWS validation](../operations/DATADOG_VALIDATION.md) deployed a
 evaluation, exact trace IDs, four attached numeric scores, correlated application
 logs and an AWS metric time series. The updated offline suite passed 439 tests.
 The rollout also fixed the shared-log permission boundary and corpus ownership.
+Session lifecycle and unique-tag changes subsequently passed **446 offline tests**,
+including bounded Forwarder-code provisioning and deletion checks. The repository's
+workflow stack-update prohibition remains enforced.
 Load testing and a broad quality benchmark were not run; one-case context precision
 was low (0.111) despite a correct cited answer.
 
 AWS application sessions additionally fetch `nexa-lab-datadog` from Secrets Manager.
 Pass `--datadog-secret-arn` at creation, or configure GitHub `aws-lab` variables
-`DATADOG_API_KEY_SECRET_ARN`, `DD_SITE`, `DD_LLMOBS_ML_APP` and, optionally,
-`APP_LOG_GROUP` (defaults to `/nexaassist/`). Release archives
+`DATADOG_API_KEY_SECRET_ARN`, `DD_SITE` and `DD_LLMOBS_ML_APP`. Release archives
 contain only the secret ARN. Recreate pre-migration disposable application sessions
 to acquire their new secret permission; the Datadog integration is separate.
 

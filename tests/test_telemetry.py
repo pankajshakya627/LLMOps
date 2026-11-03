@@ -61,6 +61,7 @@ def test_datadog_settings_validate_keys_and_trusted_sites(settings):
 
 def test_agentless_metrics_use_http_without_a_docker_agent(monkeypatch, settings):
     import datadog
+    from ddtrace import config
     from pydantic import SecretStr
 
     initialize = Mock()
@@ -68,6 +69,7 @@ def test_agentless_metrics_use_http_without_a_docker_agent(monkeypatch, settings
     monkeypatch.setattr(datadog, "initialize", initialize)
     monkeypatch.setattr(datadog, "ThreadStats", thread_stats)
     monkeypatch.setattr(telemetry, "statsd", None)
+    monkeypatch.setitem(config.tags, "lab_session_id", "offline-session")
     telemetry.configure_telemetry(
         settings.model_copy(
             update={
@@ -79,5 +81,6 @@ def test_agentless_metrics_use_http_without_a_docker_agent(monkeypatch, settings
     )
     initialize.assert_called_once_with(api_key="synthetic", api_host="https://api.datadoghq.com")
     thread_stats.return_value.start.assert_called_once_with()
+    assert "lab_session_id:offline-session" in thread_stats.call_args.kwargs["constant_tags"]
     telemetry.record_http_metrics("GET", "/health", 200, 5)
     thread_stats.return_value.distribution.assert_called_once()

@@ -81,6 +81,8 @@ def test_release_contains_only_synthetic_corpus_and_digest_manifest(
         "DatadogKeySecretArn": "arn:aws:secretsmanager:ap-south-1:123456789012:secret:nexa-lab-datadog-ABC123",
         "DatadogSite": "datadoghq.com",
         "DatadogMlApp": "nexaassist",
+        "SessionName": "nexa-lab-training",
+        "SessionId": "session-instance-id",
         "Bucket": "session-bucket",
         "GuardrailId": "guardrail",
         "GuardrailVersion": "1",
@@ -120,6 +122,7 @@ def test_release_contains_only_synthetic_corpus_and_digest_manifest(
         assert file is not None
         manifest = json.load(file)
         assert "PASSWORD" not in " ".join(manifest)
+        assert manifest["DD_TAGS"] == "session:nexa-lab-training,lab_session_id:session-instance-id"
         assert manifest["APP_IMAGE"].endswith("@sha256:" + "a" * 64)
         assert manifest["MODEL_PROVIDER"] == provider
         assert "OPENAI_API_KEY" not in manifest

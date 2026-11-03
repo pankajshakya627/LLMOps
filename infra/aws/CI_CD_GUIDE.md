@@ -2,7 +2,7 @@
 
 > Monitoring now uses the [Datadog AWS runbook](../../app/observability/README.md).
 > The API sends traces, custom metrics and evaluations directly; CloudWatch logs use the Forwarder.
-> The old Phoenix viewing instructions below are historical and no longer apply.
+> Start and Destroy own the application, session Forwarder and CloudWatch logs together.
 > Configure `DATADOG_API_KEY_SECRET_ARN`, `DD_SITE`, and `DD_LLMOBS_ML_APP` for GitHub AWS sessions.
 
 For copyable operating steps, see the [start, browser and delete guide](START_USE_DELETE_GUIDE.md).
@@ -115,8 +115,11 @@ the actual ARN. For example, `GitHubRoleArn` is an output key, while
 | `AWS_CLOUDFORMATION_ROLE_ARN` | GitHub environment variable in `aws-lab` | Value of bootstrap output `CloudFormationRoleArn` |
 | `AWS_SESSION_BOUNDARY_ARN` | GitHub environment variable in `aws-lab` | Value of bootstrap output `BoundaryArn`; this is a policy ARN |
 | `OPENAI_API_KEY_SECRET_ARN` | GitHub environment variable in `aws-lab` | Full Mumbai ARN of `nexa-lab-openai` |
+| `DATADOG_API_KEY_SECRET_ARN` | GitHub environment variable in `aws-lab` | Full same-Region ARN of `nexa-lab-datadog`; never the key value |
+| `DD_SITE`, `DD_LLMOBS_ML_APP` | GitHub environment variables in `aws-lab` | Datadog site and application name; this setup uses `datadoghq.com`, `nexaassist` |
 | `AWS_UI_ALLOWED_CIDR` | GitHub **environment secret** in `aws-lab` | Trainer public IPv4 `/32`; saved once for automatic UI access |
 | Actual OpenAI API key | AWS Secrets Manager, secret named `nexa-lab-openai` | Only the API key in plaintext, without an environment-variable prefix or JSON wrapper |
+| Actual Datadog API key | AWS Secrets Manager, secret named `nexa-lab-datadog` | Only the API key in plaintext; the account connection stays reusable |
 | Database password, gateway key, reviewer token | Generated session secret in Secrets Manager | Random session-specific credential material |
 | AWS access key / secret access key | Not required in GitHub for this pipeline | OIDC supplies temporary credentials instead |
 
@@ -155,7 +158,8 @@ already-running containers; redeploy the session to load the new value.
 | IAM and STS | Control permissions and issue temporary AWS credentials |
 | OpenAI | Supplies chat, judge and `text-embedding-3-small` embeddings through LiteLLM |
 
-PostgreSQL/pgvector, Phoenix, LiteLLM and Guardrails AI run as containers on EC2.
+PostgreSQL/pgvector, LiteLLM and Guardrails AI run as containers on EC2. Datadog
+receives agentless traces/evaluations and logs from the session-owned Forwarder.
 This lab does not use managed RDS, OpenSearch, SageMaker or Kubernetes. The
 single-host layout keeps a short training session easier to create and delete;
 it is not a production high-availability design.
@@ -213,7 +217,8 @@ name, then read that run's output. The snapshot does not establish peak-load cap
 
 Watch the destroy run to completion too. All five operations can also be run
 through GitHub **Actions → Disposable AWS lab → Run workflow**. Destroy deletes
-the session's database, traces, reports and other session data.
+the session's database, reports, Forwarder and CloudWatch logs. Exported Datadog
+history and reusable account credentials follow their own lifecycle.
 
 After successful deployment, open **Actions → your run → Summary → Open the
 application**. The URL includes `:8501`; both the UI binding and restricted
@@ -222,11 +227,10 @@ firewall rule are created automatically on fresh sessions. Complete the
 first. Only CloudFormation's role receives the scoped ingress permissions;
 GitHub's role and the instance role do not.
 
-Use the [browser guide](START_USE_DELETE_GUIDE.md#6a-direct-aws-ip-in-your-browser-restricted-to-your-ip).
+Use the [browser guide](START_USE_DELETE_GUIDE.md#2-open-the-application-and-datadog).
 Direct access uses HTTP and synthetic data only. A changed public IP requires
 refreshing the saved secret before the next fresh session. For the current
-session, use an SSM tunnel to `http://127.0.0.1:18501`; FastAPI and Phoenix also
-use SSM forwarding. Your laptop needs its own AWS login and Session Manager
+session, use an SSM tunnel to `http://127.0.0.1:18501`; FastAPI also uses SSM forwarding; open Datadog directly from the run summary. Your laptop needs its own AWS login and Session Manager
 plugin for these tunnels. GitHub authentication does not sign your laptop in.
 Older private-template stacks must be finished/destroyed and recreated before
 using the new automatic direct-access deployment.

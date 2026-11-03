@@ -200,6 +200,8 @@ Resources:
     Properties:
       LogGroupName: !Sub '/nexaassist/${AWS::StackName}'
       RetentionInDays: 1
+      Tags:
+        - {Key: lab_session_id, Value: !Select [2, !Split ['/', !Ref AWS::StackId]]}
   ForwarderLogs:
     Type: AWS::Logs::LogGroup
     Properties:
@@ -238,6 +240,7 @@ Resources:
       Timeout: 120
       Tags:
         - {Key: Session, Value: !Ref AWS::StackName}
+        - {Key: lab_session_id, Value: !Select [2, !Split ['/', !Ref AWS::StackId]]}
         - {Key: dd_forwarder_version, Value: 5.4.18}
       Role: !GetAtt ForwarderRole.Arn
       Code:
@@ -248,7 +251,9 @@ Resources:
         Variables:
           DD_API_KEY_SECRET_ARN: !Ref DatadogKeySecretArn
           DD_SITE: !Ref DatadogSite
-          DD_TAGS: !Sub 'env:dev,session:${AWS::StackName}'
+          DD_TAGS: !Sub
+            - 'env:dev,session:${AWS::StackName},lab_session_id:${Id}'
+            - Id: !Select [2, !Split ['/', !Ref AWS::StackId]]
           DD_FETCH_S3_TAGS: 'false'
           DD_FETCH_LOG_GROUP_TAGS: 'false'
           DD_FETCH_LAMBDA_TAGS: 'false'
@@ -354,6 +359,7 @@ Resources:
       Tags:
         - {Key: Name, Value: !Ref 'AWS::StackName'}
         - {Key: Session, Value: !Ref 'AWS::StackName'}
+        - {Key: lab_session_id, Value: !Select [2, !Split ['/', !Ref AWS::StackId]]}
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -528,6 +534,7 @@ Resources:
         RetryPolicy: {MaximumEventAgeInSeconds: 3600, MaximumRetryAttempts: 3}
 Outputs:
   SessionName: {Value: !Ref AWS::StackName}
+  SessionId: {Value: !Select [2, !Split ['/', !Ref AWS::StackId]]}
   ApplicationLogGroup: {Value: !Ref Logs}
   DatadogForwarderArn: {Value: !GetAtt DatadogForwarder.Arn}
   UiAllowedCidr: {Value: !Ref UiAllowedCidr}

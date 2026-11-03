@@ -1,9 +1,16 @@
 """Keep provider error content out of the pinned LiteLLM Datadog callback."""
 
+import os
+
 from litellm.integrations.datadog.datadog_llm_obs import DataDogLLMObsLogger
 
 
 class PrivateDatadogLogger(DataDogLLMObsLogger):
+    def create_llm_obs_payload(self, kwargs, start_time, end_time):
+        payload = super().create_llm_obs_payload(kwargs, start_time, end_time)
+        payload["tags"].extend(tag for tag in os.getenv("DD_TAGS", "").split(",") if tag)
+        return payload
+
     def _assemble_error_info(self, standard_logging_payload):
         error = super()._assemble_error_info(standard_logging_payload)
         if error is not None:

@@ -119,6 +119,7 @@ def configure_telemetry(settings: Settings) -> None:
         patch(fastapi=True, langchain=True)
     if settings.dd_metrics_enabled:
         tags = [f"service:{settings.dd_service}", f"env:{settings.dd_env}"]
+        tags.extend(f"{name}:{value}" for name, value in config.tags.items())
         if settings.dd_llmobs_agentless_enabled:
             from datadog import ThreadStats, initialize
 

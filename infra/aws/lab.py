@@ -163,6 +163,8 @@ def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Pat
         "DATADOG_API_KEY_SECRET_ARN": data["DatadogKeySecretArn"],
         "DD_SITE": data["DatadogSite"],
         "DD_LLMOBS_ML_APP": data["DatadogMlApp"],
+        "DD_TAGS": f"session:{data['SessionName']},lab_session_id:{data['SessionId']}",
+        "DD_VERSION": args.release_id,
         "BUCKET": data["Bucket"],
         "RELEASE_ID": args.release_id,
     }

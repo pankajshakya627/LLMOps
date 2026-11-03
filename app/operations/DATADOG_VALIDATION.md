@@ -1,5 +1,10 @@
 # Datadog AWS validation — 3 November 2026
 
+The initial manual session below was removed by the successful
+[GitHub Destroy run](https://github.com/pankajshakya627/LLMOps/actions/runs/41684363596).
+Its old application URL is no longer active. New sessions use the workflow summary's
+current app and session-filtered Datadog links.
+
 Validated the migrated application on `nexa-lab-dd-20261103` in `ap-south-1`.
 The session was created for 60 minutes; scheduled expiry is **23:08:09 IST on 3 November 2026**.
 The temporary [application UI](http://65.0.134.44:8501) is restricted to the saved trainer IP.

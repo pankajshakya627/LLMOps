@@ -37,6 +37,7 @@ jobs:
           AWS_REGION: ap-south-1
           OPENAI_API_KEY: sk-offline
           DD_API_KEY: '00000000000000000000000000000000'
+          DD_TAGS: session:nexa-lab-offline,lab_session_id:offline
           BEDROCK_CHAT_ROUTE: bedrock/converse/offline
           BEDROCK_JUDGE_ROUTE: bedrock/converse/offline
           BEDROCK_GUARDRAIL_ID: offline

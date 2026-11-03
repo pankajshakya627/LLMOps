@@ -64,6 +64,9 @@ def test_gateway_callback_keeps_error_type_without_private_details(monkeypatch):
     from types import SimpleNamespace
 
     class BaseCallback:
+        def create_llm_obs_payload(self, kwargs, start_time, end_time):
+            return {"tags": ["env:dev"], "name": "provider-call"}
+
         def _assemble_error_info(self, payload):
             return payload
 
@@ -78,3 +81,9 @@ def test_gateway_callback_keeps_error_type_without_private_details(monkeypatch):
         {"type": "ProviderError", "message": "private", "stack": "private"}
     )
     assert error == {"type": "ProviderError", "message": "", "stack": ""}
+    monkeypatch.setenv("DD_TAGS", "session:nexa-lab-training,lab_session_id:offline-session")
+    payload = callback.create_llm_obs_payload({}, None, None)
+    assert payload == {
+        "name": "provider-call",
+        "tags": ["env:dev", "session:nexa-lab-training", "lab_session_id:offline-session"],
+    }

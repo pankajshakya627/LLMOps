@@ -11,6 +11,7 @@ from unittest.mock import patch
 
 os.environ["DD_INSTRUMENTATION_TELEMETRY_ENABLED"] = "false"
 os.environ["DD_TRACE_ENABLED"] = "false"
+os.environ["DD_TAGS"] = "session:nexa-lab-offline,lab_session_id:offline-session"
 
 from app.core.config import Settings
 from app.core.telemetry import configure_telemetry
@@ -163,6 +164,8 @@ assert response.json()["datadog_span_id"] == identity["span_id"]
 root = next(s for s in spans if s["span_id"] == identity["span_id"])
 llm = next(s for s in spans if s["meta"]["span"]["kind"] == "llm")
 assert root["trace_id"] == llm["trace_id"] == identity["trace_id"]
+assert "lab_session_id:offline-session" in root["tags"]
+assert "lab_session_id:offline-session" in llm["tags"]
 assert llm["metrics"]["input_tokens"] == 8 and llm["metrics"]["output_tokens"] == 3
 assert llm["meta"]["input"]["prompt"]["version"] == "test-1"
 assert ("SYNTHETIC-PRIVATE-MARKER" in json.dumps(spans)) is capture

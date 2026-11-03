@@ -27,6 +27,8 @@ services:
       DD_SITE: ${DD_SITE:-datadoghq.com}
       DD_ENV: ${DD_ENV:-dev}
       DD_SERVICE: nexaassist-gateway
+      DD_TAGS: ${DD_TAGS:?Session tags required}
+      DD_VERSION: ${DD_VERSION:-0.1.0}
       DD_LLMOBS_ENABLED: ${DD_LLMOBS_ENABLED:-true}
       DD_LLMOBS_ML_APP: ${DD_LLMOBS_ML_APP:-nexaassist}
       DD_LLMOBS_AGENTLESS_ENABLED: "true"
@@ -57,6 +59,8 @@ services:
       DD_SITE: ${DD_SITE:-datadoghq.com}
       DD_ENV: ${DD_ENV:-dev}
       DD_SERVICE: nexaassist-api
+      DD_TAGS: ${DD_TAGS:?Session tags required}
+      DD_VERSION: ${DD_VERSION:-0.1.0}
       DD_LLMOBS_ENABLED: ${DD_LLMOBS_ENABLED:-true}
       DD_LLMOBS_ML_APP: ${DD_LLMOBS_ML_APP:-nexaassist}
       DD_LLMOBS_AGENTLESS_ENABLED: "true"
