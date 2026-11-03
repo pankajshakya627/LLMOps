@@ -71,9 +71,13 @@ model/retrieval spans, duration, errors, tokens and correlated logs. Evaluated
 answers attach the four Ragas scores to the matching workflow. The gateway has a
 separate `nexaassist-gateway` application with the same session tag.
 
-Content capture defaults to off. Trace metadata and scores remain visible;
-question/answer bodies are omitted. See the [Datadog runbook](../../app/observability/README.md)
-for capture controls, metric names, evaluation recovery and verification limits.
+The `aws-lab` environment variable `DD_CAPTURE_CONTENT=true` enables masked query
+and answer text for this synthetic training lab. The default is `false` when the
+variable is absent. Change it through GitHub Settings → Environments → `aws-lab`,
+then run **Deploy**; subsequent **Start** runs keep the same choice. Existing
+traces cannot gain text retroactively. Use the summary's **Datadog answer queries**
+link to omit health-check rows. See the [Datadog runbook](../../app/observability/README.md)
+for the 64 KiB limit, masking and evaluation recovery.
 
 Direct UI access uses HTTP and synthetic data. API, database, gateway and validator
 ports remain private. An optional authenticated SSM tunnel can expose UI port 8501

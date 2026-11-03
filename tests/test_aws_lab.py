@@ -69,10 +69,14 @@ def test_capacity_reads_memory_without_deployment_or_model_calls(
 
 
 @pytest.mark.parametrize("provider", ["openai", "bedrock"])
+@pytest.mark.parametrize("capture", [None, "true"])
 def test_release_contains_only_synthetic_corpus_and_digest_manifest(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, provider: str
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, provider: str, capture: str | None
 ) -> None:
     monkeypatch.setenv("AWS_DEFAULT_REGION", "ap-south-1")
+    monkeypatch.delenv("DD_CAPTURE_CONTENT", raising=False)
+    if capture is not None:
+        monkeypatch.setenv("DD_CAPTURE_CONTENT", capture)
     data = {
         "AppRepository": "registry/app",
         "GatewayRepository": "registry/gateway",
@@ -123,6 +127,7 @@ def test_release_contains_only_synthetic_corpus_and_digest_manifest(
         manifest = json.load(file)
         assert "PASSWORD" not in " ".join(manifest)
         assert manifest["DD_TAGS"] == "session:nexa-lab-training,lab_session_id:session-instance-id"
+        assert manifest["DD_CAPTURE_CONTENT"] == (capture or "false")
         assert manifest["APP_IMAGE"].endswith("@sha256:" + "a" * 64)
         assert manifest["MODEL_PROVIDER"] == provider
         assert "OPENAI_API_KEY" not in manifest

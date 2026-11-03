@@ -58,6 +58,7 @@ jobs:
       DATADOG_SECRET: ${{ vars.DATADOG_API_KEY_SECRET_ARN }}
       DD_SITE: ${{ vars.DD_SITE || 'datadoghq.com' }}
       DD_LLMOBS_ML_APP: ${{ vars.DD_LLMOBS_ML_APP || 'nexaassist' }}
+      DD_CAPTURE_CONTENT: ${{ vars.DD_CAPTURE_CONTENT || 'false' }}
       OPENAI_SECRET: ${{ vars.OPENAI_API_KEY_SECRET_ARN }}
       UI_ALLOWED_CIDR: ${{ secrets.AWS_UI_ALLOWED_CIDR }}
       OPENAI_CHAT_ROUTE: ${{ vars.OPENAI_LITELLM_CHAT_MODEL || 'openai/gpt-6-luna' }}
@@ -173,11 +174,13 @@ jobs:
           origin = 'https://' + host
           session_filter = 'lab_session_id:' + data['SessionId']
           traces = origin + '/llm/traces?fromUser=true&query=' + quote('ml_app:' + data['DatadogMlApp'] + ' ' + session_filter)
+          queries = traces + quote(' http_route:/answer* @is_root_span:true')
           logs = origin + '/logs?fromUser=true&query=' + quote(session_filter)
           expiry = datetime.fromisoformat(data['ExpiresAt']).replace(tzinfo=UTC).astimezone(ZoneInfo('Asia/Kolkata'))
           with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a') as report:
               report.write(
                   f'### AWS application ready\n\n[Open the application]({url})\n\n'
+                  f'[Datadog answer queries]({queries}) · '
                   f'[Datadog traces and evaluations]({traces}) · [Datadog logs]({logs}) · [Metrics Explorer]({origin}/metric/explorer)\n\n'
                   f'Session filter: `{session_filter}`\n\n'
                   f'Scheduled expiry: {expiry:%Y-%m-%d %H:%M:%S} IST\n\n'
