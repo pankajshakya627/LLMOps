@@ -7,7 +7,7 @@ import json
 import os
 import sys
 from typing import Any
-from unittest.mock import patch
+from unittest.mock import AsyncMock, patch
 
 os.environ["DD_INSTRUMENTATION_TELEMETRY_ENABLED"] = "false"
 os.environ["DD_TRACE_ENABLED"] = "false"
@@ -224,6 +224,26 @@ asyncio.run(check_concurrent_contexts())
 for version in ("v1", "v2"):
     model_span = next(s for s in spans if s["name"] == f"context-{version}")
     assert model_span["meta"]["input"]["prompt"]["version"] == version
+
+from app.evaluation import run as evaluation
+
+with (
+    patch.object(evaluation, "collect_records", AsyncMock(return_value=[])),
+    patch.object(
+        evaluation, "evaluate_ragas", AsyncMock(return_value={
+            "status": "completed", "means": dict.fromkeys(evaluation.METRIC_NAMES, 0.0)
+        })
+    ),
+    patch.object(evaluation, "publish_annotations") as publish,
+):
+    batch_report = asyncio.run(evaluation.run([], settings))
+batch = next(s for s in spans if s["name"] == "evaluation.batch")
+assert batch_report["datadog_span"] == {
+    "trace_id": batch["trace_id"], "span_id": batch["span_id"]
+}
+assert publish.call_args.args[1] == batch_report["datadog_span"]
+assert "evaluation_scope:batch_mean" in batch["tags"]
+assert "lab_session_id:offline-session" in batch["tags"]
 
 LLMObs.disable()
 print("Datadog native SDK privacy/correlation checks passed")
