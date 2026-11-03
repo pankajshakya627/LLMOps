@@ -49,6 +49,10 @@ Parameters:
     Default: nexaassist
     MinLength: 1
     AllowedPattern: '[A-Za-z0-9._-]+'
+  DatadogForwarderCodeVersion:
+    Type: String
+    Default: ''
+    Description: Immutable S3 version of the verified official Forwarder ZIP; set by the session CLI.
   ModelResources:
     Type: CommaDelimitedList
     Default: ''
@@ -61,6 +65,7 @@ Rules:
       - Assert: !Not [!Equals [!Ref OpenAIKeySecretArn, '']]
         AssertDescription: OpenAI requires an existing OpenAIKeySecretArn.
 Conditions:
+  HasForwarderCode: !Not [!Equals [!Ref DatadogForwarderCodeVersion, '']]
   UseSessionLogs: !Equals [!Ref ApplicationLogGroupName, '']
   UseOpenAI: !Equals [!Ref ModelProvider, openai]
   UseBedrock: !Equals [!Ref ModelProvider, bedrock]
@@ -207,6 +212,76 @@ Resources:
     Properties:
       LogGroupName: !Sub '/nexaassist/${AWS::StackName}'
       RetentionInDays: 1
+  ForwarderLogs:
+    Type: AWS::Logs::LogGroup
+    Condition: HasForwarderCode
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${AWS::StackName}-datadog-forwarder'
+      RetentionInDays: 1
+  ForwarderRole:
+    Type: AWS::IAM::Role
+    Condition: HasForwarderCode
+    Properties:
+      RoleName: !Sub '${AWS::StackName}-datadog-forwarder'
+      PermissionsBoundary: !Ref BoundaryArn
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: {Service: lambda.amazonaws.com}
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: forwarder
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: secretsmanager:GetSecretValue
+                Resource: !Ref DatadogKeySecretArn
+              - Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !GetAtt ForwarderLogs.Arn
+  DatadogForwarder:
+    Type: AWS::Lambda::Function
+    Condition: HasForwarderCode
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-datadog-forwarder'
+      Runtime: python3.14
+      Architectures: [arm64]
+      Handler: lambda_function.lambda_handler
+      MemorySize: 1024
+      Timeout: 120
+      Role: !GetAtt ForwarderRole.Arn
+      Code:
+        S3Bucket: !Ref Artifacts
+        S3Key: datadog/forwarder.zip
+        S3ObjectVersion: !Ref DatadogForwarderCodeVersion
+      Environment:
+        Variables:
+          DD_API_KEY_SECRET_ARN: !Ref DatadogKeySecretArn
+          DD_SITE: !Ref DatadogSite
+          DD_TAGS: !Sub 'env:dev,session:${AWS::StackName}'
+          DD_FETCH_S3_TAGS: 'false'
+          DD_FETCH_LOG_GROUP_TAGS: 'false'
+          DD_FETCH_LAMBDA_TAGS: 'false'
+          DD_STORE_FAILED_EVENTS: 'false'
+  ForwarderPermission:
+    Type: AWS::Lambda::Permission
+    Condition: HasForwarderCode
+    Properties:
+      FunctionName: !GetAtt DatadogForwarder.Arn
+      Action: lambda:InvokeFunction
+      Principal: !Sub 'logs.${AWS::Region}.amazonaws.com'
+      SourceAccount: !Ref AWS::AccountId
+      SourceArn: !If [UseSessionLogs, !GetAtt Logs.Arn, !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${ApplicationLogGroupName}:*']
+  LogSubscription:
+    Type: AWS::Logs::SubscriptionFilter
+    Condition: HasForwarderCode
+    DependsOn: ForwarderPermission
+    Properties:
+      LogGroupName: !If [UseSessionLogs, !Ref Logs, !Ref ApplicationLogGroupName]
+      FilterPattern: ''
+      DestinationArn: !GetAtt DatadogForwarder.Arn
   HostRole:
     Type: AWS::IAM::Role
     Properties:
@@ -431,6 +506,9 @@ Resources:
         Input: '{"operation":"destroy"}'
         RetryPolicy: {MaximumEventAgeInSeconds: 3600, MaximumRetryAttempts: 3}
 Outputs:
+  SessionName: {Value: !Ref AWS::StackName}
+  ApplicationLogGroup: {Value: !If [UseSessionLogs, !Ref Logs, !Ref ApplicationLogGroupName]}
+  DatadogForwarderArn: {Condition: HasForwarderCode, Value: !GetAtt DatadogForwarder.Arn}
   UiAllowedCidr: {Value: !Ref UiAllowedCidr}
   ApplicationUrl: {Value: !Sub 'http://${Host.PublicIp}:8501'}
   InstanceId: {Value: !Ref Host}

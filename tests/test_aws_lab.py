@@ -797,3 +797,33 @@ def test_host_corpus_is_readable_by_runtime_without_exposing_secrets():
     assert "chmod -R u=rwX,go= corpus" in host
     assert host.index("chmod -R u=rwX,go= corpus") < host.index("python -m app.services.ingestion")
     assert "chmod 600 .env" in host
+
+
+def test_session_forwarder_owns_logs_and_uses_immutable_code_with_scoped_access():
+    config = template("infra/aws/session.yaml")
+    resources = config["Resources"]
+    function = resources["DatadogForwarder"]["Properties"]
+    assert function["Code"] == {
+        "S3Bucket": {"Ref": "Artifacts"},
+        "S3Key": "datadog/forwarder.zip",
+        "S3ObjectVersion": {"Ref": "DatadogForwarderCodeVersion"},
+    }
+    assert function["Runtime"] == "python3.14" and function["Architectures"] == ["arm64"]
+    role = resources["ForwarderRole"]["Properties"]
+    assert role["PermissionsBoundary"] == {"Ref": "BoundaryArn"}
+    assert "ManagedPolicyArns" not in role
+    grants = role["Policies"][0]["PolicyDocument"]["Statement"]
+    assert {s["Action"] for s in grants if isinstance(s["Action"], str)} == {
+        "secretsmanager:GetSecretValue"
+    }
+    assert grants[0]["Resource"] == {"Ref": "DatadogKeySecretArn"}
+    assert grants[1]["Resource"] == {"Fn::GetAtt": "ForwarderLogs.Arn"}
+    assert function["Environment"]["Variables"]["DD_STORE_FAILED_EVENTS"] == "false"
+    assert "DD_S3_BUCKET_NAME" not in function["Environment"]["Variables"]
+    assert resources["LogSubscription"]["DependsOn"] == "ForwarderPermission"
+    permission = resources["ForwarderPermission"]["Properties"]
+    assert permission["SourceAccount"] == {"Ref": "AWS::AccountId"}
+    assert permission["SourceArn"]["Fn::If"][1] == {"Fn::GetAtt": "Logs.Arn"}
+    for name in ("ForwarderLogs", "ForwarderRole", "DatadogForwarder", "LogSubscription"):
+        assert resources[name]["Condition"] == "HasForwarderCode"
+        assert resources[name].get("DeletionPolicy", "Delete") == "Delete"
