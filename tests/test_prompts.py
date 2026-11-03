@@ -11,7 +11,8 @@ from app.chains.prompts.judge import JUDGE_PROMPT, JUDGE_VERSION
 # the reason. Re-run the golden evaluation (python -m app.evaluation.run) before merging.
 # 1.2.0: numeric citation example and exact numeric copying after live local draft failures.
 # Live candidate results are recorded in docs/debug/closing-validation-gaps-20261025.
-PINNED_ANSWER = ("1.2.0", "f29e38485765")
+# 1.2.1: an absent product filter cannot conflict with a product named in the question.
+PINNED_ANSWER = ("1.2.1", "abdc3a271455")
 PINNED_JUDGE = ("policy-judge-v2", "7e6716ec19ac")
 
 
