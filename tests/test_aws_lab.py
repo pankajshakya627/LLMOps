@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import fnmatch
 import hashlib
+import io
 import json
 import os
 import re
@@ -755,12 +756,10 @@ def test_aws_monitoring_uses_agentless_exports_and_layer_free_forwarder():
     assert "ApplicationLogGroupName" in permission["SourceArn"]["Fn::Sub"]
 
 
-def test_shared_application_logs_keep_writes_scoped_and_userdata_safe():
+def test_application_logs_are_owned_by_the_session_and_writes_stay_scoped():
     config = template("infra/aws/session.yaml")
-    parameter = config["Parameters"]["ApplicationLogGroupName"]
-    assert re.fullmatch(parameter["AllowedPattern"], "/nexaassist/")
-    assert not re.fullmatch(parameter["AllowedPattern"], "bad'$(command)")
-    assert config["Resources"]["Logs"]["Condition"] == "UseSessionLogs"
+    assert "ApplicationLogGroupName" not in config["Parameters"]
+    assert "Condition" not in config["Resources"]["Logs"]
     policies = config["Resources"]["HostRole"]["Properties"]["Policies"]
     statements = [
         s for p in policies for s in p["PolicyDocument"]["Statement"] if "Fn::If" not in s
@@ -768,8 +767,7 @@ def test_shared_application_logs_keep_writes_scoped_and_userdata_safe():
     logs_write = next(
         s for s in statements if s["Action"] == ["logs:CreateLogStream", "logs:PutLogEvents"]
     )
-    assert logs_write["Resource"]["Fn::If"][0] == "UseSessionLogs"
-    assert "${ApplicationLogGroupName}:*" in logs_write["Resource"]["Fn::If"][2]["Fn::Sub"]
+    assert logs_write["Resource"] == {"Fn::GetAtt": "Logs.Arn"}
 
 
 def test_session_boundary_allows_only_selected_log_group_families():
@@ -806,7 +804,7 @@ def test_session_forwarder_owns_logs_and_uses_immutable_code_with_scoped_access(
     assert function["Code"] == {
         "S3Bucket": {"Ref": "Artifacts"},
         "S3Key": "datadog/forwarder.zip",
-        "S3ObjectVersion": {"Ref": "DatadogForwarderCodeVersion"},
+        "S3ObjectVersion": {"Fn::GetAtt": "ForwarderCode.VersionId"},
     }
     assert function["Runtime"] == "python3.14" and function["Architectures"] == ["arm64"]
     role = resources["ForwarderRole"]["Properties"]
@@ -823,7 +821,99 @@ def test_session_forwarder_owns_logs_and_uses_immutable_code_with_scoped_access(
     assert resources["LogSubscription"]["DependsOn"] == "ForwarderPermission"
     permission = resources["ForwarderPermission"]["Properties"]
     assert permission["SourceAccount"] == {"Ref": "AWS::AccountId"}
-    assert permission["SourceArn"]["Fn::If"][1] == {"Fn::GetAtt": "Logs.Arn"}
+    assert permission["SourceArn"] == {"Fn::GetAtt": "Logs.Arn"}
     for name in ("ForwarderLogs", "ForwarderRole", "DatadogForwarder", "LogSubscription"):
-        assert resources[name]["Condition"] == "HasForwarderCode"
         assert resources[name].get("DeletionPolicy", "Delete") == "Delete"
+
+
+@pytest.mark.parametrize(
+    "request_type,valid,version",
+    [
+        ("Create", True, "immutable-version"),
+        ("Create", False, "immutable-version"),
+        ("Create", True, None),
+        ("Create", True, "null"),
+        ("Delete", True, None),
+    ],
+)
+def test_forwarder_code_preparation_signals_failure_and_never_updates_the_stack(
+    tmp_path, monkeypatch, request_type, valid, version
+):
+    import urllib.request
+
+    import boto3
+
+    package = b"verified official package"
+    code = template("infra/aws/session.yaml")["Resources"]["Cleanup"]["Properties"]["Code"][
+        "ZipFile"
+    ]
+    script = tmp_path / "lifecycle.py"
+    script.write_text(code)
+    namespace = runpy.run_path(str(script))
+    monkeypatch.setitem(
+        namespace["handler"].__globals__, "FORWARDER_SHA256", hashlib.sha256(package).hexdigest()
+    )
+    download = Mock(
+        side_effect=lambda *args, **kwargs: io.BytesIO(package if valid else b"tampered")
+    )
+    monkeypatch.setattr(urllib.request, "urlopen", download)
+    s3 = Mock()
+    s3.put_object.return_value = {"VersionId": version}
+    clients = Mock(side_effect=lambda name: s3 if name == "s3" else pytest.fail(name))
+    monkeypatch.setattr(boto3, "client", clients)
+    response = Mock(SUCCESS="SUCCESS", FAILED="FAILED")
+    monkeypatch.setitem(sys.modules, "cfnresponse", response)
+    monkeypatch.setenv("BUCKET", "owned-bucket")
+    event = {"RequestType": request_type}
+    namespace["handler"](event, None)
+    success = request_type == "Delete" or (valid and version not in (None, "null"))
+    assert response.send.call_args.args[2] == ("SUCCESS" if success else "FAILED")
+    if request_type == "Delete" or not valid:
+        clients.assert_not_called()
+    if request_type == "Delete":
+        download.assert_not_called()
+    elif valid:
+        s3.put_object.assert_called_once_with(
+            Bucket="owned-bucket", Key="datadog/forwarder.zip", Body=package
+        )
+    if success and request_type != "Delete":
+        assert response.send.call_args.args[3] == {"VersionId": "immutable-version"}
+
+
+def test_forwarder_provisioning_permissions_exclude_unrelated_functions_and_code():
+    config = template("infra/aws/github-oidc.yaml")
+    statements = config["Resources"]["CloudFormationRole"]["Properties"]["Policies"][0][
+        "PolicyDocument"
+    ]["Statement"]
+
+    def allowed(action, arn):
+        for statement in statements:
+            actions = statement.get("Action", [])
+            if isinstance(actions, str):
+                actions = [actions]
+            if not any(fnmatch.fnmatchcase(action, a) for a in actions):
+                continue
+            resources = statement["Resource"]
+            if not isinstance(resources, list):
+                resources = [resources]
+            for resource in resources:
+                pattern = resource if isinstance(resource, str) else resource["Fn::Sub"]
+                for key, value in {
+                    "Partition": "aws",
+                    "Region": "ap-south-1",
+                    "AccountId": "123456789012",
+                }.items():
+                    pattern = pattern.replace("${AWS::" + key + "}", value)
+                if fnmatch.fnmatchcase(arn, pattern):
+                    return True
+        return False
+
+    prefix = "arn:aws:lambda:ap-south-1:123456789012:function:"
+    assert allowed("lambda:CreateFunction", prefix + "nexa-lab-check-datadog-forwarder")
+    assert allowed("lambda:AddPermission", prefix + "nexa-lab-check-datadog-forwarder")
+    assert not allowed("lambda:AddPermission", prefix + "nexa-lab-check-cleanup")
+    assert allowed("lambda:InvokeFunction", prefix + "nexa-lab-check-cleanup")
+    assert not allowed("lambda:InvokeFunction", prefix + "nexa-lab-check-datadog-forwarder")
+    assert not allowed("lambda:CreateFunction", prefix + "unrelated-function")
+    assert allowed("s3:GetObjectVersion", "arn:aws:s3:::nexa-lab-check/datadog/forwarder.zip")
+    assert not allowed("s3:GetObjectVersion", "arn:aws:s3:::nexa-lab-check/reports/private.json")

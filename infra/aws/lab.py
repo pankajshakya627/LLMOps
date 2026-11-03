@@ -86,7 +86,6 @@ def create(args: argparse.Namespace) -> None:
         "DatadogKeySecretArn": datadog_secret,
         "DatadogSite": getattr(args, "datadog_site", "datadoghq.com"),
         "DatadogMlApp": getattr(args, "datadog_ml_app", "nexaassist"),
-        "ApplicationLogGroupName": getattr(args, "log_group_name", ""),
         "ModelResources": args.model_resources if args.provider == "bedrock" else "",
     }
     cf = client("cloudformation")
@@ -333,7 +332,6 @@ def main() -> None:
     start.add_argument("--datadog-secret-arn", required=True)
     start.add_argument("--datadog-site", default="datadoghq.com")
     start.add_argument("--datadog-ml-app", default="nexaassist")
-    start.add_argument("--log-group-name", default="/nexaassist/")
     start.add_argument("--model-resources", default="")
     start.add_argument("--ui-allowed-cidr", required=True)
     start.add_argument("--boundary-arn", required=True)

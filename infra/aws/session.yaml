@@ -31,11 +31,6 @@ Parameters:
     Default: ''
     Description: Existing same-Region plaintext OpenAI API key secret named nexa-lab-openai; required for OpenAI.
     AllowedPattern: '(^$|arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:nexa-lab-openai-[A-Za-z0-9]{6})'
-  ApplicationLogGroupName:
-    Type: String
-    Default: ''
-    AllowedPattern: '(^$|[A-Za-z0-9/_.#-]+)'
-    Description: Existing shared CloudWatch log group; empty creates a session-owned log group.
   DatadogKeySecretArn:
     Type: String
     Description: Existing same-Region plaintext Datadog API key secret named nexa-lab-datadog.
@@ -49,10 +44,6 @@ Parameters:
     Default: nexaassist
     MinLength: 1
     AllowedPattern: '[A-Za-z0-9._-]+'
-  DatadogForwarderCodeVersion:
-    Type: String
-    Default: ''
-    Description: Immutable S3 version of the verified official Forwarder ZIP; set by the session CLI.
   ModelResources:
     Type: CommaDelimitedList
     Default: ''
@@ -65,8 +56,6 @@ Rules:
       - Assert: !Not [!Equals [!Ref OpenAIKeySecretArn, '']]
         AssertDescription: OpenAI requires an existing OpenAIKeySecretArn.
 Conditions:
-  HasForwarderCode: !Not [!Equals [!Ref DatadogForwarderCodeVersion, '']]
-  UseSessionLogs: !Equals [!Ref ApplicationLogGroupName, '']
   UseOpenAI: !Equals [!Ref ModelProvider, openai]
   UseBedrock: !Equals [!Ref ModelProvider, bedrock]
   UseOpenAIKey: !And [!Condition UseOpenAI, !Not [!Equals [!Ref OpenAIKeySecretArn, '']]]
@@ -208,19 +197,16 @@ Resources:
       Description: Fixed session policy
   Logs:
     Type: AWS::Logs::LogGroup
-    Condition: UseSessionLogs
     Properties:
       LogGroupName: !Sub '/nexaassist/${AWS::StackName}'
       RetentionInDays: 1
   ForwarderLogs:
     Type: AWS::Logs::LogGroup
-    Condition: HasForwarderCode
     Properties:
       LogGroupName: !Sub '/aws/lambda/${AWS::StackName}-datadog-forwarder'
       RetentionInDays: 1
   ForwarderRole:
     Type: AWS::IAM::Role
-    Condition: HasForwarderCode
     Properties:
       RoleName: !Sub '${AWS::StackName}-datadog-forwarder'
       PermissionsBoundary: !Ref BoundaryArn
@@ -243,7 +229,6 @@ Resources:
                 Resource: !GetAtt ForwarderLogs.Arn
   DatadogForwarder:
     Type: AWS::Lambda::Function
-    Condition: HasForwarderCode
     Properties:
       FunctionName: !Sub '${AWS::StackName}-datadog-forwarder'
       Runtime: python3.14
@@ -251,11 +236,14 @@ Resources:
       Handler: lambda_function.lambda_handler
       MemorySize: 1024
       Timeout: 120
+      Tags:
+        - {Key: Session, Value: !Ref AWS::StackName}
+        - {Key: dd_forwarder_version, Value: 5.4.18}
       Role: !GetAtt ForwarderRole.Arn
       Code:
         S3Bucket: !Ref Artifacts
         S3Key: datadog/forwarder.zip
-        S3ObjectVersion: !Ref DatadogForwarderCodeVersion
+        S3ObjectVersion: !GetAtt ForwarderCode.VersionId
       Environment:
         Variables:
           DD_API_KEY_SECRET_ARN: !Ref DatadogKeySecretArn
@@ -265,21 +253,25 @@ Resources:
           DD_FETCH_LOG_GROUP_TAGS: 'false'
           DD_FETCH_LAMBDA_TAGS: 'false'
           DD_STORE_FAILED_EVENTS: 'false'
+  ForwarderCode:
+    Type: AWS::CloudFormation::CustomResource
+    Properties:
+      ServiceToken: !GetAtt Cleanup.Arn
+      ServiceTimeout: 180
+      Version: 5.4.18
   ForwarderPermission:
     Type: AWS::Lambda::Permission
-    Condition: HasForwarderCode
     Properties:
       FunctionName: !GetAtt DatadogForwarder.Arn
       Action: lambda:InvokeFunction
       Principal: !Sub 'logs.${AWS::Region}.amazonaws.com'
       SourceAccount: !Ref AWS::AccountId
-      SourceArn: !If [UseSessionLogs, !GetAtt Logs.Arn, !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${ApplicationLogGroupName}:*']
+      SourceArn: !GetAtt Logs.Arn
   LogSubscription:
     Type: AWS::Logs::SubscriptionFilter
-    Condition: HasForwarderCode
     DependsOn: ForwarderPermission
     Properties:
-      LogGroupName: !If [UseSessionLogs, !Ref Logs, !Ref ApplicationLogGroupName]
+      LogGroupName: !Ref Logs
       FilterPattern: ''
       DestinationArn: !GetAtt DatadogForwarder.Arn
   HostRole:
@@ -339,7 +331,7 @@ Resources:
                 - !Ref AWS::NoValue
               - Effect: Allow
                 Action: [logs:CreateLogStream, logs:PutLogEvents]
-                Resource: !If [UseSessionLogs, !GetAtt Logs.Arn, !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${ApplicationLogGroupName}:*']
+                Resource: !GetAtt Logs.Arn
   HostProfile:
     Type: AWS::IAM::InstanceProfile
     Properties:
@@ -377,10 +369,8 @@ Resources:
           sha256sum --check compose.sha256
           install -m 755 docker-compose-linux-x86_64 /usr/local/lib/docker/cli-plugins/docker-compose
           # Bounded container logs and CloudWatch collection using the EC2 role.
-          log_group='${ApplicationLogGroupName}'
-          if [ -z "$log_group" ]; then log_group='/nexaassist/${AWS::StackName}'; fi
           cat > /etc/docker/daemon.json <<JSON
-          {"log-driver":"awslogs","log-opts":{"awslogs-region":"${AWS::Region}","awslogs-group":"$log_group","awslogs-create-group":"false","mode":"non-blocking","max-buffer-size":"1m"}}
+          {"log-driver":"awslogs","log-opts":{"awslogs-region":"${AWS::Region}","awslogs-group":"/nexaassist/${AWS::StackName}","awslogs-create-group":"false","mode":"non-blocking","max-buffer-size":"1m"}}
           JSON
           systemctl restart docker
           touch /opt/nexaassist/host-ready
@@ -406,6 +396,9 @@ Resources:
               - Effect: Allow
                 Action: [s3:DeleteObjectVersion, s3:DeleteObject, s3:AbortMultipartUpload]
                 Resource: !Sub '${Artifacts.Arn}/*'
+              - Effect: Allow
+                Action: s3:PutObject
+                Resource: !Sub '${Artifacts.Arn}/datadog/forwarder.zip'
               - Effect: Allow
                 Action: cloudformation:DeleteStack
                 Resource: !Ref 'AWS::StackId'
@@ -439,10 +432,38 @@ Resources:
       Code:
         ZipFile: |
           import os
+          import hashlib
+          import urllib.request
           import boto3
           from botocore.exceptions import ClientError, WaiterError
 
+          FORWARDER_URL = 'https://github.com/DataDog/datadog-serverless-functions/releases/download/aws-dd-forwarder-5.4.18/aws-dd-forwarder-5.4.18.zip'
+          FORWARDER_SHA256 = 'fc04e413f76ff6d1b19b93e343948e8faf7848f517617d9c90d3daf0cfa70268'
+
           def handler(event, context):
+              if 'RequestType' in event:
+                  import cfnresponse
+                  try:
+                      data = {}
+                      if event['RequestType'] != 'Delete':
+                          with urllib.request.urlopen(FORWARDER_URL, timeout=30) as response:
+                              package = response.read(19774339)
+                          if hashlib.sha256(package).hexdigest() != FORWARDER_SHA256:
+                              raise ValueError('Official Forwarder ZIP checksum mismatch')
+                          uploaded = boto3.client('s3').put_object(
+                              Bucket=os.environ['BUCKET'], Key='datadog/forwarder.zip', Body=package)
+                          version = uploaded.get('VersionId')
+                          if not version or version == 'null':
+                              raise ValueError('Forwarder code requires a versioned bucket')
+                          data['VersionId'] = version
+                  except (OSError, ValueError, ClientError) as error:
+                      print('forwarder_code_failed', type(error).__name__)
+                      cfnresponse.send(event, context, cfnresponse.FAILED, {},
+                                       'datadog-forwarder-code', reason=type(error).__name__)
+                  else:
+                      cfnresponse.send(event, context, cfnresponse.SUCCESS, data,
+                                       'datadog-forwarder-code')
+                  return
               if event.get('operation') != 'destroy':
                   raise ValueError('Explicit destroy operation required')
               ec2 = boto3.client('ec2')
@@ -507,8 +528,8 @@ Resources:
         RetryPolicy: {MaximumEventAgeInSeconds: 3600, MaximumRetryAttempts: 3}
 Outputs:
   SessionName: {Value: !Ref AWS::StackName}
-  ApplicationLogGroup: {Value: !If [UseSessionLogs, !Ref Logs, !Ref ApplicationLogGroupName]}
-  DatadogForwarderArn: {Condition: HasForwarderCode, Value: !GetAtt DatadogForwarder.Arn}
+  ApplicationLogGroup: {Value: !Ref Logs}
+  DatadogForwarderArn: {Value: !GetAtt DatadogForwarder.Arn}
   UiAllowedCidr: {Value: !Ref UiAllowedCidr}
   ApplicationUrl: {Value: !Sub 'http://${Host.PublicIp}:8501'}
   InstanceId: {Value: !Ref Host}
