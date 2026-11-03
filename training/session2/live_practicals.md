@@ -1,5 +1,8 @@
 # Session 2 — tools and live practicals
 
+> Monitoring has migrated to the [Datadog AWS guide](../../app/observability/README.md).
+> Phoenix sections below describe the previous lab; use the linked guide for current telemetry commands.
+
 Companion to the **19-slide LLMOps Core** deck. Complete service/model preparation before class. Classroom demonstrations call actual application/service endpoints and `app.evaluation` entry points; [handout.md](handout.md) contains the student requests and separate offline preparation checks. Phoenix, DeepEval, Portkey and NeMo Guardrails are alternatives, not additional required installations. These examples operate on synthetic text. The application now supports explicit provider profiles; use [runtime.md](../../app/operations/README.md) to connect these tools to the actual application. Production release thresholds remain unchanged.
 
 ## 1. Preflight and model contract
@@ -54,10 +57,10 @@ Repeat with `nexa-embed-openai`. Save a dimension/count summary rather than the 
 
 Run `uv run --no-sync python -m pytest -q tests/test_telemetry.py` for offline
 trace/log and prompt-context checks. Run the actual SDK privacy/token checks in
-`tests/runtime/phoenix_profile_check.py`; these use in-memory export and mock HTTP.
+`tests/runtime/datadog_profile_check.py`; these use in-memory export and mock HTTP.
 
 For the live variant, follow [phoenix.md](../../app/observability/README.md) to start the collector and
-`app.phoenix_main:app`. Send a synthetic `/answer` request and an invalid body.
+`app.datadog_main:app`. Send a synthetic `/answer` request and an invalid body.
 Find the trace using its response header, inspect the server and model spans,
 and correlate IDs with JSON logs. Submit stage durations, reported model/tokens,
 prompt version and one failure. Export `/answer/evaluated` metrics explicitly.

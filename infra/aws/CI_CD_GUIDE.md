@@ -1,5 +1,10 @@
 # How GitHub CI/CD connects to your AWS lab
 
+> Monitoring now uses the [Datadog AWS runbook](../../app/observability/README.md).
+> The API sends traces, custom metrics and evaluations directly; CloudWatch logs use the Forwarder.
+> The old Phoenix viewing instructions below are historical and no longer apply.
+> Configure `DATADOG_API_KEY_SECRET_ARN`, `DD_SITE`, and `DD_LLMOBS_ML_APP` for GitHub AWS sessions.
+
 For copyable operating steps, see the [start, browser and delete guide](START_USE_DELETE_GUIDE.md).
 
 GitHub checks and packages your code. AWS runs the application. OpenAI supplies

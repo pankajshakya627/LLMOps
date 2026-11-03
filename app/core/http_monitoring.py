@@ -10,10 +10,12 @@ from time import perf_counter
 from typing import Any
 
 import structlog
+from ddtrace.llmobs import LLMObs
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 from app.chains.redaction import redact
 from app.core.observability import latency_summary
+from app.core.telemetry import record_http_metrics
 
 CAPTURE_LIMIT = 65_536
 SECRET_SUFFIXES = (
@@ -51,17 +53,21 @@ def safe_content(value: Any) -> Any:
 
 def record_payload(span: Any, direction: str, body: bytearray, complete: bool) -> None:
     if not complete:
-        span.set_attribute(f"nexa.{direction}.capture", "omitted: exceeds 64 KiB or incomplete")
+        LLMObs.annotate(
+            span=span, tags={f"nexa.{direction}.capture": "omitted: exceeds 64 KiB or incomplete"}
+        )
         return
     if not body:
         return
     try:
         value = json.dumps(safe_content(json.loads(body)), ensure_ascii=False)
     except ValueError, UnicodeError, RecursionError:
-        span.set_attribute(f"nexa.{direction}.capture", "omitted: invalid JSON")
+        LLMObs.annotate(span=span, tags={f"nexa.{direction}.capture": "omitted: invalid JSON"})
         return
-    span.set_attribute(f"{direction}.mime_type", "application/json")
-    span.set_attribute(f"{direction}.value", value)
+    if direction == "input":
+        LLMObs.annotate(span=span, input_data=value)
+    else:
+        LLMObs.annotate(span=span, output_data=value)
 
 
 @dataclass
@@ -93,13 +99,25 @@ class HTTPMonitoringMiddleware:
         if scope["type"] != "http":
             await self.app(scope, receive, send)
             return
+        if LLMObs.enabled:
+            with LLMObs.workflow(name=f"{scope['method']} request") as span:
+                identity = LLMObs.export_span(span)
+                scope["nexa.datadog"] = identity
+                scope["nexa.datadog.span"] = span
+                await self.monitor(scope, receive, send)
+        else:
+            await self.monitor(scope, receive, send)
+
+    async def monitor(self, scope: Scope, receive: Receive, send: Send) -> None:
         started = perf_counter()
         responded_at: float | None = None
         status = 500
         request_body, response_body = bytearray(), bytearray()
         request_complete = response_complete = False
-        span = scope.get("nexa.phoenix.span")
-        capture = bool(getattr(scope["app"].state, "phoenix_capture_content", False) and span)
+        from app.core.telemetry import capture_content_enabled
+
+        span = scope.get("nexa.datadog.span")
+        capture = bool(capture_content_enabled and span)
         request_json = b"application/json" in dict(scope.get("headers", [])).get(
             b"content-type", b""
         )
@@ -122,6 +140,14 @@ class HTTPMonitoringMiddleware:
             nonlocal status, response_complete, response_json, responded_at
             if message["type"] == "http.response.start":
                 status = message["status"]
+                identity = scope.get("nexa.datadog")
+                if identity:
+                    message.setdefault("headers", []).extend(
+                        [
+                            (b"x-datadog-trace-id", identity["trace_id"].zfill(32).encode()),
+                            (b"x-datadog-span-id", identity["span_id"].encode()),
+                        ]
+                    )
                 response_json = b"application/json" in dict(message.get("headers", [])).get(
                     b"content-type", b""
                 )
@@ -160,7 +186,13 @@ class HTTPMonitoringMiddleware:
             row.statuses[status] += 1
             row.latency_ms_total += elapsed
             row.latencies.append(elapsed)
-            identity = scope.get("nexa.phoenix")
+            record_http_metrics(method, route, status, elapsed)
+            if span:
+                LLMObs.annotate(span=span, tags={"http.route": route, "http.status_code": status})
+                if status >= 500:
+                    span.error = 1
+                    span.set_tag("error.type", "HTTPError")
+            identity = scope.get("nexa.datadog")
             structlog.get_logger().info(
                 "http_request_completed",
                 method=method,
@@ -168,5 +200,12 @@ class HTTPMonitoringMiddleware:
                 status_code=status,
                 server_error=int(status >= 500),
                 duration_ms=round(elapsed, 3),
-                **({"trace_id": identity[0], "span_id": identity[1]} if identity else {}),
+                **(
+                    {
+                        "llmobs.trace_id": identity["trace_id"].zfill(32),
+                        "llmobs.span_id": identity["span_id"],
+                    }
+                    if identity
+                    else {}
+                ),
             )

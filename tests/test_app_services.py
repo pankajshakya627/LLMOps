@@ -20,12 +20,13 @@ def test_application_owns_gateway_and_guardrail_services() -> None:
 
 def test_compose_connects_private_services_and_keeps_one_fallback_owner() -> None:
     services = yaml.safe_load(Path("app/compose.yaml").read_text())["services"]
-    assert {"api", "ui", "gateway", "guardrails", "phoenix"} <= services.keys()
+    assert {"api", "ui", "gateway", "guardrails", "datadog-agent"} <= services.keys()
     api = services["api"]["environment"]
     assert api["CHAT_BASE_URL"] == "http://gateway:4000/v1"
     assert api["EMBEDDING_BASE_URL"] == "http://gateway:4000/v1"
     assert api["GUARDRAILS_BASE_URL"] == "http://guardrails:8101"
-    assert api["PHOENIX_BASE_URL"] == "http://phoenix:6006"
+    assert api["DD_LLMOBS_AGENTLESS_ENABLED"] == "true"
+    assert services["datadog-agent"]["profiles"] == ["local-agent"]
     assert api["OPENAI_FALLBACK_MODEL"] == ""
     assert api["CHAT_REASONING_EFFORT"] == ""
     assert services["ui"]["environment"]["API_BASE_URL"] == "http://api:8000"

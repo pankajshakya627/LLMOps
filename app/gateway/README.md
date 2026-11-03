@@ -132,7 +132,7 @@ Run the real LiteLLM router/cache code with labelled synthetic responses:
 
 ```bash
 LITELLM_LOCAL_MODEL_COST_MAP=True OTEL_SDK_DISABLED=true \
-uv run --no-project --python 3.13 --with-requirements app/gateway/requirements.txt \
+PYTHONPATH=app/gateway uv run --no-project --python 3.13 --with-requirements app/gateway/requirements.txt \
   python -m app.gateway.selfcheck
 ```
 
@@ -146,21 +146,9 @@ Official references: [routing](https://docs.litellm.ai/docs/routing),
 [caching](https://docs.litellm.ai/docs/proxy/caching).
 
 
-## View the actual provider in Phoenix
+## View the actual provider in Datadog
 
-All three gateway profiles enable the official `arize_phoenix` callback. Compose
-sets `LITELLM_OTEL_V2=true` and exports to the local collector project
-**nexaassist-gateway**. Inspect `litellm.provider.model` and `llm.provider` there for
-provider-level evidence rather than interpreting the API's `ChatOpenAI` class
-or `nexa-chat` alias as an actual model identity.
-
-Gateway raw message capture is disabled (`no_content`). The application project
-**nexaassist-training** shows final responses when its synthetic content capture
-is enabled; `/answer/evaluated` publishes Ragas annotations automatically. These
-can be separate traces; do not infer fallback linkage from nearby timestamps.
-
-The gateway has no configured `DATABASE_URL`, so LiteLLM UI request-history and
-stored response content are not enabled. Phoenix remains this application's
-observability store. Enabling gateway tracing does not enable UI spend-log
-persistence. Native gateway launches should load `service.env.example` as shown
-in the root README.
+Follow the [Datadog guide](../observability/README.md). The gateway's pinned callback
+exports provider/model, latency and token metadata under `nexaassist-gateway`.
+Messages and provider exception details are hidden. Application workflows and Ragas
+results use `DD_LLMOBS_ML_APP`; gateway spans can have separate trace IDs.

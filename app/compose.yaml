@@ -2,6 +2,8 @@ name: nexaassist
 
 services:
   postgres:
+    labels:
+      com.datadoghq.ad.logs: '[{"source":"postgresql","service":"nexaassist-postgres"}]'
     image: pgvector/pgvector:0.8.2-pg17
     ports: ["127.0.0.1:${POSTGRES_PORT:-5433}:5432"]
     environment:
@@ -15,17 +17,43 @@ services:
       timeout: 3s
       retries: 10
 
-  phoenix:
-    image: arizephoenix/phoenix:20.26.0
-    ports: ["127.0.0.1:6006:6006"]
+  datadog-agent:
+    profiles: ["local-agent"]
+    image: registry.datadoghq.com/agent:7
+    container_name: dd-agent
     environment:
-      PHOENIX_HOST: 0.0.0.0
-      PHOENIX_PORT: "6006"
-      PHOENIX_WORKING_DIR: /data
-      PHOENIX_TELEMETRY_ENABLED: "false"
-    volumes: ["phoenix-data:/data"]
+      DD_API_KEY: ${DD_API_KEY:?Set DD_API_KEY in .env}
+      DD_SITE: ${DD_SITE:-datadoghq.com}
+      DD_ENV: ${DD_ENV:-dev}
+      DD_HOSTNAME: ${COMPOSE_PROJECT_NAME:-nexaassist}
+      DD_APM_ENABLED: "true"
+      DD_APM_NON_LOCAL_TRAFFIC: "true"
+      DD_DOGSTATSD_NON_LOCAL_TRAFFIC: "true"
+      DD_LOGS_ENABLED: "true"
+      DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL: "true"
+      DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION: "true"
+      DD_CONTAINER_EXCLUDE_LOGS: "name:dd-agent"
+      DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE: "false"
+      DD_CONTAINER_EXCLUDE: "name:dd-agent"
+    volumes:
+      - datadog-run:/opt/datadog-agent/run:rw
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc:/host/proc:ro
+      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+    ports:
+      - "127.0.0.1:8126:8126"
+      - "127.0.0.1:8125:8125/udp"
+    healthcheck:
+      test: ["CMD", "agent", "health"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
 
   gateway:
+    labels:
+      com.datadoghq.ad.logs: '[{"source":"python","service":"nexaassist-gateway"}]'
     build:
       context: ..
       dockerfile: app/gateway/Dockerfile
@@ -35,6 +63,14 @@ services:
       - ./gateway/${LITELLM_CONFIG:-litellm.yaml}:/opt/gateway/active.yaml:ro
     extra_hosts: ["host.docker.internal:host-gateway"]
     environment:
+      DD_API_KEY: ${DD_API_KEY:?Set DD_API_KEY in .env}
+      DD_SITE: ${DD_SITE:-datadoghq.com}
+      DD_ENV: ${DD_ENV:-dev}
+      DD_SERVICE: nexaassist-gateway
+      DD_LLMOBS_ENABLED: ${DD_LLMOBS_ENABLED:-true}
+      DD_LLMOBS_ML_APP: ${DD_LLMOBS_ML_APP:-nexaassist}
+      DD_LLMOBS_AGENTLESS_ENABLED: "true"
+      DD_AGENT_HOST: datadog-agent
       LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?Set LITELLM_MASTER_KEY in .env}
       OPENAI_API_KEY: ${OPENAI_API_KEY:?Set OPENAI_API_KEY for cloud fallback and evaluation}
       OPENAI_LITELLM_CHAT_MODEL: ${OPENAI_LITELLM_CHAT_MODEL:-openai/gpt-6-luna}
@@ -43,13 +79,6 @@ services:
       OLLAMA_REPLICA_A_BASE_URL: ${OLLAMA_REPLICA_A_BASE_URL:-http://host.docker.internal:11434}
       OLLAMA_REPLICA_B_BASE_URL: ${OLLAMA_REPLICA_B_BASE_URL:-http://host.docker.internal:11435}
       LITELLM_LOCAL_MODEL_COST_MAP: "True"
-      LITELLM_OTEL_V2: "true"
-      PHOENIX_COLLECTOR_HTTP_ENDPOINT: http://phoenix:6006/v1/traces
-      PHOENIX_PROJECT_NAME: nexaassist-gateway
-      OTEL_SERVICE_NAME: nexaassist-gateway
-      OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT: no_content
-    depends_on:
-      phoenix: {condition: service_started}
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:4000/health/liveliness', timeout=3)"]
       interval: 15s
@@ -58,12 +87,16 @@ services:
       retries: 10
 
   guardrails:
+    labels:
+      com.datadoghq.ad.logs: '[{"source":"python","service":"nexaassist-guardrails"}]'
     build:
       context: ..
       dockerfile: app/security/Dockerfile
     ports: ["127.0.0.1:8101:8101"]
 
   api:
+    labels:
+      com.datadoghq.ad.logs: '[{"source":"python","service":"nexaassist-api"}]'
     build:
       context: ..
       dockerfile: app/Dockerfile
@@ -71,7 +104,17 @@ services:
     ports: ["127.0.0.1:${API_PORT:-8000}:8000"]
     volumes: ["../nexa_synthetic_data:/data:ro"]
     environment:
-      OTEL_SDK_DISABLED: "false"
+      DD_API_KEY: ${DD_API_KEY:?Set DD_API_KEY in .env}
+      DD_SITE: ${DD_SITE:-datadoghq.com}
+      DD_ENV: ${DD_ENV:-dev}
+      DD_SERVICE: nexaassist-api
+      DD_LLMOBS_ENABLED: ${DD_LLMOBS_ENABLED:-true}
+      DD_LLMOBS_ML_APP: ${DD_LLMOBS_ML_APP:-nexaassist}
+      DD_LLMOBS_AGENTLESS_ENABLED: "true"
+      DD_AGENT_HOST: datadog-agent
+      DD_TRACE_ENABLED: "false"
+      DD_METRICS_ENABLED: "true"
+      DD_CAPTURE_CONTENT: ${DD_CAPTURE_CONTENT:-false}
       STORAGE_BACKEND: ${STORAGE_BACKEND:-pgvector}
       POSTGRES_DSN: postgresql://nexaassist:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/nexaassist
       CHAT_MODEL: ${GATEWAY_CHAT_MODEL:-nexa-chat}
@@ -90,14 +133,14 @@ services:
       MONGODB_PARENT_COLLECTION: ${GATEWAY_MONGODB_PARENT_COLLECTION:-policy_sections_qwen3_gateway_v1}
       VECTOR_INDEX_NAME: ${GATEWAY_VECTOR_INDEX_NAME:-policy_qwen3_gateway_v1}
       GUARDRAILS_BASE_URL: http://guardrails:8101
-      PHOENIX_BASE_URL: http://phoenix:6006
     depends_on:
       postgres: {condition: service_healthy}
       gateway: {condition: service_healthy}
       guardrails: {condition: service_healthy}
-      phoenix: {condition: service_started}
 
   ui:
+    labels:
+      com.datadoghq.ad.logs: '[{"source":"python","service":"nexaassist-ui"}]'
     build:
       context: ..
       dockerfile: app/Dockerfile
@@ -115,5 +158,5 @@ services:
       retries: 5
 
 volumes:
-  phoenix-data:
+  datadog-run:
   postgres-data:

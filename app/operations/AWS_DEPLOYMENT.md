@@ -1,5 +1,9 @@
 # NexaAssist on AWS — optional Bedrock deployment design
 
+> Historical deployment proposal: its Phoenix/Arize observability design is superseded.
+> Use the [current Datadog AWS runbook](../observability/README.md) and
+> [implemented disposable AWS lab](../../infra/aws/README.md) for deployment.
+
 The active disposable AWS profile uses **OpenAI** for chat, judging and
 embeddings. It neither provisions nor invokes Bedrock by default. Follow the
 [optional Bedrock setup](../../infra/aws/README.md#optional-bedrock-mode--disabled-by-default)

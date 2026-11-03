@@ -21,14 +21,12 @@ answer schemas, citation checks and one citation-repair attempt are retained.
 `OPENAI_FALLBACK_MODEL` optionally names an approved cloud model in `.env`.
 When enabled, a provider failure or non-answered result with evidence can make
 one bounded OpenAI attempt using the same retrieval. Inspect fallback provenance;
-clear this setting for pure-local benchmarks. See [phoenix.md](../observability/README.md#optional-bounded-application-fallback)
+clear this setting for pure-local benchmarks. See [observability runbook](../observability/README.md)
 for the exact behavior and limits.
 
-For the optional Arize Phoenix local reference profile, use [phoenix.md](../observability/README.md):
-start `app.phoenix_main:app`, exercise the same FastAPI endpoints and attach saved
-Ragas scores automatically for `/answer/evaluated`; use
-`python -m app.evaluation.phoenix_export` for manual recovery. This profile uses
-the same routers and business logic with OpenInference instrumentation.
+Use the [Datadog runbook](../observability/README.md) for tracing, logs, metrics
+and Ragas scores. Start `app.datadog_main:app`; `/answer/evaluated` publishes
+scores automatically. Use `python -m app.evaluation.datadog_export` for recovery.
 
 ## 1. Configure and prepare
 
@@ -76,7 +74,7 @@ Start the API with the same overlay and a running Phoenix collector:
 
 ```bash
 uv run --no-sync --env-file .env --env-file app/gateway/ollama.env.example \
-  python -m uvicorn app.phoenix_main:app --host 127.0.0.1 --port 8000
+  python -m uvicorn app.datadog_main:app --host 127.0.0.1 --port 8000
 ```
 
 `/health` checks the process; `/ready` retains the database ping contract. Neither
@@ -98,7 +96,7 @@ uvx --python 3.13 --from 'litellm[proxy]==1.106.2' litellm \
 CHAT_API_KEY="$LITELLM_MASTER_KEY" uv run --no-sync --env-file .env \
   --env-file app/gateway/ollama.env.example \
   --env-file app/gateway/gateway.env.example \
-  python -m uvicorn app.phoenix_main:app --host 127.0.0.1 --port 8000
+  python -m uvicorn app.datadog_main:app --host 127.0.0.1 --port 8000
 ```
 
 For independent gateway embedding routes, configure `EMBEDDING_BASE_URL`,

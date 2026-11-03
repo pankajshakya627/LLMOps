@@ -98,10 +98,29 @@ class Settings(BaseSettings):
     confidentiality_level: str
 
     log_level: str = "INFO"
-    phoenix_base_url: str = "http://127.0.0.1:6006"
-    phoenix_project_name: str = Field(default="nexaassist-training", min_length=1)
-    phoenix_api_key: SecretStr | None = None
-    phoenix_capture_content: bool = False
+    dd_llmobs_enabled: bool = False
+    dd_llmobs_ml_app: str = Field(default="nexaassist", min_length=1)
+    dd_api_key: SecretStr | None = None
+    dd_site: Literal[
+        "datadoghq.com",
+        "us3.datadoghq.com",
+        "us5.datadoghq.com",
+        "datadoghq.eu",
+        "ap1.datadoghq.com",
+        "ap2.datadoghq.com",
+        "uk1.datadoghq.com",
+        "ddog-gov.com",
+        "us2.ddog-gov.com",
+    ] = "datadoghq.com"
+    dd_service: str = Field(default="nexaassist-api", min_length=1)
+    dd_env: str = Field(default="dev", min_length=1)
+    dd_version: str = "0.1.0"
+    dd_llmobs_agentless_enabled: bool = True
+    dd_trace_enabled: bool = False
+    dd_capture_content: bool = False
+    dd_agent_host: str = "127.0.0.1"
+    dd_dogstatsd_port: int = Field(default=8125, ge=1, le=65535)
+    dd_metrics_enabled: bool = False
 
     @field_validator(
         "chat_base_url",
@@ -109,7 +128,6 @@ class Settings(BaseSettings):
         "eval_judge_base_url",
         "eval_embedding_base_url",
         "guardrails_base_url",
-        "phoenix_base_url",
     )
     @classmethod
     def valid_endpoint(cls, value: str | None) -> str | None:
@@ -139,6 +157,12 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def valid_overlap(self) -> Settings:
+        if (
+            (self.dd_llmobs_enabled or self.dd_metrics_enabled)
+            and self.dd_llmobs_agentless_enabled
+            and (not self.dd_api_key or not self.dd_api_key.get_secret_value().strip())
+        ):
+            raise ValueError("DD_API_KEY is required for agentless Datadog observability")
         if self.bedrock_guardrail_id and not (
             self.bedrock_guardrail_version and self.bedrock_region
         ):

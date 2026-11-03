@@ -174,12 +174,12 @@ def test_stored_feedback_survives_retired_response_fields_without_relaxing_http_
     )
     record = asyncio.run(service.submit_feedback(request, settings))
     storage.policy_feedback.update_one(
-        {"_id": str(record.feedback_id)}, {"$set": {"response.datadog_span_id": "123"}}
+        {"_id": str(record.feedback_id)}, {"$set": {"response.retired_span_id": "123"}}
     )
     assert database.list_feedback(settings, 10)[0].feedback_id == record.feedback_id
     assert database.get_feedback(record.feedback_id, settings).feedback_id == record.feedback_id
     assert asyncio.run(service.submit_feedback(request, settings)).feedback_id == record.feedback_id
-    assert storage.policy_feedback.find_one()["response"]["datadog_span_id"] == "123"
+    assert storage.policy_feedback.find_one()["response"]["retired_span_id"] == "123"
     app = create_app()
     app.dependency_overrides[get_settings] = lambda: settings
     payload = request.model_dump(mode="json")

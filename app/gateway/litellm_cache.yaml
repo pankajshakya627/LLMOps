@@ -29,7 +29,8 @@ router_settings:
   - nexa-chat:
     - nexa-chat-openai
 litellm_settings:
-  callbacks: ["arize_phoenix"]
+  callbacks: ["datadog_callback.datadog_callback"]
+  turn_off_message_logging: true
   cache: true
   cache_params:
     type: local

@@ -21,7 +21,7 @@ uv run --no-sync --env-file .env \
 
 uv run --no-sync --env-file .env \
   --env-file app/gateway/ollama.env.example \
-  python -m uvicorn app.phoenix_main:app --host 127.0.0.1 --port 8000
+  python -m uvicorn app.datadog_main:app --host 127.0.0.1 --port 8000
 ```
 
 Open `http://127.0.0.1:8000/docs` and use **Try it out**. Equivalent curl
@@ -156,7 +156,7 @@ Stop the original API process and start it with the gateway chat overlay:
 CHAT_API_KEY="$LITELLM_MASTER_KEY" uv run --no-sync --env-file .env \
   --env-file app/gateway/ollama.env.example \
   --env-file app/gateway/gateway.env.example \
-  python -m uvicorn app.phoenix_main:app --host 127.0.0.1 --port 8000
+  python -m uvicorn app.datadog_main:app --host 127.0.0.1 --port 8000
 ```
 
 Reuse `/answer` and inspect `provenance.chat_model`, `observed_chat_model` and

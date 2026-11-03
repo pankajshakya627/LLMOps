@@ -1,5 +1,10 @@
 # Disposable AWS LLMOps lab
 
+> Monitoring now uses the [Datadog AWS runbook](../../app/observability/README.md).
+> The API sends traces, custom metrics and evaluations directly; CloudWatch logs use the Forwarder.
+> The old Phoenix viewing instructions below are historical and no longer apply.
+> Configure `DATADOG_API_KEY_SECRET_ARN`, `DD_SITE`, and `DD_LLMOBS_ML_APP` for GitHub AWS sessions.
+
 For a step-by-step session, use the [start, browser and delete guide](START_USE_DELETE_GUIDE.md).
 
 This deployment is designed for **one or two hours**, followed by deletion, with a

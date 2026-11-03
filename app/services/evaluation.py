@@ -12,9 +12,11 @@ from app.chains.answer import build_answer_chain
 from app.chains.context import assemble_context
 from app.chains.llm import get_chat_model
 from app.chains.redaction import redact
+from app.core import telemetry
 from app.core.config import Settings
 from app.core.observability import sampled_hallucination
-from app.core.phoenix import correlate_answer
+from app.core.telemetry import correlate_answer
+from app.evaluation.datadog_export import publish_annotations_safely
 from app.evaluation.live import score_answer
 from app.evaluation.run import load_cases
 from app.models.answer import AnswerResponse
@@ -105,11 +107,26 @@ async def score_sampled_answer(
         }
         if "faithfulness" in scored:
             sampled_hallucination.append(1 - scored["faithfulness"])
+            if telemetry.statsd is not None:
+                telemetry.statsd.gauge(
+                    "sampled_hallucination_rate",
+                    sum(sampled_hallucination) / len(sampled_hallucination),
+                )
+                telemetry.statsd.gauge("sampled_count", len(sampled_hallucination))
+        publish_annotations_safely(
+            EvaluatedAnswerResponse(
+                answer=answer,
+                quality=AnswerQuality(
+                    metrics=metrics, reference_source="none", evaluated_at=datetime.now(UTC)
+                ),
+            ),
+            settings,
+        )
         logger.info(
             "sampled_answer_scored",
             scores=scored,
             prompt_version=answer.provenance.prompt_version if answer.provenance else None,
-            answer_span_id=answer.phoenix_span_id,
+            answer_span_id=answer.datadog_span_id,
         )
     except Exception as exc:  # noqa: BLE001 - background scoring must never affect the answer
         logger.warning("sampled_scoring_failed", error_type=type(exc).__name__)

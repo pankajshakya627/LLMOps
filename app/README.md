@@ -35,12 +35,12 @@ app/
 
 | Service | Entry point | Runtime |
 |---|---|---|
-| Instrumented API | `app.phoenix_main:app` | Python 3.14; FastAPI/OpenInference |
+| Instrumented API | `app.datadog_main:app` | Python 3.14; FastAPI/ddtrace |
 | Offline API factory | `app.main.create_app()` | Shared routers without an exporter |
 | User interface | `app/streamlit_app.py` | Python 3.14; Streamlit |
 | Gateway | LiteLLM with `app/gateway/litellm.yaml` | Separate Python 3.13 service |
 | Output validator | `app.security.guardrails_service:app` | Separate Python 3.13 service |
-| Trace collector | `phoenix serve` | Separate Python 3.13 service |
+| Telemetry collector | `datadog-agent` in Compose | Datadog Agent |
 
 Start the Docker stack from the repository root after configuring `.env`, native
 Ollama and local PostgreSQL credentials:
@@ -57,16 +57,8 @@ The private `.env` can override host ports. Keep service-to-service addresses as
 configured in Compose. Do not run overlapping Compose operations or remove older
 services/volumes merely to clear an orphan warning.
 
-For a standalone Phoenix collector:
-
-```bash
-PHOENIX_HOST=127.0.0.1 PHOENIX_PORT=6006 PHOENIX_GRPC_PORT=4317 \
-PHOENIX_WORKING_DIR=/tmp/nexaassist-phoenix PHOENIX_TELEMETRY_ENABLED=false \
-uv run --no-project --python 3.13 \
-  --with-requirements app/observability/requirements-server.txt phoenix serve
-```
-
-Reuse an existing collector when port 6006 is already occupied.
+For native agentless tracing and complete Docker collection, follow the
+[Datadog guide](observability/README.md). No Phoenix collector is required.
 
 ## Operational runbooks
 

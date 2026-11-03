@@ -55,6 +55,10 @@ jobs:
       CF_ROLE: ${{ vars.AWS_CLOUDFORMATION_ROLE_ARN }}
       BOUNDARY: ${{ vars.AWS_SESSION_BOUNDARY_ARN }}
       MODELS: ${{ vars.BEDROCK_MODEL_ARNS }}
+      DATADOG_SECRET: ${{ vars.DATADOG_API_KEY_SECRET_ARN }}
+      DD_SITE: ${{ vars.DD_SITE || 'datadoghq.com' }}
+      DD_LLMOBS_ML_APP: ${{ vars.DD_LLMOBS_ML_APP || 'nexaassist' }}
+      APP_LOG_GROUP: ${{ vars.APP_LOG_GROUP || '/nexaassist/' }}
       OPENAI_SECRET: ${{ vars.OPENAI_API_KEY_SECRET_ARN }}
       UI_ALLOWED_CIDR: ${{ secrets.AWS_UI_ALLOWED_CIDR }}
       OPENAI_CHAT_ROUTE: ${{ vars.OPENAI_LITELLM_CHAT_MODEL || 'openai/gpt-6-luna' }}
@@ -72,6 +76,7 @@ jobs:
           if [ "$LAB_OPERATION" = start ]; then
             test -n "$CF_ROLE"
             test -n "$BOUNDARY"
+            test -n "$DATADOG_SECRET"
             if [ -z "$UI_ALLOWED_CIDR" ]; then
               echo '::error::Set the aws-lab environment secret AWS_UI_ALLOWED_CIDR to your public IPv4 /32.'
               exit 1
@@ -106,6 +111,8 @@ jobs:
           uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" create \
             --minutes "$LAB_MINUTES" --budget "$LAB_BUDGET" \
             --cloudformation-role-arn "$CF_ROLE" --boundary-arn "$BOUNDARY" \
+            --datadog-secret-arn "$DATADOG_SECRET" --datadog-site "$DD_SITE" --datadog-ml-app "$DD_LLMOBS_ML_APP" \
+            --log-group-name "$APP_LOG_GROUP" \
             --ui-allowed-cidr "$UI_ALLOWED_CIDR" \
             --provider "$LAB_PROVIDER" --openai-secret-arn "$OPENAI_SECRET" --model-resources "$MODELS"
       - name: Read session outputs

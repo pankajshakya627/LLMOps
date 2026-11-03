@@ -57,7 +57,7 @@ Resources:
             - !Ref AWS::NoValue
           - Effect: Allow
             Action: [logs:CreateLogStream, logs:PutLogEvents]
-            Resource: [!Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/nexaassist/nexa-lab-*:*', !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/nexa-lab-*:*']
+            Resource: [!Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/nexaassist/nexa-lab-*:*', !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/nexaassist/:*', !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/nexa-lab-*:*']
           - Effect: Allow
             Action: cloudformation:DeleteStack
             Resource: !Sub 'arn:${AWS::Partition}:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/nexa-lab-*/*'

@@ -114,7 +114,7 @@ def test_shipped_profiles_keep_qwen_retrieval_and_an_independent_cloud_judge(
         ("eval_judge_base_url", "https://user:private@provider.invalid/v1"),
         ("eval_embedding_base_url", "file:///tmp/private"),
         ("guardrails_base_url", "http://127.0.0.1:99999"),
-        ("phoenix_base_url", "https://user:private@collector.invalid"),
+        ("dd_site", "https://user:private@collector.invalid"),
     ],
 )
 def test_provider_and_collector_endpoints_reject_unsafe_url_configuration(

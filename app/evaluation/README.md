@@ -49,7 +49,7 @@ not inferred from one candidate's static rate.
 ## Live scores in Phoenix
 
 Use `POST /answer/evaluated`, then publish the saved response and matching headers
-with `python -m app.evaluation.phoenix_export`. The
+with `python -m app.evaluation.datadog_export`. The
 [observability runbook](../observability/README.md) covers exact trace/span identity,
 publication retries and metric annotations. Tracing does not compute scores,
 create native online evaluators or approve a release.

@@ -1,5 +1,10 @@
 # Start the AWS app, open it in a browser, and delete it
 
+> Monitoring now uses the [Datadog AWS runbook](../../app/observability/README.md).
+> The API sends traces, custom metrics and evaluations directly; CloudWatch logs use the Forwarder.
+> The old Phoenix viewing instructions below are historical and no longer apply.
+> Configure `DATADOG_API_KEY_SECRET_ARN`, `DD_SITE`, and `DD_LLMOBS_ML_APP` for GitHub AWS sessions.
+
 Use this guide for each disposable NexaAssist training session. Commands marked
 **Mac terminal** can run from any directory, including `~`; the GitHub commands
 include the repository explicitly. Your local Python virtual environment and

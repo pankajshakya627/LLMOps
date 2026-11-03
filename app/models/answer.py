@@ -70,6 +70,9 @@ class AnswerResponse(BaseModel):
     citations: list[AnswerCitation]
     retrieval_timings: RetrieveTimings
     generation_ms: float
-    phoenix_trace_id: str | None = Field(default=None, pattern=r"^[0-9a-f]{32}$")
-    phoenix_span_id: str | None = Field(default=None, pattern=r"^[0-9a-f]{16}$")
+    datadog_trace_id: str | None = Field(default=None, pattern=r"^[0-9a-f]{32}$")
+    datadog_span_id: str | None = Field(default=None, pattern=r"^[1-9][0-9]{0,19}$")
+    # Retain historical feedback payloads; new requests populate Datadog IDs only.
+    phoenix_trace_id: str | None = Field(default=None, pattern=r"^[0-9a-f]{32}$", deprecated=True)
+    phoenix_span_id: str | None = Field(default=None, pattern=r"^[0-9a-f]{16}$", deprecated=True)
     provenance: Provenance | None = None

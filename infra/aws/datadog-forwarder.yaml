@@ -1,0 +1,63 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Datadog Forwarder using the official ZIP installation to avoid shared-layer access failures.
+Parameters:
+  DdApiKey:
+    Type: String
+    NoEcho: true
+    Default: ''
+    Description: Datadog API key; use an existing secret ARN instead when available.
+  DdApiKeySecretArn:
+    Type: String
+    Default: ''
+    AllowedPattern: '(^$|arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:.+)'
+  DdSite:
+    Type: String
+    Default: datadoghq.com
+    AllowedValues: [datadoghq.com, us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, uk1.datadoghq.com]
+  ApplicationLogGroupName:
+    Type: String
+    Default: ''
+    Description: Existing application CloudWatch log group; leave blank until the application is deployed.
+Rules:
+  RequireApiKey:
+    Assertions:
+      - Assert: !Or
+          - !Not [!Equals [!Ref DdApiKey, '']]
+          - !Not [!Equals [!Ref DdApiKeySecretArn, '']]
+        AssertDescription: Supply a Datadog API key or its existing Secrets Manager ARN.
+Conditions:
+  HasSecretArn: !Not [!Equals [!Ref DdApiKeySecretArn, '']]
+  HasApplicationLogs: !Not [!Equals [!Ref ApplicationLogGroupName, '']]
+Resources:
+  ForwarderStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://datadog-cloudformation-template.s3.amazonaws.com/aws/forwarder/latest.yaml
+      Parameters:
+        DdApiKey: !Ref DdApiKey
+        DdApiKeySecretArn: !If [HasSecretArn, !Ref DdApiKeySecretArn, 'arn:aws:secretsmanager:DEFAULT']
+        DdSite: !Ref DdSite
+        FunctionName: nexaassist-datadog-forwarder
+        InstallAsLayer: 'false'
+        LogRetentionInDays: '7'
+        DdTags: env:dev
+  ForwarderLogPermission:
+    Type: AWS::Lambda::Permission
+    Condition: HasApplicationLogs
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !GetAtt ForwarderStack.Outputs.DatadogForwarderArn
+      Principal: !Sub 'logs.${AWS::Region}.amazonaws.com'
+      SourceAccount: !Ref AWS::AccountId
+      SourceArn: !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${ApplicationLogGroupName}:*'
+  ApplicationLogSubscription:
+    Type: AWS::Logs::SubscriptionFilter
+    Condition: HasApplicationLogs
+    DependsOn: ForwarderLogPermission
+    Properties:
+      LogGroupName: !Ref ApplicationLogGroupName
+      FilterPattern: ''
+      DestinationArn: !GetAtt ForwarderStack.Outputs.DatadogForwarderArn
+Outputs:
+  ForwarderArn:
+    Value: !GetAtt ForwarderStack.Outputs.DatadogForwarderArn

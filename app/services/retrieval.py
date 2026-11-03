@@ -9,6 +9,7 @@ from app.chains.embeddings import get_embeddings
 from app.chains.redaction import redact
 from app.chains.rerank import build_rerank_chain
 from app.chains.retrieval import build_retrieval_chain
+from app.core import telemetry
 from app.core.config import Settings
 from app.core.observability import retrieval_latencies
 from app.database.mongo import get_parent_store, get_vector_store, ping_database
@@ -37,6 +38,8 @@ async def retrieve_policy(request: RetrieveRequest, settings: Settings) -> Retri
     request = scrub_request(request, settings)
     await asyncio.to_thread(check_content, request.query, "INPUT", settings)
     retrieval_metrics["requests"] += 1
+    if telemetry.statsd is not None:
+        telemetry.statsd.increment("retrieval.requests")
     try:
         vector_store = await asyncio.to_thread(get_vector_store, settings, get_embeddings(settings))
         chain = build_retrieval_chain(
@@ -52,12 +55,18 @@ async def retrieve_policy(request: RetrieveRequest, settings: Settings) -> Retri
         response = await chain.ainvoke(request)
     except Exception:
         retrieval_metrics["errors"] += 1
+        if telemetry.statsd is not None:
+            telemetry.statsd.increment("retrieval.errors")
         raise
     if not response.results:
         retrieval_metrics["empty"] += 1
+        if telemetry.statsd is not None:
+            telemetry.statsd.increment("retrieval.empty")
         logger.warning("retrieval_empty", as_of=request.as_of.isoformat())
     retrieval_metrics["latency_us_total"] += round(response.timings.total_ms * 1000)
     retrieval_latencies.append(response.timings.total_ms)
+    if telemetry.statsd is not None:
+        telemetry.statsd.distribution("retrieval.duration_ms", response.timings.total_ms)
     logger.info(
         "retrieval_completed",
         result_count=len(response.results),

@@ -1,5 +1,3 @@
-# Mirrors the pinned application instrumentation/client versions for standalone tooling.
-arize-phoenix-otel==0.17.2
-arize-phoenix-client==3.5.0
-openinference-instrumentation-langchain==0.1.80
-opentelemetry-instrumentation-fastapi==0.66b1
+# Matches the application tracing and metrics SDKs.
+ddtrace==4.16.1
+datadog==0.55.0

@@ -284,15 +284,15 @@ def test_ui_explains_input_security_rejection(
     assert "blocked by the input security policy" in app.error[0].value
 
 
-def test_live_quality_keeps_phoenix_correlation_and_evaluation(
+def test_live_quality_keeps_datadog_correlation_and_evaluation(
     monkeypatch: pytest.MonkeyPatch,
     client: httpx.Client,
 ) -> None:
     answer = AnswerResponse.model_validate(
         client.post("/answer", json={"query": "Question", "as_of": "2026-10-19"}).json()
     )
-    answer.phoenix_trace_id = "1" * 32
-    answer.phoenix_span_id = "2" * 16
+    answer.datadog_trace_id = "1" * 32
+    answer.datadog_span_id = "2" * 16
     metrics = {name: QualityScore(status="scored", value=0.0) for name in METRIC_NAMES}
     for name in ("context_precision", "context_recall"):
         metrics[name] = QualityScore(status="unavailable", reason="Provide a reference answer.")
@@ -315,7 +315,7 @@ def test_live_quality_keeps_phoenix_correlation_and_evaluation(
     assert not app.metric
     assert not any("RAGAS answer quality" in item.value for item in app.markdown)
     assert not any("Provide a reference" in item.value for item in app.caption)
-    assert any("Phoenix trace: " + "1" * 32 == item.value for item in app.caption)
+    assert any("Datadog trace: " + "1" * 32 == item.value for item in app.caption)
     assert app.text_area(key="quality_reference").value == ""
     assert evaluate.await_args is not None
     assert evaluate.await_args.args[0].reference_answer == "Reference for this question"

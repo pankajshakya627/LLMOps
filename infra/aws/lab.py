@@ -67,6 +67,14 @@ def create(args: argparse.Namespace) -> None:
             raise ValueError("Store the OpenAI secret in the same AWS Region as the session")
     elif not args.model_resources:
         raise ValueError("Bedrock requires explicit approved model/profile ARNs")
+    datadog_secret = getattr(args, "datadog_secret_arn", "")
+    if not re.fullmatch(
+        r"arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:nexa-lab-datadog-[A-Za-z0-9]{6}",
+        datadog_secret,
+    ):
+        raise ValueError("Datadog requires a plaintext API key secret named nexa-lab-datadog")
+    if datadog_secret.split(":")[3] != boto3.session.Session().region_name:
+        raise ValueError("Store the Datadog secret in the same AWS Region as the session")
     expires = datetime.now(UTC) + timedelta(minutes=args.minutes)
     parameters = {
         "SessionMinutes": str(args.minutes),
@@ -75,6 +83,10 @@ def create(args: argparse.Namespace) -> None:
         "ModelProvider": args.provider,
         "UiAllowedCidr": args.ui_allowed_cidr,
         "OpenAIKeySecretArn": args.openai_secret_arn if args.provider == "openai" else "",
+        "DatadogKeySecretArn": datadog_secret,
+        "DatadogSite": getattr(args, "datadog_site", "datadoghq.com"),
+        "DatadogMlApp": getattr(args, "datadog_ml_app", "nexaassist"),
+        "ApplicationLogGroupName": getattr(args, "log_group_name", ""),
         "ModelResources": args.model_resources if args.provider == "bedrock" else "",
     }
     cf = client("cloudformation")
@@ -149,6 +161,9 @@ def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Pat
         "COMPOSE_FILE": "compose.yaml",
         "AWS_REGION": boto3.session.Session().region_name,
         "SECRET_ARN": data["SecretArn"],
+        "DATADOG_API_KEY_SECRET_ARN": data["DatadogKeySecretArn"],
+        "DD_SITE": data["DatadogSite"],
+        "DD_LLMOBS_ML_APP": data["DatadogMlApp"],
         "BUCKET": data["Bucket"],
         "RELEASE_ID": args.release_id,
     }
@@ -315,6 +330,10 @@ def main() -> None:
     start.add_argument("--budget", type=int, choices=range(3, 9), default=5)
     start.add_argument("--provider", choices=["openai", "bedrock"], default="openai")
     start.add_argument("--openai-secret-arn", default="")
+    start.add_argument("--datadog-secret-arn", required=True)
+    start.add_argument("--datadog-site", default="datadoghq.com")
+    start.add_argument("--datadog-ml-app", default="nexaassist")
+    start.add_argument("--log-group-name", default="/nexaassist/")
     start.add_argument("--model-resources", default="")
     start.add_argument("--ui-allowed-cidr", required=True)
     start.add_argument("--boundary-arn", required=True)

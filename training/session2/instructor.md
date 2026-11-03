@@ -88,7 +88,7 @@ use its actual FastAPI entry point:
 ```bash
 uv run --no-sync --env-file .env \
   --env-file app/gateway/ollama.env.example \
-  python -m uvicorn app.phoenix_main:app --host 127.0.0.1 --port 8000
+  python -m uvicorn app.datadog_main:app --host 127.0.0.1 --port 8000
 ```
 
 Open `http://127.0.0.1:8000/docs`. Learners can use Swagger's **Try it out**
@@ -133,7 +133,7 @@ Token counts help explain model usage. Latency alone does not identify a cause.â
 
 - [phoenix_main.py](../../app/phoenix_main.py): FastAPI/LangChain instrumentation,
   privacy masking, collector registration and shutdown flushing.
-- [phoenix.py](../../app/core/phoenix.py): request headers, response IDs and log correlation.
+- [phoenix.py](../../app/core/telemetry.py): request headers, response IDs and log correlation.
 - [services/answer.py](../../app/services/answer.py): `policy_answer` workflow,
   error counters and end-to-end answer latency.
 - [observability.py](../../app/core/observability.py): `TokenUsageLogger`,

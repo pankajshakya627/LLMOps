@@ -1,0 +1,706 @@
+{
+  "started_at": "2026-11-03T16:48:28.055842+00:00",
+  "requests": [
+    {
+      "name": "health",
+      "attempt": 1,
+      "path": "/health",
+      "status": 200,
+      "duration_ms": 17.41,
+      "body": {
+        "status": "ok"
+      },
+      "trace_id": "6aea105c00000000bbe487fa37310d36",
+      "span_id": "9627135547619786985"
+    },
+    {
+      "name": "ready",
+      "attempt": 1,
+      "path": "/ready",
+      "status": 200,
+      "duration_ms": 9.17,
+      "body": {
+        "status": "ready"
+      },
+      "trace_id": "6aea105c00000000646313d95b44212d",
+      "span_id": "15194079260488650468"
+    },
+    {
+      "name": "maximum_loan",
+      "attempt": 1,
+      "path": "/answer",
+      "status": 200,
+      "duration_ms": 2844.27,
+      "body": {
+        "as_of": "2026-10-01",
+        "status": "answered",
+        "answer": "The maximum NexaHome Loan amount is ₹7,50,00,000 [2].",
+        "citations": [
+          {
+            "evidence_id": 2,
+            "quote": "Maximum loan amount is ₹7,50,00,000.",
+            "matched_child": {
+              "doc_id": "POL-HL-V3",
+              "title": "NexaHome Loan Policy",
+              "policy_version": "3.0",
+              "clause": "4.1",
+              "effective_date": "2025-10-01"
+            }
+          }
+        ],
+        "retrieval_timings": {
+          "search_ms": 309.27,
+          "parent_ms": 40.89,
+          "total_ms": 350.39
+        },
+        "generation_ms": 2441.19,
+        "datadog_trace_id": "6aea105c00000000d8b39744036e5b59",
+        "datadog_span_id": "11628606816872099890",
+        "phoenix_trace_id": null,
+        "phoenix_span_id": null,
+        "provenance": {
+          "prompt_id": "nexaassist-policy-answer",
+          "prompt_version": "1.2.0",
+          "prompt_sha": "f29e38485765",
+          "chat_model": "nexa-chat-openai",
+          "observed_chat_model": "nexa-chat-openai",
+          "gateway_cache_hit": null,
+          "fallback_from_model": null,
+          "fallback_reason": null,
+          "embedding_model": "nexa-embed-openai",
+          "retrieval_mode": "dense",
+          "rerank_enabled": false,
+          "evidence_refs": [
+            "CIR-2026-07:1.0:full",
+            "POL-HL-V3:3.0:7.2",
+            "POL-HL-V3:3.0:3.2",
+            "POL-HL-V3:3.0:8.3",
+            "POL-HL-V3:3.0:2.1",
+            "POL-HL-V3:3.0:full",
+            "POL-HL-V3:3.0:6.2",
+            "POL-HL-V3:3.0:1.1",
+            "POL-HL-V3:3.0:4.1"
+          ]
+        }
+      },
+      "trace_id": "6aea105c00000000d8b39744036e5b59",
+      "span_id": "11628606816872099890"
+    },
+    {
+      "name": "current_processing_fee",
+      "attempt": 1,
+      "path": "/answer",
+      "status": 200,
+      "duration_ms": 6214.38,
+      "body": {
+        "as_of": "2026-10-01",
+        "status": "answered",
+        "answer": "For loans sanctioned on or after 2026-07-01, the processing fee is 0.30% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹10,000, plus GST at 18% [1][2]. Loans sanctioned before 2026-07-01 keep the processing fee that applied at sanction [1].",
+        "citations": [
+          {
+            "evidence_id": 1,
+            "quote": "Processing fee is 0.30% of the sanctioned loan amount, subject to a minimum of ₹5,000 and a maximum of ₹10,000, plus GST.",
+            "matched_child": {
+              "doc_id": "CIR-2026-07",
+              "title": "Circular CIR-2026-07",
+              "policy_version": "1.0",
+              "clause": null,
+              "effective_date": "2026-07-01"
+            }
+          },
+          {
+            "evidence_id": 2,
+            "quote": "All fees are exclusive of GST at 18%, which is charged additionally.",
+            "matched_child": {
+              "doc_id": "POL-HL-V3",
+              "title": "NexaHome Loan Policy",
+              "policy_version": "3.0",
+              "clause": "6.2",
+              "effective_date": "2025-10-01"
+            }
+          },
+          {
+            "evidence_id": 1,
+            "quote": "Loans sanctioned before that date keep the processing fee that applied at sanction, and no refund or adjustment is made.",
+            "matched_child": {
+              "doc_id": "CIR-2026-07",
+              "title": "Circular CIR-2026-07",
+              "policy_version": "1.0",
+              "clause": null,
+              "effective_date": "2026-07-01"
+            }
+          }
+        ],
+        "retrieval_timings": {
+          "search_ms": 429.53,
+          "parent_ms": 23.89,
+          "total_ms": 453.66
+        },
+        "generation_ms": 5714.03,
+        "datadog_trace_id": "6aea105e00000000fe7a7282fdc3a07b",
+        "datadog_span_id": "6062652585570298378",
+        "phoenix_trace_id": null,
+        "phoenix_span_id": null,
+        "provenance": {
+          "prompt_id": "nexaassist-policy-answer",
+          "prompt_version": "1.2.0",
+          "prompt_sha": "f29e38485765",
+          "chat_model": "nexa-chat-openai",
+          "observed_chat_model": "nexa-chat-openai",
+          "gateway_cache_hit": null,
+          "fallback_from_model": null,
+          "fallback_reason": null,
+          "embedding_model": "nexa-embed-openai",
+          "retrieval_mode": "dense",
+          "rerank_enabled": false,
+          "evidence_refs": [
+            "CIR-2026-07:1.0:full",
+            "POL-HL-V3:3.0:1.1",
+            "POL-HL-V3:3.0:7.2",
+            "POL-HL-V3:3.0:5.1",
+            "POL-HL-V3:3.0:2.1",
+            "POL-HL-V3:3.0:3.3",
+            "POL-HL-V3:3.0:8.3",
+            "POL-HL-V3:3.0:4.1",
+            "POL-HL-V3:3.0:6.2"
+          ]
+        }
+      },
+      "trace_id": "6aea105e00000000fe7a7282fdc3a07b",
+      "span_id": "6062652585570298378"
+    },
+    {
+      "name": "unsupported_policy",
+      "attempt": 1,
+      "path": "/answer",
+      "status": 200,
+      "duration_ms": 2372.23,
+      "body": {
+        "as_of": "2026-10-01",
+        "status": "insufficient_evidence",
+        "answer": "I cannot answer this question reliably from the retrieved policy evidence. Check the selected product and policy date, and specify the policy term you want to check.",
+        "citations": [],
+        "retrieval_timings": {
+          "search_ms": 443.63,
+          "parent_ms": 15.86,
+          "total_ms": 459.79
+        },
+        "generation_ms": 1869.76,
+        "datadog_trace_id": "6aea106500000000ce7aa74d1450a3ce",
+        "datadog_span_id": "8008046863174381313",
+        "phoenix_trace_id": null,
+        "phoenix_span_id": null,
+        "provenance": {
+          "prompt_id": "nexaassist-policy-answer",
+          "prompt_version": "1.2.0",
+          "prompt_sha": "f29e38485765",
+          "chat_model": "nexa-chat-openai",
+          "observed_chat_model": "nexa-chat-openai",
+          "gateway_cache_hit": null,
+          "fallback_from_model": null,
+          "fallback_reason": null,
+          "embedding_model": "nexa-embed-openai",
+          "retrieval_mode": "dense",
+          "rerank_enabled": false,
+          "evidence_refs": [
+            "POL-AL-V1:1.0:6.1",
+            "POL-OPS-001:1.0:2.1",
+            "POL-OPS-001:1.0:3.3",
+            "POL-OPS-001:1.0:1.1",
+            "POL-LAP-V1:1.0:6.1"
+          ]
+        }
+      },
+      "trace_id": "6aea106500000000ce7aa74d1450a3ce",
+      "span_id": "8008046863174381313"
+    },
+    {
+      "name": "evaluated_maximum_loan",
+      "attempt": 1,
+      "path": "/answer/evaluated",
+      "status": 429,
+      "duration_ms": 3.36,
+      "body": {
+        "detail": "Rate limit exceeded"
+      },
+      "trace_id": "6aea1067000000009a696ac8b5e924b4",
+      "span_id": "7656362512355220031"
+    },
+    {
+      "name": "evaluated_maximum_loan",
+      "attempt": 2,
+      "path": "/answer/evaluated",
+      "status": 200,
+      "duration_ms": 33245.66,
+      "body": {
+        "answer": {
+          "as_of": "2026-10-01",
+          "status": "answered",
+          "answer": "The maximum NexaHome Loan amount is ₹7,50,00,000 [2].",
+          "citations": [
+            {
+              "evidence_id": 2,
+              "quote": "Maximum loan amount is ₹7,50,00,000.",
+              "matched_child": {
+                "doc_id": "POL-HL-V3",
+                "title": "NexaHome Loan Policy",
+                "policy_version": "3.0",
+                "clause": "4.1",
+                "effective_date": "2025-10-01"
+              }
+            }
+          ],
+          "retrieval_timings": {
+            "search_ms": 304.99,
+            "parent_ms": 27.32,
+            "total_ms": 332.56
+          },
+          "generation_ms": 2813.31,
+          "datadog_trace_id": "6aea109900000000baf04541cdd1710b",
+          "datadog_span_id": "340727592469766836",
+          "phoenix_trace_id": null,
+          "phoenix_span_id": null,
+          "provenance": {
+            "prompt_id": "nexaassist-policy-answer",
+            "prompt_version": "1.2.0",
+            "prompt_sha": "f29e38485765",
+            "chat_model": "nexa-chat-openai",
+            "observed_chat_model": "nexa-chat-openai",
+            "gateway_cache_hit": null,
+            "fallback_from_model": null,
+            "fallback_reason": null,
+            "embedding_model": "nexa-embed-openai",
+            "retrieval_mode": "dense",
+            "rerank_enabled": false,
+            "evidence_refs": [
+              "CIR-2026-07:1.0:full",
+              "POL-HL-V3:3.0:7.2",
+              "POL-HL-V3:3.0:3.2",
+              "POL-HL-V3:3.0:8.3",
+              "POL-HL-V3:3.0:2.1",
+              "POL-HL-V3:3.0:full",
+              "POL-HL-V3:3.0:6.2",
+              "POL-HL-V3:3.0:1.1",
+              "POL-HL-V3:3.0:4.1"
+            ]
+          }
+        },
+        "quality": {
+          "metrics": {
+            "faithfulness": {
+              "status": "scored",
+              "value": 1.0,
+              "reason": null
+            },
+            "answer_relevancy": {
+              "status": "scored",
+              "value": 0.9583824114285449,
+              "reason": null
+            },
+            "context_precision": {
+              "status": "scored",
+              "value": 0.11111111109999999,
+              "reason": null
+            },
+            "context_recall": {
+              "status": "scored",
+              "value": 1.0,
+              "reason": null
+            }
+          },
+          "reference_source": "provided",
+          "reference_answer": "The maximum NexaHome Loan amount is ₹7,50,00,000 (₹7.5 crore). The minimum is ₹5,00,000. This is the limit under POL-HL-V3, clause 4.1.",
+          "evaluated_at": "2026-11-03T16:50:02.760763Z"
+        }
+      },
+      "trace_id": "6aea109900000000baf04541cdd1710b",
+      "span_id": "340727592469766836"
+    },
+    {
+      "name": "invalid_top_k",
+      "attempt": 1,
+      "path": "/retrieve",
+      "status": 422,
+      "duration_ms": 13.93,
+      "body": {
+        "detail": [
+          {
+            "type": "greater_than_equal",
+            "loc": [
+              "body",
+              "top_k"
+            ],
+            "msg": "Input should be greater than or equal to 1",
+            "input": 0,
+            "ctx": {
+              "ge": 1
+            }
+          }
+        ]
+      },
+      "trace_id": "6aea10ba000000000dca154b6ec9ce95",
+      "span_id": "5184478422234551572"
+    },
+    {
+      "name": "unsafe_prompt",
+      "attempt": 1,
+      "path": "/retrieve",
+      "status": 400,
+      "duration_ms": 3.92,
+      "body": {
+        "detail": "Query blocked by security policy."
+      },
+      "trace_id": "6aea10ba000000004f3ebeb7dd413ecc",
+      "span_id": "9484968251867194891"
+    },
+    {
+      "name": "http_metrics",
+      "attempt": 1,
+      "path": "/metrics/http",
+      "status": 200,
+      "duration_ms": 6.68,
+      "body": {
+        "scope": "current API process; resets on restart; last 1000 latencies per route",
+        "routes": [
+          {
+            "method": "GET",
+            "route": "/docs",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "GET",
+            "route": "/docs/oauth2-redirect",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "GET",
+            "route": "/feedback",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "GET",
+            "route": "/health",
+            "requests": 7,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {
+              "200": 7
+            },
+            "latency_ms_total": 9.454983000011907,
+            "sample_count": 7,
+            "p50_ms": 0.8905400000003283,
+            "p95_ms": 4.005120999977407,
+            "p99_ms": 4.005120999977407
+          },
+          {
+            "method": "GET",
+            "route": "/metrics",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "GET",
+            "route": "/metrics/answers",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "GET",
+            "route": "/metrics/http",
+            "requests": 1,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {
+              "200": 1
+            },
+            "latency_ms_total": 64.13628700005347,
+            "sample_count": 1,
+            "p50_ms": 64.13628700005347,
+            "p95_ms": 64.13628700005347,
+            "p99_ms": 64.13628700005347
+          },
+          {
+            "method": "GET",
+            "route": "/metrics/latency",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "GET",
+            "route": "/openapi.json",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "GET",
+            "route": "/ready",
+            "requests": 2,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {
+              "200": 2
+            },
+            "latency_ms_total": 406.66380600004004,
+            "sample_count": 2,
+            "p50_ms": 8.439031000023078,
+            "p95_ms": 398.22477500001696,
+            "p99_ms": 398.22477500001696
+          },
+          {
+            "method": "GET",
+            "route": "/redoc",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "HEAD",
+            "route": "/docs",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "HEAD",
+            "route": "/docs/oauth2-redirect",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "HEAD",
+            "route": "/openapi.json",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "HEAD",
+            "route": "/redoc",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "POST",
+            "route": "/answer",
+            "requests": 4,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {
+              "200": 4
+            },
+            "latency_ms_total": 16150.497639000094,
+            "sample_count": 4,
+            "p50_ms": 2842.3819900000353,
+            "p95_ms": 6212.548814999991,
+            "p99_ms": 6212.548814999991
+          },
+          {
+            "method": "POST",
+            "route": "/answer/evaluated",
+            "requests": 1,
+            "client_errors": 1,
+            "server_errors": 0,
+            "status_counts": {
+              "429": 1
+            },
+            "latency_ms_total": 1.4410869999892384,
+            "sample_count": 1,
+            "p50_ms": 1.4410869999892384,
+            "p95_ms": 1.4410869999892384,
+            "p99_ms": 1.4410869999892384
+          },
+          {
+            "method": "POST",
+            "route": "/feedback",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "POST",
+            "route": "/feedback/{feedback_id}/golden",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "POST",
+            "route": "/feedback/{feedback_id}/review",
+            "requests": 0,
+            "client_errors": 0,
+            "server_errors": 0,
+            "status_counts": {},
+            "latency_ms_total": 0,
+            "sample_count": 0,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0
+          },
+          {
+            "method": "POST",
+            "route": "/retrieve",
+            "requests": 2,
+            "client_errors": 2,
+            "server_errors": 0,
+            "status_counts": {
+              "422": 1,
+              "400": 1
+            },
+            "latency_ms_total": 11.232184999926176,
+            "sample_count": 2,
+            "p50_ms": 1.891810999950394,
+            "p95_ms": 9.340373999975782,
+            "p99_ms": 9.340373999975782
+          }
+        ]
+      },
+      "trace_id": "6aea10ba00000000fa9bba6011a073cd",
+      "span_id": "1483484609050028842"
+    },
+    {
+      "name": "answers_metrics",
+      "attempt": 1,
+      "path": "/metrics/answers",
+      "status": 200,
+      "duration_ms": 3.85,
+      "body": {
+        "sample_count": 4,
+        "p50_ms": 2840.91,
+        "p95_ms": 6211.24,
+        "p99_ms": 6211.24,
+        "answer_requests_total": 4,
+        "answer_errors_total": 0,
+        "answer_error_rate": 0.0,
+        "input_tokens_total": 13670,
+        "output_tokens_total": 782,
+        "cost_per_query_usd": null,
+        "sampled_count": 0,
+        "sampled_hallucination_rate": null
+      },
+      "trace_id": "6aea10ba00000000438a4333b164d75d",
+      "span_id": "4019602490676914639"
+    }
+  ],
+  "checks": {
+    "health": true,
+    "ready": true,
+    "maximum_loan_schema_and_correlation": true,
+    "maximum_loan_correct_and_cited": true,
+    "current_processing_fee_schema_and_correlation": true,
+    "current_fee_uses_amendment": true,
+    "unsupported_policy_schema_and_correlation": true,
+    "unsupported_policy_abstains": true,
+    "rate_limit_returns_retry_after": true,
+    "evaluated_maximum_loan_schema_and_correlation": true,
+    "evaluation_all_four_scored": true,
+    "invalid_input_rejected": true,
+    "unsafe_prompt_blocked": true,
+    "/metrics/http": true,
+    "/metrics/answers": true
+  },
+  "completed_at": "2026-11-03T16:50:02.791527+00:00",
+  "guardrail_schema_self_check": "passed: five real-container cases",
+  "datadog_ui_verification": {
+    "evaluated_trace": "6aea109900000000baf04541cdd1710b",
+    "span_id": "340727592469766836",
+    "evaluations": 4,
+    "correlated_logs": 44,
+    "aws_lambda_metric_chart": "observed"
+  }
+}

@@ -12,7 +12,7 @@ from pymongo.errors import PyMongoError
 
 from app.api.limits import limit_requests
 from app.core.config import Settings, get_settings
-from app.evaluation.phoenix_export import publish_annotations_safely
+from app.evaluation.datadog_export import publish_annotations_safely
 from app.models.answer import AnswerResponse
 from app.models.evaluation import EvaluatedAnswerRequest, EvaluatedAnswerResponse
 from app.models.retrieval import RetrieveRequest
@@ -31,10 +31,8 @@ async def evaluated_answer(
 ) -> EvaluatedAnswerResponse:
     try:
         response = await answer_with_quality(request, settings)
-        if response.answer.phoenix_span_id:
-            background.add_task(
-                publish_annotations_safely, response, response.answer.phoenix_span_id, settings
-            )
+        if response.answer.datadog_span_id:
+            background.add_task(publish_annotations_safely, response, settings)
         return response
     except (
         OpenAIError,

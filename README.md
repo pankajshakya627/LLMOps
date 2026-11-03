@@ -24,7 +24,7 @@ evaluation. Ollama chat uses `qwen3.5:9b-mlx`, local embeddings use
 - [Application layout and runbooks](#application-layout-and-runbooks)
 - [Docker: run the complete application](#docker-run-the-complete-application)
 - [Native services](#native-services)
-- [Query, evaluate and inspect Phoenix](#query-evaluate-and-inspect-phoenix)
+- [Query, evaluate and inspect Datadog](#query-evaluate-and-inspect-datadog)
 - [Gateway examples](#gateway-examples)
 - [Security examples](#security-examples)
 - [Detailed gateways and guardrails training guide](app/operations/GATEWAYS_AND_GUARDRAILS_GUIDE.md)
@@ -57,7 +57,7 @@ flowchart LR
 | [app/chains/llm.py](app/chains/llm.py), [embeddings.py](app/chains/embeddings.py) | OpenAI-compatible clients and cache partitioning |
 | [app/chains/answer.py](app/chains/answer.py), [guardrails.py](app/chains/guardrails.py) | Generation, output rails and validator calls |
 | [app/chains/redaction.py](app/chains/redaction.py) | Supported email, phone, PAN and Aadhaar patterns |
-| [app/phoenix_main.py](app/phoenix_main.py), [app/core/phoenix.py](app/core/phoenix.py) | Instrumented serving and trace/header/log correlation |
+| [app/datadog_main.py](app/datadog_main.py), [app/core/telemetry.py](app/core/telemetry.py) | Instrumented serving and trace/header/log correlation |
 | [app/observability/](app/observability) | Phoenix collector/client requirements and observability runbook |
 | [app/evaluation/](app/evaluation) | Ragas metrics, judge profiles, datasets, quality gates and annotation export |
 | [app/operations/](app/operations) | Runtime configuration, service operations and verification evidence |
@@ -166,7 +166,7 @@ docker compose --env-file .env -f app/compose.yaml run --rm api \
 ```
 
 Open [FastAPI Swagger](http://127.0.0.1:8001/docs) (the template uses `API_PORT=8001`),
-[Streamlit](http://127.0.0.1:8501), [Phoenix](http://127.0.0.1:6006) and
+[Streamlit](http://127.0.0.1:8501), [Datadog](https://app.datadoghq.com/llm) and
 [Guardrails Swagger](http://127.0.0.1:8101/docs). The gateway uses `GATEWAY_PORT`
 (default 4000; set 4001 in `.env` if another proxy already owns 4000) and requires
 the private gateway key. Adjust the gateway HTTP examples to that host port.
@@ -219,28 +219,15 @@ Both aliases are required for native gateway clients. An absent alias produces
 does not authenticate the gateway. Compose sets these aliases inside the API
 container automatically, but does not set them in your native terminal.
 
-Choose either the Docker stack or the native service commands below. When the
-Docker Phoenix and Guardrails services are already healthy, reuse them rather
-than starting another process on ports 6006 or 8101.
-
-**Phoenix:**
-
-The collector has its own Python 3.13 environment. Its requirements are now
-[app/observability/requirements-server.txt](app/observability/requirements-server.txt);
-standalone client tooling uses
-[requirements-client.txt](app/observability/requirements-client.txt).
-
-```bash
-PHOENIX_HOST=127.0.0.1 PHOENIX_PORT=6006 PHOENIX_GRPC_PORT=4317 \
-PHOENIX_WORKING_DIR=/tmp/nexaassist-phoenix PHOENIX_TELEMETRY_ENABLED=false \
-uv run --no-project --python 3.13 \
-  --with-requirements app/observability/requirements-server.txt phoenix serve
-```
+Choose the Docker stack or native services. The [Datadog guide](app/observability/README.md)
+covers log, metric, APM and LLM trace delivery. Phoenix is no longer required.
+The AWS integration collects infrastructure metrics; the Forwarder handles CloudWatch logs.
+Application traces, metrics and evaluations export directly without a Docker Agent.
 
 **LiteLLM:**
 
 ```bash
-uv run --no-project --python 3.13 --with-requirements app/gateway/requirements.txt \
+PYTHONPATH=app/gateway uv run --no-project --python 3.13 --with-requirements app/gateway/requirements.txt \
   --env-file .env --env-file app/gateway/service.env.example \
   litellm --config app/gateway/litellm.yaml --host 127.0.0.1 --port 4000 --num_workers 1
 ```
@@ -275,7 +262,7 @@ uv run --no-sync --env-file .env --env-file app/gateway/application.env.example 
 
 OTEL_SDK_DISABLED=false uv run --no-sync \
   --env-file .env --env-file app/gateway/application.env.example \
-  python -m uvicorn app.phoenix_main:app --host 127.0.0.1 --port 8000
+  python -m uvicorn app.datadog_main:app --host 127.0.0.1 --port 8000
 ```
 
 **Streamlit:**
@@ -292,7 +279,7 @@ serving; add `GUARDRAILS_BASE_URL` when using the validator. Independent OpenAI
 judges still need their own working credentials. See the
 [runtime guide](app/operations/README.md) for comparison profiles.
 
-## Query, evaluate and inspect Phoenix
+## Query, evaluate and inspect Datadog
 
 The curl example below uses the Docker API on **8001**, matching `.env.example`.
 For a native API on port 8000, change the request URL accordingly. A native
@@ -313,65 +300,12 @@ The reference answer is **₹7,50,00,000 (₹7.5 crore)** under `POL-HL-V3`, cla
 4.1. Inspect the actual evidence, citations, status and responding model.
 HTTP 200 alone does not establish correctness.
 
-Use `POST /answer/evaluated` to compute Ragas metrics. The instrumented API now
-publishes the existing metrics to the matching Phoenix request span in the
-background. No separate export command is needed for a normal successful run.
-`/answer` remains the generation-only endpoint by default.
-
-With `PHOENIX_CAPTURE_CONTENT=true`, the root request span's **Output** contains
-the final response, including quality metrics for evaluated requests. With content
-capture disabled, payloads stay hidden. `/health` and `/ready` probes are excluded
-from new traces so they do not obscure policy requests.
-
-For diagnosis or manual export recovery, save the response and matching headers:
-
-```bash
-curl --fail --silent --show-error http://127.0.0.1:8001/answer/evaluated \
-  -H 'Content-Type: application/json' \
-  -d '{"query":"What is the maximum loan amount for a NexaHome Loan?","as_of":"2026-10-01","product_id":"NEXA-HL","top_k":5,"reference_answer":"The maximum loan amount is 7.5 crore."}' \
-  -D /tmp/phoenix-evaluated.headers -o /tmp/phoenix-evaluated.json
-
-grep -i '^x-phoenix-' /tmp/phoenix-evaluated.headers
-
-# Optional recovery exporter; normally annotations publish automatically.
-uv run --no-sync --env-file .env python -m app.evaluation.phoenix_export \
-  --response /tmp/phoenix-evaluated.json --headers /tmp/phoenix-evaluated.headers
-```
-
-For manual recovery using Docker, run the exporter inside the API container:
-
-```bash
-docker compose --env-file .env -f app/compose.yaml cp /tmp/phoenix-evaluated.json api:/tmp/phoenix-evaluated.json
-docker compose --env-file .env -f app/compose.yaml cp /tmp/phoenix-evaluated.headers api:/tmp/phoenix-evaluated.headers
-docker compose --env-file .env -f app/compose.yaml exec api \
-  python -m app.evaluation.phoenix_export \
-  --response /tmp/phoenix-evaluated.json --headers /tmp/phoenix-evaluated.headers
-```
-
-In Phoenix, open project **nexaassist-training**, locate the matching trace ID,
-and inspect the HTTP server span and runnable/model children. On the request
-span, inspect `ragas_faithfulness`, `ragas_answer_relevancy`,
-`ragas_context_precision` and `ragas_context_recall` annotations. Batched trace
-export can take a few seconds. Unavailable/error metrics keep their labels and
-reasons; they are not invented numeric scores.
-
-Open project **nexaassist-gateway** for the gateway's actual model/provider
-telemetry. On a model span, inspect `litellm.provider.model`, for example
-`ollama_chat/qwen3.5:9b-mlx` or `openai/qwen3-embedding:0.6b`.
-Span titles and `llm.model_name` can retain the requested alias. It uses LiteLLM's
-Phoenix callback with raw message capture disabled; application results remain
-in **nexaassist-training**. Gateway spans can be separate traces, so an alias or
-an unlinked gateway span is not proof of a specific application's fallback.
-
-The current gateway has no history database and does not store prompt/response
-content in LiteLLM UI Logs. Use Phoenix for retained results. `ChatOpenAI` is the
-OpenAI-compatible client class; it does not establish the actual provider.
-
-Tracing does not compute scores or create native online evaluators. Prompt
-version **1.2.0** is served from [answer.py](app/chains/prompts/answer.py).
-Responses record its version/fingerprint. Saving a version in Phoenix's registry
-does not deploy it. Inputs/outputs are masked by default; enable
-`PHOENIX_CAPTURE_CONTENT=true` only for approved synthetic classroom content.
+Use `POST /answer/evaluated` to compute Ragas scores and publish them automatically
+to the corresponding Datadog workflow. `/answer` remains generation-only unless
+sampled judging is enabled. See the [Datadog runbook](app/observability/README.md)
+for correlation IDs, safe content capture, manual recovery and monitoring queries.
+Unavailable/error results remain categorical; measured zero remains numeric zero.
+Historical Phoenix traces stay in the old collector and are not imported automatically.
 
 ## Gateway examples
 
@@ -435,7 +369,7 @@ uv run --locked --no-sync mypy app
 
 # Additional real SDK fixtures and the synthetic mock banking API:
 RAGAS_DO_NOT_TRACK=true uv run --no-sync --with openapi-spec-validator \
-  python -m pytest -q tests tests/runtime/phoenix_profile_check.py \
+  python -m pytest -q tests \
   tests/runtime/ragas_adapters_check.py nexa_synthetic_data/api/mock_server/test_mock_api.py \
   --tb=short --junitxml=app/operations/runtime-consolidation-tests.xml
 
@@ -460,7 +394,7 @@ Real LiteLLM router/cache and Guardrails schema checks run without live model ca
 
 ```bash
 LITELLM_LOCAL_MODEL_COST_MAP=True OTEL_SDK_DISABLED=true \
-uv run --no-project --python 3.13 --with-requirements app/gateway/requirements.txt \
+PYTHONPATH=app/gateway uv run --no-project --python 3.13 --with-requirements app/gateway/requirements.txt \
   python -m app.gateway.selfcheck
 
 LITELLM_LOCAL_MODEL_COST_MAP=True OTEL_SDK_DISABLED=true \

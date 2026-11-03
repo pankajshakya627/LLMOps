@@ -1,6 +1,6 @@
 # NexaAssist component guide
 
-Phoenix/OpenInference provides observability. Ragas provides evaluation metrics.
+Datadog/OpenInference provides observability. Ragas provides evaluation metrics.
 Use [README.md](README.md) for startup and the
 [Session 2 trainer checklist](training/session2/TRAINER_SCRIPT.md) for demonstrations.
 
@@ -8,7 +8,7 @@ Use [README.md](README.md) for startup and the
 
 | Layer | Files | Responsibility |
 |---|---|---|
-| Serving | [app/phoenix_main.py](app/phoenix_main.py) | Register the Phoenix exporter, instrument FastAPI/LangChain, apply privacy masking and flush on shutdown |
+| Serving | [app/datadog_main.py](app/datadog_main.py) | Configure Datadog before FastAPI/LangChain imports and apply export privacy masking |
 | Gateway | [app/gateway/](app/gateway) | LiteLLM profiles, separate embedding routes, bounded chat fallback and optional exact cache |
 | Security | [app/security/](app/security) | Input override checks and the separate Guardrails AI validator |
 | Base application | [app/main.py](app/main.py) | Shared routers and startup; an uninstrumented factory for offline callers/tests |
@@ -18,7 +18,7 @@ Use [README.md](README.md) for startup and the
 | Storage | [app/database/](app/database) | Scoped Atlas access, embedding compatibility, parent/amendment resolution and feedback persistence |
 | Contracts | [app/models/](app/models) | Strict request/response schemas and provenance |
 | Evaluation | [app/evaluation/](app/evaluation) | Ragas adapters, independent judge profiles, quality gates and annotation export |
-| UI | [app/ui/app.py](app/ui/app.py) | HTTP-only policy chat, citations, Phoenix trace IDs and feedback/reviewer controls |
+| UI | [app/ui/app.py](app/ui/app.py) | HTTP-only policy chat, citations, Datadog trace IDs and feedback/reviewer controls |
 
 Routers delegate to services. Services wire chains and storage adapters. Model
 contracts do not call the database or providers. The UI calls FastAPI; it does
@@ -26,7 +26,7 @@ not bypass API authorization to access MongoDB directly.
 
 ## Observability
 
-[app/core/phoenix.py](app/core/phoenix.py) correlates the HTTP server span with
+[app/core/telemetry.py](app/core/telemetry.py) correlates the HTTP server span with
 `x-phoenix-trace-id` / `x-phoenix-span-id` headers and answer response fields.
 JSON logs carry the active OpenTelemetry trace/span IDs through
 [app/core/logging.py](app/core/logging.py).
@@ -36,7 +36,7 @@ latency/token counters and attaches versioned source prompts to OpenInference
 context. Context is scoped to a call and restored after failures. No external
 collector is needed for these counters or offline tests.
 
-`PHOENIX_CAPTURE_CONTENT=false` masks input/output content, retrieved documents,
+`DD_CAPTURE_CONTENT=false` masks input/output content, retrieved documents,
 prompt variables and metadata. Embedding vectors and invocation parameters stay
 hidden. Enable content capture only for approved synthetic data. Raw drafts may
 appear in traces before application validation.
@@ -54,7 +54,7 @@ appear in traces before application validation.
 5. If configured, one bounded OpenAI fallback reuses the retrieved evidence and
    validation. Provenance identifies the returned model and fallback reason.
 6. The service returns citations, timings, prompt/model provenance and the
-   Phoenix server trace/span IDs when an instrumented request is active.
+   Datadog server trace/span IDs when an instrumented request is active.
 
 ## Evaluation
 
@@ -68,17 +68,17 @@ metric embedding settings from the candidate chat/retrieval configuration.
 [app/evaluation/run.py](app/evaluation/run.py) saves batch reports and applies
 unchanged gates. Its local trace summaries are not automatically published.
 
-[app/evaluation/phoenix_export.py](app/evaluation/phoenix_export.py) attaches a
+[app/evaluation/datadog_export.py](app/evaluation/datadog_export.py) attaches a
 saved `/answer/evaluated` response to its exact HTTP span. It retries only HTTP
 404 while batched trace ingestion catches up; other failures and exhaustion
 return a nonzero exit. This explicit publication does not create native online
-evaluators. See [the Phoenix guide](app/observability/README.md).
+evaluators. See [the Datadog guide](app/observability/README.md).
 
 ## Prompts and configuration
 
 [app/chains/prompts/answer.py](app/chains/prompts/answer.py) contains the serving
 prompt and version/fingerprint. The application loads this local source; saving
-a version in Phoenix's prompt registry does not deploy it.
+a version in Datadog's prompt registry does not deploy it.
 
 [app/core/config.py](app/core/config.py) loads private `.env` settings. Query and
 stored embeddings must have matching model/profile/dimensions. A custom endpoint

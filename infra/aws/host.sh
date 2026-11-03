@@ -10,7 +10,7 @@ export AWS_DEFAULT_REGION="$region"
 
 if [ "$action" = deploy ]; then
   umask 077
-  trap 'rm -f /run/nexaassist-secret /run/nexaassist-openai-key' EXIT
+  trap 'rm -f /run/nexaassist-secret /run/nexaassist-openai-key /run/nexaassist-datadog-key' EXIT
   secret_arn="$(python3 -c 'import json; print(json.load(open("release.json"))["SECRET_ARN"])')"
   aws secretsmanager get-secret-value --region "$region" --secret-id "$secret_arn" \
     --query SecretString --output text > /run/nexaassist-secret
@@ -20,14 +20,17 @@ if [ "$action" = deploy ]; then
     aws secretsmanager get-secret-value --region "$region" --secret-id "$openai_arn" \
       --query SecretString --output text > /run/nexaassist-openai-key
   fi
-  python3 - /run/nexaassist-secret /run/nexaassist-openai-key <<'PY'
+  datadog_arn="$(python3 -c 'import json; print(json.load(open("release.json"))["DATADOG_API_KEY_SECRET_ARN"])')"
+  aws secretsmanager get-secret-value --region "$region" --secret-id "$datadog_arn" \
+    --query SecretString --output text > /run/nexaassist-datadog-key
+  python3 - /run/nexaassist-secret /run/nexaassist-openai-key /run/nexaassist-datadog-key <<'PY'
 import json
 import re
 import sys
 from pathlib import Path
 
 config = json.loads(Path('release.json').read_text())
-material_path, key_path = map(Path, sys.argv[1:])
+material_path, key_path, datadog_path = map(Path, sys.argv[1:])
 material = material_path.read_text().strip()
 if len(material) != 96 or not material.isalnum():
     raise ValueError('Unexpected session secret format')
@@ -38,14 +41,21 @@ if config['MODEL_PROVIDER'] == 'openai':
     if not re.fullmatch(r'sk-[A-Za-z0-9_-]+', key):
         raise ValueError('OpenAI secret must contain only the API key in plaintext')
     config['OPENAI_API_KEY'] = key
+datadog_key = datadog_path.read_text().strip()
+if not re.fullmatch(r'[A-Fa-f0-9]{32}', datadog_key):
+    raise ValueError('Datadog secret must contain only a plaintext API key')
+config['DD_API_KEY'] = datadog_key
 Path('.env').write_text(''.join(f'{k}={json.dumps(v)}\n' for k, v in config.items()))
 material_path.unlink()
 key_path.unlink(missing_ok=True)
+datadog_path.unlink()
 PY
   chmod 600 .env
   registry="$(python3 -c 'import json; print(json.load(open("release.json"))["APP_IMAGE"].split("/")[0])')"
   aws ecr get-login-password --region "$region" | docker login --username AWS --password-stdin "$registry"
   install -d -o 10001 -g 10001 -m 700 reports
+  chown -R 10001:10001 corpus
+  chmod -R u=rwX,go= corpus
   docker compose pull
   previous=""
   if [ -L /opt/nexaassist/current ] && [ -d /opt/nexaassist/current ]; then
@@ -59,7 +69,7 @@ PY
     fi
   }
   trap rollback ERR
-  docker compose up -d --wait --wait-timeout 300 postgres phoenix gateway guardrails
+  docker compose up -d --wait --wait-timeout 300 postgres gateway guardrails
   free -b > reports/memory-before-ingestion.txt
   docker compose run --rm --no-deps api python -m app.database.postgres init
   docker compose run --rm --no-deps api \
@@ -79,7 +89,7 @@ assert r['status'] == 'answered' and r['citations'], 'Live structured answer/cit
 assert json.loads(Path('reports/ready.json').read_text())['status'] == 'ready'
 routes = json.loads(Path('reports/http-metrics.json').read_text())['routes']
 assert any(r['route'] == '/answer/evaluated' for r in routes), 'Missing all-route monitoring'
-assert 'x-phoenix-span-id:' in Path('reports/answer.headers').read_text().lower()
+assert 'x-datadog-span-id:' in Path('reports/answer.headers').read_text().lower()
 PY
   free -b > reports/host-memory.txt
   docker stats --no-stream --format '{{json .}}' > reports/container-stats.jsonl
