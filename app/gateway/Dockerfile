@@ -6,7 +6,7 @@ COPY app/gateway/requirements.txt ./requirements.txt
 RUN uv pip install --system --no-cache -r requirements.txt
 RUN python -c "from ddtrace.llmobs import LLMObs"
 COPY app/gateway/*.yaml ./
-COPY app/gateway/datadog_callback.py ./datadog_callback.py
+COPY app/gateway/datadog_callback.py app/gateway/output_limit.py ./
 RUN useradd --system --create-home --uid 10001 gateway \
     && chown -R gateway:gateway /opt/gateway
 USER gateway

@@ -257,10 +257,11 @@ def gateway_profile(provider: str, observability: str, anthropic_model: str) -> 
                 "litellm_params": {
                     "model": anthropic_model,
                     "api_key": "os.environ/ANTHROPIC_API_KEY",
-                    "max_tokens": 2000,
+                    "max_tokens": 4096,
                 },
             }
         )
+    profile["litellm_settings"].setdefault("callbacks", []).append("output_limit.output_limit")
     return profile
 
 

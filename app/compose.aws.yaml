@@ -80,6 +80,8 @@ services:
       CHAT_BASE_URL: http://gateway:4000/v1
       CHAT_API_KEY: ${LITELLM_MASTER_KEY:?required}
       CHAT_REASONING_EFFORT: ""
+      # The private gateway applies the selected route's output limit.
+      CHAT_MAX_OUTPUT_TOKENS: ""
       CHAT_TIMEOUT_SECONDS: "60"
       CHAT_CACHE_NAMESPACE: ""
       OPENAI_FALLBACK_MODEL: ""

@@ -4,3 +4,4 @@ New external integration: optional direct Anthropic API via the existing pinned 
 Deployment changes: CloudWatch default, credential-isolated dual-provider gateway, tested image promotion, EC2 stop/resume and retained pgvector storage.
 HTTP application routes unchanged. Historical disposable-stack validation remains dated evidence.
 No prior codemaps qualify for the 90-day staleness check.
+Updated backend.md after the live comparison to map the AWS gateway's per-route output limit checks.

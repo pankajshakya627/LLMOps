@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     @field_validator(
         "feedback_reviewer_token",
         "chat_reasoning_effort",
+        "chat_max_output_tokens",
         "openai_fallback_model",
         "chat_cache_namespace",
         mode="before",

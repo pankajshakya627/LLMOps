@@ -43,6 +43,8 @@ aws cloudformation wait stack-update-complete --region ap-south-1 --stack-name n
 | `/v1/chat/completions` | `nexa-judge-openai` | Independent OpenAI evaluation judge |
 | `/v1/embeddings` | `nexa-embed-openai` | OpenAI text-embedding-3-small, 1,536 dimensions |
 
+The private AWS gateway allows up to 4,096 output tokens for Claude and 2,000 for OpenAI chat, the OpenAI judge and Bedrock chat or judging. Clients can request a smaller limit. Requests above the selected route's limit are rejected before a provider call.
+
 The workflow packages the selected routes in `gateway.yaml`. Calls from FastAPI use the gateway master key on the private Compose network. Provider fallback is disabled. Changing the answer alias preserves the vector index. The AWS deployment always provisions the application-level guardrails sidecar. Local Ollama training uses its own Compose file.
 
 ## Running costs

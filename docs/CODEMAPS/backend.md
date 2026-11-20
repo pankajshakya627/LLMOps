@@ -1,4 +1,4 @@
-<!-- Generated: 2026-11-20 | Files scanned: 79 | Token estimate: ~263 -->
+<!-- Generated: 2026-11-20 | Files scanned: 80 | Token estimate: ~295 -->
 # Backend
 
 | Request | Handler and downstream work |
@@ -12,3 +12,5 @@
 | GET /metrics, /metrics/http, /metrics/answers and /metrics/latency | Process-level counters, HTTP monitoring and timing |
 
 FastAPI routers live in `app/api/`, service orchestration in `app/services/`, and retrieval and model chains in `app/chains/`. The HTTP middleware records timings and request IDs. The ingest entry point is a CLI, `python -m app.services.ingestion`.
+
+On AWS, LiteLLM applies the output limit for each configured chat or judge route. `app/gateway/output_limit.py` rejects oversized requests before forwarding them. Claude allows 4,096 output tokens. OpenAI and Bedrock allow 2,000.

@@ -2,6 +2,7 @@
 
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -24,7 +25,7 @@ DRAFT = {
 
 
 class Upstream(BaseHTTPRequestHandler):
-    calls: ClassVar[list[tuple[str, str]]] = []
+    calls: ClassVar[list[tuple[str, str, int | None]]] = []
 
     def log_message(self, *args: Any) -> None:
         pass
@@ -32,7 +33,8 @@ class Upstream(BaseHTTPRequestHandler):
     def do_POST(self) -> None:
         body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
         model = body["model"]
-        self.calls.append((self.path.split("?")[0], model))
+        cap = body.get("max_completion_tokens", body.get("max_tokens"))
+        self.calls.append((self.path.split("?")[0], model, cap))
         if self.path.startswith("/v1/messages"):
             assert self.headers["x-api-key"] == "sk-ant-fixture"
             content: list[dict[str, Any]] = [{"type": "text", "text": json.dumps(DRAFT)}]
@@ -102,6 +104,7 @@ def main() -> None:
             params["api_base"] = (
                 origin if entry["model_name"] == "nexa-chat-anthropic" else origin + "/v1"
             )
+        shutil.copy(Path("app/gateway/output_limit.py"), Path(tmp, "output_limit.py"))
         path = Path(tmp, "gateway.yaml")
         path.write_text(json.dumps(profile))
         port = 14001
@@ -178,17 +181,41 @@ def main() -> None:
                     json={"model": "nexa-chat-anthropic", "messages": messages, "max_tokens": 32},
                 )
                 assert result.raise_for_status().json()["content"][0]["type"] == "text"
+                for route, alias, field, limit in (
+                    ("/v1/chat/completions", "nexa-chat-anthropic", "max_completion_tokens", 4096),
+                    ("/v1/messages", "nexa-chat-anthropic", "max_tokens", 4096),
+                    ("/v1/chat/completions", "nexa-chat-openai", "max_tokens", 2000),
+                ):
+                    denied = client.post(
+                        route,
+                        headers={"x-api-key": "sk-fixture", "anthropic-version": "2023-06-01"},
+                        json={"model": alias, "messages": messages, field: limit + 1},
+                    )
+                    assert denied.status_code == 400, denied.text
+                    assert str(limit) in denied.text
+                nested = client.post(
+                    "/v1/chat/completions",
+                    headers={"Authorization": "Bearer sk-fixture"},
+                    json={
+                        "model": "nexa-chat-anthropic",
+                        "messages": messages,
+                        "extra_body": {"max_tokens": 4097},
+                    },
+                )
+                assert nested.status_code == 400 and "4096" in nested.text, nested.text
                 assert Upstream.calls == [
-                    ("/v1/chat/completions", "gpt-6-luna"),
-                    ("/v1/messages", "claude-haiku-4-5-20251001"),
-                    ("/v1/embeddings", "text-embedding-3-small"),
-                    ("/v1/messages", "claude-haiku-4-5-20251001"),
+                    ("/v1/chat/completions", "gpt-6-luna", 2000),
+                    ("/v1/messages", "claude-haiku-4-5-20251001", 4096),
+                    ("/v1/embeddings", "text-embedding-3-small", None),
+                    ("/v1/messages", "claude-haiku-4-5-20251001", 32),
                 ], Upstream.calls
         finally:
             proxy.terminate()
             proxy.wait(timeout=20)
             server.shutdown()
-    print("Four routed requests passed against credential-isolated upstream fixtures.")
+    print(
+        "Four provider requests passed and four oversized requests were rejected before reaching the fixtures."
+    )
 
 
 if __name__ == "__main__":

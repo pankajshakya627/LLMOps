@@ -162,7 +162,9 @@ def test_release_contains_only_synthetic_corpus_and_digest_manifest(
         file = tar.extractfile("gateway.yaml")
         assert file is not None
         gateway = json.load(file)
-        assert bool(gateway["litellm_settings"].get("callbacks")) == (observability == "datadog")
+        callbacks = gateway["litellm_settings"]["callbacks"]
+        assert "output_limit.output_limit" in callbacks
+        assert ("datadog_callback.datadog_callback" in callbacks) == (observability == "datadog")
         assert {route["model_name"] for route in gateway["model_list"]} == {
             f"nexa-chat-{provider}",
             f"nexa-judge-{provider}",

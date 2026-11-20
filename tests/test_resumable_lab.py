@@ -20,7 +20,7 @@ def test_optional_claude_uses_its_own_key_without_changing_embeddings():
         "litellm_params": {
             "model": "anthropic/claude-example",
             "api_key": "os.environ/ANTHROPIC_API_KEY",
-            "max_tokens": 2000,
+            "max_tokens": 4096,
         },
     }
     assert dual["router_settings"]["max_fallbacks"] == 0
