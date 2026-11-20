@@ -5,7 +5,7 @@ One Mumbai EC2 host runs the Streamlit UI, FastAPI, PostgreSQL/pgvector, LiteLLM
 ## Configure AWS and GitHub
 
 1. Use a dedicated AWS sandbox in `ap-south-1`. Apply [github-oidc.yaml](github-oidc.yaml) as the bootstrap administrator. Set `GitHubSubject` to the exact OIDC subject of this repository's `aws-lab` environment and `EnableBedrock=false`. Supply the existing GitHub OIDC provider ARN if the account already has one. For an existing bootstrap, preserve its subject and provider parameters by using previous values and update the template to install the stop/resume permissions.
-2. Put the OpenAI API key in a same-region Secrets Manager plaintext secret named `nexa-lab-openai`. For direct Claude access, create `nexa-lab-anthropic` the same way. Enter each value using the secret editor. Only the gateway container receives the provider keys. The host generates the database, reviewer and gateway credentials from a separate stack-owned secret.
+2. Put the OpenAI API key in a same-region Secrets Manager plaintext secret named `nexa-lab-openai`. For direct Claude access, store `nexa-lab-anthropic` as plaintext or as a Secrets Manager key/value object containing exactly one direct Anthropic API key. Enter each value using the secret editor. Only the gateway container receives the provider keys. The host generates the database, reviewer and gateway credentials from a separate stack-owned secret.
 3. In GitHub, restrict the `aws-lab` environment to branch `main`. Save the trainer's global IPv4 /32 as environment secret `AWS_UI_ALLOWED_CIDR`. Set these environment variables.
 
 | GitHub environment variable | Value |

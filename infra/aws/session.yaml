@@ -34,7 +34,7 @@ Parameters:
   AnthropicKeySecretArn:
     Type: String
     Default: ''
-    Description: Optional same-Region plaintext secret named nexa-lab-anthropic.
+    Description: Optional same-Region secret named nexa-lab-anthropic, containing one direct API key as plaintext or a JSON field.
     AllowedPattern: '(^$|arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:nexa-lab-anthropic-[A-Za-z0-9]{6})'
   DatadogKeySecretArn:
     Type: String

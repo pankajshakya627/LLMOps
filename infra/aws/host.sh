@@ -31,14 +31,14 @@ if [ "$action" = deploy ]; then
     aws secretsmanager get-secret-value --region "$region" --secret-id "$datadog_arn" \
       --query SecretString --output text > /run/nexaassist-datadog-key
   fi
-  python3 - /run/nexaassist-secret /run/nexaassist-openai-key /run/nexaassist-datadog-key <<'PY'
+  python3 - /run/nexaassist-secret /run/nexaassist-openai-key /run/nexaassist-datadog-key /run/nexaassist-anthropic-key <<'PY'
 import json
 import re
 import sys
 from pathlib import Path
 
 config = json.loads(Path('release.json').read_text())
-material_path, key_path, datadog_path = map(Path, sys.argv[1:])
+material_path, key_path, datadog_path, anthropic_path = map(Path, sys.argv[1:])
 material = material_path.read_text().strip()
 if len(material) != 96 or not material.isalnum():
     raise ValueError('Unexpected session secret format')
@@ -50,10 +50,12 @@ if config['MODEL_PROVIDER'] == 'openai':
         raise ValueError('OpenAI secret must contain only the API key in plaintext')
     config['OPENAI_API_KEY'] = key
 if config.get('ANTHROPIC_API_KEY_SECRET_ARN'):
-    key = Path('/run/nexaassist-anthropic-key').read_text().strip()
-    if not re.fullmatch(r'sk-ant-[A-Za-z0-9_-]+', key):
-        raise ValueError('Anthropic secret must contain a plaintext API key')
-    config['ANTHROPIC_API_KEY'] = key
+    raw = anthropic_path.read_text().strip()
+    values = json.loads(raw).values() if raw.startswith('{') else [raw]
+    keys = [v for v in values if isinstance(v, str) and re.fullmatch(r'sk-ant-[A-Za-z0-9_-]+', v)]
+    if len(keys) != 1:
+        raise ValueError('Secret must contain exactly one direct Anthropic API key')
+    config['ANTHROPIC_API_KEY'] = keys[0]
 if config.get('OBSERVABILITY', 'datadog') == 'datadog':
     datadog_key = datadog_path.read_text().strip()
     if not re.fullmatch(r'[A-Fa-f0-9]{32}', datadog_key):
@@ -63,9 +65,9 @@ Path('.env').write_text(''.join(f'{k}={json.dumps(v)}\n' for k, v in config.item
 material_path.unlink()
 key_path.unlink(missing_ok=True)
 datadog_path.unlink(missing_ok=True)
+anthropic_path.unlink(missing_ok=True)
 PY
   chmod 600 .env
-  rm -f /run/nexaassist-anthropic-key
   registry="$(python3 -c 'import json; print(json.load(open("release.json"))["APP_IMAGE"].split("/")[0])')"
   aws ecr get-login-password --region "$region" | docker login --username AWS --password-stdin "$registry"
   install -d -o 10001 -g 10001 -m 700 reports

@@ -759,7 +759,9 @@ def test_host_loads_openai_secret_privately_and_fails_closed(
     monkeypatch.chdir(tmp_path)
     datadog_file = tmp_path / "datadog-secret"
     datadog_file.write_text("a" * 32)
-    monkeypatch.setattr(sys, "argv", [str(script), str(material), str(key_file), str(datadog_file)])
+    monkeypatch.setattr(
+        sys, "argv", [str(script), str(material), str(key_file), str(datadog_file), "no-claude"]
+    )
     previous_umask = os.umask(0o077)
     try:
         if provider == "openai" and key in ("wrong format", "sk-bad$key"):
@@ -1028,28 +1030,54 @@ def test_cloudwatch_resources_exclude_forwarder_and_its_secret_access():
     )
 
 
-def test_cloudwatch_host_secret_setup_without_datadog_file(tmp_path, monkeypatch):
+@pytest.mark.parametrize(
+    "anthropic_secret,valid",
+    [
+        (None, True),
+        ("sk-ant-fixture", True),
+        ('{"ANTHROPIC_API_KEY":"sk-ant-fixture","label":"training"}', True),
+        ('{"first":"sk-ant-one","second":"sk-ant-two"}', False),
+        ('{"ANTHROPIC_API_KEY":"invalid"}', False),
+    ],
+)
+def test_cloudwatch_host_secret_setup_without_datadog_file(
+    tmp_path, monkeypatch, anthropic_secret, valid
+):
     source = Path("infra/aws/host.sh").read_text()
     code = source.split("<<'PY'\n", 1)[1].split("\nPY", 1)[0]
     script = tmp_path / "configure.py"
     script.write_text(code)
-    (tmp_path / "release.json").write_text(
-        json.dumps({"MODEL_PROVIDER": "bedrock", "OBSERVABILITY": "cloudwatch"})
-    )
+    release = {"MODEL_PROVIDER": "bedrock", "OBSERVABILITY": "cloudwatch"}
+    openai_path, anthropic_path = tmp_path / "openai-key", tmp_path / "claude-key"
+    if anthropic_secret is not None:
+        release.update(MODEL_PROVIDER="openai", ANTHROPIC_API_KEY_SECRET_ARN="test-arn")
+        openai_path.write_text("sk-openai-fixture")
+        anthropic_path.write_text(anthropic_secret)
+    (tmp_path / "release.json").write_text(json.dumps(release))
     material = tmp_path / "runtime-secret"
     material.write_text("A" * 96)
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr(
-        sys, "argv", [str(script), str(material), "missing-openai", "missing-datadog"]
+        sys, "argv", [str(script), str(material), str(openai_path), "missing-datadog", str(anthropic_path)]
     )
+    if not valid:
+        with pytest.raises(ValueError, match="exactly one direct Anthropic"):
+            runpy.run_path(str(script))
+        assert not (tmp_path / ".env").exists()
+        return
     previous_umask = os.umask(0o077)
     try:
         runpy.run_path(str(script))
     finally:
         os.umask(previous_umask)
     exported = dict(line.split("=", 1) for line in (tmp_path / ".env").read_text().splitlines())
-    assert "DD_API_KEY" not in exported and "OPENAI_API_KEY" not in exported
-    assert not material.exists()
+    assert "DD_API_KEY" not in exported
+    assert ("OPENAI_API_KEY" in exported) == (anthropic_secret is not None)
+    if anthropic_secret is not None:
+        assert json.loads(exported["ANTHROPIC_API_KEY"]) == "sk-ant-fixture"
+    else:
+        assert "ANTHROPIC_API_KEY" not in exported
+    assert not material.exists() and not anthropic_path.exists()
     assert (tmp_path / ".env").stat().st_mode & 0o777 == 0o600
 
 
