@@ -65,9 +65,12 @@ Resources:
             Action: lambda:InvokeFunction
             Resource: !Sub 'arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:nexa-lab-*-cleanup'
           - Effect: Allow
-            Action: ec2:TerminateInstances
+            Action: [ec2:StopInstances, ec2:TerminateInstances]
             Resource: !Sub 'arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/*'
             Condition: {StringLike: {'ec2:ResourceTag/Session': 'nexa-lab-*'}}
+          - Effect: Allow
+            Action: scheduler:GetSchedule
+            Resource: !Sub 'arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule/default/nexa-lab-*-expiry'
   CloudFormationRole:
     Type: AWS::IAM::Role
     Properties:
@@ -164,6 +167,12 @@ Resources:
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
+              - !If
+                - UseBedrock
+                - Effect: Allow
+                  Action: bedrock:GetFoundationModelAvailability
+                  Resource: !Sub 'arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/*'
+                - !Ref AWS::NoValue
               - Effect: Allow
                 Action: [cloudformation:CreateStack, cloudformation:DeleteStack, cloudformation:DescribeStacks, cloudformation:DescribeStackEvents, cloudformation:DescribeStackResources, cloudformation:GetTemplate]
                 Resource: !Sub 'arn:${AWS::Partition}:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/nexa-lab-*/*'
@@ -172,7 +181,7 @@ Resources:
                 Resource: !GetAtt CloudFormationRole.Arn
                 Condition: {StringEquals: {'iam:PassedToService': cloudformation.amazonaws.com}}
               - Effect: Allow
-                Action: [ecr:GetAuthorizationToken, ssm:GetCommandInvocation, ssm:DescribeInstanceInformation, ssm:CancelCommand]
+                Action: [ec2:DescribeInstances, ecr:GetAuthorizationToken, ssm:GetCommandInvocation, ssm:DescribeInstanceInformation, ssm:CancelCommand]
                 Resource: '*'
               - Effect: Allow
                 Action: [ecr:BatchCheckLayerAvailability, ecr:InitiateLayerUpload, ecr:UploadLayerPart, ecr:CompleteLayerUpload, ecr:PutImage, ecr:DescribeImages, ecr:BatchGetImage, ecr:GetDownloadUrlForLayer]
@@ -180,6 +189,17 @@ Resources:
               - Effect: Allow
                 Action: [s3:PutObject, s3:GetObject]
                 Resource: !Sub 'arn:${AWS::Partition}:s3:::nexa-lab-*/*'
+              - Effect: Allow
+                Action: [ec2:StartInstances, ec2:StopInstances]
+                Resource: !Sub 'arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/*'
+                Condition: {StringLike: {'ec2:ResourceTag/Session': 'nexa-lab-*'}}
+              - Effect: Allow
+                Action: [scheduler:GetSchedule, scheduler:UpdateSchedule]
+                Resource: !Sub 'arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule/default/nexa-lab-*-expiry'
+              - Effect: Allow
+                Action: iam:PassRole
+                Resource: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:role/nexa-lab-*-expiry'
+                Condition: {StringEquals: {'iam:PassedToService': scheduler.amazonaws.com}}
               - Effect: Allow
                 Action: ssm:SendCommand
                 Resource: !Sub 'arn:${AWS::Partition}:ssm:${AWS::Region}::document/AWS-RunShellScript'

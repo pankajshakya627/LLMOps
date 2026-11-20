@@ -5,6 +5,8 @@ gateway key private; policy clients should call FastAPI. The application uses it
 OpenAI-compatible clients in [llm.py](../chains/llm.py) and
 [embeddings.py](../chains/embeddings.py). No second router is implemented in FastAPI.
 
+On AWS, the release includes a private LiteLLM configuration generated from the selected provider profile. Direct OpenAI and Claude share the OpenAI-compatible chat interface. Claude also supports the native Messages interface. The following table describes the local training profile. See [AWS gateway settings](../../infra/aws/README.md#gateway-routes).
+
 | Alias | Provider | Use |
 |---|---|---|
 | `nexa-chat` | Ollama `qwen3.5:9b-mlx` | Primary chat; one configured fallback model group |

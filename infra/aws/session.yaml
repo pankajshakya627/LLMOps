@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Disposable NexaAssist lab. UI access from one public IPv4 address; backend access through SSM. Session-owned resources are deleted at expiry; external telemetry follows its own retention.
+Description: Resumable NexaAssist training host with private backend services and timed EC2 stop.
 Parameters:
   UiAllowedCidr:
     Type: String
@@ -14,11 +14,11 @@ Parameters:
     AllowedValues: [m7i-flex.large]
   SessionMinutes:
     Type: Number
-    Default: 120
+    Default: 60
     AllowedValues: [60, 120]
   ExpiresAt:
     Type: String
-    Description: UTC YYYY-MM-DDTHH:mm:ss; set once at session creation, never extend during updates.
+    Description: Initial UTC auto-stop deadline. Resume re-arms the session schedule.
     AllowedPattern: '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}'
   BoundaryArn:
     Type: String
@@ -31,10 +31,20 @@ Parameters:
     Default: ''
     Description: Existing same-Region plaintext OpenAI API key secret named nexa-lab-openai; required for OpenAI.
     AllowedPattern: '(^$|arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:nexa-lab-openai-[A-Za-z0-9]{6})'
+  AnthropicKeySecretArn:
+    Type: String
+    Default: ''
+    Description: Optional same-Region plaintext secret named nexa-lab-anthropic.
+    AllowedPattern: '(^$|arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:nexa-lab-anthropic-[A-Za-z0-9]{6})'
   DatadogKeySecretArn:
     Type: String
+    Default: ''
     Description: Existing same-Region plaintext Datadog API key secret named nexa-lab-datadog.
-    AllowedPattern: 'arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:nexa-lab-datadog-[A-Za-z0-9]{6}'
+    AllowedPattern: '(^$|arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:nexa-lab-datadog-[A-Za-z0-9]{6})'
+  Observability:
+    Type: String
+    Default: cloudwatch
+    AllowedValues: [cloudwatch, datadog]
   DatadogSite:
     Type: String
     Default: datadoghq.com
@@ -50,14 +60,21 @@ Parameters:
     Description: Exact approved Bedrock model/profile ARNs, including Titan and any cross-Region destination models.
     AllowedPattern: '(^$|arn:aws:bedrock:[a-z0-9-]+:[0-9]{0,12}:(foundation-model|inference-profile|application-inference-profile)/[A-Za-z0-9._:/-]+)'
 Rules:
+  DatadogSecretRequired:
+    RuleCondition: !Equals [!Ref Observability, datadog]
+    Assertions:
+      - Assert: !Not [!Equals [!Ref DatadogKeySecretArn, '']]
+        AssertDescription: Datadog mode requires DatadogKeySecretArn.
   OpenAISecretRequired:
     RuleCondition: !Equals [!Ref ModelProvider, openai]
     Assertions:
       - Assert: !Not [!Equals [!Ref OpenAIKeySecretArn, '']]
         AssertDescription: OpenAI requires an existing OpenAIKeySecretArn.
 Conditions:
+  UseDatadog: !And [!Equals [!Ref Observability, datadog], !Not [!Equals [!Ref DatadogKeySecretArn, '']]]
   UseOpenAI: !Equals [!Ref ModelProvider, openai]
   UseBedrock: !Equals [!Ref ModelProvider, bedrock]
+  UseAnthropicKey: !And [!Condition UseOpenAI, !Not [!Equals [!Ref AnthropicKeySecretArn, '']]]
   UseOpenAIKey: !And [!Condition UseOpenAI, !Not [!Equals [!Ref OpenAIKeySecretArn, '']]]
   UseBedrockModels: !And [!Condition UseBedrock, !Not [!Equals [!Join [',', !Ref ModelResources], '']]]
 Resources:
@@ -204,11 +221,13 @@ Resources:
         - {Key: lab_session_id, Value: !Select [2, !Split ['/', !Ref AWS::StackId]]}
   ForwarderLogs:
     Type: AWS::Logs::LogGroup
+    Condition: UseDatadog
     Properties:
       LogGroupName: !Sub '/aws/lambda/${AWS::StackName}-datadog-forwarder'
       RetentionInDays: 1
   ForwarderRole:
     Type: AWS::IAM::Role
+    Condition: UseDatadog
     Properties:
       RoleName: !Sub '${AWS::StackName}-datadog-forwarder'
       PermissionsBoundary: !Ref BoundaryArn
@@ -231,6 +250,7 @@ Resources:
                 Resource: !GetAtt ForwarderLogs.Arn
   DatadogForwarder:
     Type: AWS::Lambda::Function
+    Condition: UseDatadog
     Properties:
       FunctionName: !Sub '${AWS::StackName}-datadog-forwarder'
       Runtime: python3.14
@@ -260,12 +280,14 @@ Resources:
           DD_STORE_FAILED_EVENTS: 'false'
   ForwarderCode:
     Type: AWS::CloudFormation::CustomResource
+    Condition: UseDatadog
     Properties:
       ServiceToken: !GetAtt Cleanup.Arn
       ServiceTimeout: 180
       Version: 5.4.18
   ForwarderPermission:
     Type: AWS::Lambda::Permission
+    Condition: UseDatadog
     Properties:
       FunctionName: !GetAtt DatadogForwarder.Arn
       Action: lambda:InvokeFunction
@@ -274,6 +296,7 @@ Resources:
       SourceArn: !GetAtt Logs.Arn
   LogSubscription:
     Type: AWS::Logs::SubscriptionFilter
+    Condition: UseDatadog
     DependsOn: ForwarderPermission
     Properties:
       LogGroupName: !Ref Logs
@@ -319,9 +342,18 @@ Resources:
                   Action: secretsmanager:GetSecretValue
                   Resource: !Ref OpenAIKeySecretArn
                 - !Ref AWS::NoValue
-              - Effect: Allow
-                Action: secretsmanager:GetSecretValue
-                Resource: !Ref DatadogKeySecretArn
+              - !If
+                - UseAnthropicKey
+                - Effect: Allow
+                  Action: secretsmanager:GetSecretValue
+                  Resource: !Ref AnthropicKeySecretArn
+                - !Ref AWS::NoValue
+              - !If
+                - UseDatadog
+                - Effect: Allow
+                  Action: secretsmanager:GetSecretValue
+                  Resource: !Ref DatadogKeySecretArn
+                - !Ref AWS::NoValue
               - !If
                 - UseBedrockModels
                 - Effect: Allow
@@ -351,8 +383,8 @@ Resources:
       IamInstanceProfile: !Ref HostProfile
       SubnetId: !Ref Subnet
       SecurityGroupIds: [!Ref SecurityGroup]
-      InstanceInitiatedShutdownBehavior: terminate
-      MetadataOptions: {HttpTokens: required, HttpPutResponseHopLimit: 2}
+      InstanceInitiatedShutdownBehavior: stop
+      MetadataOptions: {HttpTokens: required, HttpPutResponseHopLimit: !If [UseBedrock, 2, 1]}
       BlockDeviceMappings:
         - DeviceName: /dev/xvda
           Ebs: {VolumeSize: 40, VolumeType: gp3, Encrypted: true, DeleteOnTermination: true}
@@ -409,8 +441,11 @@ Resources:
                 Action: cloudformation:DeleteStack
                 Resource: !Ref 'AWS::StackId'
               - Effect: Allow
-                Action: ec2:TerminateInstances
+                Action: [ec2:StopInstances, ec2:TerminateInstances]
                 Resource: !Sub 'arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/${Host}'
+              - Effect: Allow
+                Action: scheduler:GetSchedule
+                Resource: !Sub 'arn:${AWS::Partition}:scheduler:${AWS::Region}:${AWS::AccountId}:schedule/default/${AWS::StackName}-expiry'
               - Effect: Allow
                 Action: ec2:DescribeInstances
                 Resource: '*'
@@ -435,6 +470,7 @@ Resources:
           BUCKET: !Ref Artifacts
           STACK: !Ref 'AWS::StackId'
           INSTANCE: !Ref Host
+          SCHEDULE: !Sub '${AWS::StackName}-expiry'
       Code:
         ZipFile: |
           import os
@@ -470,6 +506,12 @@ Resources:
                       cfnresponse.send(event, context, cfnresponse.SUCCESS, data,
                                        'datadog-forwarder-code')
                   return
+              if event.get('operation') == 'stop':
+                  schedule = boto3.client('scheduler').get_schedule(Name=os.environ['SCHEDULE'])
+                  if schedule['ScheduleExpression'] != 'at(' + event['deadline'] + ')':
+                      return {'status': 'stale'}
+                  boto3.client('ec2').stop_instances(InstanceIds=[os.environ['INSTANCE']])
+                  return {'status': 'stopping'}
               if event.get('operation') != 'destroy':
                   raise ValueError('Explicit destroy operation required')
               ec2 = boto3.client('ec2')
@@ -530,26 +572,28 @@ Resources:
       Target:
         Arn: !GetAtt Cleanup.Arn
         RoleArn: !GetAtt SchedulerRole.Arn
-        Input: '{"operation":"destroy"}'
+        Input: !Sub '{"operation":"stop","deadline":"${ExpiresAt}"}'
         RetryPolicy: {MaximumEventAgeInSeconds: 3600, MaximumRetryAttempts: 3}
 Outputs:
   SessionName: {Value: !Ref AWS::StackName}
   SessionId: {Value: !Select [2, !Split ['/', !Ref AWS::StackId]]}
   ApplicationLogGroup: {Value: !Ref Logs}
-  DatadogForwarderArn: {Value: !GetAtt DatadogForwarder.Arn}
+  DatadogForwarderArn: {Condition: UseDatadog, Value: !GetAtt DatadogForwarder.Arn}
   UiAllowedCidr: {Value: !Ref UiAllowedCidr}
-  ApplicationUrl: {Value: !Sub 'http://${Host.PublicIp}:8501'}
+  StopSchedule: {Value: !Ref Expiry}
   InstanceId: {Value: !Ref Host}
   Bucket: {Value: !Ref Artifacts}
   AppRepository: {Value: !GetAtt AppRepository.RepositoryUri}
   GatewayRepository: {Value: !GetAtt GatewayRepository.RepositoryUri}
   GuardrailsRepository: {Value: !GetAtt GuardrailsRepository.RepositoryUri}
   SecretArn: {Value: !Ref SessionSecret}
-  DatadogKeySecretArn: {Value: !Ref DatadogKeySecretArn}
-  DatadogSite: {Value: !Ref DatadogSite}
-  DatadogMlApp: {Value: !Ref DatadogMlApp}
+  DatadogKeySecretArn: {Condition: UseDatadog, Value: !Ref DatadogKeySecretArn}
+  DatadogSite: {Condition: UseDatadog, Value: !Ref DatadogSite}
+  DatadogMlApp: {Condition: UseDatadog, Value: !Ref DatadogMlApp}
+  Observability: {Value: !Ref Observability}
   ModelProvider: {Value: !Ref ModelProvider}
   OpenAIKeySecretArn: {Condition: UseOpenAI, Value: !Ref OpenAIKeySecretArn}
+  AnthropicKeySecretArn: {Condition: UseAnthropicKey, Value: !Ref AnthropicKeySecretArn}
   GuardrailId: {Condition: UseBedrock, Value: !GetAtt Guardrail.GuardrailId}
   GuardrailVersion: {Condition: UseBedrock, Value: !GetAtt GuardrailVersion.Version}
   CleanupFunction: {Value: !Ref Cleanup}

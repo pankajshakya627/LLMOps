@@ -10,6 +10,7 @@ from app.chains.redaction import redact
 from app.chains.rerank import build_rerank_chain
 from app.chains.retrieval import build_retrieval_chain
 from app.core import telemetry
+from app.core.aws_tracing import trace_callbacks
 from app.core.config import Settings
 from app.core.observability import retrieval_latencies
 from app.database.mongo import get_parent_store, get_vector_store, ping_database
@@ -52,7 +53,10 @@ async def retrieve_policy(request: RetrieveRequest, settings: Settings) -> Retri
             reranker=build_rerank_chain(settings) if settings.rerank_enabled else None,
             amendment_search=build_amendment_search(settings),
         )
-        response = await chain.ainvoke(request)
+        with trace_callbacks(settings.aws_trace_enabled) as callbacks:
+            response = await chain.ainvoke(
+                request, config={"callbacks": callbacks} if callbacks else None
+            )
     except Exception:
         retrieval_metrics["errors"] += 1
         if telemetry.statsd is not None:

@@ -320,3 +320,38 @@ def test_batch_exports_actual_means_or_unavailable_without_changing_results(
     telemetry.annotate.assert_called_once_with(
         tags={"evaluation_scope": "batch_mean", "case_count": "0"}
     )
+
+
+def test_provider_trial_retains_failed_and_critical_cases(tmp_path, monkeypatch, settings):
+    import asyncio
+
+    from app.evaluation import provider_trial as runner
+
+    cases = runner.load_cases(runner.HERE / "datasets/answer.jsonl")
+    chosen = [cases[0], next(c for c in cases if c.expected_status != "answered")]
+    monkeypatch.setattr(runner, "load_cases", lambda path: chosen)
+    settings = settings.model_copy(
+        update={"eval_judge_model": "nexa-judge-openai", "embedding_model": "nexa-embed-openai"}
+    )
+    monkeypatch.setattr(runner, "get_settings", lambda: settings)
+
+    async def records(batch, config):
+        assert config.chat_model == "nexa-chat-anthropic" and config.openai_fallback_model is None
+        if batch == [chosen[1]]:
+            raise RuntimeError("fixture upstream error")
+        return [
+            {
+                "judge": {"status_matches": True, "correctness": 1, "groundedness": 1},
+                "actual_status": "answered",
+            }
+        ]
+
+    monkeypatch.setattr(runner, "collect_records", records)
+    output = tmp_path / "trial.jsonl"
+    asyncio.run(runner.trial("nexa-chat-anthropic", 2, output))
+    rows = [json.loads(line) for line in output.read_text().splitlines()]
+    assert [row["passed"] for row in rows] == [True, False]
+    assert rows[1]["critical"] and rows[1]["error_type"] == "RuntimeError"
+    assert {row["trial"] for row in rows} == {2}
+    with pytest.raises(FileExistsError):
+        asyncio.run(runner.trial("nexa-chat-anthropic", 2, output))

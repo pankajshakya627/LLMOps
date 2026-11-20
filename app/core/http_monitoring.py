@@ -8,6 +8,7 @@ from collections import Counter, deque
 from dataclasses import dataclass, field
 from time import perf_counter
 from typing import Any
+from uuid import uuid4
 
 import structlog
 from ddtrace.llmobs import LLMObs
@@ -41,7 +42,7 @@ def safe_content(value: Any) -> Any:
             else safe_content(item)
             for key, item in value.items()
         }
-    if isinstance(value, list):
+    if isinstance(value, (list, tuple)):
         return [safe_content(item) for item in value]
     if isinstance(value, str):
         return SECRET_TEXT.sub("[REDACTED_SECRET]", redact(value)[0])
@@ -99,6 +100,12 @@ class HTTPMonitoringMiddleware:
         if scope["type"] != "http":
             await self.app(scope, receive, send)
             return
+        request_id = uuid4().hex
+        scope["nexa.request_id"] = request_id
+        with structlog.contextvars.bound_contextvars(request_id=request_id):
+            await self.trace_request(scope, receive, send)
+
+    async def trace_request(self, scope: Scope, receive: Receive, send: Send) -> None:
         if LLMObs.enabled:
             with LLMObs.workflow(name=f"{scope['method']} request") as span:
                 identity = LLMObs.export_span(span)
@@ -140,6 +147,9 @@ class HTTPMonitoringMiddleware:
             nonlocal status, response_complete, response_json, responded_at
             if message["type"] == "http.response.start":
                 status = message["status"]
+                message.setdefault("headers", []).append(
+                    (b"x-request-id", scope["nexa.request_id"].encode())
+                )
                 identity = scope.get("nexa.datadog")
                 if identity:
                     message.setdefault("headers", []).extend(

@@ -1,12 +1,12 @@
-name: Disposable AWS lab
+name: AWS training application
 on:
   workflow_dispatch:
     inputs:
       operation:
         type: choice
-        options: [start, deploy, evaluate, capacity, destroy]
+        options: [start, deploy, stop, resume, evaluate, capacity, destroy]
         default: start
-        description: Start creates a NEW session. Deploy replaces images in an existing session. Destroy deletes all session data.
+        description: Start creates a stack. Stop retains data. Resume starts the saved release. Destroy deletes all session data.
       session:
         type: string
         default: nexa-lab-training
@@ -15,15 +15,20 @@ on:
         type: choice
         options: [openai, bedrock]
         default: openai
-        description: OpenAI is the default. Bedrock requires explicit bootstrap opt-in and a new session.
+        description: Bedrock keeps inference on AWS; requires bootstrap opt-in and a new session.
+      observability:
+        type: choice
+        options: [cloudwatch, datadog]
+        default: cloudwatch
+        description: CloudWatch uses AWS only. Datadog is retained for existing sessions.
       minutes:
         type: choice
         options: ['60', '120']
-        default: '120'
-        description: Maximum session lifetime; deploy does not extend it
+        default: '60'
+        description: Minutes until automatic stop after start or resume
       budget:
         type: choice
-        options: ['3', '4', '5', '6', '7', '8']
+        options: ['2', '3', '4', '5', '6', '7', '8', '9']
         default: '5'
         description: USD planning allowance, recorded as a tag; NOT a billing hard cap
 permissions:
@@ -35,6 +40,8 @@ jobs:
   checks:
     if: inputs.operation == 'start' || inputs.operation == 'deploy'
     uses: ./.github/workflows/ci.yaml
+    with:
+      release_images: true
   session:
     needs: checks
     if: always() && (needs.checks.result == 'success' || needs.checks.result == 'skipped')
@@ -52,6 +59,7 @@ jobs:
       LAB_MINUTES: ${{ inputs.minutes }}
       LAB_BUDGET: ${{ inputs.budget }}
       LAB_PROVIDER: ${{ inputs.model_provider }}
+      LAB_OBSERVABILITY: ${{ inputs.observability }}
       CF_ROLE: ${{ vars.AWS_CLOUDFORMATION_ROLE_ARN }}
       BOUNDARY: ${{ vars.AWS_SESSION_BOUNDARY_ARN }}
       MODELS: ${{ vars.BEDROCK_MODEL_ARNS }}
@@ -59,12 +67,15 @@ jobs:
       DD_SITE: ${{ vars.DD_SITE || 'datadoghq.com' }}
       DD_LLMOBS_ML_APP: ${{ vars.DD_LLMOBS_ML_APP || 'nexaassist' }}
       DD_CAPTURE_CONTENT: ${{ vars.DD_CAPTURE_CONTENT || 'false' }}
+      ANTHROPIC_SECRET: ${{ vars.ANTHROPIC_API_KEY_SECRET_ARN }}
+      ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_LITELLM_CHAT_MODEL }}
+      ANSWER_MODEL: ${{ vars.CHAT_MODEL }}
       OPENAI_SECRET: ${{ vars.OPENAI_API_KEY_SECRET_ARN }}
       UI_ALLOWED_CIDR: ${{ secrets.AWS_UI_ALLOWED_CIDR }}
       OPENAI_CHAT_ROUTE: ${{ vars.OPENAI_LITELLM_CHAT_MODEL || 'openai/gpt-6-luna' }}
       OPENAI_JUDGE_ROUTE: ${{ vars.OPENAI_LITELLM_JUDGE_MODEL || 'openai/gpt-6-luna' }}
-      BEDROCK_CHAT_ROUTE: ${{ vars.BEDROCK_CHAT_ROUTE }}
-      BEDROCK_JUDGE_ROUTE: ${{ vars.BEDROCK_JUDGE_ROUTE }}
+      BEDROCK_CHAT_ROUTE: ${{ vars.BEDROCK_CHAT_ROUTE || 'bedrock/converse/apac.amazon.nova-lite-v1:0' }}
+      BEDROCK_JUDGE_ROUTE: ${{ vars.BEDROCK_JUDGE_ROUTE || 'bedrock/converse/apac.amazon.nova-lite-v1:0' }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Require the default branch and configured AWS settings
@@ -76,13 +87,18 @@ jobs:
           if [ "$LAB_OPERATION" = start ]; then
             test -n "$CF_ROLE"
             test -n "$BOUNDARY"
-            test -n "$DATADOG_SECRET"
+            if [ "$LAB_OBSERVABILITY" = datadog ]; then
+              test -n "$DATADOG_SECRET"
+            fi
             if [ -z "$UI_ALLOWED_CIDR" ]; then
               echo '::error::Set the aws-lab environment secret AWS_UI_ALLOWED_CIDR to your public IPv4 /32.'
               exit 1
             fi
             if [ "$LAB_PROVIDER" = openai ]; then
               test -n "$OPENAI_SECRET"
+              if [ -n "$ANTHROPIC_MODEL" ] || [ "$ANSWER_MODEL" = nexa-chat-anthropic ]; then
+                test -n "$ANTHROPIC_SECRET" && [[ "$ANTHROPIC_MODEL" =~ ^anthropic/claude-[a-zA-Z0-9.-]+$ ]] || { echo "::error::Set both Anthropic secret ARN and direct Claude model"; exit 1; }
+              fi
             else
               test -n "$MODELS"
             fi
@@ -108,18 +124,33 @@ jobs:
         if: inputs.operation == 'start'
         id: create
         run: |
+          if [ "$LAB_PROVIDER" = bedrock ]; then ANTHROPIC_SECRET=""; fi
           uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" create \
             --minutes "$LAB_MINUTES" --budget "$LAB_BUDGET" \
+            --observability "$LAB_OBSERVABILITY" --anthropic-secret-arn "$ANTHROPIC_SECRET" \
             --cloudformation-role-arn "$CF_ROLE" --boundary-arn "$BOUNDARY" \
             --datadog-secret-arn "$DATADOG_SECRET" --datadog-site "$DD_SITE" --datadog-ml-app "$DD_LLMOBS_ML_APP" \
             --ui-allowed-cidr "$UI_ALLOWED_CIDR" \
             --provider "$LAB_PROVIDER" --openai-secret-arn "$OPENAI_SECRET" --model-resources "$MODELS"
+      - name: Stop host and verify stopped state
+        if: inputs.operation == 'stop'
+        run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" stop
+      - name: Resume saved release and verify readiness
+        if: inputs.operation == 'resume'
+        run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" resume --minutes "$LAB_MINUTES"
       - name: Read session outputs
+        if: contains(fromJSON('["start","deploy","resume"]'), inputs.operation)
+        run: |
+          args=()
+          if [ "$LAB_OPERATION" != resume ]; then args=(--provider "$LAB_PROVIDER"); fi
+          uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" status "${args[@]}" > session-outputs.json
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         if: inputs.operation == 'start' || inputs.operation == 'deploy'
-        run: uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" status --provider "$LAB_PROVIDER" > session-outputs.json
-      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
-        if: inputs.operation == 'start' || inputs.operation == 'deploy'
-      - name: Build three images and resolve immutable digests
+        with:
+          pattern: release-*
+          path: ${{ runner.temp }}/release-images
+          merge-multiple: true
+      - name: Publish the three tested images and resolve immutable digests
         if: inputs.operation == 'start' || inputs.operation == 'deploy'
         run: |
           registry="$(jq -r '.AppRepository | split("/")[0]' session-outputs.json)"
@@ -127,15 +158,15 @@ jobs:
           tag="$GITHUB_SHA-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
           for component in app gateway guardrails; do
             case "$component" in
-              app) field=AppRepository; dockerfile=app/Dockerfile ;;
-              gateway) field=GatewayRepository; dockerfile=app/gateway/Dockerfile ;;
-              guardrails) field=GuardrailsRepository; dockerfile=app/security/Dockerfile ;;
+              app) field=AppRepository ;;
+              gateway) field=GatewayRepository ;;
+              guardrails) field=GuardrailsRepository ;;
             esac
             repo="$(jq -r --arg field "$field" '.[$field]' session-outputs.json)"
-            docker buildx build --platform linux/amd64 --push --provenance=false \
-              --file "$dockerfile" --tag "$repo:$tag" \
-              --metadata-file "$RUNNER_TEMP/$component-build.json" .
-            digest="$(jq -r '.["containerimage.digest"]' "$RUNNER_TEMP/$component-build.json")"
+            zstd -dc "$RUNNER_TEMP/release-images/$component.tar.zst" | docker load
+            docker tag "nexa-ci/$component:$GITHUB_SHA" "$repo:$tag"
+            docker push "$repo:$tag"
+            digest="$(aws ecr describe-images --repository-name "${repo#*/}" --image-ids imageTag="$tag" --query 'imageDetails[0].imageDigest' --output text)"
             echo "$component=$repo@$digest" >> "$RUNNER_TEMP/image-refs"
           done
           python - <<'PY'
@@ -148,6 +179,8 @@ jobs:
         if: inputs.operation == 'start' || inputs.operation == 'deploy'
         run: |
           if [ "$LAB_PROVIDER" = bedrock ]; then
+            ANSWER_MODEL=nexa-chat-bedrock
+            ANTHROPIC_MODEL=""
             CHAT_ROUTE="$BEDROCK_CHAT_ROUTE"
             JUDGE_ROUTE="$BEDROCK_JUDGE_ROUTE"
           else
@@ -156,9 +189,10 @@ jobs:
           fi
           uv run --no-sync python infra/aws/lab.py --stack "$LAB_STACK" deploy \
             --images images.json --release-id "$GITHUB_SHA-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" \
-            --provider "$LAB_PROVIDER" --chat-route "$CHAT_ROUTE" --judge-route "$JUDGE_ROUTE"
+            --provider "$LAB_PROVIDER" --chat-route "$CHAT_ROUTE" --judge-route "$JUDGE_ROUTE" \
+            --answer-model "$ANSWER_MODEL" --anthropic-model "$ANTHROPIC_MODEL"
       - name: Publish application browser link
-        if: inputs.operation == 'start' || inputs.operation == 'deploy'
+        if: contains(fromJSON('["start","deploy","resume"]'), inputs.operation)
         run: |
           python - <<'PY'
           import json
@@ -169,23 +203,28 @@ jobs:
           from zoneinfo import ZoneInfo
           data = json.loads(Path('session-outputs.json').read_text())
           url = data['ApplicationUrl']
-          site = data['DatadogSite']
-          host = 'app.' + site if site in ('datadoghq.com', 'datadoghq.eu', 'ddog-gov.com') else site
-          origin = 'https://' + host
-          session_filter = 'lab_session_id:' + data['SessionId']
-          traces = origin + '/llm/traces?fromUser=true&query=' + quote('ml_app:' + data['DatadogMlApp'] + ' ' + session_filter)
-          queries = traces + quote(' http_route:/answer* @is_root_span:true')
-          logs = origin + '/logs?fromUser=true&query=' + quote(session_filter)
+          region = os.environ['AWS_REGION']
+          cloudwatch = f'https://{region}.console.aws.amazon.com/cloudwatch/home?region={region}'
+          monitoring = (
+              f'[CloudWatch logs]({cloudwatch}#logsV2:log-groups)\n\n'
+              f'Log group: `{data["ApplicationLogGroup"]}` · Reports: `s3://{data["Bucket"]}/reports/`\n\n'
+          )
+          if data.get('Observability', 'datadog') == 'datadog':
+              site = data['DatadogSite']
+              host = 'app.' + site if site in ('datadoghq.com', 'datadoghq.eu', 'ddog-gov.com') else site
+              origin = 'https://' + host
+              session_filter = 'lab_session_id:' + data['SessionId']
+              traces = origin + '/llm/traces?fromUser=true&query=' + quote('ml_app:' + data['DatadogMlApp'] + ' ' + session_filter)
+              logs = origin + '/logs?fromUser=true&query=' + quote(session_filter)
+              monitoring += f'[Datadog traces and evaluations]({traces}) · [Datadog logs]({logs})\n\n'
           expiry = datetime.fromisoformat(data['ExpiresAt']).replace(tzinfo=UTC).astimezone(ZoneInfo('Asia/Kolkata'))
           with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a') as report:
               report.write(
-                  f'### AWS application ready\n\n[Open the application]({url})\n\n'
-                  f'[Datadog answer queries]({queries}) · '
-                  f'[Datadog traces and evaluations]({traces}) · [Datadog logs]({logs}) · [Metrics Explorer]({origin}/metric/explorer)\n\n'
-                  f'Session filter: `{session_filter}`\n\n'
-                  f'Scheduled expiry: {expiry:%Y-%m-%d %H:%M:%S} IST\n\n'
-                  'Destroy removes the app, Forwarder and session CloudWatch logs. '
-                  'Reusable Datadog account setup, credentials and exported history are retained.\n\n'
+                  f'### AWS application ready\n\n[Open the application]({url})\n\n' +
+                  monitoring +
+                  f'Scheduled power action: {expiry:%Y-%m-%d %H:%M:%S} IST\n\n'
+                  'Destroy removes the app, database, session reports and session CloudWatch logs. '
+                  + ('Auto-stop retains the disk, index and feedback.\n\n' if 'StopSchedule' in data else 'Legacy expiry deletes this session.\n\n') +
                   'UI port 8501 is restricted to the saved trainer IP. '
                   'Use synthetic data only; this demo uses HTTP.\n'
               )

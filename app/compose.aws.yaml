@@ -21,9 +21,10 @@ services:
     labels:
       com.datadoghq.ad.logs: '[{"source":"python","service":"nexaassist-gateway"}]'
     image: ${GATEWAY_IMAGE:?required}
-    command: ["litellm", "--config", "/opt/gateway/litellm_openai.yaml", "--host", "0.0.0.0", "--port", "4000", "--num_workers", "1"]
+    volumes: ["./gateway.yaml:/opt/gateway/active.yaml:ro"]
+    command: ["litellm", "--config", "/opt/gateway/active.yaml", "--host", "0.0.0.0", "--port", "4000", "--num_workers", "1"]
     environment:
-      DD_API_KEY: ${DD_API_KEY:?Set DD_API_KEY in .env}
+      DD_API_KEY: ${DD_API_KEY:-}
       DD_SITE: ${DD_SITE:-datadoghq.com}
       DD_ENV: ${DD_ENV:-dev}
       DD_SERVICE: nexaassist-gateway
@@ -34,6 +35,7 @@ services:
       DD_LLMOBS_AGENTLESS_ENABLED: "true"
       LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?required}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       OPENAI_LITELLM_CHAT_MODEL: ${OPENAI_LITELLM_CHAT_MODEL:-openai/gpt-6-luna}
       OPENAI_LITELLM_JUDGE_MODEL: ${OPENAI_LITELLM_JUDGE_MODEL:-openai/gpt-6-luna}
       LITELLM_LOCAL_MODEL_COST_MAP: "True"
@@ -53,9 +55,8 @@ services:
     labels:
       com.datadoghq.ad.logs: '[{"source":"python","service":"nexaassist-api"}]'
     image: ${APP_IMAGE:?required}
-    env_file: .env
     environment:
-      DD_API_KEY: ${DD_API_KEY:?Set DD_API_KEY in .env}
+      DD_API_KEY: ${DD_API_KEY:-}
       DD_SITE: ${DD_SITE:-datadoghq.com}
       DD_ENV: ${DD_ENV:-dev}
       DD_SERVICE: nexaassist-api
@@ -73,7 +74,8 @@ services:
       JURISDICTION: IN
       CONFIDENTIALITY_LEVEL: internal
       OPENAI_API_KEY: ""
-      CHAT_MODEL: nexa-chat-openai
+      FEEDBACK_REVIEWER_TOKEN: ${FEEDBACK_REVIEWER_TOKEN:?required}
+      CHAT_MODEL: ${CHAT_MODEL:-nexa-chat-openai}
       CHAT_API_MODE: chat_completions
       CHAT_BASE_URL: http://gateway:4000/v1
       CHAT_API_KEY: ${LITELLM_MASTER_KEY:?required}
@@ -129,6 +131,6 @@ services:
       retries: 5
     restart: unless-stopped
 
-# shortcut: state lasts for one lab session; use RDS and managed telemetry for persistent service.
+# The fixed Compose project name keeps this volume across release directories and EC2 stops.
 volumes:
   postgres-data:

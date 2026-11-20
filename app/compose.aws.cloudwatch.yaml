@@ -1,0 +1,19 @@
+# CloudWatch collects stdout using the EC2 Docker log driver for either model provider.
+services:
+  gateway:
+    environment:
+      DD_API_KEY: ""
+      DD_LLMOBS_ENABLED: "false"
+      DD_TRACE_ENABLED: "false"
+      DD_INSTRUMENTATION_TELEMETRY_ENABLED: "false"
+      LITELLM_TELEMETRY: "False"
+  api:
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    environment:
+      DD_API_KEY: ""
+      DD_LLMOBS_ENABLED: "false"
+      AWS_TRACE_ENABLED: "true"
+      DD_METRICS_ENABLED: "false"
+      DD_TRACE_ENABLED: "false"
+      DD_INSTRUMENTATION_TELEMETRY_ENABLED: "false"
+      DD_CAPTURE_CONTENT: "false"

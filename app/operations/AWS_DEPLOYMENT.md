@@ -1,29 +1,6 @@
 # NexaAssist on AWS — optional Bedrock deployment design
 
-> Historical deployment proposal: its Phoenix/Arize observability design is superseded.
-> Use the [current Datadog AWS runbook](../observability/README.md) and
-> [implemented disposable AWS lab](../../infra/aws/README.md) for deployment.
-
-The active disposable AWS profile uses **OpenAI** for chat, judging and
-embeddings. It neither provisions nor invokes Bedrock by default. Follow the
-[optional Bedrock setup](../../infra/aws/README.md#optional-bedrock-mode--disabled-by-default)
-only when you explicitly choose to change providers in a new session. The
-existing Guardrails AI service and application validations remain active with OpenAI.
-
-For the requested **short-lived training sessions**, the implemented path is
-[the disposable AWS lab](../../infra/aws/README.md). It uses one Docker host and
-automatic teardown to match the 1–2 hour, $3–$8 allowance. The persistent managed
-architecture below remains a separate, unimplemented design.
-
-Implementation update, **31 October 2026**: the lab now includes
-`app/gateway/litellm_bedrock.yaml`, optional fail-closed Bedrock input/output
-checks, CloudFormation and GitHub Actions. Its Phoenix-based tracing and
-single-host lifecycle differ from the Arize/ECS target below. No live AWS
-compatibility or deployment result is claimed by this implementation.
-
-Updated **28 October 2026** against the current repository and the linked vendor documentation. This is an implementation plan, not a deployed or benchmarked AWS stack. The current local Compose configuration still uses Ollama for chat and embeddings and self-hosted Phoenix for local tracing.
-
-The proposed deployment uses **Anthropic Claude on Amazon Bedrock** for chat and **Amazon Titan Text Embeddings V2** for embeddings. Choose a Claude model or inference profile available to the target AWS account and Region, then verify the application's strict structured-output contract before deployment. This is a design choice, not a route in the current gateway YAML. [Claude on Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/service_code_examples_bedrock-runtime_anthropic_claude.html), [model availability](https://docs.aws.amazon.com/bedrock/latest/userguide/models.html).
+The implemented training stack uses OpenAI, optional direct Claude, CloudWatch and a resumable EC2 host. Use the [AWS operator guide](../../infra/aws/START_USE_DELETE_GUIDE.md) and [current deployment runbook](../../infra/aws/README.md). The following sections preserve the historical managed-service proposal.
 
 ## Recommended responsibility split
 

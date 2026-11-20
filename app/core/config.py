@@ -75,7 +75,7 @@ class Settings(BaseSettings):
     token_encoding: str = "o200k_base"
     # Share of answered /answer requests scored in the background; 0 disables sampling.
     live_eval_sample_rate: float = Field(default=0.0, ge=0, le=1)
-    # Requests per client address per minute on /answer* and /feedback; 0 disables the limit.
+    # Per-client requests/minute per /answer*, /retrieve or /feedback group; 0 disables it.
     rate_limit_per_minute: int = Field(default=30, ge=0)
     # USD per million tokens. Unset means /metrics/answers reports no cost.
     chat_input_price_per_mtok: float | None = Field(default=None, ge=0)
@@ -98,6 +98,7 @@ class Settings(BaseSettings):
     confidentiality_level: str
 
     log_level: str = "INFO"
+    aws_trace_enabled: bool = False
     dd_llmobs_enabled: bool = False
     dd_llmobs_ml_app: str = Field(default="nexaassist", min_length=1)
     dd_api_key: SecretStr | None = None

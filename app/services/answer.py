@@ -8,6 +8,7 @@ from langchain_core.runnables import RunnableLambda
 from app.chains.answer import build_answer_chain
 from app.chains.llm import get_chat_model
 from app.core import telemetry
+from app.core.aws_tracing import trace_callbacks
 from app.core.config import Settings
 from app.core.observability import answer_latencies, answer_metrics, track_answer_usage
 from app.core.telemetry import correlate_answer
@@ -23,7 +24,10 @@ async def _generate_answer(request: RetrieveRequest, settings: Settings) -> Answ
         return await retrieve_policy(value, settings)
 
     chain = build_answer_chain(RunnableLambda(retrieve), get_chat_model(settings), settings)
-    response = await chain.ainvoke(request)
+    with trace_callbacks(settings.aws_trace_enabled) as callbacks:
+        response = await chain.ainvoke(
+            request, config={"callbacks": callbacks} if callbacks else None
+        )
     correlate_answer(response)
     logger.info(
         "answer_completed",

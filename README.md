@@ -3,16 +3,10 @@
 An enterprise policy intelligence reference application for NexaBank, a fictional
 bank. The corpus and examples are synthetic.
 
-For daily use, follow the [AWS start, browser and delete guide](infra/aws/START_USE_DELETE_GUIDE.md).
+Start, stop, and resume the AWS training application with the [operator guide](infra/aws/START_USE_DELETE_GUIDE.md).
+The Mumbai deployment defaults to OpenAI and CloudWatch. An optional direct Anthropic route shares the OpenAI embedding index. A 60-minute timer stops the host and retains its encrypted disk. The trainer's saved IPv4 address controls browser access.
 
-For disposable **1–2 hour AWS sessions** and GitHub Actions CI/CD, follow the
-[AWS lab runbook](infra/aws/README.md). The $3–$8 allowance is a planning target;
-the deployment includes scheduled teardown. The AWS profile uses **OpenAI for
-chat, evaluation and embeddings** by default, with no Bedrock calls or resources.
-Bedrock is available only through the [explicit opt-in instructions](infra/aws/README.md#optional-bedrock-mode--disabled-by-default).
-
-For an explanation of the workflows, AWS roles, secret storage and local
-start/stop commands, read the [AWS CI/CD guide](infra/aws/CI_CD_GUIDE.md).
+See the [AWS setup and cost guide](infra/aws/README.md), [CI/CD guide](infra/aws/CI_CD_GUIDE.md), and [application codemap](docs/CODEMAPS/architecture.md).
 
 The application uses **LiteLLM** for chat routing/fallback, load balancing and
 optional exact response caching; **Guardrails AI** plus application checks for

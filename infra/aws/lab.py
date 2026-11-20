@@ -1,9 +1,10 @@
-"""Explicit deployment, capacity inspection and deletion of disposable AWS training sessions."""
+"""Provision, deploy, stop and resume AWS training sessions."""
 
 from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import ipaddress
 import json
 import os
@@ -16,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 import boto3
+import yaml
 from botocore.config import Config
 from botocore.exceptions import ClientError
 
@@ -44,7 +46,79 @@ def output(summary: str, artifacts: list[str], next_actions: list[str]) -> None:
 
 def stack_outputs(stack: str) -> dict[str, str]:
     data = client("cloudformation").describe_stacks(StackName=stack)["Stacks"][0]
-    return {entry["OutputKey"]: entry["OutputValue"] for entry in data["Outputs"]}
+    outputs = {entry["OutputKey"]: entry["OutputValue"] for entry in data["Outputs"]}
+    if "StopSchedule" in outputs:
+        host = describe_host(outputs["InstanceId"])
+        outputs["HostState"] = host["State"]["Name"]
+        if host.get("PublicIpAddress") and outputs["HostState"] == "running":
+            outputs["ApplicationUrl"] = f"http://{host['PublicIpAddress']}:8501"
+        schedule = client("scheduler").get_schedule(Name=outputs["StopSchedule"])
+        expression = schedule["ScheduleExpression"]
+        outputs["ExpiresAt"] = expression.removeprefix("at(").removesuffix(")")
+    return outputs
+
+
+def describe_host(instance: str) -> dict[str, Any]:
+    reservations = client("ec2").describe_instances(InstanceIds=[instance])["Reservations"]
+    return reservations[0]["Instances"][0]
+
+
+def power(data: dict[str, str], action: str, minutes: int = 60) -> None:
+    if not data.get("StopSchedule"):
+        raise ValueError(
+            "Stop/resume requires a resumable stack; legacy sessions expire by deletion"
+        )
+    instance = data["InstanceId"]
+    ids = {"InstanceIds": [instance]}
+    ec2 = client("ec2")
+    state = data["HostState"]
+    if action == "stop":
+        if state in {"pending", "running"}:
+            if state == "pending":
+                ec2.get_waiter("instance_running").wait(**ids)
+            ec2.stop_instances(**ids)
+        elif state not in {"stopping", "stopped"}:
+            raise ValueError(f"Cannot stop a host in state {state}")
+        ec2.get_waiter("instance_stopped").wait(**ids)
+        output("Host stopped; disk and release retained", [instance], [])
+        return
+
+    if state == "stopping":
+        ec2.get_waiter("instance_stopped").wait(**ids)
+        state = "stopped"
+    if state == "stopped":
+        # Arm the cloud-side safeguard before starting chargeable compute.
+        scheduler = client("scheduler")
+        name = data["StopSchedule"]
+        schedule = scheduler.get_schedule(Name=name)
+        deadline = (datetime.now(UTC) + timedelta(minutes=minutes)).strftime("%Y-%m-%dT%H:%M:%S")
+        scheduler.update_schedule(
+            Name=name,
+            ScheduleExpression=f"at({deadline})",
+            ScheduleExpressionTimezone="UTC",
+            FlexibleTimeWindow=schedule["FlexibleTimeWindow"],
+            Target={
+                **schedule["Target"],
+                "Input": json.dumps({"operation": "stop", "deadline": deadline}),
+            },
+        )
+        ec2.start_instances(**ids)
+    elif state not in {"running", "pending"}:
+        raise ValueError(f"Cannot resume a host in state {state}")
+    try:
+        ec2.get_waiter("instance_running").wait(**ids)
+        run_remote(
+            instance,
+            "set -eu; cd /opt/nexaassist/current; "
+            "docker compose up -d --no-build --pull never --wait --wait-timeout 300; "
+            "curl -fsS http://127.0.0.1:8000/ready >/dev/null; "
+            "curl -fsS http://127.0.0.1:8501/_stcore/health >/dev/null",
+        )
+    except Exception:
+        if state == "stopped":
+            ec2.stop_instances(**ids)
+        raise
+    output("Current release ready", [instance], [])
 
 
 def validate_ui_cidr(value: str) -> None:
@@ -58,6 +132,17 @@ def validate_ui_cidr(value: str) -> None:
 
 def create(args: argparse.Namespace) -> None:
     validate_ui_cidr(args.ui_allowed_cidr)
+    observability = getattr(args, "observability", "cloudwatch")
+    anthropic_secret = getattr(args, "anthropic_secret_arn", "")
+    if anthropic_secret:
+        region = re.escape(str(boto3.session.Session().region_name))
+        if args.provider != "openai" or not re.fullmatch(
+            rf"arn:aws:secretsmanager:{region}:\d{{12}}:secret:nexa-lab-anthropic-[A-Za-z0-9]{{6}}",
+            anthropic_secret,
+        ):
+            raise ValueError(
+                "Use the same-Region nexa-lab-anthropic secret with the OpenAI profile"
+            )
     if args.provider == "openai":
         if not re.fullmatch(
             r"arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:nexa-lab-openai-[A-Za-z0-9]{6}",
@@ -69,22 +154,41 @@ def create(args: argparse.Namespace) -> None:
     elif not args.model_resources:
         raise ValueError("Bedrock requires explicit approved model/profile ARNs")
     datadog_secret = getattr(args, "datadog_secret_arn", "")
-    if not re.fullmatch(
+    if observability == "datadog" and not re.fullmatch(
         r"arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:nexa-lab-datadog-[A-Za-z0-9]{6}",
         datadog_secret,
     ):
         raise ValueError("Datadog requires a plaintext API key secret named nexa-lab-datadog")
-    if datadog_secret.split(":")[3] != boto3.session.Session().region_name:
+    if observability == "datadog" and (
+        datadog_secret.split(":")[3] != boto3.session.Session().region_name
+    ):
         raise ValueError("Store the Datadog secret in the same AWS Region as the session")
+    if args.provider == "bedrock":
+        model_ids = {
+            arn.split("/", 1)[1]
+            for arn in args.model_resources.split(",")
+            if ":foundation-model/" in arn
+        }
+        if not model_ids:
+            raise ValueError("Include approved foundation-model ARNs for Bedrock access checks")
+        for model in sorted(model_ids):
+            access = client("bedrock").get_foundation_model_availability(modelId=model)
+            if access.get("authorizationStatus") != "AUTHORIZED":
+                raise ValueError(
+                    f"Bedrock model {model} is not authorized; no session was created. "
+                    "Resolve model/account access in AWS before retrying"
+                )
     expires = datetime.now(UTC) + timedelta(minutes=args.minutes)
     parameters = {
         "SessionMinutes": str(args.minutes),
         "ExpiresAt": expires.strftime("%Y-%m-%dT%H:%M:%S"),
         "BoundaryArn": args.boundary_arn,
         "ModelProvider": args.provider,
+        "Observability": observability,
+        "AnthropicKeySecretArn": anthropic_secret,
         "UiAllowedCidr": args.ui_allowed_cidr,
         "OpenAIKeySecretArn": args.openai_secret_arn if args.provider == "openai" else "",
-        "DatadogKeySecretArn": datadog_secret,
+        "DatadogKeySecretArn": datadog_secret if observability == "datadog" else "",
         "DatadogSite": getattr(args, "datadog_site", "datadoghq.com"),
         "DatadogMlApp": getattr(args, "datadog_ml_app", "nexaassist"),
         "ModelResources": args.model_resources if args.provider == "bedrock" else "",
@@ -99,7 +203,6 @@ def create(args: argparse.Namespace) -> None:
         Tags=[
             {"Key": "Session", "Value": args.stack},
             {"Key": "BudgetUSD", "Value": str(args.budget)},
-            {"Key": "ExpiresAt", "Value": parameters["ExpiresAt"]},
         ],
     )
     # A failed create on an already-live name must never trigger deletion of that session.
@@ -124,6 +227,8 @@ def require_provider(data: dict[str, str], provider: str) -> None:
 
 
 def require_ui(data: dict[str, str]) -> None:
+    if "HostState" in data and data["HostState"] != "running":
+        raise ValueError("Host is not running; resume it before deployment")
     try:
         validate_ui_cidr(data.get("UiAllowedCidr", ""))
         address = re.fullmatch(r"http://([0-9.]+):8501", data.get("ApplicationUrl", ""))
@@ -134,6 +239,29 @@ def require_ui(data: dict[str, str]) -> None:
         raise ValueError(
             "Session lacks restricted public UI access; destroy it and create a fresh session"
         ) from None
+
+
+def gateway_profile(provider: str, observability: str, anthropic_model: str) -> dict[str, Any]:
+    profile = yaml.safe_load((ROOT / f"app/gateway/litellm_{provider}.yaml").read_text())
+    if observability == "cloudwatch":
+        profile["litellm_settings"].pop("callbacks")
+        profile["litellm_settings"]["telemetry"] = False
+    if anthropic_model:
+        if provider != "openai" or not re.fullmatch(
+            r"anthropic/claude-[a-zA-Z0-9.-]+", anthropic_model
+        ):
+            raise ValueError("Use a direct anthropic/claude-* model with the OpenAI profile")
+        profile["model_list"].append(
+            {
+                "model_name": "nexa-chat-anthropic",
+                "litellm_params": {
+                    "model": anthropic_model,
+                    "api_key": "os.environ/ANTHROPIC_API_KEY",
+                    "max_tokens": 2000,
+                },
+            }
+        )
+    return profile
 
 
 def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Path, str]:
@@ -161,15 +289,33 @@ def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Pat
         "COMPOSE_FILE": "compose.yaml",
         "AWS_REGION": boto3.session.Session().region_name,
         "SECRET_ARN": data["SecretArn"],
-        "DATADOG_API_KEY_SECRET_ARN": data["DatadogKeySecretArn"],
-        "DD_SITE": data["DatadogSite"],
-        "DD_LLMOBS_ML_APP": data["DatadogMlApp"],
+        "OBSERVABILITY": data.get("Observability", "datadog"),
         "DD_CAPTURE_CONTENT": os.environ.get("DD_CAPTURE_CONTENT", "false"),
         "DD_TAGS": f"session:{data['SessionName']},lab_session_id:{data['SessionId']}",
         "DD_VERSION": args.release_id,
         "BUCKET": data["Bucket"],
         "RELEASE_ID": args.release_id,
     }
+    if config["OBSERVABILITY"] == "datadog":
+        config.update(
+            DATADOG_API_KEY_SECRET_ARN=data["DatadogKeySecretArn"],
+            DD_SITE=data["DatadogSite"],
+            DD_LLMOBS_ML_APP=data["DatadogMlApp"],
+        )
+    anthropic_model = getattr(args, "anthropic_model", "")
+    answer_model = getattr(args, "answer_model", "") or f"nexa-chat-{args.provider}"
+    aliases = {f"nexa-chat-{args.provider}"}
+    if anthropic_model:
+        if not data.get("AnthropicKeySecretArn"):
+            raise ValueError("Configure the Anthropic secret ARN before selecting a Claude model")
+        config["ANTHROPIC_API_KEY_SECRET_ARN"] = data["AnthropicKeySecretArn"]
+        aliases.add("nexa-chat-anthropic")
+    if answer_model not in aliases:
+        raise ValueError(
+            "Selected CHAT_MODEL is unavailable; check the provider, Claude model ID and secret ARN"
+        )
+    config["CHAT_MODEL"] = answer_model
+    gateway = gateway_profile(args.provider, config["OBSERVABILITY"], anthropic_model)
     if args.provider == "openai":
         config.update(
             OPENAI_API_KEY_SECRET_ARN=data["OpenAIKeySecretArn"],
@@ -184,6 +330,8 @@ def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Pat
             BEDROCK_CHAT_ROUTE=args.chat_route,
             BEDROCK_JUDGE_ROUTE=args.judge_route,
         )
+    if config["OBSERVABILITY"] == "cloudwatch":
+        config["COMPOSE_FILE"] += ":compose.cloudwatch.yaml"
     register = ROOT / "nexa_synthetic_data/document_register.json"
     archive = Path(args.archive)
     with tarfile.open(archive, "w:gz") as tar:
@@ -195,6 +343,8 @@ def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Pat
             tar.add(source, arcname=name)
         if args.provider == "bedrock":
             tar.add(ROOT / "app/compose.aws.bedrock.yaml", arcname="compose.bedrock.yaml")
+        if config["OBSERVABILITY"] == "cloudwatch":
+            tar.add(ROOT / "app/compose.aws.cloudwatch.yaml", arcname="compose.cloudwatch.yaml")
         for entry in json.loads(register.read_text()):
             relative = Path(entry["file"])
             if relative.is_absolute() or ".." in relative.parts:
@@ -206,12 +356,11 @@ def prepare_release(args: argparse.Namespace, data: dict[str, str]) -> tuple[Pat
                 raise ValueError("Corpus checksum mismatch")
             tar.add(source, arcname=f"corpus/{entry['file']}")
         # This manifest contains ARNs and image digests, never credentials.
-        import io
-
-        body = json.dumps(config).encode()
-        info = tarfile.TarInfo("release.json")
-        info.size = len(body)
-        tar.addfile(info, io.BytesIO(body))
+        for name, document in (("release.json", config), ("gateway.yaml", gateway)):
+            body = json.dumps(document).encode()  # JSON is valid YAML for the LiteLLM proxy.
+            info = tarfile.TarInfo(name)
+            info.size = len(body)
+            tar.addfile(info, io.BytesIO(body))
     return archive, hashlib.sha256(archive.read_bytes()).hexdigest()
 
 
@@ -258,7 +407,9 @@ def deploy(args: argparse.Namespace, data: dict[str, str]) -> None:
     if datetime.fromisoformat(data["ExpiresAt"]).replace(tzinfo=UTC) <= datetime.now(
         UTC
     ) + timedelta(minutes=15):
-        raise ValueError("Less than 15 minutes remain; destroy this session and create another")
+        raise ValueError(
+            "Less than 15 minutes remain in the deployment window; stop and resume a resumable host"
+        )
     archive, digest = prepare_release(args, data)
     key = f"releases/{args.release_id}.tar.gz"
     client("s3").upload_file(str(archive), data["Bucket"], key)
@@ -283,7 +434,7 @@ def deploy(args: argparse.Namespace, data: dict[str, str]) -> None:
     output(
         "Release deployed; live readiness and structured-answer smoke passed",
         [f"s3://{data['Bucket']}/reports/{args.release_id}/"],
-        [f"Open {data['ApplicationUrl']}; destroy the session when finished"],
+        [f"Open {data['ApplicationUrl']}; stop the host when finished"],
     )
 
 
@@ -329,11 +480,13 @@ def main() -> None:
     parser.add_argument("--stack", required=True)
     commands = parser.add_subparsers(dest="action", required=True)
     start = commands.add_parser("create")
-    start.add_argument("--minutes", type=int, choices=[60, 120], default=120)
-    start.add_argument("--budget", type=int, choices=range(3, 9), default=5)
+    start.add_argument("--minutes", type=int, choices=[60, 120], default=60)
+    start.add_argument("--budget", type=int, choices=range(2, 10), default=5)
     start.add_argument("--provider", choices=["openai", "bedrock"], default="openai")
     start.add_argument("--openai-secret-arn", default="")
-    start.add_argument("--datadog-secret-arn", required=True)
+    start.add_argument("--anthropic-secret-arn", default="")
+    start.add_argument("--observability", choices=["cloudwatch", "datadog"], default="cloudwatch")
+    start.add_argument("--datadog-secret-arn", default="")
     start.add_argument("--datadog-site", default="datadoghq.com")
     start.add_argument("--datadog-ml-app", default="nexaassist")
     start.add_argument("--model-resources", default="")
@@ -348,9 +501,14 @@ def main() -> None:
     release.add_argument("--provider", choices=["openai", "bedrock"], default="openai")
     release.add_argument("--chat-route", default="openai/gpt-6-luna")
     release.add_argument("--judge-route", default="openai/gpt-6-luna")
+    release.add_argument("--anthropic-model", default="")
+    release.add_argument("--answer-model", default="")
     release.add_argument("--archive", default="release.tar.gz")
     evaluate = commands.add_parser("evaluate")
     evaluate.add_argument("--provider", choices=["openai", "bedrock"], default="openai")
+    commands.add_parser("stop")
+    resume = commands.add_parser("resume")
+    resume.add_argument("--minutes", type=int, choices=[60, 120], default=60)
     stop = commands.add_parser("destroy")
     stop.add_argument("--receipt", help="Only destroy the stack ID recorded by this create")
     status = commands.add_parser("status")
@@ -367,7 +525,9 @@ def main() -> None:
             destroy_stack(args.stack, args.receipt)
             return
         data = stack_outputs(args.stack)
-        if args.action == "deploy":
+        if args.action in {"stop", "resume"}:
+            power(data, args.action, getattr(args, "minutes", 60))
+        elif args.action == "deploy":
             deploy(args, data)
         elif args.action == "evaluate":
             require_provider(data, args.provider)

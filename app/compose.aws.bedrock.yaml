@@ -1,9 +1,9 @@
 # Optional override: use only with an explicitly provisioned Bedrock session.
 services:
   gateway:
-    command: ["litellm", "--config", "/opt/gateway/litellm_bedrock.yaml", "--host", "0.0.0.0", "--port", "4000", "--num_workers", "1"]
     environment:
       OPENAI_API_KEY: ""
+      ANTHROPIC_API_KEY: ""
       BEDROCK_CHAT_ROUTE: ${BEDROCK_CHAT_ROUTE:?required}
       BEDROCK_JUDGE_ROUTE: ${BEDROCK_JUDGE_ROUTE:?required}
       AWS_REGION_NAME: ${AWS_REGION:?required}

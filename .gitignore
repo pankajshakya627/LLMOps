@@ -52,3 +52,6 @@ session-outputs.json
 session-created.json
 images.json
 release.tar.gz
+
+# Local verification state
+/.agent-harness/

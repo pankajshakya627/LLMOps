@@ -8,12 +8,16 @@ ENV UV_LINK_MODE=copy
 COPY pyproject.toml uv.lock ./
 RUN --mount=type=cache,target=/root/.cache/uv uv sync --locked --no-dev --extra evaluation --extra ui --extra aws
 
+RUN TIKTOKEN_CACHE_DIR=/opt/tokenizers .venv/bin/python -c "import tiktoken; tiktoken.get_encoding('o200k_base')"
+
 FROM python:3.14-slim
 RUN apt-get update \
     && apt-get install -y --no-install-recommends libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /opt/nexaassist
 COPY --from=dependencies /opt/nexaassist/.venv ./.venv
+COPY --from=dependencies /opt/tokenizers /opt/tokenizers
+ENV TIKTOKEN_CACHE_DIR=/opt/tokenizers
 COPY --chmod=u=rwX,go=rX app ./app
 ENV PATH="/opt/nexaassist/.venv/bin:$PATH"
 RUN useradd --system --no-create-home --uid 10001 nexaassist

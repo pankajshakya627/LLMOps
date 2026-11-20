@@ -25,7 +25,11 @@ def test_native_datadog_monitoring_masks_content_and_correlates_models(capture):
         check=False,
     )
     assert result.returncode == 0, result.stdout + result.stderr
-    logs = [json.loads(line) for line in result.stdout.splitlines() if line.startswith("{") and json.loads(line).get("event") == "http_request_completed"]
+    logs = [
+        json.loads(line)
+        for line in result.stdout.splitlines()
+        if line.startswith("{") and json.loads(line).get("event") == "http_request_completed"
+    ]
     assert logs
     assert all(re.fullmatch(r"[0-9a-f]{32}", row["dd.trace_id"]) for row in logs)
     assert all(row["dd.span_id"] == row["llmobs.span_id"] for row in logs)
@@ -33,7 +37,9 @@ def test_native_datadog_monitoring_masks_content_and_correlates_models(capture):
     assert any(row["status_code"] == 503 and row["route"] == "/unavailable" for row in logs)
 
 
-def test_disabled_monitoring_keeps_local_metrics_without_claiming_trace(settings, monkeypatch):
+def test_disabled_monitoring_keeps_local_metrics_without_claiming_trace(
+    settings, monkeypatch, capsys
+):
     app = create_app()
     app.dependency_overrides[get_settings] = lambda: settings
     monkeypatch.setattr("app.main.get_settings", lambda: settings)
@@ -41,6 +47,17 @@ def test_disabled_monitoring_keeps_local_metrics_without_claiming_trace(settings
         response = client.get("/health")
         assert response.json() == {"status": "ok"}
         assert not any(key.startswith("x-datadog-") for key in response.headers)
+        request_id = response.headers["x-request-id"]
+        assert re.fullmatch(r"[0-9a-f]{32}", request_id)
         rows = client.get("/metrics/http").json()["routes"]
+    logs = [
+        json.loads(line) for line in capsys.readouterr().out.splitlines() if line.startswith("{")
+    ]
+    request = next(row for row in logs if row.get("route") == "/health")
+    assert request["request_id"] == request_id
+    assert (
+        len({row["request_id"] for row in logs if row.get("event") == "http_request_completed"})
+        == 2
+    )
     assert next(row for row in rows if row["route"] == "/health")["requests"] == 1
     assert next(row for row in rows if row["route"] == "/answer/evaluated")["requests"] == 0

@@ -23,16 +23,23 @@ def private_log(_logger: Any, _method: str, event: MutableMapping[str, Any]) -> 
         )
         event["error_type"] = type(error).__name__
     # Identifiers can contain digit sequences that resemble phone numbers.
-    identity_keys = {"dd.trace_id", "dd.span_id", "llmobs.trace_id", "llmobs.span_id"}
-    safe = dict(
-        safe_content({key: value for key, value in event.items() if key not in identity_keys})
-    )
+    identity_keys = {
+        "request_id",
+        "trace_id",
+        "span_id",
+        "parent_span_id",
+        "dd.trace_id",
+        "dd.span_id",
+        "llmobs.trace_id",
+        "llmobs.span_id",
+    }
+    safe = safe_content({key: value for key, value in event.items() if key not in identity_keys})
     safe.update({key: value for key, value in event.items() if key in identity_keys})
     return safe
 
 
 def configure_logging(level: str) -> None:
-    """JSON stdout logs collected by the Agent with Datadog trace correlation."""
+    """Masked JSON stdout logs for CloudWatch or Datadog collection."""
     processors: list[Processor] = [
         structlog.contextvars.merge_contextvars,
         trace_log_context,

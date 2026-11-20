@@ -1,0 +1,6 @@
+2026-11-20 — initial source scan from published main 0f75293 and feature changes.
+Added architecture.md, backend.md, frontend.md, data.md and dependencies.md under docs/CODEMAPS. No previous codemap set was present to compare. No codemaps removed.
+New external integration: optional direct Anthropic API via the existing pinned LiteLLM proxy. Python package dependencies unchanged.
+Deployment changes: CloudWatch default, credential-isolated dual-provider gateway, tested image promotion, EC2 stop/resume and retained pgvector storage.
+HTTP application routes unchanged. Historical disposable-stack validation remains dated evidence.
+No prior codemaps qualify for the 90-day staleness check.

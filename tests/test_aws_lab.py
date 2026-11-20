@@ -68,10 +68,22 @@ def test_capacity_reads_memory_without_deployment_or_model_calls(
     assert "container memory snapshot" in capsys.readouterr().out
 
 
-@pytest.mark.parametrize("provider", ["openai", "bedrock"])
+@pytest.mark.parametrize(
+    "provider,observability",
+    [
+        ("openai", "datadog"),
+        ("openai", "cloudwatch"),
+        ("bedrock", "datadog"),
+        ("bedrock", "cloudwatch"),
+    ],
+)
 @pytest.mark.parametrize("capture", [None, "true"])
 def test_release_contains_only_synthetic_corpus_and_digest_manifest(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, provider: str, capture: str | None
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    provider: str,
+    observability: str,
+    capture: str | None,
 ) -> None:
     monkeypatch.setenv("AWS_DEFAULT_REGION", "ap-south-1")
     monkeypatch.delenv("DD_CAPTURE_CONTENT", raising=False)
@@ -91,10 +103,14 @@ def test_release_contains_only_synthetic_corpus_and_digest_manifest(
         "GuardrailId": "guardrail",
         "GuardrailVersion": "1",
         "ModelProvider": provider,
+        "Observability": observability,
         "UiAllowedCidr": "8.8.8.8/32",
         "ApplicationUrl": "http://1.1.1.1:8501",
         "OpenAIKeySecretArn": "arn:aws:secretsmanager:ap-south-1:123456789012:secret:nexa-lab-openai-ABC123",
     }
+    if observability == "cloudwatch":
+        for name in ("DatadogKeySecretArn", "DatadogSite", "DatadogMlApp"):
+            data.pop(name)
     images = tmp_path / "images.json"
     images.write_text(
         json.dumps(
@@ -130,10 +146,28 @@ def test_release_contains_only_synthetic_corpus_and_digest_manifest(
         assert manifest["DD_CAPTURE_CONTENT"] == (capture or "false")
         assert manifest["APP_IMAGE"].endswith("@sha256:" + "a" * 64)
         assert manifest["MODEL_PROVIDER"] == provider
+        assert manifest["OBSERVABILITY"] == observability
+        assert ("DATADOG_API_KEY_SECRET_ARN" in manifest) == (observability == "datadog")
+        assert ("compose.cloudwatch.yaml" in names) == (observability == "cloudwatch")
+        if observability == "cloudwatch":
+            assert manifest["COMPOSE_FILE"] == (
+                "compose.yaml:compose.bedrock.yaml:compose.cloudwatch.yaml"
+                if provider == "bedrock"
+                else "compose.yaml:compose.cloudwatch.yaml"
+            )
         assert "OPENAI_API_KEY" not in manifest
         assert ("compose.bedrock.yaml" in names) == (provider == "bedrock")
         assert any(key.startswith("BEDROCK_") for key in manifest) == (provider == "bedrock")
         assert ("OPENAI_API_KEY_SECRET_ARN" in manifest) == (provider == "openai")
+        file = tar.extractfile("gateway.yaml")
+        assert file is not None
+        gateway = json.load(file)
+        assert bool(gateway["litellm_settings"].get("callbacks")) == (observability == "datadog")
+        assert {route["model_name"] for route in gateway["model_list"]} == {
+            f"nexa-chat-{provider}",
+            f"nexa-judge-{provider}",
+            f"nexa-embed-{provider}",
+        }
     args.provider = "openai" if provider == "bedrock" else "bedrock"
     with pytest.raises(ValueError, match="Cannot change providers"):
         lab.prepare_release(args, data)
@@ -217,7 +251,7 @@ def test_cleanup_stops_compute_then_empties_versions_then_deletes_only_its_stack
     cf.delete_stack.assert_called_once_with(StackName="own-stack")
 
 
-def test_session_exposes_only_restricted_ui_and_retains_no_paid_resources() -> None:
+def test_session_exposes_only_restricted_ui_and_retains_data_until_destroy() -> None:
     config = template("infra/aws/session.yaml")
     resources = config["Resources"]
     assert not resources["SecurityGroup"]["Properties"].get("SecurityGroupIngress")
@@ -243,10 +277,8 @@ def test_session_exposes_only_restricted_ui_and_retains_no_paid_resources() -> N
     for invalid in ("0.0.0.0/0", "8.8.8.0/24", "::/32", "999.1.1.1/32", "8.8.8.8"):
         assert not re.fullmatch(parameter["AllowedPattern"], invalid)
     assert config["Outputs"]["UiAllowedCidr"] == {"Value": {"Ref": "UiAllowedCidr"}}
-    assert config["Outputs"]["ApplicationUrl"] == {
-        "Value": {"Fn::Sub": "http://${Host.PublicIp}:8501"}
-    }
-    assert resources["Host"]["Properties"]["InstanceInitiatedShutdownBehavior"] == "terminate"
+    assert config["Outputs"]["StopSchedule"]["Value"] == {"Ref": "Expiry"}
+    assert resources["Host"]["Properties"]["InstanceInitiatedShutdownBehavior"] == "stop"
     assert "CreditSpecification" not in resources["Host"]["Properties"]
     assert all(resource.get("DeletionPolicy") != "Retain" for resource in resources.values())
     for resource in resources.values():
@@ -433,6 +465,7 @@ def test_create_requires_ui_cidr_and_passes_it_to_cloudformation(
     monkeypatch.setenv("AWS_DEFAULT_REGION", "ap-south-1")
     cf = Mock()
     cf.create_stack.return_value = {"StackId": "new-stack-id"}
+    cf.get_foundation_model_availability.return_value = {"authorizationStatus": "AUTHORIZED"}
     monkeypatch.setattr(lab, "client", lambda _: cf)
     monkeypatch.setattr(lab, "stack_outputs", lambda _: {"UiAllowedCidr": "8.8.8.8/32"})
     argv = [
@@ -445,7 +478,7 @@ def test_create_requires_ui_cidr_and_passes_it_to_cloudformation(
         "--datadog-secret-arn",
         "arn:aws:secretsmanager:ap-south-1:123456789012:secret:nexa-lab-datadog-ABC123",
         "--model-resources",
-        "model",
+        "arn:aws:bedrock:ap-south-1::foundation-model/amazon.nova-lite-v1:0",
         "--boundary-arn",
         "boundary",
         "--cloudformation-role-arn",
@@ -595,11 +628,15 @@ def test_default_runtime_uses_openai_without_constructing_a_bedrock_client(
     ui_check = compose["services"]["ui"]["healthcheck"]["test"]
     assert "http://127.0.0.1:8501/_stcore/health" in ui_check[-1]
     gateway = compose["services"]["gateway"]
-    assert "/opt/gateway/litellm_openai.yaml" in gateway["command"]
+    assert "/opt/gateway/active.yaml" in gateway["command"]
+    assert "env_file" not in compose["services"]["api"]
     env = compose["services"]["api"]["environment"]
     assert not any(key.startswith("BEDROCK_") for key in env)
+    assert env["CHAT_MODEL"] == "${CHAT_MODEL:-nexa-chat-openai}"
     env = {
         **env,
+        "CHAT_MODEL": "nexa-chat-openai",
+        "FEEDBACK_REVIEWER_TOKEN": "f" * 32,
         "DD_API_KEY": "synthetic",
         "DD_SITE": "datadoghq.com",
         "DD_ENV": "test",
@@ -925,3 +962,119 @@ def test_forwarder_provisioning_permissions_exclude_unrelated_functions_and_code
     assert not allowed("lambda:CreateFunction", prefix + "unrelated-function")
     assert allowed("s3:GetObjectVersion", "arn:aws:s3:::nexa-lab-check/datadog/forwarder.zip")
     assert not allowed("s3:GetObjectVersion", "arn:aws:s3:::nexa-lab-check/reports/private.json")
+
+
+def test_cloudwatch_create_needs_no_external_key(tmp_path, monkeypatch):
+    monkeypatch.setenv("AWS_DEFAULT_REGION", "ap-south-1")
+    cf = Mock()
+    cf.create_stack.return_value = {"StackId": "new-aws-session"}
+    cf.get_foundation_model_availability.return_value = {"authorizationStatus": "AUTHORIZED"}
+    monkeypatch.setattr(lab, "client", lambda _: cf)
+    monkeypatch.setattr(lab, "stack_outputs", lambda _: {})
+    args = argparse.Namespace(
+        stack="nexa-lab-native",
+        minutes=60,
+        budget=2,
+        provider="bedrock",
+        observability="cloudwatch",
+        model_resources="arn:aws:bedrock:ap-south-1::foundation-model/amazon.nova-lite-v1:0",
+        ui_allowed_cidr="8.8.8.8/32",
+        boundary_arn="boundary",
+        cloudformation_role_arn="role",
+        openai_secret_arn="",
+        receipt=str(tmp_path / "receipt.json"),
+        output=str(tmp_path / "outputs.json"),
+    )
+    lab.create(args)
+    parameters = {
+        p["ParameterKey"]: p["ParameterValue"]
+        for p in cf.create_stack.call_args.kwargs["Parameters"]
+    }
+    assert parameters["Observability"] == "cloudwatch"
+    assert parameters["DatadogKeySecretArn"] == parameters["OpenAIKeySecretArn"] == ""
+    cf.reset_mock()
+    cf.get_foundation_model_availability.return_value = {"authorizationStatus": "NOT_AUTHORIZED"}
+    with pytest.raises(ValueError, match="not authorized; no session was created"):
+        lab.create(args)
+    cf.create_stack.assert_not_called()
+    args.provider = "openai"
+    with pytest.raises(ValueError, match="OpenAI requires the ARN"):
+        lab.create(args)
+    cf.create_stack.assert_not_called()
+
+
+def test_cloudwatch_resources_exclude_forwarder_and_its_secret_access():
+    config = template("infra/aws/session.yaml")
+    for name in (
+        "ForwarderLogs",
+        "ForwarderRole",
+        "DatadogForwarder",
+        "ForwarderCode",
+        "ForwarderPermission",
+        "LogSubscription",
+    ):
+        assert config["Resources"][name]["Condition"] == "UseDatadog"
+    grants = config["Resources"]["HostRole"]["Properties"]["Policies"][0]["PolicyDocument"][
+        "Statement"
+    ]
+    dd_grant = next(s["Fn::If"] for s in grants if s.get("Fn::If", [""])[0] == "UseDatadog")
+    assert dd_grant[1]["Resource"] == {"Ref": "DatadogKeySecretArn"}
+    assert dd_grant[2] == {"Ref": "AWS::NoValue"}
+    assert config["Resources"]["Logs"]["Properties"]["RetentionInDays"] == 1
+    assert not any(
+        r["Type"]
+        in {"AWS::EC2::NatGateway", "AWS::RDS::DBInstance", "AWS::OpenSearchServerless::Collection"}
+        for r in config["Resources"].values()
+    )
+
+
+def test_cloudwatch_host_secret_setup_without_datadog_file(tmp_path, monkeypatch):
+    source = Path("infra/aws/host.sh").read_text()
+    code = source.split("<<'PY'\n", 1)[1].split("\nPY", 1)[0]
+    script = tmp_path / "configure.py"
+    script.write_text(code)
+    (tmp_path / "release.json").write_text(
+        json.dumps({"MODEL_PROVIDER": "bedrock", "OBSERVABILITY": "cloudwatch"})
+    )
+    material = tmp_path / "runtime-secret"
+    material.write_text("A" * 96)
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(
+        sys, "argv", [str(script), str(material), "missing-openai", "missing-datadog"]
+    )
+    previous_umask = os.umask(0o077)
+    try:
+        runpy.run_path(str(script))
+    finally:
+        os.umask(previous_umask)
+    exported = dict(line.split("=", 1) for line in (tmp_path / ".env").read_text().splitlines())
+    assert "DD_API_KEY" not in exported and "OPENAI_API_KEY" not in exported
+    assert not material.exists()
+    assert (tmp_path / ".env").stat().st_mode & 0o777 == 0o600
+
+
+def test_cloudwatch_summary_runs_without_datadog_outputs(tmp_path, monkeypatch):
+    config = yaml.safe_load(Path(".github/workflows/aws-lab.yaml").read_text())
+    step = next(
+        s
+        for s in config["jobs"]["session"]["steps"]
+        if s.get("name") == "Publish application browser link"
+    )
+    code = step["run"].split("<<'PY'\n", 1)[1].split("\nPY", 1)[0]
+    data = {
+        "ApplicationUrl": "http://1.1.1.1:8501",
+        "ApplicationLogGroup": "/nexaassist/nexa-lab-test",
+        "Bucket": "session-bucket",
+        "Observability": "cloudwatch",
+        "ExpiresAt": "2026-11-04T06:00:00",
+    }
+    (tmp_path / "session-outputs.json").write_text(json.dumps(data))
+    summary = tmp_path / "summary.md"
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary))
+    monkeypatch.setenv("AWS_REGION", "ap-south-1")
+    script = tmp_path / "summary.py"
+    script.write_text(code)
+    runpy.run_path(str(script))
+    assert "CloudWatch logs" in summary.read_text()
+    assert "Datadog traces" not in summary.read_text()
